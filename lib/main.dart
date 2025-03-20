@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
-//this is a test comment
+//this is another test statement
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
             Builder(
               builder: (BuildContext context) {
                 return IconButton(
-                  icon: Icon(Icons.menu),
+                  icon: const Icon(Icons.menu),
                   onPressed: () {
                     Scaffold.of(context).openEndDrawer();
                   },
@@ -33,49 +33,49 @@ class MyApp extends StatelessWidget {
             children: <Widget>[
               ListTile(
                
-                title: Text('Find jobs'),
+                title: const Text('Find jobs'),
                 onTap: () {
                   Navigator.pop(context);
                 },
               ),
               ListTile(
                
-                title: Text('Find companies'),
+                title: const Text('Find companies'),
                 onTap: () {
                   Navigator.pop(context);
                 },
               ),
               ListTile(
                 
-                title: Text('Blog'),
+                title: const Text('Blog'),
                 onTap: () {
                   Navigator.pop(context);
                 },
               ),
               ListTile(
                
-                title: Text('Contact us'),
+                title: const Text('Contact us'),
                 onTap: () {
                   Navigator.pop(context);
                 },
               ),
               ListTile(
                 
-                title: Text('Log in'),
+                title: const Text('Log in'),
                 onTap: () {
                   Navigator.pop(context);
                 },
               ),
               ListTile(
                
-                title: Text('Sign up'),
+                title: const Text('Sign up'),
                 onTap: () {
                   Navigator.pop(context);
                 },
               ),
               ListTile(
                 
-                title: Text('Employers, are you recruiting?'),
+                title: const Text('Employers, are you recruiting?'),
                 onTap: () {
                   Navigator.pop(context);
                 },
@@ -88,26 +88,26 @@ class MyApp extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 'Ethiojobs',
                 style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold, color: Colors.green),
               ),
-              SizedBox(height: 40), // Spacing between texts
-              Text(
+              const SizedBox(height: 40), // Spacing between texts
+              const Text(
                 'Find top employers',
                 style: TextStyle(fontSize: 24,color:Colors.black),
               ),
-              SizedBox(height: 20), // Spacing before the button
+              const SizedBox(height: 20), // Spacing before the button
               ElevatedButton(
   onPressed: () {
     // Action for button
   },
   style: ElevatedButton.styleFrom(
     backgroundColor: Colors.green, // Set background color to green
-    padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16), 
-    textStyle: TextStyle(fontSize: 18), // Increase text size
+    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16), 
+    textStyle: const TextStyle(fontSize: 18), // Increase text size
   ),
-  child: Text('Get Started'),
+  child: const Text('Get Started'),
 ),
             ],
           ),
