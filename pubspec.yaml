@@ -45,7 +45,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -75,27 +75,31 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Outfit
-      fonts:
-        - asset: fonts/Outfit-Black.ttf
-          weight: 700
-        - asset: fonts/Outfit-Bold.ttf
-          weight: 700
-        - asset: fonts/Outfit-ExtraLight.ttf
-          weight: 700
-        - asset: fonts/Outfit-ExtraBold.ttf
-          weight: 700
-        - asset: fonts/Outfit-Light.ttf
-          weight: 700
-        - asset: fonts/Outfit-Medium.ttf
-          weight: 700
-        - asset: fonts/Outfit-Regular.ttf
-          weight: 700
-        - asset: fonts/Outfit-SemiBold.ttf
-          weight: 700
-        - asset: fonts/Outfit-Thin.ttf
-          weight: 700
-          
+  - family: Outfit
+    fonts:
+      - asset: fonts/Outfit-Black.ttf
+        weight: 900  # Black weight
+      - asset: fonts/Outfit-Bold.ttf
+        weight: 700  # Bold weight
+      - asset: fonts/Outfit-ExtraLight.ttf
+        weight: 200  # Extra Light weight
+      - asset: fonts/Outfit-ExtraBold.ttf
+        weight: 800  # Extra Bold weight
+      - asset: fonts/Outfit-Light.ttf
+        weight: 300  # Light weight
+      - asset: fonts/Outfit-Medium.ttf
+        weight: 500  # Medium weight
+      - asset: fonts/Outfit-Regular.ttf
+        weight: 400  # Regular weight
+      - asset: fonts/Outfit-SemiBold.ttf
+        weight: 600  # Semi Bold weight
+      - asset: fonts/Outfit-Thin.ttf
+        weight: 100  # Thin weight
+
+  - family: UbuntuCondensed
+    fonts:
+      - asset: fonts/UbuntuCondensed-Regular.ttf
+        weight: 400  # Black weight
 
   #   - family: Trajan Pro
   #     fonts:
