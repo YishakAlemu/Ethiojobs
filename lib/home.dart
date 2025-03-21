@@ -1,6 +1,7 @@
 // import 'package:flutter/material.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Homepage extends StatelessWidget {
   const Homepage({super.key});
@@ -14,7 +15,7 @@ class Homepage extends StatelessWidget {
         title: const Text(
           "ethiojobs",
           style: TextStyle(
-            fontFamily: 'UbuntuCondensed',
+            fontFamily: 'Baloo2',
             fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
@@ -114,7 +115,7 @@ class Homepage extends StatelessWidget {
           alignment: const Alignment(-0.6, 0), // Center alignment for the button
           child: ElevatedButton(
             onPressed: () {
-              // Action for button
+              print('Search icon tapped!');
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.green,
@@ -127,33 +128,63 @@ class Homepage extends StatelessWidget {
             child: const Text('Get Started', style: TextStyle(color: Colors.white)),
           ),
         ),
-       Align(
-  alignment: Alignment(0.8, 0.8),
-  child: Container( // Use a Container to apply BoxDecoration
-    decoration: BoxDecoration(
-      color: Colors.white, // You can set the background color here
-      boxShadow: [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.11), // Corrected opacity
-          blurRadius: 40,
-          spreadRadius: 0.0,
-        ),
-      ],
-      borderRadius: BorderRadius.circular(20), // Optional: add border radius
-    ),
-    child: TextField(
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: Colors.transparent,
-        contentPadding: EdgeInsets.all(15), // This should be transparent since you set the color in BoxDecoration
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(5),
-         borderSide: BorderSide.none
+      Align(
+          alignment: Alignment(-0.6, 0.5),
+          child: Container(
+            width: 300, 
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.11),
+                  blurRadius: 40,
+                  spreadRadius: 0.0,
+                ),
+              ],
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: TextField(
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.transparent,
+                contentPadding: EdgeInsets.all(15),
+                 // Make sure this path is correct
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5),
+                  borderSide: BorderSide.none,
+                ),
+              ),
+            ),
+          ),
       ),
-    ),
-  ),
-)
-       )
-      ],
+      Align(
+              alignment: Alignment(0.9, 0.5), // Adjust alignment as needed
+              child: GestureDetector(
+                onTap: () {
+                },
+                child: Container(
+                  width: 50,  
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.white, // Background color
+                    shape: BoxShape.rectangle, // Ensure it's square
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 10,
+                        spreadRadius: 0,
+                      ),
+                    ],
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: SvgPicture.asset(
+                    'assets/search.svg',
+                    width: 10, // Set width for the icon
+                    height: 10, // Set height for the icon
+                  ),
+                ),
+              ),
+    )],
     );
   }
 }
