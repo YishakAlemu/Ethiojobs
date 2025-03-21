@@ -127,6 +127,32 @@ class Homepage extends StatelessWidget {
             child: const Text('Get Started', style: TextStyle(color: Colors.white)),
           ),
         ),
+       Align(
+  alignment: Alignment(0.8, 0.8),
+  child: Container( // Use a Container to apply BoxDecoration
+    decoration: BoxDecoration(
+      color: Colors.white, // You can set the background color here
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.11), // Corrected opacity
+          blurRadius: 40,
+          spreadRadius: 0.0,
+        ),
+      ],
+      borderRadius: BorderRadius.circular(20), // Optional: add border radius
+    ),
+    child: TextField(
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.transparent,
+        contentPadding: EdgeInsets.all(15), // This should be transparent since you set the color in BoxDecoration
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(5),
+         borderSide: BorderSide.none
+      ),
+    ),
+  ),
+)
+       )
       ],
     );
   }
