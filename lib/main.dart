@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ethiojobs());
 }
 //this is another test statement
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class ethiojobs extends StatelessWidget {
+  const ethiojobs ({super.key});
 
   @override
   Widget build(BuildContext context) {
