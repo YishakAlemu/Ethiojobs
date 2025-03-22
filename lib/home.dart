@@ -154,46 +154,48 @@ class Homepage extends StatelessWidget {
                 filled: true,
                 fillColor: Colors.transparent,
                 contentPadding: EdgeInsets.all(13),
-                
-                
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: const Color.fromARGB(255, 107, 101, 101)),
+              borderSide: BorderSide(color: Color.fromARGB(255, 107, 101, 101)),
                 ),
               ),
             ),
           ),
       ),
       Align(
-              alignment: Alignment(0.8, 0.45), 
-              child: GestureDetector(
-                onTap: () {
-                },
-                child: Container(
-                  width: 48,  
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.white, // 
-                    shape: BoxShape.rectangle, 
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.11),
-                        blurRadius: 10,
-                        spreadRadius: 0,
-                      ),
-                    ],
-                    borderRadius: BorderRadius.circular(10),
-                    
-                  ),
-                  
-                  child: SvgPicture.asset(
-                    'assets/search.svg',
-                    width: 5, // Set width for the icon
-                    height: 5, // Set height for the icon
-                  ),
-                ),
-              ),
-    )],
-    );
+  alignment: Alignment(0.8, 0.45),
+  child: GestureDetector(
+    onTap: () {
+      print('Icon tapped!'); // Confirm the button is working
+    },
+    child: Container(
+      width: 50,  
+      height: 50,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        shape: BoxShape.rectangle,
+        border: Border.all(
+          color: Color.fromARGB(255, 107, 101, 101), // Border color
+          width: 0.5, // Border width
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.11),
+            blurRadius: 10,
+            spreadRadius: 0,
+          ),
+        ],
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: SvgPicture.asset(
+        'assets/search_icon.svg',
+        width: 24, // Set a more reasonable width
+        height: 24, // Set a more reasonable height
+        fit: BoxFit.contain, // Ensure it scales appropriately
+      ),
+    ),
+  ),
+)
+  ]);
   }
 }

@@ -22,7 +22,7 @@ flutter:
   assets:
     - assets/search.svg
     - assets/ethio_logo.png
-
+    - assets/search_icon.svg
   uses-material-design: true
 
   # fonts:
