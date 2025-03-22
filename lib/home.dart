@@ -15,12 +15,14 @@ class Homepage extends StatelessWidget {
             // Image in the AppBar
             Image.asset(
               'assets/ethio_logo.png', // Adjust the path to your image
-              height: 20, // Set the desired height
+              height: 110, // Set the desired height
             ),
             SizedBox(width: 10), // Add space between the image and title
            
           ],
+          
         ),
+        backgroundColor: Colors.white,
         actions: [
           Builder(
             builder: (BuildContext context) {
@@ -92,96 +94,102 @@ class Homepage extends StatelessWidget {
     return Stack(
       children: [
         const Align(
-          alignment: Alignment(-0.6, -0.8),
+          alignment: Alignment(-0.55, -0.8),
           child: Text(
             "Ethiojobs",
             style: TextStyle(
-              fontSize: 50,
+              fontSize: 46,
               fontWeight: FontWeight.bold,
-              color: Colors.green,
+              color: Color.fromARGB(255, 72, 193, 156),
             ),
           ),
         ),
         const Align(
-          alignment: Alignment(-0.6, -0.63),
+          alignment: Alignment(-0.55, -0.63),
           child: Text(
             "Find top employers",
             style: TextStyle(
-              fontSize: 24,
+              fontSize: 22,
               color: Colors.black,
             ),
           ),
         ),
         Align(
-          alignment: const Alignment(-0.6, 0), // Center alignment for the button
+          alignment: const Alignment(-0.55, -0.2), 
           child: ElevatedButton(
             onPressed: () {
               print('Search icon tapped!');
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.green,
+              backgroundColor: Color.fromARGB(255, 72, 193, 156),
               padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 16),
               textStyle: const TextStyle(
-                fontSize: 18,
+                fontSize: 25,
                 color: Colors.white,
               ),
             ),
-            child: const Text('Get Started', style: TextStyle(color: Colors.white)),
+            child: const Text('Get Started', style: TextStyle(
+               fontSize: 20,
+               color: Colors.white)),
           ),
         ),
       Align(
-          alignment: Alignment(-0.6, 0.5),
+          alignment: Alignment(-0.6, 0.45),
           child: Container(
-            width: 300, 
+            width: 270, 
             decoration: BoxDecoration(
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.11),
-                  blurRadius: 40,
+                  blurRadius: 20,
                   spreadRadius: 0.0,
                 ),
               ],
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: TextField(
               decoration: InputDecoration(
+                
                 filled: true,
                 fillColor: Colors.transparent,
-                contentPadding: EdgeInsets.all(15),
-                 // Make sure this path is correct
+                contentPadding: EdgeInsets.all(13),
+                
+                
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: const Color.fromARGB(255, 107, 101, 101)),
                 ),
               ),
             ),
           ),
       ),
       Align(
-              alignment: Alignment(0.9, 0.5), // Adjust alignment as needed
+              alignment: Alignment(0.8, 0.45), 
               child: GestureDetector(
                 onTap: () {
                 },
                 child: Container(
-                  width: 50,  
+                  width: 48,  
                   height: 50,
                   decoration: BoxDecoration(
-                    color: Colors.white, // Background color
-                    shape: BoxShape.rectangle, // Ensure it's square
+                    color: Colors.white, // 
+                    shape: BoxShape.rectangle, 
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
+                        color: Colors.black.withOpacity(0.11),
                         blurRadius: 10,
                         spreadRadius: 0,
                       ),
                     ],
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(10),
+                    
                   ),
+                  
                   child: SvgPicture.asset(
                     'assets/search.svg',
-                    width: 10, // Set width for the icon
-                    height: 10, // Set height for the icon
+                    width: 5, // Set width for the icon
+                    height: 5, // Set height for the icon
                   ),
                 ),
               ),
