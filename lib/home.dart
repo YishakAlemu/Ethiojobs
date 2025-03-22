@@ -10,15 +10,16 @@ class Homepage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 20.0,
-        title: const Text(
-          "ethiojobs",
-          style: TextStyle(
-            fontFamily: 'Baloo2',
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
+        title: Row(
+          children: [
+            // Image in the AppBar
+            Image.asset(
+              'assets/ethio_logo.png', // Adjust the path to your image
+              height: 20, // Set the desired height
+            ),
+            SizedBox(width: 10), // Add space between the image and title
+           
+          ],
         ),
         actions: [
           Builder(

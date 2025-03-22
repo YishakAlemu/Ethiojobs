@@ -21,6 +21,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/search.svg
+    - assets/ethio_logo.png
 
   uses-material-design: true
 
@@ -51,7 +52,6 @@ flutter:
         - asset: fonts/UbuntuCondensed-Regular.ttf
 
     - family: Baloo2
-      fonts:
-        
-        - asset: fonts/Baloo2-SemiBold.ttf
+      fonts:    
+    - asset: fonts/Baloo2-SemiBold.ttf
 

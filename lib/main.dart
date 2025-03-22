@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'home.dart'; // Import the home.dart file
-import 'package:flutter_svg/flutter_svg.dart';
 void main() {
   runApp(const Ethiojobs());
 }
