@@ -55,7 +55,7 @@ class Homepage extends StatelessWidget {
 
   Widget myLayoutWidget() {
     return SingleChildScrollView(
-      child: Container(
+      child: SizedBox(
         
         height: 700, // Ensure space for content
         child: Stack(
@@ -96,65 +96,73 @@ class Homepage extends StatelessWidget {
               ),
             ),
             Align(
-              alignment: Alignment(-0.6, 0.45),
-              child: Container(
-                width: 270,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.11),
-                      blurRadius: 20,
-                      spreadRadius: 0.0,
-                    ),
-                  ],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: TextField(
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.transparent,
-                    contentPadding: EdgeInsets.all(13),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(color: Color.fromARGB(255, 107, 101, 101)),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Align(
+  alignment: Alignment(-0.6, 0.45),
+  child: Container(
+    width: 282,
+    decoration: BoxDecoration(
+      color: Colors.white,
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0),
+          blurRadius: 0,
+          spreadRadius: 0.0,
+        ),
+      ],
+      borderRadius: BorderRadius.circular(10),
+    ),
+    child: TextField(
+      decoration: InputDecoration(
+        hintText: "Job title, company or industry", // Placeholder text
+        hintStyle: TextStyle(color: Colors.black, fontSize: 16), // Style of the placeholder
+        //filled: true,
+        //fillColor: Colors.transparent,
+        contentPadding: EdgeInsets.all(15),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: const Color.fromARGB(255, 206, 202, 229) ,width:1), // Border when not focused
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: const Color.fromARGB(255, 206, 202, 229), width: 1), // Border when focused
+        ),
+      ),
+    ),
+  ),
+),
+
+
+   Align(
   alignment: Alignment(0.87, 0.45),
   child: ElevatedButton(
     onPressed: () {
-      print('Search icon tapped!'); // Your action here
+      print('Search icon tapped!'); 
     },
     style: ElevatedButton.styleFrom(
-      backgroundColor: Colors.white, // Keep button white
+      backgroundColor: Colors.white,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10), // Rounded corners
-        side: BorderSide(color: Color.fromARGB(255, 107, 101, 101), width: 0.5),
-      ),
-      padding: EdgeInsets.zero, // Remove padding to fit the container
-      elevation: 0, // Add a shadow effect
-    ),
-    child: Container(
-      width: 40,
-      height: 50,
-      decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
+        side: BorderSide(color: const Color.fromARGB(255, 206, 202, 229), width: 1),
       ),
+      padding: EdgeInsets.zero, // Ensure no extra padding
+      elevation: 0,
+      minimumSize: Size(0, 0), // Prevent button from forcing width
+    ),
+    child: SizedBox( 
+      width: 52.5, //  Force container width here
+      height: 53.5, 
       child: Center(
         child: SvgPicture.asset(
           'assets/search20.svg',
-          width: 30,
-          height: 20,
+          width: 25, // Adjust icon size separately
+          height: 28, 
           fit: BoxFit.contain,
         ),
       ),
     ),
   ),
 ),
+
+
 
           ],
         ),
