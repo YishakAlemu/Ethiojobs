@@ -54,7 +54,11 @@ class Homepage extends StatelessWidget {
   }
 
   Widget myLayoutWidget() {
-    return SingleChildScrollView(
+    return Container(
+      color: Colors.white, // Set the background color to white
+      child: Stack(
+        children: [
+    SingleChildScrollView(
       child: SizedBox(
         
         height: 700, // Ensure space for content
@@ -113,7 +117,10 @@ class Homepage extends StatelessWidget {
     child: TextField(
       decoration: InputDecoration(
         hintText: "Job title, company or industry", // Placeholder text
-        hintStyle: TextStyle(color: Colors.black, fontSize: 16), // Style of the placeholder
+        hintStyle: TextStyle(
+          color: Colors.black,
+          fontWeight: FontWeight.w400,
+           fontSize: 16), // Style of the placeholder
         //filled: true,
         //fillColor: Colors.transparent,
         contentPadding: EdgeInsets.all(15),
@@ -167,7 +174,9 @@ class Homepage extends StatelessWidget {
           ],
         ),
       ),
-    );
+    )
+      ]));
+        
     
   }
 }
