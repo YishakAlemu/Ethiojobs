@@ -55,7 +55,7 @@ class Homepage extends StatelessWidget {
 
   Widget myLayoutWidget() {
     return Container(
-      color: Colors.white, // Set the background color to white
+       // Set the background color to white
       child: Stack(
         children: [
     SingleChildScrollView(
