@@ -169,8 +169,26 @@ class Homepage extends StatelessWidget {
   ),
 ),
 
-
-
+          const Align(
+              alignment: Alignment(-0.3, -0.5),
+              child: Text(
+                "Search by ",
+                style: TextStyle(
+                  fontSize: 50,
+                  color: Color.fromARGB(255, 109, 74, 205),
+                ),
+              ),
+            ),
+         const Align(
+              alignment: Alignment(-0.25, -0.45),
+              child: Text(
+                "categories",
+                style: TextStyle(
+                  fontSize: 50,
+                  color: Color.fromARGB(255, 109, 74, 205),
+                ),
+              ),
+            ),
           ],
         ),
       ),
