@@ -35,20 +35,25 @@ class Homepage extends StatelessWidget {
         ],
       ),
       endDrawer: Drawer(
-        width: 200,
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            ListTile(title: const Text('Find jobs'), onTap: () => Navigator.pop(context)),
-            ListTile(title: const Text('Find companies'), onTap: () => Navigator.pop(context)),
-            ListTile(title: const Text('Blog'), onTap: () => Navigator.pop(context)),
-            ListTile(title: const Text('Contact us'), onTap: () => Navigator.pop(context)),
-            ListTile(title: const Text('Log in'), onTap: () => Navigator.pop(context)),
-            ListTile(title: const Text('Sign up'), onTap: () => Navigator.pop(context)),
-            ListTile(title: const Text('Employers, are you recruiting?'), onTap: () => Navigator.pop(context)),
-          ],
-        ),
-      ),
+  width: 200,
+  child: Container(
+    height: 400, // Adjust the height as needed
+    child: Column(
+      mainAxisSize: MainAxisSize.min, // Makes it only as big as needed
+      children: <Widget>[
+        SizedBox(height: 110), // Space below the logo (Adjust based on AppBar height)
+        ListTile(title: Text('Find jobs'), onTap: () => Navigator.pop(context)),
+        ListTile(title: Text('Find companies'), onTap: () => Navigator.pop(context)),
+        ListTile(title: Text('Blog'), onTap: () => Navigator.pop(context)),
+        ListTile(title: Text('Contact us'), onTap: () => Navigator.pop(context)),
+        ListTile(title: Text('Log in'), onTap: () => Navigator.pop(context)),
+        ListTile(title: Text('Sign up'), onTap: () => Navigator.pop(context)),
+        ListTile(title: Text('Employers, are you recruiting?'), onTap: () => Navigator.pop(context)),
+      ],
+    ),
+  ),
+),
+
       body: myLayoutWidget(),
     );
   }
@@ -65,7 +70,7 @@ class Homepage extends StatelessWidget {
         child: Stack(
           children: [
             const Align(
-              alignment: Alignment(-0.55, -0.8),
+              alignment: Alignment(-0.2, -0.8),
               child: Text(
                 "Ethiojobs",
                 style: TextStyle(
@@ -76,7 +81,7 @@ class Homepage extends StatelessWidget {
               ),
             ),
             const Align(
-              alignment: Alignment(-0.55, -0.63),
+              alignment: Alignment(-0.2, -0.63),
               child: Text(
                 "Find top employers",
                 style: TextStyle(
@@ -86,7 +91,7 @@ class Homepage extends StatelessWidget {
               ),
             ),
             Align(
-              alignment: const Alignment(-0.55, -0.2),
+              alignment: const Alignment(-0.2, -0.25),
               child: ElevatedButton(
                 onPressed: () {
                   print('Search icon tapped!');
@@ -100,7 +105,7 @@ class Homepage extends StatelessWidget {
               ),
             ),
             Align(
-  alignment: Alignment(-0.6, 0.45),
+  alignment: Alignment(-0.6, 0.35),
   child: Container(
     width: 282,
     decoration: BoxDecoration(
@@ -139,7 +144,7 @@ class Homepage extends StatelessWidget {
 
 
    Align(
-  alignment: Alignment(0.87, 0.45),
+  alignment: Alignment(0.87, 0.35),
   child: ElevatedButton(
     onPressed: () {
       print('Search icon tapped!'); 
@@ -170,22 +175,24 @@ class Homepage extends StatelessWidget {
 ),
 
           const Align(
-              alignment: Alignment(-0.3, -0.5),
+              alignment: Alignment(-0.1, 0.65),
               child: Text(
                 "Search by ",
                 style: TextStyle(
-                  fontSize: 50,
-                  color: Color.fromARGB(255, 109, 74, 205),
+                  fontSize: 27,
+                  fontWeight: FontWeight.w600,
+                  color: Color.fromARGB(255, 6, 1, 19),
                 ),
               ),
             ),
          const Align(
-              alignment: Alignment(-0.25, -0.45),
+              alignment: Alignment(-0.15, 0.73),
               child: Text(
                 "categories",
                 style: TextStyle(
-                  fontSize: 50,
-                  color: Color.fromARGB(255, 109, 74, 205),
+                  fontSize: 27,
+                  fontWeight: FontWeight.w600,
+                  color: Color.fromARGB(255, 6, 1, 19),
                 ),
               ),
             ),
