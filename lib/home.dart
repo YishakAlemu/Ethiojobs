@@ -4,10 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class Homepage extends StatelessWidget {
-  const Homepage({super.key});
+  Homepage({super.key});
+  
 
   @override
   Widget build(BuildContext context) {
+    
+
+   
     return Scaffold(
       resizeToAvoidBottomInset: true, // Prevents keyboard from covering input
       appBar: AppBar(
@@ -36,7 +40,7 @@ class Homepage extends StatelessWidget {
       ),
       endDrawer: Drawer(
   width: 200,
-  child: Container(
+  child: SizedBox(
     height: 400, // Adjust the height as needed
     child: Column(
       mainAxisSize: MainAxisSize.min, // Makes it only as big as needed
@@ -70,7 +74,7 @@ class Homepage extends StatelessWidget {
         child: Stack(
           children: [
             const Align(
-              alignment: Alignment(-0.2, -0.8),
+              alignment: Alignment(-0.13, -0.8),
               child: Text(
                 "Ethiojobs",
                 style: TextStyle(
@@ -81,7 +85,7 @@ class Homepage extends StatelessWidget {
               ),
             ),
             const Align(
-              alignment: Alignment(-0.2, -0.63),
+              alignment: Alignment(-0.13, -0.63),
               child: Text(
                 "Find top employers",
                 style: TextStyle(
@@ -91,10 +95,10 @@ class Homepage extends StatelessWidget {
               ),
             ),
             Align(
-              alignment: const Alignment(-0.2, -0.25),
+              alignment: const Alignment(-0.13, -0.35),
               child: ElevatedButton(
                 onPressed: () {
-                  print('Search icon tapped!');
+                  
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color.fromARGB(255, 72, 193, 156),
@@ -105,7 +109,7 @@ class Homepage extends StatelessWidget {
               ),
             ),
             Align(
-  alignment: Alignment(-0.6, 0.35),
+  alignment: Alignment(-0.6, 0.15),
   child: Container(
     width: 282,
     decoration: BoxDecoration(
@@ -144,7 +148,7 @@ class Homepage extends StatelessWidget {
 
 
    Align(
-  alignment: Alignment(0.87, 0.35),
+  alignment: Alignment(0.87, 0.15),
   child: ElevatedButton(
     onPressed: () {
       print('Search icon tapped!'); 
@@ -175,7 +179,7 @@ class Homepage extends StatelessWidget {
 ),
 
           const Align(
-              alignment: Alignment(-0.1, 0.65),
+              alignment: Alignment(-0.1, 0.5),
               child: Text(
                 "Search by ",
                 style: TextStyle(
@@ -186,7 +190,7 @@ class Homepage extends StatelessWidget {
               ),
             ),
          const Align(
-              alignment: Alignment(-0.15, 0.73),
+              alignment: Alignment(-0.15, 0.58),
               child: Text(
                 "categories",
                 style: TextStyle(
