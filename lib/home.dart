@@ -10,7 +10,6 @@ class Homepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-
    
     return Scaffold(
       resizeToAvoidBottomInset: true, // Prevents keyboard from covering input
@@ -133,6 +132,8 @@ class Homepage extends StatelessWidget {
         //filled: true,
         //fillColor: Colors.transparent,
         contentPadding: EdgeInsets.all(15),
+
+        
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(color: const Color.fromARGB(255, 206, 202, 229) ,width:1), // Border when not focused
@@ -177,6 +178,7 @@ class Homepage extends StatelessWidget {
     ),
   ),
 ),
+
 
           const Align(
               alignment: Alignment(-0.1, 0.5),
