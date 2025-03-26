@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'home.dart'; // Import the home.dart file
+
 void main() {
   runApp(const Ethiojobs());
 }

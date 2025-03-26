@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class homepage extends StatefulWidget {
+  const homepage({super.key});
+
   @override
   _homepageState createState() => _homepageState();
 }
@@ -19,6 +21,14 @@ class _homepageState extends State<homepage> {
     'assets/unilever_logo.png',
     'assets/zemen_logo.png',
     'assets/savechild_logo.png',
+    'assets/actionhunger_logo.jpg',
+    'assets/bgi_logo.png',
+    'assets/catholic_logo.jpg',
+    'assets/care_logo.png',
+    'assets/islamic_logo.jpeg',
+    'assets/medicalteams_logo.jpg',
+    'assets/people_logo.png',
+    'assets/mercy_logo.png',
   ];
 
   @override
@@ -164,7 +174,7 @@ void _startAutoScroll() {
               SizedBox(width: 10),
               ElevatedButton(
                 onPressed: () {
-                  print('Search icon tapped!');
+                  
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
