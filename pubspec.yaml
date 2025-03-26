@@ -20,10 +20,20 @@ dev_dependencies:
 
 flutter:
   assets:
-    - assets/search.svg
-    - assets/ethio_logo.png
-    - assets/search_icon.svg
-    - assets/search20.svg
+  - assets/search.svg
+  - assets/ethio_logo.png
+  - assets/search_icon.svg
+  - assets/search20.svg
+  - assets/ahadu_logo.png
+  - assets/amref_logo.png
+  - assets/coca_logo.png
+  - assets/dashin_logo.png
+  - assets/komari_logo.png
+  - assets/mariestops_logo.png
+  - assets/medicalcorps_logo.png
+  - assets/unilever_logo.png
+  - assets/zemen_logo.png
+  - assets/savechild_logo.png
   uses-material-design: true
 
   fonts:

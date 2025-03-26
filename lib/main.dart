@@ -13,7 +13,7 @@ class Ethiojobs extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Homepage(), // Use the HomeScreen widget from home.dart
+      home: homepage(), // Use the HomeScreen widget from home.dart
     );
   }
 }
