@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class homepage extends StatefulWidget {
-  const homepage({super.key});
+class Homepage extends StatefulWidget {
+  const Homepage({super.key});
 
   @override
   _homepageState createState() => _homepageState();
 }
 
-class _homepageState extends State<homepage> {
+class _homepageState extends State<Homepage> {
   final ScrollController _scrollController = ScrollController();
   final List<String> _categories = [
     'assets/ahadu_logo.png',

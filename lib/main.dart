@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'home.dart'; // Import the home.dart file
+import 'home.dart';
 
 void main() {
   runApp(const Ethiojobs());
@@ -14,7 +14,7 @@ class Ethiojobs extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: homepage(), // Use the HomeScreen widget from home.dart
+      home: Homepage(), // Use the HomeScreen widget from home.dart
     );
   }
 }
