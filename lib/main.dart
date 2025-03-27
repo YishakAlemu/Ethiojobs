@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
+//import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const Ethiojobs());
 }
-
 
 
 class Ethiojobs extends StatelessWidget {
