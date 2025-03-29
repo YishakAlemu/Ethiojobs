@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
-
   @override
   _homepageState createState() => _homepageState();
 }
@@ -29,7 +28,22 @@ class _homepageState extends State<Homepage> {
     'assets/medicalteams_logo.jpg',
     'assets/people_logo.png',
     'assets/mercy_logo.png',
+    'assets/concern_logo.png',
+   'assets/danish_logo.png',
+     'assets/fhethio_logo.png',
+  'assets/flocash_logo.png',
+  'assets/giz_logo.png',
+  'assets/kerchanshe.jpg',
+  'assets/medecins_logo.png',
+  'assets/norwegian_logo.png',
+  'assets/oxfam1_logo.png',
+  'assets/rescue_logo.png',
+  'assets/plan_logo.png',
+  'assets/samartian_logo.jpg',
+  'assets/un_logo.png',
+  'assets/sosethio_logo.jpg'
   ];
+  
 
   @override
   void initState() {
@@ -91,13 +105,13 @@ void _startAutoScroll() {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             SizedBox(height: 80), // Adjust space for logo height
-            ListTile(title: Text('Find Jobs',style: TextStyle(fontSize: 27, fontWeight: FontWeight.w200)), onTap: () => Navigator.pop(context)),
-            ListTile(title: Text('Find Companies',style: TextStyle(fontSize: 27, fontWeight: FontWeight.w200)), onTap: () => Navigator.pop(context)),
-            ListTile(title: Text('Blog',style: TextStyle(fontSize: 27, fontWeight: FontWeight.w200)), onTap: () => Navigator.pop(context)),
-            ListTile(title: Text('Contact us',style: TextStyle(fontSize: 27, fontWeight: FontWeight.w200)), onTap: () => Navigator.pop(context)),
-            ListTile(title: Text('Log in',style: TextStyle(fontSize: 27, fontWeight: FontWeight.w200)), onTap: () => Navigator.pop(context)),
-            ListTile(title: Text('Sign up',style: TextStyle(fontSize: 27, fontWeight: FontWeight.w200)), onTap: () => Navigator.pop(context)),
-            ListTile(title: Text('Employers, are you recruiting?',style: TextStyle(fontSize: 27, fontWeight: FontWeight.w200)), onTap: () => Navigator.pop(context)),
+            ListTile(title: Text('Find Jobs',style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)), onTap: () => Navigator.pop(context)),
+            ListTile(title: Text('Find Companies',style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)), onTap: () => Navigator.pop(context)),
+            ListTile(title: Text('Blog',style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)), onTap: () => Navigator.pop(context)),
+            ListTile(title: Text('Contact us',style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)), onTap: () => Navigator.pop(context)),
+            ListTile(title: Text('Log in',style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)), onTap: () => Navigator.pop(context)),
+            ListTile(title: Text('Sign up',style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)), onTap: () => Navigator.pop(context)),
+            ListTile(title: Text('Employers, are you recruiting?',style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)), onTap: () => Navigator.pop(context)),
           ],
         ),
       ),
@@ -213,7 +227,7 @@ void _startAutoScroll() {
     controller: _scrollController,
     physics: NeverScrollableScrollPhysics(), // Disable manual scrolling
     scrollDirection: Axis.horizontal,
-    itemCount: _categories.length * 2, // Duplicate items for infinite effect
+    itemCount: _categories.length, // Duplicate items for infinite effect
     itemBuilder: (context, index) {
       final realIndex = index % _categories.length; // Repeat items infinitely
       return Container(

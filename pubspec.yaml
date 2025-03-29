@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
-  flutter_svg: ^^2.0.9
+  flutter_svg: ^2.0.9
   google_fonts: ^6.2.1
 
 dev_dependencies:
@@ -43,6 +43,21 @@ flutter:
   - assets/medicalteams_logo.jpg
   - assets/people_logo.png
   - assets/mercy_logo.png
+  - assets/concern_logo.png
+  - assets/danish_logo.png
+  - assets/fhethio_logo.png
+  - assets/flocash_logo.png
+  - assets/giz_logo.png
+  - assets/kerchanshe.jpg
+  - assets/medecins_logo.png
+  - assets/norwegian_logo.png
+  - assets/oxfam1_logo.png
+  - assets/rescue_logo.png
+  - assets/plan_logo.png
+  - assets/samartian_logo.jpg
+  - assets/un_logo.png
+  - assets/sosethio_logo.jpg
+  
   uses-material-design: true
 
   fonts:
