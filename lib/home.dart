@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 
 
@@ -15,54 +14,120 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: Size.fromHeight(65.0),
-      child: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 4,
-        shadowColor: Colors.black,
-        actions: [
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Image.asset('assets/your_image.png', height: 40), // Update with your image path
-      ),
-    ],
+     appBar: PreferredSize(
+  preferredSize: Size.fromHeight(65.0),
+  child: AppBar(
+    title: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Image.asset(
+          'assets/ethiojobs.webp',
+          height: 125,
+          width: 145,
         ),
+        PopupMenuButton<String>(
+          icon: Icon(Icons.menu, size: 30), 
+          itemBuilder: (BuildContext context) {
+            return [
+              PopupMenuItem<String>(
+                child: Text('Find Jobs'),
+              ),
+              PopupMenuItem<String>(
+                child: Text('Find Companies'),
+              ),
+              PopupMenuItem<String>(
+                child: Text('Blog'),
+              ),
+              PopupMenuItem<String>( 
+                child: Text('Contact Us'),
+              ),
+              PopupMenuItem<String>(               
+                child: Text('Log In'),
+              ),
+              PopupMenuItem<String>(           
+                child: Text('Sign Up'),
+              ),
+              PopupMenuItem<String>(
+                child: Text('Employers,are you recruiting?'),
+              ),
+            ];
+          },
+          onSelected: (String value) {
+
+          },
+        ),
+      ],
+    ),
+              backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+              elevation: 5,
+            shadowColor: Colors.black,
+      ),
           ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
+                 body: SingleChildScrollView(
+                 child: Column(
+                 children: [
             // First main container
-            Container(
-              height: 200,
-              color: Color.fromARGB(255, 72, 193, 156), // Background color for the first container
-              child: Center(
+                    Container(
+                     height: 210,
+                 color: Color.fromARGB(255, 72, 193, 156), // Background color for the first container
+                 child: Center(
                 child: Text(
                   'First Container',
                   style: TextStyle(color: Colors.white, fontSize: 24),
                 ),
               ),
             ),
+            
             // Second main container
             Container(
-              color: Colors.white, // Background color for the second container
+              width:400,
+              
+              color: const Color.fromARGB(150, 255, 255, 255), // Background color for the second container
               child: Column(
                 children: [
+
                   Container(
-                    height: 50,
-                    color: Colors.blue[100],
-                    margin: EdgeInsets.only(top: 5),
-                    child: Center(
-                      child: Text(
-                        'Sub Container 1',
-                        style: TextStyle(color: Colors.white, fontSize: 18),
-                      ),
+                    height: 340,
+                    width: 355,
+                  margin: EdgeInsets.only(top: 115),
+                  decoration: BoxDecoration(
+                   color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                  BoxShadow(
+               color: Colors.black.withOpacity(0.1), // Shadow color
+               spreadRadius: 5, // Spread radius
+                blurRadius: 10, // Blur radius
+                offset: Offset(0, 2), // Offset for the shadow
                     ),
-                  ),
+                  ], // Set the circular radius here
+                           ),
+                           child: Center(
+                              child: Text(
+                        'Sub Container 1',
+                        style: TextStyle(color: Colors.black, fontSize: 18), // Changed color for visibility
+                          ),
+                         ),
+                      ),
+
                   Container(
-                    height: 50,
-                    color: Colors.blue[200],
-                    margin: EdgeInsets.only(top: 5),
+
+                    height: 340,
+                    width: 355,
+                    margin: EdgeInsets.only(top: 25),
+                    decoration: BoxDecoration(
+                   color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                  BoxShadow(
+               color: Colors.black.withOpacity(0.1), // Shadow color
+               spreadRadius: 5, // Spread radius
+                blurRadius: 10, // Blur radius
+                offset: Offset(0, 2), // Offset for the shadow
+                    ),
+                  ], // Set the circular radius here
+                           ),
                     child: Center(
                       child: Text(
                         'Sub Container 2',
@@ -70,101 +135,314 @@ class _HomepageState extends State<Homepage> {
                       ),
                     ),
                   ),
+
                   Container(
-                    height: 50,
-                    color: Colors.blue[300],
-                    margin: EdgeInsets.only(top: 5),
+
+                    height: 340,
+                    width: 355,
+                    margin: EdgeInsets.only(top: 25),
+                    decoration: BoxDecoration(
+                   color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                  BoxShadow(
+               color: Colors.black.withOpacity(0.1), // Shadow color
+               spreadRadius: 5, // Spread radius
+                blurRadius: 10, // Blur radius
+                offset: Offset(0, 2), // Offset for the shadow
+                    ),
+                  ], // Set the circular radius here
+                           ),
                     child: Center(
                       child: Text(
-                        'Sub Container 3',
+                        'Sub Container 2',
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
                   ),
-                  Container(
-                    height: 50,
-                    color: Colors.blue[400],
-                    margin: EdgeInsets.only(top: 5),
+
+                Container(
+
+                    height: 340,
+                    width: 355,
+                    margin: EdgeInsets.only(top: 25),
+                    decoration: BoxDecoration(
+                   color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                  BoxShadow(
+               color: Colors.black.withOpacity(0.1), // Shadow color
+               spreadRadius: 5, // Spread radius
+                blurRadius: 10, // Blur radius
+                offset: Offset(0, 2), // Offset for the shadow
+                    ),
+                  ], // Set the circular radius here
+                           ),
                     child: Center(
                       child: Text(
-                        'Sub Container 4',
+                        'Sub Container 2',
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
                   ),
-                  Container(
-                    height: 50,
-                    color: Colors.blue[500],
-                    margin: EdgeInsets.only(top: 5),
+                Container(
+
+                    height: 340,
+                    width: 355,
+                    margin: EdgeInsets.only(top: 25),
+                    decoration: BoxDecoration(
+                   color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                  BoxShadow(
+               color: Colors.black.withOpacity(0.1), // Shadow color
+               spreadRadius: 5, // Spread radius
+                blurRadius: 10, // Blur radius
+                offset: Offset(0, 2), // Offset for the shadow
+                    ),
+                  ], // Set the circular radius here
+                           ),
                     child: Center(
                       child: Text(
-                        'Sub Container 5',
+                        'Sub Container 2',
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
                   ),
-                  Container(
-                    height: 50,
-                    color: Colors.blue[600],
-                    margin: EdgeInsets.only(top: 5),
+                
+                Container(
+
+                    height: 340,
+                    width: 355,
+                    margin: EdgeInsets.only(top: 25),
+                    decoration: BoxDecoration(
+                   color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                  BoxShadow(
+               color: Colors.black.withOpacity(0.1), // Shadow color
+               spreadRadius: 5, // Spread radius
+                blurRadius: 10, // Blur radius
+                offset: Offset(0, 2), // Offset for the shadow
+                    ),
+                  ], // Set the circular radius here
+                           ),
                     child: Center(
                       child: Text(
-                        'Sub Container 6',
+                        'Sub Container 2',
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
                   ),
-                  Container(
-                    height: 50,
-                    color: Colors.blue[700],
-                    margin: EdgeInsets.only(top: 5),
+                   
+                   Container(
+
+                    height: 340,
+                    width: 355,
+                    margin: EdgeInsets.only(top: 25),
+                    decoration: BoxDecoration(
+                   color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                  BoxShadow(
+               color: Colors.black.withOpacity(0.1), // Shadow color
+               spreadRadius: 5, // Spread radius
+                blurRadius: 10, // Blur radius
+                offset: Offset(0, 2), // Offset for the shadow
+                    ),
+                  ], // Set the circular radius here
+                           ),
                     child: Center(
                       child: Text(
-                        'Sub Container 7',
+                        'Sub Container 2',
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
                   ),
-                  Container(
-                    height: 50,
-                    color: Colors.blue[800],
-                    margin: EdgeInsets.only(top: 5),
+                
+                Container(
+
+                    height: 340,
+                    width: 355,
+                    margin: EdgeInsets.only(top: 25),
+                    decoration: BoxDecoration(
+                   color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                  BoxShadow(
+               color: Colors.black.withOpacity(0.1), // Shadow color
+               spreadRadius: 5, // Spread radius
+                blurRadius: 10, // Blur radius
+                offset: Offset(0, 2), // Offset for the shadow
+                    ),
+                  ], // Set the circular radius here
+                           ),
                     child: Center(
                       child: Text(
-                        'Sub Container 8',
+                        'Sub Container 2',
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
                   ),
-                  Container(
-                    height: 50,
-                    color: Colors.blue[900],
-                    margin: EdgeInsets.only(top: 5),
+                
+                Container(
+
+                    height: 340,
+                    width: 355,
+                    margin: EdgeInsets.only(top: 25),
+                    decoration: BoxDecoration(
+                   color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                  BoxShadow(
+               color: Colors.black.withOpacity(0.1), // Shadow color
+               spreadRadius: 5, // Spread radius
+                blurRadius: 10, // Blur radius
+                offset: Offset(0, 2), // Offset for the shadow
+                    ),
+                  ], // Set the circular radius here
+                           ),
                     child: Center(
                       child: Text(
-                        'Sub Container 9',
+                        'Sub Container 2',
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
                   ),
-                  Container(
-                    height: 50,
-                    color: Colors.blue[1000],
-                    margin: EdgeInsets.only(top: 5),
+                
+                Container(
+
+                    height: 340,
+                    width: 355,
+                    margin: EdgeInsets.only(top: 25),
+                    decoration: BoxDecoration(
+                   color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                  BoxShadow(
+               color: Colors.black.withOpacity(0.1), // Shadow color
+               spreadRadius: 5, // Spread radius
+                blurRadius: 10, // Blur radius
+                offset: Offset(0, 2), // Offset for the shadow
+                    ),
+                  ], // Set the circular radius here
+                           ),
                     child: Center(
                       child: Text(
-                        'Sub Container 10',
+                        'Sub Container 2',
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
                   ),
+                
+                Container(
+
+                    height: 340,
+                    width: 355,
+                    margin: EdgeInsets.only(top: 25),
+                    decoration: BoxDecoration(
+                   color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                  BoxShadow(
+               color: Colors.black.withOpacity(0.1), // Shadow color
+               spreadRadius: 5, // Spread radius
+                blurRadius: 10, // Blur radius
+                offset: Offset(0, 2), // Offset for the shadow
+                    ),
+                  ], // Set the circular radius here
+                           ),
+                    child: Center(
+                      child: Text(
+                        'Sub Container 2',
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      ),
+                    ),
+                  ),
+                
+                Container(
+
+                    height: 340,
+                    width: 355,
+                    margin: EdgeInsets.only(top: 25),
+                    decoration: BoxDecoration(
+                   color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                  BoxShadow(
+               color: Colors.black.withOpacity(0.1), // Shadow color
+               spreadRadius: 5, // Spread radius
+                blurRadius: 10, // Blur radius
+                offset: Offset(0, 2), // Offset for the shadow
+                    ),
+                  ], // Set the circular radius here
+                           ),
+                    child: Center(
+                      child: Text(
+                        'Sub Container 2',
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      ),
+                    ),
+                  ),
+                
+                Container(
+
+                    height: 340,
+                    width: 355,
+                    margin: EdgeInsets.only(top: 150),
+                    decoration: BoxDecoration(
+                   color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                  BoxShadow(
+               color: Colors.black.withOpacity(0.1), // Shadow color
+               spreadRadius: 5, // Spread radius
+                blurRadius: 10, // Blur radius
+                offset: Offset(0, 2), // Offset for the shadow
+                    ),
+                  ], // Set the circular radius here
+                           ),
+                    child: Center(
+                      child: Text(
+                        'Sub Container 2',
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      ),
+                    ),
+                  ),
+                
+                Container(
+
+                    height: 290,
+                    width: 355,
+                    margin: EdgeInsets.only(top: 25),
+                    decoration: BoxDecoration(
+                   color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                  BoxShadow(
+               color: Colors.black.withOpacity(0.1), // Shadow color
+               spreadRadius: 5, // Spread radius
+                blurRadius: 10, // Blur radius
+                offset: Offset(0, 2), // Offset for the shadow
+                    ),
+                  ], // Set the circular radius here
+                           ),
+                    child: Center(
+                      child: Text(
+                        'Sub Container 2',
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      ),
+                    ),
+                  ),
+
+                 
                 ],
               ),
             ),
             Container(
-              height: 50,
-              color: Colors.grey, // Background color for the footer
-              margin: EdgeInsets.only(top: 10), // Spacing above the footer
+              height: 600,
+              color: Color.fromARGB(255, 72, 193, 156), // Background color for the footer
+              margin: EdgeInsets.only(top: 25), // Spacing above the footer
               child: Center(
                 child: Text(
                   'footer',

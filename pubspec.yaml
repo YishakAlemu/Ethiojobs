@@ -57,6 +57,7 @@ flutter:
   - assets/samartian_logo.jpg
   - assets/un_logo.png
   - assets/sosethio_logo.jpg
+  - assets/ethiojobs.webp
   
   uses-material-design: true
 
