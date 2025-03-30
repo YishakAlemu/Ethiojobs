@@ -64,25 +64,142 @@ class _HomepageState extends State<Homepage> {
             shadowColor: Colors.black,
       ),
           ),
+
+           //BODY 
                  body: SingleChildScrollView(
                  child: Column(
                  children: [
             // First main container
                     Container(
-                     height: 210,
+                     height: 215,
+                     width:700,
                  color: Color.fromARGB(255, 72, 193, 156), // Background color for the first container
-                 child: Center(
+               child: Column(
+          children: [
+            Container(
+              height: 60,
+              width: 355,
+              margin: EdgeInsets.only(top: 10),
+              
+              child: Center(
                 child: Text(
-                  'First Container',
-                  style: TextStyle(color: Colors.white, fontSize: 24),
-                ),
+                 'Find Your Dream Job in Ethiopia',
+                  style: TextStyle(color: Colors.white, fontSize: 20), // Changed color for visibility
+               ),
+             ),
+            ),
+            Container(
+              height: 50,
+              width: 355,
+              margin: EdgeInsets.only(top: 0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(25),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2), // Shadow color
+                    spreadRadius: 5, // Spread radius
+                    blurRadius: 10, // Blur radius
+                    offset: Offset(0, 2), // Offset for the shadow
+                  ),
+                  ],
+              ),
+             child: Center(
+  child: TextField(
+    decoration: InputDecoration(
+      hintText: "Job title, Keywords, or industry",
+      hintStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w300),
+      contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 12),
+      border: InputBorder.none,
+      prefixIcon: Padding(
+        padding: EdgeInsets.only(left: 10.0, right: 10.0), // Add some padding
+        child: Icon(Icons.search, color: Colors.grey), // Search icon
+      ),
+    ),
+  ),
+),
+            ),
+
+
+    Container(
+      margin: EdgeInsets.only(top: 18),
+  height: 50,
+  width: 700,
+  child: SingleChildScrollView(
+    scrollDirection: Axis.horizontal,
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20), // Adjust the horizontal padding
+      child: Wrap(
+        spacing: 20, // Space between buttons
+        children: [
+          Container(
+            height : 42,
+            width:42,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white,
+            ),
+            child: IconButton(
+              icon: Icon(Icons.tune, color: Colors.black), // Icon color
+              onPressed: () {},
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {},
+            child: Text('Category'),
+            style: ElevatedButton.styleFrom(
+              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 5),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8), // Optional: rounded corners
               ),
             ),
+          ),
+          ElevatedButton(
+            onPressed: () {},
+            child: Text('Location'),
+            style: ElevatedButton.styleFrom(
+              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 7),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8), // Optional: rounded corners
+              ),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {},
+            child: Text('Carrer'),
+            style: ElevatedButton.styleFrom(
+              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 7),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8), // Optional: rounded corners
+              ),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {},
+            child: Text('Employment Type'),
+            style: ElevatedButton.styleFrom(
+              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 7),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8), // Optional: rounded corners
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+  ),
+),
+          ]
+        ),
+    ),
             
+
+
+
             // Second main container
             Container(
               width:400,
-              
+             // margin: EdgeInsets.only(top: 8),
               color: const Color.fromARGB(150, 255, 255, 255), // Background color for the second container
               child: Column(
                 children: [
