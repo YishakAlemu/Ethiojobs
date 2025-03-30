@@ -27,36 +27,44 @@ class _HomepageState extends State<Homepage> {
           width: 145,
         ),
         PopupMenuButton<String>(
-          icon: Icon(Icons.menu, size: 30), 
-          itemBuilder: (BuildContext context) {
-            return [
-              PopupMenuItem<String>(
-                child: Text('Find Jobs'),
-              ),
-              PopupMenuItem<String>(
-                child: Text('Find Companies'),
-              ),
-              PopupMenuItem<String>(
-                child: Text('Blog'),
-              ),
-              PopupMenuItem<String>( 
-                child: Text('Contact Us'),
-              ),
-              PopupMenuItem<String>(               
-                child: Text('Log In'),
-              ),
-              PopupMenuItem<String>(           
-                child: Text('Sign Up'),
-              ),
-              PopupMenuItem<String>(
-                child: Text('Employers,are you recruiting?'),
-              ),
-            ];
-          },
-          onSelected: (String value) {
-
-          },
-        ),
+  icon: Icon(Icons.menu, size: 30),
+  itemBuilder: (BuildContext context) {
+    return [
+      PopupMenuItem<String>(
+        value: 'Find Jobs',
+        child: Text('Find Jobs'),
+      ),
+      PopupMenuItem<String>(
+        value: 'Find Companies',
+        child: Text('Find Companies'),
+      ),
+      PopupMenuItem<String>(
+        value: 'Blog',
+        child: Text('Blog'),
+      ),
+      PopupMenuItem<String>(
+        value: 'Contact Us',
+        child: Text('Contact Us'),
+      ),
+      PopupMenuItem<String>(
+        value: 'Log In',
+        child: Text('Log In'),
+      ),
+      PopupMenuItem<String>(
+        value: 'Sign Up',
+        child: Text('Sign Up'),
+      ),
+      PopupMenuItem<String>(
+        value: 'Employers, are you recruiting?',
+        child: Text('Employers, are you recruiting?'),
+      ),
+    ];
+  },
+  onSelected: (String value) {
+    // Handle selection here
+  },
+  offset: Offset(0, 35), // Adjust this value to control vertical position
+)
       ],
     ),
               backgroundColor: const Color.fromARGB(255, 255, 255, 255),
@@ -132,58 +140,121 @@ class _HomepageState extends State<Homepage> {
       child: Wrap(
         spacing: 20, // Space between buttons
         children: [
-          Container(
-            height : 42,
-            width:42,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white,
-            ),
-            child: IconButton(
-              icon: Icon(Icons.tune, color: Colors.black), // Icon color
-              onPressed: () {},
-            ),
-          ),
+          
+            Material(
+  color: Colors.white, // Background color of the button
+  shape: CircleBorder(), // Makes the button circular
+  child: IconButton(
+    icon: Icon(Icons.tune, color: Colors.black, size: 20), // Icon color and size
+    onPressed: () {
+      // Define your action here
+    },
+    constraints: BoxConstraints(
+      minWidth: 35, // Minimum width for the button
+      minHeight: 35, // Minimum height for the button
+    ),
+  ),
+),
           ElevatedButton(
             onPressed: () {},
-            child: Text('Category'),
+            
             style: ElevatedButton.styleFrom(
               padding: EdgeInsets.symmetric(horizontal: 40, vertical: 5),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8), // Optional: rounded corners
               ),
+             
             ),
+              child: Text('Category',
+              style: TextStyle(fontSize: 13, 
+        fontWeight:FontWeight.w400, 
+        color: Colors.black)),
           ),
           ElevatedButton(
             onPressed: () {},
-            child: Text('Location'),
+            
             style: ElevatedButton.styleFrom(
               padding: EdgeInsets.symmetric(horizontal: 40, vertical: 7),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8), // Optional: rounded corners
               ),
             ),
+            child: Text('Location', 
+            style: TextStyle(fontSize: 13, 
+        fontWeight:FontWeight.w400, 
+        color: Colors.black)),
           ),
           ElevatedButton(
             onPressed: () {},
-            child: Text('Carrer'),
+           
             style: ElevatedButton.styleFrom(
               padding: EdgeInsets.symmetric(horizontal: 40, vertical: 7),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8), // Optional: rounded corners
               ),
             ),
+             child: Text('Carrer',
+             style: TextStyle(fontSize: 13, 
+        fontWeight:FontWeight.w400, 
+        color: Colors.black)),
           ),
           ElevatedButton(
             onPressed: () {},
-            child: Text('Employment Type'),
+            
             style: ElevatedButton.styleFrom(
               padding: EdgeInsets.symmetric(horizontal: 40, vertical: 7),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8), // Optional: rounded corners
               ),
             ),
+        child: Text('Employment Type', 
+        style: TextStyle(fontSize: 13, 
+        fontWeight:FontWeight.w400, 
+        color: Colors.black)),
           ),
+           Container(
+  margin: EdgeInsets.only(top: 4),
+  height: 40,
+  width: 160, // Fixed width for the dropdown
+  decoration: BoxDecoration(
+    color: Colors.white, // Background color
+    borderRadius: BorderRadius.circular(8), // Rounded corners
+    boxShadow: [
+      BoxShadow(
+        color: Colors.grey.withOpacity(0.2), // Shadow effect
+        spreadRadius: 1,
+        blurRadius: 3,
+        offset: Offset(0, 2), // Position of shadow
+      ),
+    ],
+  ),
+  child: PopupMenuButton<String>(
+    onSelected: (String value) {
+      // Handle the selection
+    },
+    icon: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween, // Space between text and icon
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Text(
+            'Posted Wit...',
+            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: Colors.black),
+          ),
+        ),
+        Icon(Icons.arrow_drop_down, color: Colors.grey), // Dropdown icon
+      ],
+    ),
+    itemBuilder: (BuildContext context) => [
+      PopupMenuItem(value: 'Any date', child: Text('Any date')),
+      PopupMenuItem(value: 'Since yesterday', child: Text('Since yesterday')),
+      PopupMenuItem(value: 'Last 7 days', child: Text('Last 7 days')),
+      PopupMenuItem(value: 'Last 30 days', child: Text('Last 30 days')),
+    ],
+    offset: Offset(0, 40), // Adjust this value to control vertical position
+    color: Colors.white, // Background color of dropdown menu
+  ),
+)
         ],
       ),
     ),
