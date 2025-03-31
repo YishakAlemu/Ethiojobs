@@ -370,11 +370,15 @@ class _HomepageState extends State<Homepage> {
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 8.0, right:0),
-               // Adjust space for Button 1
+               
               child: TextButton(
                 onPressed: () {
-                  // Action for Button 1
+                  
                 },
+                style: TextButton.styleFrom(
+          padding: EdgeInsets.zero, // Remove any padding from the button
+          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
+        ),
                 child: Text(
                   'New',
                   style: TextStyle(color: Colors.blueAccent,fontSize: 14.5),
@@ -387,6 +391,10 @@ class _HomepageState extends State<Homepage> {
                 onPressed: () {
                   // Action for Button 2
                 },
+                style: TextButton.styleFrom(
+          padding: EdgeInsets.zero, // Remove any padding from the button
+          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
+        ),
                 child: Text('Premium', style: TextStyle(color: Colors.green, fontSize: 14.5,),),
               ),
             ),
@@ -403,6 +411,7 @@ onPressed: () {
           label: Text('Easy Apply', style: TextStyle(color: const Color.fromARGB(255, 15, 92, 154), fontSize: 14.5),),
         ),
             ),
+            SizedBox(width: 40),
             TextButton(
   onPressed: () {
     
@@ -418,36 +427,84 @@ onPressed: () {
       ), //
          
        Container(
-        height:150,
+        color: Colors.blue,
+        height:140,
   padding: EdgeInsets.all(3.0),
       child:Row(
+       
 mainAxisAlignment: MainAxisAlignment.start,
        children: [
-         Image.asset(
-          'assets/ethiojobs.webp',
-          height: 120,
-          width: 140,
-        ),
+        Align(
+      alignment: Alignment(-1.0, 0.0), // Adjust alignment as needed (e.g., Alignment.center, Alignment.topRight, etc.)
+      child: Image.asset(
+        'assets/ethiojobs.webp',
+        height: 120,
+        width: 140,
+      ),
+    ),
         Container(
-          color: Colors.blue,
-          height: 80,
+          padding: EdgeInsets.all(0),
+          color: Colors.white,
+          height: 139,
               width: 200,
-              padding: EdgeInsets.all(5),
+              
           child: Column(
             children: [
-              Container(
-              height: 20,
-              width: 150,
-              margin: EdgeInsets.only(top: 10),
-                child: Text(
-                 'Senior Full Stack\nDeveloper',
-                  style: TextStyle(color: Colors.black, fontSize: 14), // Changed color for visibility
-               ),
-            ),
-              Container(
-                margin: EdgeInsets.only(top: 10),
-              height:5
+             
+               TextButton(
+                onPressed: () {
+                  
+                },
+                style: TextButton.styleFrom(
+                  
+    padding: EdgeInsets.symmetric(horizontal: 5, vertical: 1), // Adjust padding
+   // Minimum size for the button
+                ),
+                child: Text('Senior FullStack Developer\n&Data Engineer', style: TextStyle(overflow: TextOverflow.ellipsis,
+                  color: Colors.black, fontSize: 18,),),
               ),
+            SizedBox(height: 8.0),
+              SizedBox(
+  width: 160.0, // Set the desired width
+  height: 34.0, // Set the desired height
+  child: ElevatedButton(
+    onPressed: () {
+      // Action when button is pressed
+    },
+    style: ElevatedButton.styleFrom(
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20.0), // Rounded corners
+      ),
+      backgroundColor: const Color.fromARGB(200, 255, 255, 255), // Background color
+    ),
+    child: Text(
+      'ComputerScience & IT',
+      style: TextStyle(color: Colors.black, fontSize: 10, overflow: TextOverflow.ellipsis), // Text color
+    ),
+  ),
+),
+SizedBox(height: 8.0),
+ SizedBox(
+  width: 160.0, // Set the desired width
+  height: 34.0, // Set the desired height
+  child: ElevatedButton(
+    onPressed: () {
+      // Action when button is pressed
+    },
+    style: ElevatedButton.styleFrom(
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(18.0), // Rounded corners
+      ),
+      backgroundColor: const Color.fromARGB(200, 255, 255, 255), // Background color
+    ),
+    child: Text(
+      'Software Engineering',
+      style: TextStyle(color: Colors.black, fontSize: 10,overflow: TextOverflow.ellipsis,), // Text color
+    ),
+  ),
+)
               
             ],
           ),
@@ -455,14 +512,37 @@ mainAxisAlignment: MainAxisAlignment.start,
        ],
       )
 
+       ),
 
-
-
-
-
-
-       )
-
+    Container(
+  padding: EdgeInsets.all(0), // Ensure no padding around the container
+  color: Colors.green,
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.start, // Align contents to the start (left)
+    crossAxisAlignment: CrossAxisAlignment.start, // Align to the top
+    children: [
+      // Label
+      Text(
+        '30 minutes ago by ',
+        style: TextStyle(fontSize: 14), // Customize the style as needed
+      ),
+      // Text Button
+      TextButton(
+        onPressed: () {
+          // Action to perform when the button is pressed
+        },
+        style: TextButton.styleFrom(
+          padding: EdgeInsets.all(1),
+          minimumSize: Size(0, 0), // Remove padding from the button
+        ),
+        child: Text(
+          'ETHIOJOBS & AFRINET',
+          style: TextStyle(fontSize: 17),
+        ), // Text displayed on the button
+      ),
+    ],
+  ),
+),
     ],
   ),
 ),
