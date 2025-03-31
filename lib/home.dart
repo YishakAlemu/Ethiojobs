@@ -130,7 +130,7 @@ class _HomepageState extends State<Homepage> {
 
 
     Container(
-      margin: EdgeInsets.only(top: 18),
+      margin: EdgeInsets.only(top: 20),
   height: 50,
   width: 700,
   child: SingleChildScrollView(
@@ -141,83 +141,151 @@ class _HomepageState extends State<Homepage> {
         spacing: 20, // Space between buttons
         children: [
           
-            Material(
-  color: Colors.white, // Background color of the button
-  shape: CircleBorder(), // Makes the button circular
+            Container(
+              margin: EdgeInsets.only(top: 3),
+              height: 42,
+              width:42,
+  decoration: BoxDecoration(
+    color: const Color.fromARGB(255, 225, 225, 220), // Background color
+    shape: BoxShape.circle, // Makes the button circular
+    boxShadow: [
+      BoxShadow(
+        color: Colors.black.withOpacity(0.2), // Shadow color
+        spreadRadius: 0.5, // Spread radius
+        blurRadius: 2, // Blur radius
+        offset: Offset(0, 0), // Position of the shadow
+      ),
+    ],
+    border: Border.all(
+      color: Colors.grey, // Border color
+      width: 0.8, // Border width
+    ),
+  ),
   child: IconButton(
-    icon: Icon(Icons.tune, color: Colors.black, size: 20), // Icon color and size
+    icon: Icon(Icons.tune, color: Colors.black, size: 22), // Icon color and size
     onPressed: () {
       // Define your action here
     },
     constraints: BoxConstraints(
-      minWidth: 35, // Minimum width for the button
-      minHeight: 35, // Minimum height for the button
+      minWidth: 32, // Minimum width for the button
+      minHeight: 32, // Minimum height for the button
     ),
   ),
 ),
           ElevatedButton(
-            onPressed: () {},
-            
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 5),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8), // Optional: rounded corners
-              ),
-             
-            ),
-              child: Text('Category',
-              style: TextStyle(fontSize: 13, 
-        fontWeight:FontWeight.w400, 
-        color: Colors.black)),
-          ),
+  onPressed: () {},
+  style: ElevatedButton.styleFrom(
+    backgroundColor : const Color.fromARGB(255, 225, 225, 220),
+    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 7), // Adjust padding as needed
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(8),
+      side: BorderSide(
+        color: Colors.grey, // Border color
+        width: 0.8, // Border width
+      ), // Optional: rounded corners
+    ),
+  ),
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween, // Space between text and icon
+    children: [
+      Text(
+        'Category', 
+        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
+      ),
+      Padding(
+        padding: EdgeInsets.only(left: 30.0), // Add padding if needed
+        child: Icon(Icons.fiber_manual_record, size: 12), // Dot icon on the right
+      ),
+    ],
+  ),
+),
           ElevatedButton(
-            onPressed: () {},
-            
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 7),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8), // Optional: rounded corners
-              ),
-            ),
-            child: Text('Location', 
-            style: TextStyle(fontSize: 13, 
-        fontWeight:FontWeight.w400, 
-        color: Colors.black)),
-          ),
+  onPressed: () {},
+  style: ElevatedButton.styleFrom(
+    backgroundColor : const Color.fromARGB(255, 225, 225, 220),
+    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 7), // Adjust padding as needed
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(8),
+      side: BorderSide(
+        color: Colors.grey, // Border color
+        width: 0.8, // Border width
+      ), // // Optional: rounded corners
+    ),
+  ),
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween, // Space between text and icon
+    children: [
+      Text(
+        'Location', 
+        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
+      ),
+      Padding(
+        padding: EdgeInsets.only(left: 30.0), // Add padding if needed
+        child: Icon(Icons.fiber_manual_record, size: 12), // Dot icon on the right
+      ),
+    ],
+  ),
+),
+         ElevatedButton(
+  onPressed: () {},
+  style: ElevatedButton.styleFrom(
+    backgroundColor : const Color.fromARGB(255, 225, 225, 220),
+    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 7), // Adjust padding as needed
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(8),
+      side: BorderSide(
+        color: Colors.grey, // Border color
+        width: 0.8, // Border width
+      ), // // Optional: rounded corners
+    ),
+  ),
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween, // Space between text and icon
+    children: [
+      Text(
+        'Carrer', 
+        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
+      ),
+      Padding(
+        padding: EdgeInsets.only(left: 30.0), // Add padding if needed
+        child: Icon(Icons.fiber_manual_record, size: 12), // Dot icon on the right
+      ),
+    ],
+  ),
+),
           ElevatedButton(
-            onPressed: () {},
-           
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 7),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8), // Optional: rounded corners
-              ),
-            ),
-             child: Text('Carrer',
-             style: TextStyle(fontSize: 13, 
-        fontWeight:FontWeight.w400, 
-        color: Colors.black)),
-          ),
-          ElevatedButton(
-            onPressed: () {},
-            
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 7),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8), // Optional: rounded corners
-              ),
-            ),
-        child: Text('Employment Type', 
-        style: TextStyle(fontSize: 13, 
-        fontWeight:FontWeight.w400, 
-        color: Colors.black)),
-          ),
+  onPressed: () {},
+  style: ElevatedButton.styleFrom(
+    backgroundColor : const Color.fromARGB(255, 225, 225, 220),
+    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 7), // Adjust padding as needed
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(8),
+      side: BorderSide(
+        color: Colors.grey, // Border color
+        width: 0.8, // Border width
+      ), // // Optional: rounded corners
+    ),
+  ),
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween, // Space between text and icon
+    children: [
+      Text(
+        'Employment Type', 
+        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
+      ),
+      Padding(
+        padding: EdgeInsets.only(left: 30.0), // Add padding if needed
+        child: Icon(Icons.fiber_manual_record, size: 12), // Dot icon on the right
+      ),
+    ],
+  ),
+),
            Container(
   margin: EdgeInsets.only(top: 4),
   height: 40,
   width: 160, // Fixed width for the dropdown
   decoration: BoxDecoration(
-    color: Colors.white, // Background color
+    color: const Color.fromARGB(255, 225, 225, 220), // Background color
     borderRadius: BorderRadius.circular(8), // Rounded corners
     boxShadow: [
       BoxShadow(
@@ -239,17 +307,17 @@ class _HomepageState extends State<Homepage> {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Text(
             'Posted Wit...',
-            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: Colors.black),
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
           ),
         ),
         Icon(Icons.arrow_drop_down, color: Colors.grey), // Dropdown icon
       ],
     ),
     itemBuilder: (BuildContext context) => [
-      PopupMenuItem(value: 'Any date', child: Text('Any date')),
-      PopupMenuItem(value: 'Since yesterday', child: Text('Since yesterday')),
-      PopupMenuItem(value: 'Last 7 days', child: Text('Last 7 days')),
-      PopupMenuItem(value: 'Last 30 days', child: Text('Last 30 days')),
+      PopupMenuItem(value: 'Any date', child: Text('Any date',style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: Colors.black),)),
+      PopupMenuItem(value: 'Since yesterday', child: Text('Since yesterday',style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: Colors.black),)),
+      PopupMenuItem(value: 'Last 7 days', child: Text('Last 7 days',style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: Colors.black),)),
+      PopupMenuItem(value: 'Last 30 days', child: Text('Last 30 days',style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: Colors.black),)),
     ],
     offset: Offset(0, 40), // Adjust this value to control vertical position
     color: Colors.white, // Background color of dropdown menu
@@ -271,33 +339,133 @@ class _HomepageState extends State<Homepage> {
             Container(
               width:400,
              // margin: EdgeInsets.only(top: 8),
-              color: const Color.fromARGB(150, 255, 255, 255), // Background color for the second container
+              color: const Color.fromARGB(255, 240, 238, 238), // Background color for the second container
               child: Column(
                 children: [
 
                   Container(
-                    height: 340,
-                    width: 355,
-                  margin: EdgeInsets.only(top: 115),
-                  decoration: BoxDecoration(
-                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(15),
-                  boxShadow: [
-                  BoxShadow(
-               color: Colors.black.withOpacity(0.1), // Shadow color
-               spreadRadius: 5, // Spread radius
-                blurRadius: 10, // Blur radius
-                offset: Offset(0, 2), // Offset for the shadow
-                    ),
-                  ], // Set the circular radius here
-                           ),
-                           child: Center(
-                              child: Text(
-                        'Sub Container 1',
-                        style: TextStyle(color: Colors.black, fontSize: 18), // Changed color for visibility
-                          ),
-                         ),
-                      ),
+  height: 340,
+  width: 355,
+  margin: EdgeInsets.only(top: 115),
+  decoration: BoxDecoration(
+    color: Colors.white,
+    borderRadius: BorderRadius.circular(15),
+    boxShadow: [
+      BoxShadow(
+        color: Colors.black.withOpacity(0.1), // Shadow color
+        spreadRadius: 5, // Spread radius
+        blurRadius: 10, // Blur radius
+        offset: Offset(0, 2), // Offset for the shadow
+      ),
+    ],
+  ),
+  child: Column(
+    children: [
+      Container(
+        height: 34, // Height for the button row
+        width: 355,
+        margin: EdgeInsets.only(top: 30),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start, // Start alignment for manual control
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0, right:0),
+               // Adjust space for Button 1
+              child: TextButton(
+                onPressed: () {
+                  // Action for Button 1
+                },
+                child: Text(
+                  'New',
+                  style: TextStyle(color: Colors.blueAccent,fontSize: 14.5),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 0.0), // Adjust space for Button 2
+              child: TextButton(
+                onPressed: () {
+                  // Action for Button 2
+                },
+                child: Text('Premium', style: TextStyle(color: Colors.green, fontSize: 14.5,),),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 0.0), // Adjust space for Button 3
+               child :TextButton.icon(
+onPressed: () {
+            // Button 1 action
+          },
+          icon: Padding(
+            padding: const EdgeInsets.only(left:0,right: 0.0), // Adjust spacing
+            child: Icon(Icons.flash_on_outlined,size:18,color:const Color.fromARGB(255, 15, 92, 154)), // Using the lightning icon
+          ),
+          label: Text('Easy Apply', style: TextStyle(color: const Color.fromARGB(255, 15, 92, 154), fontSize: 14.5),),
+        ),
+            ),
+            TextButton(
+  onPressed: () {
+    
+  },
+  child: Icon(
+    Icons.bookmark_border, // Use Icons.favorite for filled heart
+    color: Colors.black54, // Customize the icon color
+    size: 24.0, // Customize the icon size
+  ),
+)
+          ],
+        ),
+      ), //
+         
+       Container(
+        height:150,
+  padding: EdgeInsets.all(3.0),
+      child:Row(
+mainAxisAlignment: MainAxisAlignment.start,
+       children: [
+         Image.asset(
+          'assets/ethiojobs.webp',
+          height: 120,
+          width: 140,
+        ),
+        Container(
+          color: Colors.blue,
+          height: 80,
+              width: 200,
+              padding: EdgeInsets.all(5),
+          child: Column(
+            children: [
+              Container(
+              height: 20,
+              width: 150,
+              margin: EdgeInsets.only(top: 10),
+                child: Text(
+                 'Senior Full Stack\nDeveloper',
+                  style: TextStyle(color: Colors.black, fontSize: 14), // Changed color for visibility
+               ),
+            ),
+              Container(
+                margin: EdgeInsets.only(top: 10),
+              height:5
+              ),
+              
+            ],
+          ),
+        )
+       ],
+      )
+
+
+
+
+
+
+
+       )
+
+    ],
+  ),
+),
 
                   Container(
 
@@ -318,7 +486,7 @@ class _HomepageState extends State<Homepage> {
                            ),
                     child: Center(
                       child: Text(
-                        'Sub Container 2',
+                        '',
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
@@ -343,7 +511,7 @@ class _HomepageState extends State<Homepage> {
                            ),
                     child: Center(
                       child: Text(
-                        'Sub Container 2',
+                        '',
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
@@ -368,7 +536,7 @@ class _HomepageState extends State<Homepage> {
                            ),
                     child: Center(
                       child: Text(
-                        'Sub Container 2',
+                        '',
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
@@ -392,7 +560,7 @@ class _HomepageState extends State<Homepage> {
                            ),
                     child: Center(
                       child: Text(
-                        'Sub Container 2',
+                        '',
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
@@ -417,7 +585,7 @@ class _HomepageState extends State<Homepage> {
                            ),
                     child: Center(
                       child: Text(
-                        'Sub Container 2',
+                        '',
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
@@ -442,7 +610,7 @@ class _HomepageState extends State<Homepage> {
                            ),
                     child: Center(
                       child: Text(
-                        'Sub Container 2',
+                        '',
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
@@ -467,7 +635,7 @@ class _HomepageState extends State<Homepage> {
                            ),
                     child: Center(
                       child: Text(
-                        'Sub Container 2',
+                        '',
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
@@ -492,7 +660,7 @@ class _HomepageState extends State<Homepage> {
                            ),
                     child: Center(
                       child: Text(
-                        'Sub Container 2',
+                        '',
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
@@ -517,7 +685,7 @@ class _HomepageState extends State<Homepage> {
                            ),
                     child: Center(
                       child: Text(
-                        'Sub Container 2',
+                        '',
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
@@ -542,7 +710,7 @@ class _HomepageState extends State<Homepage> {
                            ),
                     child: Center(
                       child: Text(
-                        'Sub Container 2',
+                        '',
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
@@ -567,7 +735,7 @@ class _HomepageState extends State<Homepage> {
                            ),
                     child: Center(
                       child: Text(
-                        'Sub Container 2',
+                        '',
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
@@ -592,7 +760,7 @@ class _HomepageState extends State<Homepage> {
                            ),
                     child: Center(
                       child: Text(
-                        'Sub Container 2',
+                        '',
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
@@ -617,7 +785,7 @@ class _HomepageState extends State<Homepage> {
                            ),
                     child: Center(
                       child: Text(
-                        'Sub Container 2',
+                        '',
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
@@ -644,3 +812,9 @@ class _HomepageState extends State<Homepage> {
     );
   }
 }
+
+
+
+
+
+
