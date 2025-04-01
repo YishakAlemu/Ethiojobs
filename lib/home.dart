@@ -10,6 +10,7 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  // Default text color
 
   @override
   Widget build(BuildContext context) {
@@ -307,7 +308,7 @@ class _HomepageState extends State<Homepage> {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Text(
             'Posted Wit...',
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
+            style: TextStyle(overflow: TextOverflow.ellipsis,fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
           ),
         ),
         Icon(Icons.arrow_drop_down, color: Colors.grey), // Dropdown icon
@@ -344,7 +345,8 @@ class _HomepageState extends State<Homepage> {
                 children: [
 
                   Container(
-  height: 340,
+                    
+  height: 360,
   width: 355,
   margin: EdgeInsets.only(top: 115),
   decoration: BoxDecoration(
@@ -362,12 +364,15 @@ class _HomepageState extends State<Homepage> {
   child: Column(
     children: [
       Container(
+        
+        color: Colors.white,
         height: 34, // Height for the button row
         width: 355,
-        margin: EdgeInsets.only(top: 30),
+        margin: EdgeInsets.only(top: 25),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start, // Start alignment for manual control
           children: [
+            SizedBox(width:6),
             Padding(
               padding: const EdgeInsets.only(left: 8.0, right:0),
                
@@ -381,10 +386,11 @@ class _HomepageState extends State<Homepage> {
         ),
                 child: Text(
                   'New',
-                  style: TextStyle(color: Colors.blueAccent,fontSize: 14.5),
+                  style: TextStyle(color: Colors.indigo,fontSize: 14.8),
                 ),
               ),
             ),
+            SizedBox(width:11),
             Padding(
               padding: const EdgeInsets.only(right: 0.0), // Adjust space for Button 2
               child: TextButton(
@@ -395,78 +401,100 @@ class _HomepageState extends State<Homepage> {
           padding: EdgeInsets.zero, // Remove any padding from the button
           minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
         ),
-                child: Text('Premium', style: TextStyle(color: Colors.green, fontSize: 14.5,),),
+                child: Text('Premium', style: TextStyle(color: Colors.green, fontSize: 14.8,),),
               ),
             ),
+            SizedBox(width:11),
             Padding(
-              padding: const EdgeInsets.only(right: 0.0), // Adjust space for Button 3
-               child :TextButton.icon(
-onPressed: () {
-            // Button 1 action
-          },
-          icon: Padding(
-            padding: const EdgeInsets.only(left:0,right: 0.0), // Adjust spacing
-            child: Icon(Icons.flash_on_outlined,size:18,color:const Color.fromARGB(255, 15, 92, 154)), // Using the lightning icon
-          ),
-          label: Text('Easy Apply', style: TextStyle(color: const Color.fromARGB(255, 15, 92, 154), fontSize: 14.5),),
+  padding: const EdgeInsets.only(right: 0.0), 
+  child: TextButton.icon(
+    onPressed: () {
+      // Button action
+    },
+    style: TextButton.styleFrom(
+          padding: EdgeInsets.zero, // Remove any padding from the button
+          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
         ),
-            ),
-            SizedBox(width: 40),
+    icon: Icon(
+      Icons.flash_on_outlined,
+      size: 16,
+      color: const Color.fromARGB(255, 15, 92, 154), // Lightning icon color
+    ),
+    label: Text(
+      'Easy Apply',
+      style: TextStyle(
+        color: Colors.blueAccent,
+        fontSize: 14.8,
+      ),
+    ),
+  ),
+),
+            SizedBox(width: 57),
             TextButton(
   onPressed: () {
     
   },
+  style: TextButton.styleFrom(
+          padding: EdgeInsets.zero, // Remove any padding from the button
+          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
+        ),
   child: Icon(
     Icons.bookmark_border, // Use Icons.favorite for filled heart
     color: Colors.black54, // Customize the icon color
-    size: 24.0, // Customize the icon size
+    size: 24.5, // Customize the icon size
   ),
 )
           ],
         ),
       ), //
          
-       Container(
-        color: Colors.blue,
-        height:140,
-  padding: EdgeInsets.all(3.0),
-      child:Row(
+   Container(
+    color: Colors.white,
+    height:148,
+    width:320,
+    padding: EdgeInsets.all(4.0),
+    child: Row(
        
 mainAxisAlignment: MainAxisAlignment.start,
        children: [
-        Align(
-      alignment: Alignment(-1.0, 0.0), // Adjust alignment as needed (e.g., Alignment.center, Alignment.topRight, etc.)
-      child: Image.asset(
-        'assets/ethiojobs.webp',
-        height: 120,
-        width: 140,
+      Container(
+        
+        width:120,
+        padding: EdgeInsets.all(0.0),
+        color: Colors.white,
+        child: Image.asset(
+          'assets/ethiojobs.webp',
+          
+        ),
       ),
-    ),
+    
         Container(
           padding: EdgeInsets.all(0),
           color: Colors.white,
-          height: 139,
-              width: 200,
+          height: 140,
+              width: 190,
               
           child: Column(
             children: [
-             
                TextButton(
                 onPressed: () {
-                  
+                 
                 },
                 style: TextButton.styleFrom(
                   
     padding: EdgeInsets.symmetric(horizontal: 5, vertical: 1), // Adjust padding
-   // Minimum size for the button
+   
                 ),
-                child: Text('Senior FullStack Developer\n&Data Engineer', style: TextStyle(overflow: TextOverflow.ellipsis,
-                  color: Colors.black, fontSize: 18,),),
+                child: Text('Senior FullStack Developer', style: TextStyle(
+                  color: Colors.black, fontSize: 18,), overflow: TextOverflow.ellipsis, // Enable ellipsis
+            maxLines: 2,),
               ),
             SizedBox(height: 8.0),
-              SizedBox(
+              Container(
+                
+                
   width: 160.0, // Set the desired width
-  height: 34.0, // Set the desired height
+  height: 33.0, // Set the desired height
   child: ElevatedButton(
     onPressed: () {
       // Action when button is pressed
@@ -479,15 +507,15 @@ mainAxisAlignment: MainAxisAlignment.start,
       backgroundColor: const Color.fromARGB(200, 255, 255, 255), // Background color
     ),
     child: Text(
-      'ComputerScience & IT',
-      style: TextStyle(color: Colors.black, fontSize: 10, overflow: TextOverflow.ellipsis), // Text color
+      'Computer Science & IT',
+      style: TextStyle(color: Colors.black, fontSize: 12.5,fontWeight: FontWeight.w400, ), overflow: TextOverflow.ellipsis,maxLines: 1, // Text color
     ),
   ),
 ),
 SizedBox(height: 8.0),
- SizedBox(
+ Container(
   width: 160.0, // Set the desired width
-  height: 34.0, // Set the desired height
+  height: 33.0, // Set the desired height
   child: ElevatedButton(
     onPressed: () {
       // Action when button is pressed
@@ -501,7 +529,7 @@ SizedBox(height: 8.0),
     ),
     child: Text(
       'Software Engineering',
-      style: TextStyle(color: Colors.black, fontSize: 10,overflow: TextOverflow.ellipsis,), // Text color
+      style: TextStyle(color: Colors.black, fontSize: 12.5,fontWeight: FontWeight.w400,),overflow: TextOverflow.ellipsis,maxLines: 2, // Text color
     ),
   ),
 )
@@ -515,34 +543,103 @@ SizedBox(height: 8.0),
        ),
 
     Container(
-  padding: EdgeInsets.all(0), // Ensure no padding around the container
-  color: Colors.green,
+  height: 25,
+  width: 338,
+  margin: EdgeInsets.symmetric(horizontal: 22.0),
+  padding: EdgeInsets.all(3), // Ensure no padding around the container
+  color: Colors.white,
   child: Row(
-    mainAxisAlignment: MainAxisAlignment.start, // Align contents to the start (left)
-    crossAxisAlignment: CrossAxisAlignment.start, // Align to the top
     children: [
       // Label
       Text(
         '30 minutes ago by ',
         style: TextStyle(fontSize: 14), // Customize the style as needed
       ),
+      SizedBox(width: 6),
       // Text Button
-      TextButton(
-        onPressed: () {
-          // Action to perform when the button is pressed
-        },
-        style: TextButton.styleFrom(
-          padding: EdgeInsets.all(1),
-          minimumSize: Size(0, 0), // Remove padding from the button
+      Expanded( // Use Expanded to take available space
+        child: TextButton(
+          onPressed: () {
+            // Action to perform when the button is pressed
+          },
+          style: TextButton.styleFrom(
+            padding: EdgeInsets.all(0),
+            minimumSize: Size(0, 0), // Remove padding from the button
+          ),
+          child: Text(
+            'ETHIOJOBS & AFRINET',
+            style: TextStyle(fontSize: 16, color: Colors.blueAccent),
+            overflow: TextOverflow.ellipsis, // Enable ellipsis
+            maxLines: 1, // Limit to one line
+          ),
         ),
-        child: Text(
-          'ETHIOJOBS & AFRINET',
-          style: TextStyle(fontSize: 17),
-        ), // Text displayed on the button
       ),
     ],
   ),
 ),
+
+
+      Container(
+        height: 25,
+  width: 338,
+  margin: EdgeInsets.symmetric(horizontal: 22.0),
+  padding: EdgeInsets.only(top:6), // Ensure no padding around the container
+  color: Colors.white,
+
+  child: Row(
+    children: [
+         Padding(
+  padding: const EdgeInsets.only(right: 0.0), 
+  child: TextButton.icon(
+    onPressed: () {
+      // Button action
+    },
+    style: TextButton.styleFrom(
+          padding: EdgeInsets.zero, // Remove any padding from the button
+          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
+        ),
+    icon: Icon(
+      Icons.location_on_outlined,
+      size: 17,
+      color: Colors.black, // Lightning icon color
+    ),
+    label: Text(
+      'Addis Ababa',
+      style: TextStyle(
+        color: Colors.black,
+        fontSize: 14.8,
+      ),
+    ),
+  ),
+),
+SizedBox(width:20),
+Padding(
+  padding: const EdgeInsets.only(right: 0.0), 
+  child: TextButton.icon(
+    onPressed: () {
+      // Button action
+    },
+    style: TextButton.styleFrom(
+          padding: EdgeInsets.zero, // Remove any padding from the button
+          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
+        ),
+    icon: Icon(
+      Icons.calendar_month_outlined,
+      size: 16,
+      color: Colors.black, // Lightning icon color
+    ),
+    label: Text(
+      'April 10th, 2025',
+      style: TextStyle(
+        color: Colors.black,
+        fontSize: 14.8,
+      ),
+    ),
+  ),
+),
+  ],)
+      )
+
     ],
   ),
 ),
