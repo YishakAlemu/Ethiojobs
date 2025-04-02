@@ -1,83 +1,28 @@
 import 'package:flutter/material.dart';
-
+import 'job_details.dart';
 
 
 class Homepage extends StatefulWidget {
-  const Homepage({super.key});
+  final Function(String) onJobSelected;
+  const Homepage({super.key, required this.onJobSelected});
 
   @override
   _HomepageState createState() => _HomepageState();
 }
 
 class _HomepageState extends State<Homepage> {
-  // Default text color
+  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     appBar: PreferredSize(
-  preferredSize: Size.fromHeight(65.0),
-  child: AppBar(
-    title: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Image.asset(
-          'assets/ethiojobs.webp',
-          height: 125,
-          width: 145,
-        ),
-        PopupMenuButton<String>(
-  icon: Icon(Icons.menu, size: 30),
-  itemBuilder: (BuildContext context) {
-    return [
-      PopupMenuItem<String>(
-        value: 'Find Jobs',
-        child: Text('Find Jobs'),
-      ),
-      PopupMenuItem<String>(
-        value: 'Find Companies',
-        child: Text('Find Companies'),
-      ),
-      PopupMenuItem<String>(
-        value: 'Blog',
-        child: Text('Blog'),
-      ),
-      PopupMenuItem<String>(
-        value: 'Contact Us',
-        child: Text('Contact Us'),
-      ),
-      PopupMenuItem<String>(
-        value: 'Log In',
-        child: Text('Log In'),
-      ),
-      PopupMenuItem<String>(
-        value: 'Sign Up',
-        child: Text('Sign Up'),
-      ),
-      PopupMenuItem<String>(
-        value: 'Employers, are you recruiting?',
-        child: Text('Employers, are you recruiting?'),
-      ),
-    ];
-  },
-  onSelected: (String value) {
-    // Handle selection here
-  },
-  offset: Offset(0, 35), // Adjust this value to control vertical position
-)
-      ],
-    ),
-              backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-              elevation: 5,
-            shadowColor: Colors.black,
-      ),
-          ),
+     
 
-           //BODY 
+            //BODY 
                  body: SingleChildScrollView(
                  child: Column(
                  children: [
+
             // First main container
                     Container(
                      height: 215,
@@ -165,11 +110,11 @@ class _HomepageState extends State<Homepage> {
   child: IconButton(
     icon: Icon(Icons.tune, color: Colors.black, size: 22), // Icon color and size
     onPressed: () {
-      // Define your action here
+      
     },
     constraints: BoxConstraints(
-      minWidth: 32, // Minimum width for the button
-      minHeight: 32, // Minimum height for the button
+      minWidth: 32, 
+      minHeight: 32, 
     ),
   ),
 ),
@@ -177,17 +122,17 @@ class _HomepageState extends State<Homepage> {
   onPressed: () {},
   style: ElevatedButton.styleFrom(
     backgroundColor : const Color.fromARGB(255, 225, 225, 220),
-    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 7), // Adjust padding as needed
+    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 7), 
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(8),
       side: BorderSide(
-        color: Colors.grey, // Border color
-        width: 0.8, // Border width
-      ), // Optional: rounded corners
+        color: Colors.grey, 
+        width: 0.8, 
+      ), 
     ),
   ),
   child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween, // Space between text and icon
+    mainAxisAlignment: MainAxisAlignment.spaceBetween, 
     children: [
       Text(
         'Category', 
@@ -235,21 +180,21 @@ class _HomepageState extends State<Homepage> {
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(8),
       side: BorderSide(
-        color: Colors.grey, // Border color
-        width: 0.8, // Border width
-      ), // // Optional: rounded corners
+        color: Colors.grey, 
+        width: 0.8, 
+      ), 
     ),
   ),
   child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween, // Space between text and icon
+    mainAxisAlignment: MainAxisAlignment.spaceBetween, 
     children: [
       Text(
         'Carrer', 
         style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
       ),
       Padding(
-        padding: EdgeInsets.only(left: 30.0), // Add padding if needed
-        child: Icon(Icons.fiber_manual_record, size: 12), // Dot icon on the right
+        padding: EdgeInsets.only(left: 30.0), 
+        child: Icon(Icons.fiber_manual_record, size: 12), 
       ),
     ],
   ),
@@ -275,8 +220,8 @@ class _HomepageState extends State<Homepage> {
         style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
       ),
       Padding(
-        padding: EdgeInsets.only(left: 30.0), // Add padding if needed
-        child: Icon(Icons.fiber_manual_record, size: 12), // Dot icon on the right
+        padding: EdgeInsets.only(left: 30.0), 
+        child: Icon(Icons.fiber_manual_record, size: 12), 
       ),
     ],
   ),
@@ -284,25 +229,25 @@ class _HomepageState extends State<Homepage> {
            Container(
   margin: EdgeInsets.only(top: 4),
   height: 40,
-  width: 160, // Fixed width for the dropdown
+  width: 160, 
   decoration: BoxDecoration(
-    color: const Color.fromARGB(255, 225, 225, 220), // Background color
-    borderRadius: BorderRadius.circular(8), // Rounded corners
+    color: const Color.fromARGB(255, 225, 225, 220), 
+    borderRadius: BorderRadius.circular(8), 
     boxShadow: [
       BoxShadow(
-        color: Colors.grey.withOpacity(0.2), // Shadow effect
+        color: Colors.grey.withOpacity(0.2), 
         spreadRadius: 1,
         blurRadius: 3,
-        offset: Offset(0, 2), // Position of shadow
+        offset: Offset(0, 2), 
       ),
     ],
   ),
   child: PopupMenuButton<String>(
     onSelected: (String value) {
-      // Handle the selection
+      
     },
     icon: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween, // Space between text and icon
+      mainAxisAlignment: MainAxisAlignment.spaceBetween, 
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -311,7 +256,7 @@ class _HomepageState extends State<Homepage> {
             style: TextStyle(overflow: TextOverflow.ellipsis,fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
           ),
         ),
-        Icon(Icons.arrow_drop_down, color: Colors.grey), // Dropdown icon
+        Icon(Icons.arrow_drop_down, color: Colors.grey), 
       ],
     ),
     itemBuilder: (BuildContext context) => [
@@ -320,8 +265,8 @@ class _HomepageState extends State<Homepage> {
       PopupMenuItem(value: 'Last 7 days', child: Text('Last 7 days',style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: Colors.black),)),
       PopupMenuItem(value: 'Last 30 days', child: Text('Last 30 days',style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: Colors.black),)),
     ],
-    offset: Offset(0, 40), // Adjust this value to control vertical position
-    color: Colors.white, // Background color of dropdown menu
+    offset: Offset(0, 40), 
+    color: Colors.white, 
   ),
 )
         ],
@@ -336,7 +281,7 @@ class _HomepageState extends State<Homepage> {
 
 
 
-            // Second main container
+            // SECOND MAIN CONTAINER
             Container(
               width:400,
              // margin: EdgeInsets.only(top: 8),
@@ -346,24 +291,24 @@ class _HomepageState extends State<Homepage> {
 
                   Container(
                     
-  height: 360,
-  width: 355,
-  margin: EdgeInsets.only(top: 115),
-  decoration: BoxDecoration(
-    color: Colors.white,
-    borderRadius: BorderRadius.circular(15),
-    boxShadow: [
-      BoxShadow(
-        color: Colors.black.withOpacity(0.1), // Shadow color
-        spreadRadius: 5, // Spread radius
-        blurRadius: 10, // Blur radius
-        offset: Offset(0, 2), // Offset for the shadow
-      ),
-    ],
-  ),
-  child: Column(
-    children: [
-      Container(
+                     height: 340,
+                      width: 355,
+                    margin: EdgeInsets.only(top: 115),
+                    decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                    BoxShadow(
+                     color: Colors.black.withOpacity(0.1), // Shadow color
+                      spreadRadius: 5, // Spread radius
+                      blurRadius: 10, // Blur radius
+                      offset: Offset(0, 2), // Offset for the shadow
+                       ),
+                      ],
+                      ),
+             child: Column(
+            children: [
+                 Container(
         
         color: Colors.white,
         height: 34, // Height for the button row
@@ -478,7 +423,7 @@ mainAxisAlignment: MainAxisAlignment.start,
             children: [
                TextButton(
                 onPressed: () {
-                 
+                 widget.onJobSelected('Senior FullStack Developer');
                 },
                 style: TextButton.styleFrom(
                   
@@ -638,8 +583,77 @@ Padding(
   ),
 ),
   ],)
-      )
+      ),
+SizedBox(width:50),
+            Container(
+              height: 60,
+             width: 338,
+             margin: EdgeInsets.symmetric(horizontal: 22.0),
+             padding: EdgeInsets.only(top:10),
+             color: Colors.white,
+             child:Row(
+              children: [
+                  Padding(
+  padding: const EdgeInsets.only(right: 0.0), 
+  child: Container(
+    padding: EdgeInsets.only(top:2),
+    color: Colors.white,
+    height: 38,
+    width : 140,
+    child: ElevatedButton(
+      onPressed: () {
+        // Button action
+      },
+      style: ElevatedButton.styleFrom(
+             padding: EdgeInsets.symmetric(horizontal: 12, vertical: 3),
+        shape: RoundedRectangleBorder(
+          
+          borderRadius: BorderRadius.circular(18.0), // Rounded corners
+        ),
+        backgroundColor: const Color.fromARGB(255, 72, 193, 156),
+          ),
+      child: Text(
+        'Apply Now',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 14.8,
+        ),
+      ),
+    ),
+  ),
+),
+SizedBox(width:25),
+Padding(
+  padding: const EdgeInsets.only(right: 0.0), 
+  child: Container(
+    padding: EdgeInsets.only(top:2),
+    color: Colors.white,
+    height: 38,
+    width : 140,
+    child: ElevatedButton(
+      onPressed: () {
+        // Button action
+      },
+      style: ElevatedButton.styleFrom(
+             padding: EdgeInsets.symmetric(horizontal: 12, vertical: 3),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(18.0), // Rounded corners
+        ),
+        backgroundColor: const Color.fromARGB(200, 255, 255, 255),
+          ),
+      child: Text(
+        'See More',
+        style: TextStyle(
+          color: const Color.fromARGB(255, 72, 193, 156),
+          fontSize: 14.8,
+        ),
+      ),
+    ),
+  ),
+),
 
+             ],)
+            )
     ],
   ),
 ),
@@ -967,8 +981,6 @@ Padding(
                       ),
                     ),
                   ),
-
-                 
                 ],
               ),
             ),

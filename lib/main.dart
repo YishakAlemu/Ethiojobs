@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'home.dart';
-//import 'package:google_fonts/google_fonts.dart';
+import 'parent_widget.dart';
 
 void main() {
   runApp(const Ethiojobs());
 }
-
 
 class Ethiojobs extends StatelessWidget {
   const Ethiojobs({super.key});
@@ -14,7 +12,7 @@ class Ethiojobs extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Homepage(), // Use the HomeScreen widget from home.dart
+      home: ParentWidget(), // Use ParentWidget to manage navigation and persistent AppBar
     );
   }
 }
