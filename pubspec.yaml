@@ -13,6 +13,8 @@ dependencies:
   flutter_svg: ^2.0.9
   google_fonts: ^6.2.1
   url_launcher: ^6.1.7
+  font_awesome_flutter: ^10.4.0
+
 
 dev_dependencies:
   flutter_test:
@@ -58,7 +60,10 @@ flutter:
   - assets/un_logo.png
   - assets/sosethio_logo.jpg
   - assets/ethiojobs.webp
-  
+  - assets/africa_jobs.webp
+  - assets/linkedin.webp
+  - assets/google_logo.webp
+
   uses-material-design: true
 
   fonts:

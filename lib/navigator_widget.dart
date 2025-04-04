@@ -3,6 +3,8 @@ import 'home.dart';
 import 'job_details.dart';
 
 class NavigatorWidget extends StatelessWidget {
+  const NavigatorWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Homepage(

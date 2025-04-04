@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
 import 'job_details.dart';
+import 'login.dart'; 
+import 'signup.dart';
 
 class ParentWidget extends StatefulWidget {
+  const ParentWidget({super.key});
+
   @override
   _ParentWidgetState createState() => _ParentWidgetState();
 }
@@ -61,7 +65,12 @@ class _ParentWidgetState extends State<ParentWidget> {
     ];
   },
   onSelected: (String value) {
-    
+                  if (value == 'Log In') {
+                    _navigatorKey.currentState!.pushNamed('/login');
+                  }
+                   else if (value == 'Sign Up') {
+                    _navigatorKey.currentState!.pushNamed('/signup');
+                }
   },
   offset: Offset(0, 35), 
 )
@@ -98,6 +107,12 @@ class _ParentWidgetState extends State<ParentWidget> {
               case '/jobDetail':
                 final String jobTitle = settings.arguments as String;
                 builder = (BuildContext context) => JobDetailPage(jobTitle: jobTitle);
+                break;
+                case '/login': 
+                builder = (BuildContext context) => Loginpage();
+                break;
+                case '/signup': 
+                builder = (BuildContext context) => Signuppage();
                 break;
               default:
                 throw Exception('Invalid route: ${settings.name}');
