@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'job_details.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'login.dart';
-import 'signup.dart';
 
 class Homepage extends StatefulWidget {
   final Function(String) onJobSelected;
@@ -362,10 +359,15 @@ class _HomepageState extends State<Homepage> {
           padding: EdgeInsets.zero, // Remove any padding from the button
           minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
         ),
-    icon: Icon(
-      Icons.flash_on_outlined,
-      size: 16,
-      color: const Color.fromARGB(255, 15, 92, 154), // Lightning icon color
+    icon: Container(
+      
+      width:10,
+      height:15,
+      child: Icon(
+        Icons.flash_on_outlined,
+        size: 16,
+        color: const Color.fromARGB(255, 15, 92, 154), // Lightning icon color
+      ),
     ),
     label: Text(
       'Easy Apply',

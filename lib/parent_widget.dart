@@ -3,6 +3,7 @@ import 'home.dart';
 import 'job_details.dart';
 import 'login.dart'; 
 import 'signup.dart';
+import 'profile.dart';
 
 class ParentWidget extends StatefulWidget {
   const ParentWidget({super.key});
@@ -20,6 +21,7 @@ class _ParentWidgetState extends State<ParentWidget> {
       appBar: PreferredSize(
   preferredSize: Size.fromHeight(65.0),
   child: AppBar(
+    
     title: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -30,8 +32,42 @@ class _ParentWidgetState extends State<ParentWidget> {
           height: 125,
           width: 145,
         ),
+        SizedBox(width:90),
+ Container(
+  
+  width:2,
+   child: Icon(
+          Icons.person_outline_outlined,
+          color: Color.fromARGB(255, 72, 193, 156),
+          size: 22,
+        ),
+ ),
+      PopupMenuButton<String>(
+        icon: Icon(Icons.keyboard_arrow_down_sharp, size: 25), // Downward-facing arrow icon
+        onSelected: (value) {
+          // Handle the selected value
+          if (value == 'Profile') {
+            _navigatorKey.currentState!.pushNamed('/profile');
+          } else if (value == 'Log Out') {
+            _navigatorKey.currentState!.pushNamed('/logout');
+          }
+        },
+        itemBuilder: (BuildContext context) {
+          return {'Profile', 'Log Out'}.map((String choice) {
+            return PopupMenuItem<String>(
+              value: choice,
+              child: Text(choice),
+            );
+          }).toList();
+        },
+        offset: Offset(0, 35),
+      ),
+    
+  
+        
+
         PopupMenuButton<String>(
-  icon: Icon(Icons.menu, size: 30),
+  icon: Icon(Icons.menu, size: 32),
   itemBuilder: (BuildContext context) {
     return [
       PopupMenuItem<String>(
@@ -114,6 +150,10 @@ class _ParentWidgetState extends State<ParentWidget> {
                 case '/signup': 
                 builder = (BuildContext context) => Signuppage();
                 break;
+                case '/profile': 
+                builder = (BuildContext context) => Profilepage();
+                break;
+                
               default:
                 throw Exception('Invalid route: ${settings.name}');
             }
