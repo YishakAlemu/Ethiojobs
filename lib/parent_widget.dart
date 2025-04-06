@@ -33,7 +33,7 @@ class _ParentWidgetState extends State<ParentWidget> {
           width: 145,
         ),
         SizedBox(width:90),
- Container(
+ SizedBox(
   
   width:2,
    child: Icon(

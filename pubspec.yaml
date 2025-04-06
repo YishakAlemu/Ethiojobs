@@ -63,6 +63,7 @@ flutter:
   - assets/africa_jobs.webp
   - assets/linkedin.webp
   - assets/google_logo.webp
+  - assets/user_blue.webp
 
   uses-material-design: true
 
