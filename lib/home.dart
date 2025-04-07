@@ -1166,6 +1166,57 @@ Padding(
           ],
         ),
       ),
+      bottomNavigationBar: BottomAppBar(
+  child: Container(
+    color: Colors.white,
+    height: 70,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(icon: Icon(Icons.location_city, size: 20), onPressed: () {}),
+            Text('Jobs', style: TextStyle(fontSize: 12)), // Adjust font size as needed
+          ],
+        ),
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(icon: Icon(Icons.search, size: 20), onPressed: () {}),
+            Text('Applications', style: TextStyle(fontSize: 12)), // Adjust font size as needed
+          ],
+        ),
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(icon: Icon(Icons.person_outline_outlined, size: 25), onPressed: () {}),
+            Text('Profile', style: TextStyle(fontSize: 12)), // Adjust font size as needed
+          ],
+        ),
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(icon: Icon(Icons.add_alert_sharp, size: 20), onPressed: () {}),
+            Text('Alert', style: TextStyle(fontSize: 12)), // Adjust font size as needed
+          ],
+        ),
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(icon: Icon(Icons.bookmark_add_rounded, size: 20), onPressed: () {}),
+            Text('Save Jobs', style: TextStyle(fontSize: 12)), // Adjust font size as needed
+          ],
+        ),
+      ],
+    ),
+  ),
+),
     );
   }
 }
