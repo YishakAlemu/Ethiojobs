@@ -3,11 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:file_picker/file_picker.dart';
 import 'dart:io';
 import 'dart:async';
-import 'home.dart';
-import 'login.dart'; 
-import 'signup.dart';
-import 'login.dart'; 
-import 'parent_widget.dart';
 class Profilepage extends StatefulWidget {
   const Profilepage({super.key});
   
@@ -832,6 +827,7 @@ child: Row(
     ],
   ),
 ),
+ 
      
       ),
     SizedBox(height:700),

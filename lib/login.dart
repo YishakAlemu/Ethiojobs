@@ -53,7 +53,7 @@ class _LoginpageState extends State<Loginpage> {
         children: [
           SizedBox(height: 30),
           Center(
-            child: Text('Log In', style: TextStyle(color: Colors.black, fontSize: 24)),
+            child: Text('Log in', style: TextStyle(color: Colors.black, fontSize: 24)),
           ),
           Center(
             child: Text(

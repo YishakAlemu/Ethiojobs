@@ -15,6 +15,13 @@ class ParentWidget extends StatefulWidget {
 class _ParentWidgetState extends State<ParentWidget> {
   final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
 
+  void onJobSelected(String job) {
+    _navigatorKey.currentState!.pushNamed(
+      '/jobDetail',
+      arguments: job,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,35 +40,8 @@ class _ParentWidgetState extends State<ParentWidget> {
           width: 145,
         ),
         SizedBox(width:90),
- SizedBox(
-  
-  width:2,
-   child: Icon(
-          Icons.person_outline_outlined,
-          color: Color.fromARGB(255, 72, 193, 156),
-          size: 22,
-        ),
- ),
-      PopupMenuButton<String>(
-        icon: Icon(Icons.keyboard_arrow_down_sharp, size: 25), // Downward-facing arrow icon
-        onSelected: (value) {
-          // Handle the selected value
-          if (value == 'Profile') {
-            _navigatorKey.currentState!.pushNamed('/profile');
-          } else if (value == 'Log Out') {
-            _navigatorKey.currentState!.pushNamed('/logout');
-          }
-        },
-        itemBuilder: (BuildContext context) {
-          return {'Profile', 'Log Out'}.map((String choice) {
-            return PopupMenuItem<String>(
-              value: choice,
-              child: Text(choice),
-            );
-          }).toList();
-        },
-        offset: Offset(0, 35),
-      ),
+ 
+      
     
   
         
@@ -71,33 +51,68 @@ class _ParentWidgetState extends State<ParentWidget> {
   itemBuilder: (BuildContext context) {
     return [
       PopupMenuItem<String>(
-        value: 'Find Jobs',
-        child: Text('Find Jobs'),
+  value: 'Find Jobs',
+  child: Row(
+    children: [
+      Icon(Icons.home, color: const Color.fromARGB(255, 72, 193, 156), size: 20),
+      SizedBox(width: 8),
+      Text(
+        'Find Jobs',
+        style: TextStyle(color: const Color.fromARGB(255, 72, 193, 156)),
       ),
+    ],
+  ),
+),
+      // PopupMenuItem<String>(
+      //   value: 'Find Companies',
+      //   child: Text('Find Companies'),
+      // ),
+      // PopupMenuItem<String>(
+      //   value: 'Blog',
+      //   child: Text('Blog'),
+      // ),
       PopupMenuItem<String>(
-        value: 'Find Companies',
-        child: Text('Find Companies'),
-      ),
-      PopupMenuItem<String>(
-        value: 'Blog',
-        child: Text('Blog'),
-      ),
-      PopupMenuItem<String>(
-        value: 'Contact Us',
-        child: Text('Contact Us'),
+        value: 'Contact us',
+        child:Row(children: [
+          Icon(Icons.phone, color: const Color.fromARGB(255, 72, 193, 156),size:20),
+          SizedBox(width:8),
+          Text('Contact us', style: TextStyle(color:const Color.fromARGB(255, 72, 193, 156)),),
+        ],)
       ),
       PopupMenuItem<String>(
         value: 'Log In',
-        child: Text('Log In'),
+        child:Row(children: [
+          Icon(Icons.login,color:Colors.blue, size:20),
+          SizedBox(width:8),
+          Text('Log in', style: TextStyle(color:Colors.blue)),
+        ],)
       ),
       PopupMenuItem<String>(
         value: 'Sign Up',
-        child: Text('Sign Up'),
+        child:Row(children: [
+          Icon(Icons.person_add,color:Colors.blue, size:20),
+          SizedBox(width:8),
+          Text('Sign up', style: TextStyle(color:Colors.blue)),
+        ],)
       ),
       PopupMenuItem<String>(
-        value: 'Employers, are you recruiting?',
-        child: Text('Employers, are you recruiting?'),
+  value: 'Log out',
+  child: Row(
+    children: [
+      Icon(Icons.logout, color: Colors.red, size: 20),
+      SizedBox(width: 8),
+      Text(
+        'Log out',
+        style: TextStyle(color: Colors.red),
       ),
+    ],
+  ),
+),
+
+      // PopupMenuItem<String>(
+      //   value: 'Employers, are you recruiting?',
+      //   child: Text('Employers, are you recruiting?'),
+      // ),
     ];
   },
   onSelected: (String value) {
@@ -107,6 +122,12 @@ class _ParentWidgetState extends State<ParentWidget> {
                    else if (value == 'Sign Up') {
                     _navigatorKey.currentState!.pushNamed('/signup');
                 }
+                else if (value == 'Find Jobs') {
+                    _navigatorKey.currentState!.pushNamed('/home');}
+                    else if (value == 'Log out') {
+                    _navigatorKey.currentState!.pushNamed('/logout');} 
+
+
   },
   offset: Offset(0, 35), 
 )
@@ -152,6 +173,9 @@ class _ParentWidgetState extends State<ParentWidget> {
                 break;
                 case '/profile': 
                 builder = (BuildContext context) => Profilepage();
+                break;
+                case '/home': 
+                builder = (BuildContext context) => Homepage(onJobSelected:onJobSelected);
                 break;
                 
               default:

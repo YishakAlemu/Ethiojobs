@@ -57,7 +57,7 @@ class _SignuppageState extends State<Signuppage> {
         children: [
           SizedBox(height: 30),
           Center(
-            child: Text('Sign Up', style: TextStyle(color: Colors.black, fontSize: 24)),
+            child: Text('Sign up', style: TextStyle(color: Colors.black, fontSize: 24)),
           ),
           Center(
             child: Text(

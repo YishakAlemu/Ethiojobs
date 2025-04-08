@@ -281,7 +281,7 @@ class JobDetailPage extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min, // Size of the Row
                 children: [
-                  Icon(Icons.person_add_alt_1_outlined, color: Colors.black, size: 17), // Icon
+                  Icon(Icons.how_to_reg, color: Colors.black, size: 17), // Icon
                   SizedBox(width: 16), // Space between icon and text
                   Expanded( // Allow text to wrap within available space
                     child: Text(
@@ -338,7 +338,7 @@ class JobDetailPage extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min, // Size of the Row
                 children: [
-                  Icon(Icons.person_add_alt_1_outlined, color: Colors.black, size: 17), // Icon
+                  Icon(Icons.how_to_reg, color: Colors.black, size: 17), // Icon
                   SizedBox(width: 16), // Space between icon and text
                   Expanded( // Allow text to wrap within available space
                     child: Text(
@@ -357,7 +357,7 @@ class JobDetailPage extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min, // Size of the Row
                 children: [
-                  Icon(Icons.person_add_alt_1_outlined, color: Colors.black, size: 17), // Icon
+                  Icon(Icons.how_to_reg, color: Colors.black, size: 17), // Icon
                   SizedBox(width: 16), // Space between icon and text
                   Expanded( // Allow text to wrap within available space
                     child: Text(
