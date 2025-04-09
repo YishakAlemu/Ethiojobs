@@ -4,6 +4,7 @@ import 'job_details.dart';
 import 'login.dart'; 
 import 'signup.dart';
 import 'profile.dart';
+import 'apps.dart';
 
 class ParentWidget extends StatefulWidget {
   const ParentWidget({super.key});
@@ -176,6 +177,9 @@ class _ParentWidgetState extends State<ParentWidget> {
                 break;
                 case '/home': 
                 builder = (BuildContext context) => Homepage(onJobSelected:onJobSelected);
+                break;
+                case '/apps': 
+                builder = (BuildContext context) => Appspage();
                 break;
                 
               default:

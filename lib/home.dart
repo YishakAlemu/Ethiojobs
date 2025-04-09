@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'profile.dart';
 
 class Homepage extends StatefulWidget {
   final Function(String) onJobSelected;
@@ -16,7 +15,7 @@ class _HomepageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
-    Widget _buildNavItem(IconData icon, String label, VoidCallback onTap,double iconSize,Color iconColor) {
+    Widget buildNavItem(IconData icon, String label, VoidCallback onTap,double iconSize,Color iconColor) {
   return InkWell(
     onTap: onTap,
     child: SizedBox(
@@ -563,6 +562,8 @@ SizedBox(height: 8.0),
   margin: EdgeInsets.symmetric(horizontal: 22.0),
   padding: EdgeInsets.only(top:6), // Ensure no padding around the container
   color: Colors.white,
+
+
 
   child: Row(
     children: [
@@ -1200,25 +1201,27 @@ Padding(
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        _buildNavItem(Icons.location_city, 'Jobs', () {
-          
-        },22,const Color.fromARGB(255, 72, 193, 156)),
-        SizedBox(width:10),
-        _buildNavItem(Icons.search, 'Applications', () {
-          
-        },22,const Color.fromARGB(255, 72, 193, 156)),
-        SizedBox(width:10),
-        _buildNavItem(Icons.person_outline_outlined, 'Profile', () {
+        buildNavItem(
+          Icons.search_rounded,
+          'Jobs',
+          () {
+            // Action for Jobs
+          },
+          22,
+          const Color.fromARGB(255, 72, 193, 156),
+        ),
+        buildNavItem(Icons.menu_book_outlined, 'Applications', () {
+          Navigator.pushNamed(context, '/apps');
+        }, 22, const Color.fromARGB(255, 72, 193, 156)),
+        buildNavItem(Icons.person_outline_outlined, 'Profile', () {
           Navigator.pushNamed(context, '/profile');
-        },35,const Color.fromARGB(255, 72, 193, 156)),
-        SizedBox(width:10),
-        _buildNavItem(Icons.add_alert_sharp, 'Alert', () {
-          
-        },22,const Color.fromARGB(255, 72, 193, 156)),
-        SizedBox(width:10),
-        _buildNavItem(Icons.bookmark_add_rounded, 'Save Jobs', () {
-          
-        },22,const Color.fromARGB(255, 72, 193, 156)),
+        }, 35, const Color.fromARGB(255, 72, 193, 156)),
+        buildNavItem(Icons.add_alert_sharp, 'Alert', () {
+          // Action for Alert
+        }, 22, const Color.fromARGB(255, 72, 193, 156)),
+        buildNavItem(Icons.bookmark_added, 'Saved Jobs', () {
+          // Action for Save Jobs
+        }, 22, const Color.fromARGB(255, 72, 193, 156)),
       ],
     ),
   ),

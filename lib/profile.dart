@@ -37,7 +37,7 @@ class _ProfilepageState extends State<Profilepage> {
 
   int? _slide = 1;
   bool _isExpanded = false;
-  double _progress = 0.5; // Initialize _progress variable
+  double progress = 0.5; // Initialize _progress variable
   String _percentage = "50%"; // Initialize _percentage variable
   final TextEditingController _dateController = TextEditingController();
   final TextEditingController _genderController = TextEditingController();
@@ -47,10 +47,10 @@ class _ProfilepageState extends State<Profilepage> {
 
   void _startLoading() {
     Timer.periodic(Duration(milliseconds: 100), (timer) {
-      if (_progress < 1.0) {
+      if (progress < 1.0) {
         setState(() {
-          _progress += 0.01; // Increment progress
-          _percentage = "${(_progress * 100).toStringAsFixed(0)}%"; // Update percentage text
+          progress += 0.01; // Increment progress
+          _percentage = "${(progress * 100).toStringAsFixed(0)}%"; // Update percentage text
         });
       } else {
         timer.cancel(); // Stop the timer when loading is complete
@@ -229,7 +229,7 @@ void _showProfessionPicker(){
 );
 }
 
-void _showPopup(BuildContext context) {
+void showPopup(BuildContext context) {
   showGeneralDialog(
     context: context,
     barrierDismissible: true,
@@ -586,6 +586,28 @@ Container(
 
   @override
   Widget build(BuildContext context) {
+    Widget buildNavItem(IconData icon, String label, VoidCallback onTap,double iconSize,Color iconColor) {
+  return InkWell(
+    onTap: onTap,
+    child: SizedBox(
+      width: 60,
+      height: double.infinity,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, size: iconSize, color: iconColor),
+          SizedBox(height: 4),
+          Text(
+            label,
+            style: TextStyle(fontSize: 12, color: Colors.black),
+            textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
+      ),
+    ),
+  );
+}
     return Scaffold(
 backgroundColor: const Color.fromARGB(255, 247, 251, 250),
       body: SingleChildScrollView(
@@ -632,7 +654,7 @@ child: Row(
       padding: const EdgeInsets.only(right: 0.0), 
       child: TextButton.icon(
         onPressed: ( ) {
-          _showPopup(context);
+          showPopup(context);
         },
         style: TextButton.styleFrom(
           padding: EdgeInsets.zero, // Remove any padding from the button
@@ -803,7 +825,7 @@ child: Row(
               width:270,
               clipBehavior: Clip.hardEdge,
               child: LinearProgressIndicator(
-                    value: _progress, // Value between 0.0 and 1.0
+                    value: progress, // Value between 0.0 and 1.0
                     backgroundColor: Colors.transparent, // Background color
                     valueColor: AlwaysStoppedAnimation<Color>(Colors.white,
                     ), // Fill color
@@ -837,14 +859,22 @@ child: Row(
      
       ),
     SizedBox(height:20),
-Container(
+SizedBox(
          height:100,
+         child:Theme(
+        data: Theme.of(context).copyWith(dividerColor: Colors.white),
   child: ListView(children:[
            CupertinoSlidingSegmentedControl<int>(
             padding: EdgeInsets.all(10),
             children:{
-              1: Text('My Profile'),
-              2: Text('CV preview')
+              1: Container(
+          alignment: Alignment.center,
+          padding: EdgeInsets.symmetric(vertical: 13), // Increase vertical padding
+          child:Text('My Profile'),),
+              2: Container(
+          alignment: Alignment.center,
+          padding: EdgeInsets.symmetric(vertical: 13), // Increase vertical padding
+          child:Text('CV preview')),
             },
             groupValue: _slide,
             onValueChanged: (int? newValue){
@@ -859,7 +889,8 @@ Container(
   
   
            ),
-  ]),
+  ])
+),
 ),
   Container(
   constraints: BoxConstraints(
@@ -1046,7 +1077,41 @@ Container(
     ],
   ),
 ),
-
+bottomNavigationBar: 
+      BottomAppBar(
+        elevation: 8,
+  color: Colors.white,
+  child: Container(
+    height: 70,
+    padding: EdgeInsets.symmetric(horizontal: 4),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        buildNavItem(
+          Icons.search_rounded,
+          'Jobs',
+          () {
+            // Action for Jobs
+          },
+          22,
+          const Color.fromARGB(255, 72, 193, 156),
+        ),
+        buildNavItem(Icons.menu_book_outlined, 'Applications', () {
+          Navigator.pushNamed(context, '/apps');
+        }, 22, const Color.fromARGB(255, 72, 193, 156)),
+        buildNavItem(Icons.person_outline_outlined, 'Profile', () {
+          Navigator.pushNamed(context, '/profile');
+        }, 35, const Color.fromARGB(255, 72, 193, 156)),
+        buildNavItem(Icons.add_alert_sharp, 'Alert', () {
+          // Action for Alert
+        }, 22, const Color.fromARGB(255, 72, 193, 156)),
+        buildNavItem(Icons.bookmark_added, 'Saved Jobs', () {
+          // Action for Save Jobs
+        }, 22, const Color.fromARGB(255, 72, 193, 156)),
+      ],
+    ),
+  ),
+),
 
   );
   }
@@ -1067,13 +1132,25 @@ Container(
                         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Curabitur pretium tincidunt lacus. Nulla gravida orci a odio, et feugiat tellus tincidunt vitae. Suspendisse potenti. Fusce ac felis sit amet ligula pharetra condimentum. Morbi tincidunt, libero sed scelerisque dictum, nunc ante sagittis velit, ut aliquet felis augue sit amet nunc.Phasellus bibendum, sem ut eleifend tincidunt, augue dolor vulputate risus, eget suscipit nulla mauris eu odio. Proin ac tortor nec justo hendrerit dignissim. Integer facilisis, eros eget fermentum dapibus, leo nisi tincidunt velit, vitae varius magna justo sit amet dolor.",
                       ),
                       SizedBox(height: 8),
-                      Row(children: [
-                        SizedBox(width:220),
-                        IconButton(icon: Icon(Icons.edit,
-                        color:Colors.greenAccent), 
-                        onPressed: () { }),
-                          Text('edit'),
-                      ],)
+                      Row(
+                        children: [
+                          SizedBox(width:210),
+                          TextButton.icon(
+                                              onPressed: () { },
+                                              icon: SizedBox(
+                          width:12,
+                          child: Icon(
+                          Icons.edit, size:17,
+                          color: Color.fromARGB(255, 72, 193, 156), // Icon color
+                                    ),
+                                              ),
+                                              label: 
+                          Text(
+                                              'Edit', // Button text
+                                              style: TextStyle(color: Color.fromARGB(255, 72, 193, 156), fontSize:14),) // Text color
+                                            ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
@@ -1095,8 +1172,8 @@ case 'Resume':
                   child: Column(
                     children: [
                       Container(
-                        height:370,
-                        width :300,
+                        height:340,
+                        width :320,
                         decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(30),
@@ -1105,13 +1182,94 @@ case 'Resume':
                   color: Colors.grey.withOpacity(0.2),
                   spreadRadius: 2,
                   blurRadius: 10,
-                  offset: Offset(0, 2), // changes position of shadow
+                  offset: Offset(0, 0), // changes position of shadow
                 ),
               ],
             ),
+            
+            child: Column(children:[
+              SizedBox(height:30),
+                 Row(children:[
+                  SizedBox(width:15),
+                  Icon(Icons.file_copy, color: Colors.green[100], size: 25),
+                  SizedBox(width:5),
+                  SizedBox(
+                    width: 155,
+                    child: Text('Recruiter_company', style:TextStyle(fontSize: 17,fontWeight: FontWeight.w500 ))),
+                  SizedBox(width:0),
+                  IconButton(icon: Icon(Icons.cloud_download_rounded, 
+                  color:const Color.fromARGB(255, 26, 121, 198),
+                   size: 25),
+                   onPressed: () { }),
+                  IconButton(icon: Icon(Icons.delete_outline_rounded, 
+                  color: Colors.black, 
+                  size: 25),
+                  onPressed: () { }),
+                 ]),
+                 SizedBox(height:10),
+                 Divider(color:const Color.fromARGB(255, 197, 231, 205),indent: 10,endIndent: 12),
+                 Row(children:[
+                  SizedBox(width:15),
+                  Icon(Icons.file_copy, color: Colors.green[100], size: 25),
+                  SizedBox(width:5),
+                  SizedBox(
+                     width: 155,
+                    child: Text('Resume.pdf', style:TextStyle(fontSize: 17,fontWeight: FontWeight.w500 ))),
+                  SizedBox(width:0),
+                  IconButton(icon: Icon(Icons.cloud_download_rounded, 
+                  color:const Color.fromARGB(255, 26, 121, 198),
+                   size: 25),
+                   onPressed: () { }),
+                  SizedBox(width:0),
+                  IconButton(icon: Icon(Icons.delete_outline_rounded, 
+                  color: Colors.black, 
+                  size: 25),
+                  onPressed: () { }),
+                 ]),
+                 SizedBox(height:10),
+                 Divider(color:const Color.fromARGB(255, 197, 231, 205),indent: 10,endIndent: 12),
+                 Row(children:[
+                  SizedBox(width:15),
+                  Icon(Icons.file_copy, color: Colors.green[100], size: 25),
+                  SizedBox(width:5),
+                  SizedBox(
+                     width: 155,
+                    child: Text('Who_are_we.pdf', style:TextStyle(fontSize: 17,fontWeight: FontWeight.w500 ))),
+                  SizedBox(width:0),
+                  IconButton(icon: Icon(Icons.cloud_download_rounded, 
+                  color:const Color.fromARGB(255, 26, 121, 198),
+                   size: 25),
+                   onPressed: () { }),
+                  SizedBox(width:0),
+                  IconButton(icon: Icon(Icons.delete_outline_rounded, 
+                  color: Colors.black, 
+                  size: 25),
+                  onPressed: () { }),
+                 ]),
+                 SizedBox(height:10),
+                 Divider(color:const Color.fromARGB(255, 197, 231, 205),indent: 10,endIndent: 12),
+                 Row(children:[
+                  SizedBox(width:15),
+                  Icon(Icons.file_copy, color: Colors.green[100], size: 25),
+                  SizedBox(width:5),
+                  SizedBox(
+                     width: 155,
+                    child: Text('Jon_Don_.pdf', style:TextStyle(fontSize: 17,fontWeight: FontWeight.w500 ))),
+                  SizedBox(width:0),
+                  IconButton(icon: Icon(Icons.cloud_download_rounded, 
+                  color:const Color.fromARGB(255, 26, 121, 198),
+                   size: 25),
+                   onPressed: () { }),
+                  SizedBox(width:0),
+                  IconButton(icon: Icon(Icons.delete_outline_rounded, 
+                  color: Colors.black, 
+                  size: 25),
+                  onPressed: () { }),
+                 ]),
+            ]),
                       ),
                       SizedBox(height: 20),
-                   Container(
+                   SizedBox(
                     width:280,
                      child: ElevatedButton(
                                onPressed: () {
@@ -1131,7 +1289,7 @@ case 'Resume':
                              ),
                    ),
                    SizedBox(height: 10),
-                   Container(
+                   SizedBox(
                     width:280,
                      child: ElevatedButton(
                                onPressed: () {
@@ -1170,7 +1328,8 @@ case 'Resume':
                   child: Column(
                     children: [
                       Container(
-                        height:370,
+                        padding: EdgeInsets.all(16.0),
+                        height:380,
                         width :300,
                         decoration: BoxDecoration(
               color: Colors.white,
@@ -1184,9 +1343,50 @@ case 'Resume':
                 ),
               ],
             ),
+            child:Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children:[
+              SizedBox(height:25),
+                  Text('University or College ', style:TextStyle(fontSize:16, color:Colors.grey)),
+                  SizedBox(height:10),
+                  Text('Degree type ', style:TextStyle(fontSize:16, color:Colors.grey)),
+                  Text("Bachelor's degree(B.A. or B.Sc.) ", style:TextStyle(fontSize:17, color:Colors.black)),
+                  SizedBox(height:20),
+                  Text('University major ', style:TextStyle(fontSize:16, color:Colors.grey)),
+                  Text('Electromechanical Engineering', style:TextStyle(fontSize:17, color:Colors.black)),
+                  SizedBox(height:20),
+                  Text('Year ', style:TextStyle(fontSize:16, color:Colors.grey)),
+                  Text('YY-MM-DD ', style:TextStyle(fontSize:10, color:Colors.grey)),
+                  SizedBox(height:3),
+                  Text('2025-04-09', style:TextStyle(fontSize:17, color:Colors.black)),
+                  SizedBox(height:25),
+                  Row(children:[
+                    SizedBox(width:130),
+                    TextButton.icon(
+                    onPressed: () { },
+                    icon: SizedBox(
+                      width:12,
+                      child: Icon(
+                      Icons.edit, size:17,
+                      color: Color.fromARGB(255, 72, 193, 156), // Icon color
+                                ),
+                    ),
+                    label: 
+                      Text(
+                    'Edit', // Button text
+                    style: TextStyle(color: Color.fromARGB(255, 72, 193, 156), fontSize:14),) // Text color
+                  ),
+                    IconButton(icon: Icon(Icons.delete_outline_rounded, 
+                  color: Colors.black, 
+                  size: 22),
+                  onPressed: () { }),
+                    
+                    ])
+
+                      ])
                       ),
                       SizedBox(height: 20),
-                   Container(
+                   SizedBox(
                     width:280,
                      child: ElevatedButton(
                                onPressed: () {
@@ -1204,6 +1404,7 @@ case 'Resume':
                                  style: TextStyle(fontSize: 17, color:Colors.white,fontWeight: FontWeight.bold),
                                ),
                              ),
+
                    ),
                      
                     ],
@@ -1226,7 +1427,8 @@ case 'Resume':
                   child: Column(
                     children: [
                       Container(
-                        height:370,
+                        padding: EdgeInsets.only(left: 16.0), 
+                        height:380,
                         width :300,
                         decoration: BoxDecoration(
               color: Colors.white,
@@ -1240,9 +1442,52 @@ case 'Resume':
                 ),
               ],
             ),
+            child:Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children:[
+              SizedBox(height:25),
+                  Text('Company name ', style:TextStyle(fontSize:16, color:Colors.grey)),
+                  Text('Dereja ', style:TextStyle(fontSize:16, color:Colors.black)),
+                  SizedBox(height:10),
+                  Text('Title ', style:TextStyle(fontSize:16, color:Colors.grey)),
+                  Text("composity ", style:TextStyle(fontSize:17, color:Colors.black)),
+                  SizedBox(height:20),
+                  Text('From to date ', style:TextStyle(fontSize:16, color:Colors.grey)),
+                  Text('YY-MM-DD ', style:TextStyle(fontSize:10, color:Colors.grey)),
+                  SizedBox(height:3),
+                  Text('2025-04-09 - 2008-11-03', style:TextStyle(fontSize:17, color:Colors.black)),
+                  SizedBox(height:20),
+                  Text('Description ', style:TextStyle(fontSize:16, color:Colors.grey)),
+                  Text('lorem lope', style:TextStyle(fontSize:17, color:Colors.black)),
+                  SizedBox(height:25),
+                  Row(children:[
+                    SizedBox(width:130),
+                    TextButton.icon(
+                    onPressed: () { },
+                    icon: SizedBox(
+                      width:12,
+                      child: Icon(
+                      Icons.edit, size:17,
+                      color: Color.fromARGB(255, 72, 193, 156), // Icon color
+                                ),
+                    ),
+                    label: 
+                      Text(
+                    'Edit', // Button text
+                    style: TextStyle(color: Color.fromARGB(255, 72, 193, 156), fontSize:14),) // Text color
+                  ),
+                    IconButton(icon: Icon(Icons.delete_outline_rounded, 
+                  color: Colors.black, 
+                  size: 22),
+                  onPressed: () { }),
+                    
+                    ])
+
+                      ])
                       ),
                       SizedBox(height: 20),
                       Container(
+                        padding: EdgeInsets.only(left:16),
                         height:370,
                         width :300,
                         decoration: BoxDecoration(
@@ -1257,9 +1502,51 @@ case 'Resume':
                 ),
               ],
             ),
+            child:Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children:[
+              SizedBox(height:25),
+                  Text('Company name ', style:TextStyle(fontSize:16, color:Colors.grey)),
+                  Text('test company ', style:TextStyle(fontSize:16, color:Colors.black)),
+                  SizedBox(height:10),
+                  Text('Title ', style:TextStyle(fontSize:16, color:Colors.grey)),
+                  Text("software analysis ", style:TextStyle(fontSize:17, color:Colors.black)),
+                  SizedBox(height:20),
+                  Text('From to date ', style:TextStyle(fontSize:16, color:Colors.grey)),
+                  Text('YY-MM-DD ', style:TextStyle(fontSize:10, color:Colors.grey)),
+                  SizedBox(height:3),
+                  Text('2025-04-09 - invalid date', style:TextStyle(fontSize:17, color:Colors.black)),
+                  SizedBox(height:20),
+                  Text('Description ', style:TextStyle(fontSize:16, color:Colors.grey)),
+                  Text('lorem lope', style:TextStyle(fontSize:17, color:Colors.black)),
+                  SizedBox(height:25),
+                  Row(children:[
+                    SizedBox(width:130),
+                    TextButton.icon(
+                    onPressed: () { },
+                    icon: SizedBox(
+                      width:12,
+                      child: Icon(
+                      Icons.edit, size:17,
+                      color: Color.fromARGB(255, 72, 193, 156), // Icon color
+                                ),
+                    ),
+                    label: 
+                      Text(
+                    'Edit', // Button text
+                    style: TextStyle(color: Color.fromARGB(255, 72, 193, 156), fontSize:14),) // Text color
+                  ),
+                    IconButton(icon: Icon(Icons.delete_outline_rounded, 
+                  color: Colors.black, 
+                  size: 22),
+                  onPressed: () { }),
+                    
+                    ])
+
+                      ])
                       ),
                       SizedBox(height:15),
-                   Container(
+                   SizedBox(
                     width:280,
                      child: ElevatedButton(
                                onPressed: () {
@@ -1302,7 +1589,8 @@ case 'Resume':
                   child: Column(
                     children: [
                       Container(
-                        height:600,
+                        padding: EdgeInsets.only(left:16),
+                        height:750,
                         width :300,
                         decoration: BoxDecoration(
               color: Colors.white,
@@ -1316,9 +1604,78 @@ case 'Resume':
                 ),
               ],
             ),
+            child:Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children:[
+              SizedBox(height:25),
+                  Text('Skills', style:TextStyle(fontSize:16, color:Colors.black)),
+                  SizedBox(height:20),
+                  Text('Accounting ', style:TextStyle(fontSize:16, color:Colors.grey)),
+                  Text('2 years', style:TextStyle(fontSize:17, color:Colors.black)),
+                  SizedBox(height:20),
+                 Text('Adobe photoshop, Indesign ', style:TextStyle(fontSize:16, color:Colors.grey)),
+                  Text('2 years', style:TextStyle(fontSize:17, color:Colors.black)),
+                  SizedBox(height:20),
+                  Text('Financial Management ', style:TextStyle(fontSize:16, color:Colors.grey)),
+                  Text('9 years', style:TextStyle(fontSize:17, color:Colors.black)),
+                  SizedBox(height:20),
+                  Text('ACLS ', style:TextStyle(fontSize:16, color:Colors.grey)),
+                  Text('6 years', style:TextStyle(fontSize:17, color:Colors.black)),
+                  SizedBox(height:20),
+                  Text('Accounting ', style:TextStyle(fontSize:16, color:Colors.grey)),
+                  Text('2 years', style:TextStyle(fontSize:17, color:Colors.black)),
+                  SizedBox(height:20),
+                  Text('Accounting Management ', style:TextStyle(fontSize:16, color:Colors.grey)),
+                  Text('4 years', style:TextStyle(fontSize:17, color:Colors.black)),
+                  SizedBox(height:20),
+                  SizedBox(height:25),
+                  Row(children:[
+                    SizedBox(width:170),
+                    TextButton.icon(
+                    onPressed: () { },
+                    icon: SizedBox(
+                      width:12,
+                      child: Icon(
+                      Icons.edit, size:17,
+                      color: Color.fromARGB(255, 72, 193, 156), // Icon color
+                                ),
+                    ),
+                    label: 
+                      Text(
+                    'Edit', // Button text
+                    style: TextStyle(color: Color.fromARGB(255, 72, 193, 156), fontSize:14),) // Text color
+                  ),
+                   
+                    
+                    ]),
+                     SizedBox(height:20),
+                     Divider(color: Color.fromARGB(255, 72, 193, 156),indent:12, endIndent:12),
+                     SizedBox(height:20),
+                     Text('Language', style:TextStyle(fontSize: 17, color:Colors.black)),
+                     SizedBox(height:30),
+                      Row(children:[
+                    SizedBox(width:170),
+                    TextButton.icon(
+                    onPressed: () { },
+                    icon: SizedBox(
+                      width:12,
+                      child: Icon(
+                      Icons.edit, size:17,
+                      color: Color.fromARGB(255, 72, 193, 156), // Icon color
+                                ),
+                    ),
+                    label: 
+                      Text(
+                    'Edit', // Button text
+                    style: TextStyle(color: Color.fromARGB(255, 72, 193, 156), fontSize:14),) // Text color
+                  ),
+                   
+                    
+                    ]),
+                      ])
                       ),
                       SizedBox(height: 20),
-                   Container(
+                   SizedBox(
                     width:280,
                      child: ElevatedButton(
                                onPressed: () {
@@ -1360,6 +1717,7 @@ case 'Resume':
                   child: Column(
                     children: [
                       Container(
+                        padding: EdgeInsets.only(left:16),
                         height:280,
                         width :300,
                         decoration: BoxDecoration(
@@ -1374,9 +1732,43 @@ case 'Resume':
                 ),
               ],
             ),
-                      ),
+                  
+                  child:Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children:[
+                    SizedBox(height:40),
+                  Text('Description ', style:TextStyle(fontSize:16, color:Colors.grey)),
+                  Text('test', style:TextStyle(fontSize:17, color:Colors.black)),
+                  SizedBox(height:20),
+                  Text('Title ', style:TextStyle(fontSize:16, color:Colors.grey)),
+                  Text('Link', style:TextStyle(fontSize:17, color:Colors.black)),
+                  SizedBox(height:30),
+                  Row(children:[
+                    SizedBox(width:130),
+                    TextButton.icon(
+                    onPressed: () { },
+                    icon: SizedBox(
+                      width:12,
+                      child: Icon(
+                      Icons.edit, size:17,
+                      color: Color.fromARGB(255, 72, 193, 156), // Icon color
+                                ),
+                    ),
+                    label: 
+                      Text(
+                    'Edit', // Button text
+                    style: TextStyle(color: Color.fromARGB(255, 72, 193, 156), fontSize:14),) // Text color
+                  ),
+                    IconButton(icon: Icon(Icons.delete_outline_rounded, 
+                  color: Colors.black, 
+                  size: 22),
+                  onPressed: () { }),
+                    
+                    ])
+
+                      ])    ),
                       SizedBox(height: 20),
-                   Container(
+                   SizedBox(
                     width:280,
                      child: ElevatedButton(
                                onPressed: () {
@@ -1416,8 +1808,10 @@ case 'Resume':
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: [
+
                       Container(
-                        height:320,
+                        padding: EdgeInsets.only(left:16),
+                        
                         width :300,
                         decoration: BoxDecoration(
               color: Colors.white,
@@ -1431,13 +1825,47 @@ case 'Resume':
                 ),
               ],
             ),
+            child: SingleChildScrollView(
+            child:Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children:[
+              SizedBox(height:40),
+                  Text('Desire employment ', style:TextStyle(fontSize:16, color:Colors.grey)),
+                  Text('Consultancy, Internship\nFreelance, contract,partime\nFull time', style:TextStyle(fontSize:17, color:Colors.black)),
+                  SizedBox(height:20),
+                  Text('Desired Salary ', style:TextStyle(fontSize:16, color:Colors.grey)),
+                  Text('5000 - 7000', style:TextStyle(fontSize:17, color:Colors.black)),
+                  SizedBox(height:20),
+                  Text('Current Salary ', style:TextStyle(fontSize:16, color:Colors.grey)),
+                  Text('200,000 - 300,000', style:TextStyle(fontSize:17, color:Colors.black)),
+                  SizedBox(height:30),
+                  Row(children:[
+                    SizedBox(width:150),
+                    TextButton.icon(
+                    onPressed: () { },
+                    icon: SizedBox(
+                      width:12,
+                      child: Icon(
+                      Icons.edit, size:17,
+                      color: Color.fromARGB(255, 72, 193, 156), // Icon color
+                                ),
+                    ),
+                    label: 
+                      Text(
+                    'Edit', // Button text
+                    style: TextStyle(color: Color.fromARGB(255, 72, 193, 156), fontSize:14),) // Text color
+                  ),
+                    
+                    ]),
+                    SizedBox(height:40),
+            ])),
                       ),
                     ],
                   ),
                 ),
               ],
             ),
-            Divider(color:const Color.fromARGB(255, 197, 231, 205),indent: 12,endIndent: 12),
+            
           ],
         );
         default:
@@ -1541,7 +1969,7 @@ case 'Resume':
               children: [
                  Row(children: [
                   SizedBox(width:140),
-                  Container(
+                  SizedBox(
                     width:165,
                     height:43,
                     child: ElevatedButton(
