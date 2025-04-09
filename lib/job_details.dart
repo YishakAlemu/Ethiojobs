@@ -863,6 +863,36 @@ class JobDetailPage extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: BottomAppBar(
+  elevation: 8,
+  color: Colors.white,
+  child: SizedBox(
+    height: 65,
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+      child: SizedBox(
+        width: double.infinity,
+        height: double.infinity,
+        child: ElevatedButton(
+          onPressed: () {
+            // Handle Apply action
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color.fromARGB(255, 72, 193, 156),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            elevation: 4,
+          ),
+          child: const Text(
+            'Apply',
+            style: TextStyle(fontSize: 25, color:Colors.white,fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
+    ),
+  ),
+),
     );
   }
 }

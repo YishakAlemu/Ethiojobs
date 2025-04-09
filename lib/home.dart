@@ -991,7 +991,6 @@ Padding(
                   ),
                 
                 Container(
-
                     height: 290,
                     width: 355,
                     margin: EdgeInsets.only(top: 25),
@@ -1193,6 +1192,7 @@ Padding(
       ),
       bottomNavigationBar: 
       BottomAppBar(
+        elevation: 8,
   color: Colors.white,
   child: Container(
     height: 70,

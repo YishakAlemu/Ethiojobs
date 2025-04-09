@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'dart:async';
 class Profilepage extends StatefulWidget {
@@ -12,6 +16,26 @@ class Profilepage extends StatefulWidget {
 }
 
 class _ProfilepageState extends State<Profilepage> {
+  Future<void> _generatePdf(String text) async {
+    final pdf = pw.Document();
+
+    pdf.addPage(
+      pw.Page(
+        build: (pw.Context context) => pw.Center(
+          child: pw.Text(text),
+        ),
+      ),
+    );
+
+    final output = await getTemporaryDirectory();
+    final file = File("${output.path}/download.pdf");
+    await file.writeAsBytes(await pdf.save());
+    
+    // Optionally, open the file using a file viewer
+    // You can use a package like open_file to open it
+  }
+
+  int? _slide = 1;
   bool _isExpanded = false;
   double _progress = 0.5; // Initialize _progress variable
   String _percentage = "50%"; // Initialize _percentage variable
@@ -193,23 +217,6 @@ void _showProfessionPicker(){
                   },
                   activeColor: Colors.blue,
                 ),
-                
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
               ],
                   ),
                   ),
@@ -580,9 +587,8 @@ Container(
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-backgroundColor: Colors.white,
+backgroundColor: const Color.fromARGB(255, 247, 251, 250),
       body: SingleChildScrollView(
-        
   child: 
   Column(
     children: [
@@ -830,7 +836,47 @@ child: Row(
  
      
       ),
-    SizedBox(height:700),
+    SizedBox(height:20),
+Container(
+         height:100,
+  child: ListView(children:[
+           CupertinoSlidingSegmentedControl<int>(
+            padding: EdgeInsets.all(10),
+            children:{
+              1: Text('My Profile'),
+              2: Text('CV preview')
+            },
+            groupValue: _slide,
+            onValueChanged: (int? newValue){
+              
+              setState(() {
+                _slide = newValue;
+              
+              
+            });
+            },
+  
+  
+  
+           ),
+  ]),
+),
+  Container(
+  constraints: BoxConstraints(
+    minHeight: 400, // Set a minimum height
+  ),
+  child: _getSegment(_slide),
+),
+
+
+
+
+
+
+
+
+
+
     Container(
               height: 605,
               width:400,
@@ -1000,6 +1046,538 @@ child: Row(
     ],
   ),
 ),
+
+
   );
   }
+   Widget _buildExpandableTile(String title) {
+    switch (title) {
+      case 'About':
+        return Column(
+          children: [
+            ExpansionTile(
+              title: Text(title,style: TextStyle(fontSize: 22, fontWeight:FontWeight.w500),),
+              trailing: Icon(Icons.keyboard_arrow_down_rounded,color: Color.fromARGB(255, 72, 193, 156)),
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                       Text(
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Curabitur pretium tincidunt lacus. Nulla gravida orci a odio, et feugiat tellus tincidunt vitae. Suspendisse potenti. Fusce ac felis sit amet ligula pharetra condimentum. Morbi tincidunt, libero sed scelerisque dictum, nunc ante sagittis velit, ut aliquet felis augue sit amet nunc.Phasellus bibendum, sem ut eleifend tincidunt, augue dolor vulputate risus, eget suscipit nulla mauris eu odio. Proin ac tortor nec justo hendrerit dignissim. Integer facilisis, eros eget fermentum dapibus, leo nisi tincidunt velit, vitae varius magna justo sit amet dolor.",
+                      ),
+                      SizedBox(height: 8),
+                      Row(children: [
+                        SizedBox(width:220),
+                        IconButton(icon: Icon(Icons.edit,
+                        color:Colors.greenAccent), 
+                        onPressed: () { }),
+                          Text('edit'),
+                      ],)
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Divider(color:const Color.fromARGB(255, 197, 231, 205),indent: 12,endIndent: 12,),
+          ],
+        );
+    
+case 'Resume':
+        return Column(
+          children: [
+            ExpansionTile(
+              title: Text(title,style: TextStyle(fontSize: 22, fontWeight:FontWeight.w500),),
+              trailing: Icon(Icons.keyboard_arrow_down_rounded,color: Color.fromARGB(255, 72, 193, 156)),
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      Container(
+                        height:370,
+                        width :300,
+                        decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(30),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 2,
+                  blurRadius: 10,
+                  offset: Offset(0, 2), // changes position of shadow
+                ),
+              ],
+            ),
+                      ),
+                      SizedBox(height: 20),
+                   Container(
+                    width:280,
+                     child: ElevatedButton(
+                               onPressed: () {
+                                 // Handle Apply action
+                               },
+                               style: ElevatedButton.styleFrom(
+                                 backgroundColor: const Color.fromARGB(255, 26, 121, 198),
+                                 shape: RoundedRectangleBorder(
+                                   borderRadius: BorderRadius.circular(20),
+                                 ),
+                                 elevation: 4,
+                               ),
+                               child: const Text(
+                                 'Resume Auto Fill',
+                                 style: TextStyle(fontSize: 17, color:Colors.white,fontWeight: FontWeight.bold),
+                               ),
+                             ),
+                   ),
+                   SizedBox(height: 10),
+                   Container(
+                    width:280,
+                     child: ElevatedButton(
+                               onPressed: () {
+                                 // Handle Apply action
+                               },
+                               style: ElevatedButton.styleFrom(
+                                 backgroundColor: const Color.fromARGB(255, 26, 121, 198),
+                                 shape: RoundedRectangleBorder(
+                                   borderRadius: BorderRadius.circular(20),
+                                 ),
+                                 elevation: 4,
+                               ),
+                               child: const Text(
+                                 'Upload Resume',
+                                 style: TextStyle(fontSize: 17, color:Colors.white,fontWeight: FontWeight.bold),
+                               ),
+                             ),
+                   ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Divider(color:const Color.fromARGB(255, 197, 231, 205),indent: 12,endIndent: 12),
+          ],
+        );
+        case 'Education':
+        return Column(
+          children: [
+            ExpansionTile(
+              title: Text(title,style: TextStyle(fontSize: 22, fontWeight:FontWeight.w500),),
+              trailing: Icon(Icons.keyboard_arrow_down_rounded,color: Color.fromARGB(255, 72, 193, 156)),
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      Container(
+                        height:370,
+                        width :300,
+                        decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(30),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 2,
+                  blurRadius: 10,
+                  offset: Offset(0, 2), // changes position of shadow
+                ),
+              ],
+            ),
+                      ),
+                      SizedBox(height: 20),
+                   Container(
+                    width:280,
+                     child: ElevatedButton(
+                               onPressed: () {
+                                 // Handle Apply action
+                               },
+                               style: ElevatedButton.styleFrom(
+                                 backgroundColor: const Color.fromARGB(255, 26, 121, 198),
+                                 shape: RoundedRectangleBorder(
+                                   borderRadius: BorderRadius.circular(20),
+                                 ),
+                                 elevation: 4,
+                               ),
+                               child: const Text(
+                                 '+Add Eduaction',
+                                 style: TextStyle(fontSize: 17, color:Colors.white,fontWeight: FontWeight.bold),
+                               ),
+                             ),
+                   ),
+                     
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Divider(color:const Color.fromARGB(255, 197, 231, 205),indent: 12,endIndent: 12),
+          ],
+        );
+        case 'Work Experience':
+        return Column(
+          children: [
+            ExpansionTile(
+              title: Text(title,style: TextStyle(fontSize: 22, fontWeight:FontWeight.w500),),
+              trailing: Icon(Icons.keyboard_arrow_down_rounded,color: Color.fromARGB(255, 72, 193, 156)),
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      Container(
+                        height:370,
+                        width :300,
+                        decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(30),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 2,
+                  blurRadius: 10,
+                  offset: Offset(0, 2), // changes position of shadow
+                ),
+              ],
+            ),
+                      ),
+                      SizedBox(height: 20),
+                      Container(
+                        height:370,
+                        width :300,
+                        decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(30),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 2,
+                  blurRadius: 10,
+                  offset: Offset(0, 2), // changes position of shadow
+                ),
+              ],
+            ),
+                      ),
+                      SizedBox(height:15),
+                   Container(
+                    width:280,
+                     child: ElevatedButton(
+                               onPressed: () {
+                                 // Handle Apply action
+                               },
+                               style: ElevatedButton.styleFrom(
+                                 backgroundColor: const Color.fromARGB(255, 26, 121, 198),
+                                 shape: RoundedRectangleBorder(
+                                   borderRadius: BorderRadius.circular(20),
+                                 ),
+                                 elevation: 4,
+                               ),
+                               child: const Text(
+                                 '+Add Experience',
+                                 style: TextStyle(fontSize: 17, color:Colors.white,fontWeight: FontWeight.bold),
+                               ),
+                             ),
+                   ),
+                      
+
+
+
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Divider(color:const Color.fromARGB(255, 197, 231, 205),indent: 12,endIndent: 12),
+          ],
+        );
+        case 'Skills':
+        return Column(
+          children: [
+            ExpansionTile(
+              title: Text(title,style: TextStyle(fontSize: 22, fontWeight:FontWeight.w500),),
+              trailing: Icon(Icons.keyboard_arrow_down_rounded,color: Color.fromARGB(255, 72, 193, 156)),
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      Container(
+                        height:600,
+                        width :300,
+                        decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(30),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 2,
+                  blurRadius: 10,
+                  offset: Offset(0, 2), // changes position of shadow
+                ),
+              ],
+            ),
+                      ),
+                      SizedBox(height: 20),
+                   Container(
+                    width:280,
+                     child: ElevatedButton(
+                               onPressed: () {
+                                 // Handle Apply action
+                               },
+                               style: ElevatedButton.styleFrom(
+                                 backgroundColor: const Color.fromARGB(255, 26, 121, 198),
+                                 shape: RoundedRectangleBorder(
+                                   borderRadius: BorderRadius.circular(20),
+                                 ),
+                                 elevation: 4,
+                               ),
+                               child: const Text(
+                                 '+Add Skill or Language',
+                                 style: TextStyle(fontSize: 17, color:Colors.white,fontWeight: FontWeight.bold),
+                               ),
+                             ),
+                   ),
+                      
+
+
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Divider(color:const Color.fromARGB(255, 197, 231, 205),indent: 12,endIndent: 12),
+          ],
+        );
+        case 'Project and Portfolio':
+        return Column(
+          children: [
+            ExpansionTile(
+              title: Text(title,style: TextStyle(fontSize: 22, fontWeight:FontWeight.w500),),
+              trailing: Icon(Icons.keyboard_arrow_down_rounded,color: Color.fromARGB(255, 72, 193, 156)),
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      Container(
+                        height:280,
+                        width :300,
+                        decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(30),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 2,
+                  blurRadius: 10,
+                  offset: Offset(0, 2), // changes position of shadow
+                ),
+              ],
+            ),
+                      ),
+                      SizedBox(height: 20),
+                   Container(
+                    width:280,
+                     child: ElevatedButton(
+                               onPressed: () {
+                                 // Handle Apply action
+                               },
+                               style: ElevatedButton.styleFrom(
+                                 backgroundColor: const Color.fromARGB(255, 26, 121, 198),
+                                 shape: RoundedRectangleBorder(
+                                   borderRadius: BorderRadius.circular(20),
+                                 ),
+                                 elevation: 4,
+                               ),
+                               child: const Text(
+                                 '+Add Project and Portfolio',
+                                 style: TextStyle(fontSize: 17, color:Colors.white,fontWeight: FontWeight.bold),
+                               ),
+                             ),
+                   ),
+                      
+
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Divider(color:const Color.fromARGB(255, 197, 231, 205),indent: 12,endIndent: 12),
+          ],
+        );
+        case 'Job preference':
+        return Column(
+          children: [
+            ExpansionTile(
+              title: Text(title,style: TextStyle(fontSize: 22, fontWeight:FontWeight.w500),),
+              trailing: Icon(Icons.keyboard_arrow_down_rounded,color: Color.fromARGB(255, 72, 193, 156)),
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      Container(
+                        height:320,
+                        width :300,
+                        decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(30),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 2,
+                  blurRadius: 10,
+                  offset: Offset(0, 2), // changes position of shadow
+                ),
+              ],
+            ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Divider(color:const Color.fromARGB(255, 197, 231, 205),indent: 12,endIndent: 12),
+          ],
+        );
+        default:
+      return SizedBox.shrink();
+  }
+   }
+  
+  Widget _getSegment(int? segment) {
+  switch (segment) {
+    case 1:  //My profile
+    return SingleChildScrollView( // Wrap with SingleChildScrollView for dynamic content
+        child: Center(
+          child: Column(
+            children: [
+              
+              
+              Container(
+                width:366,
+            padding: const EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 2,
+                  blurRadius: 15,
+                  offset: Offset(0, 5), // changes position of shadow
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                _buildExpandableTile('About'),
+                SizedBox(height: 12),
+                _buildExpandableTile('Resume'),
+                SizedBox(height: 12),
+                _buildExpandableTile('Education'),
+                SizedBox(height: 12),
+                _buildExpandableTile('Work Experience'),
+                SizedBox(height: 12),
+                _buildExpandableTile('Skills'),
+                SizedBox(height: 12),
+                _buildExpandableTile('Project and Portfolio'),
+                SizedBox(height: 12),
+                _buildExpandableTile('Job preference'),
+                
+              ],
+            ),
+          ),
+          
+        SizedBox(height: 40),
+
+               Container(
+
+                height:800,
+                width:366,
+            padding: const EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 2,
+                  blurRadius: 15,
+                  offset: Offset(0, 10), // changes position of shadow
+                ),
+              ],
+            ),
+               ),
+              
+            ],
+          ),
+        ),
+      );
+    case 2:
+      return SingleChildScrollView( // Wrap with SingleChildScrollView for dynamic content
+        child: Center(
+          child: Column(
+            children: [
+              
+              
+              Container(
+                height:1000,
+                width:366,
+            padding: const EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 2,
+                  blurRadius: 15,
+                  offset: Offset(0, 5), // changes position of shadow
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                 Row(children: [
+                  SizedBox(width:140),
+                  Container(
+                    width:165,
+                    height:43,
+                    child: ElevatedButton(
+                                 onPressed: () {
+                                   _generatePdf('Name: Jon Don\nPhone: 2517890987');
+                                 },
+                                 style: ElevatedButton.styleFrom(
+                                   backgroundColor: const Color.fromARGB(255, 26, 121, 198),
+                                   shape: RoundedRectangleBorder(
+                                     borderRadius: BorderRadius.circular(24),
+                                   ),
+                                   elevation: 2,
+                                 ),
+                                 child: const Text(
+                                   'Download CV',
+                                   style: TextStyle(fontSize: 16, color:Colors.white),
+                                 ),
+                               ),
+                  ),
+                 ],),
+              Text('Jon Don', style:TextStyle(fontSize:24, fontWeight: FontWeight.bold) ),
+              Row(children: [
+                 Icon(Icons.phone, size: 12, color:Colors.green),
+                 Text('2517890987', style:TextStyle(fontSize:14, ) ),
+              ],)
+              
+              
+              ]
+            ),
+              ),
+            ]
+          )
+        ),
+      );
+    default:
+      return Center(child: Text('Select an option.'));
+  }
+}
 }
