@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
@@ -1091,7 +1090,7 @@ bottomNavigationBar:
           Icons.search_rounded,
           'Jobs',
           () {
-            // Action for Jobs
+           Navigator.pushNamed(context, '/home');
           },
           22,
           const Color.fromARGB(255, 72, 193, 156),
@@ -1106,7 +1105,7 @@ bottomNavigationBar:
           // Action for Alert
         }, 22, const Color.fromARGB(255, 72, 193, 156)),
         buildNavItem(Icons.bookmark_added, 'Saved Jobs', () {
-          // Action for Save Jobs
+          Navigator.pushNamed(context, '/saved');
         }, 22, const Color.fromARGB(255, 72, 193, 156)),
       ],
     ),

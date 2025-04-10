@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-class Appspage extends StatefulWidget {
-  const Appspage({super.key});
+class Savedpage extends StatefulWidget {
+  final Function(String) onJobSelected;
+  const Savedpage({super.key, required this.onJobSelected});
+
   
 
   @override
-  _AppspageState createState() => _AppspageState();
+  _SavedpageState createState() => _SavedpageState();
 }
 
-class _AppspageState extends State<Appspage> {
+class _SavedpageState extends State<Savedpage> {
   // Define the _isExpanded variable
   double progress = 0.5; // Define the progress variable with a value between 0.0 and 1.0
-  int? _slide1 = 1;
-  Widget _getSegment1(int? segment1) {
-  switch (segment1) {
+  int? _slide2 = 1;
+  Widget _getSegment1(int? segment2) {
+  switch (segment2) {
     case 1:
      return SingleChildScrollView( // Wrap with SingleChildScrollView for dynamic content
         child: Center(
@@ -22,40 +24,185 @@ class _AppspageState extends State<Appspage> {
             children: [
               SingleChildScrollView(
             child:Container(
-              
-                
-                width:366,
-                padding: const EdgeInsets.all(16.0),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.2),
-                  spreadRadius: 2,
-                  blurRadius: 15,
-                  offset: Offset(0, 5), // changes position of shadow
+                      width: 355,
+                    margin: EdgeInsets.only(top: 45),
+                    decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                    BoxShadow(
+                     color: Colors.black.withOpacity(0.1), // Shadow color
+                      spreadRadius: 5, // Spread radius
+                      blurRadius: 10, // Blur radius
+                      offset: Offset(0, 2), // Offset for the shadow
+                       ),
+                      ],
+                      ),
+             child: Column(
+            children: [
+                 Container(
+        
+        color: Colors.white,
+        height: 34, // Height for the button row
+        width: 355,
+        margin: EdgeInsets.only(top: 25),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start, // Start alignment for manual control
+          children: [
+            SizedBox(width:6),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0, right:0),
+               
+              child: TextButton(
+                onPressed: () {
+                  
+                },
+                style: TextButton.styleFrom(
+          padding: EdgeInsets.zero, // Remove any padding from the button
+          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
+        ),
+                child: Text(
+                  'New',
+                  style: TextStyle(color: Colors.indigo,fontSize: 14.8),
                 ),
-              ],
-            ),
-            child: Column(
-              
-              children: [
-              SizedBox(height:10),
-              Row(children: [
-              Container(
-                margin: EdgeInsets.only(top:0),
-                padding: const EdgeInsets.all(5.0),
-                color:Colors.red,
-                height:150,
-                width:150,
-                child: Image.asset(
-                          'assets/ethiojobs.webp',
-                          
-                        ),
               ),
-              SizedBox(width:10),
-            ElevatedButton(
+            ),
+            SizedBox(width:11),
+            Padding(
+              padding: const EdgeInsets.only(right: 0.0), // Adjust space for Button 2
+              child: TextButton(
+                onPressed: () {
+                  // Action for Button 2
+                },
+                style: TextButton.styleFrom(
+          padding: EdgeInsets.zero, // Remove any padding from the button
+          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
+        ),
+                child: Text('Premium', style: TextStyle(color: Colors.green, fontSize: 14.8,),),
+              ),
+            ),
+            SizedBox(width:11),
+            Padding(
+  padding: const EdgeInsets.only(right: 0.0), 
+  child: TextButton.icon(
+    onPressed: () {
+      // Button action
+    },
+    style: TextButton.styleFrom(
+          padding: EdgeInsets.zero, // Remove any padding from the button
+          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
+        ),
+    icon: SizedBox(
+      
+      width:10,
+      height:15,
+      child: Icon(
+        Icons.flash_on_outlined,
+        size: 16,
+        color: const Color.fromARGB(255, 15, 92, 154), // Lightning icon color
+      ),
+    ),
+    label: Text(
+      'Easy Apply',
+      style: TextStyle(
+        color: Colors.blueAccent,
+        fontSize: 14.8,
+      ),
+    ),
+  ),
+),
+            SizedBox(width: 57),
+            TextButton(
+  onPressed: () {
+    
+  },
+  style: TextButton.styleFrom(
+          padding: EdgeInsets.zero, // Remove any padding from the button
+          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
+        ),
+  child: Icon(
+    Icons.bookmark_border, // Use Icons.favorite for filled heart
+    color: Colors.black54, // Customize the icon color
+    size: 24.5, // Customize the icon size
+  ),
+)
+          ],
+        ),
+      ), //
+         
+   Container(
+    color: Colors.white,
+    height:148,
+    width:320,
+    padding: EdgeInsets.all(4.0),
+    child: Row(
+       
+mainAxisAlignment: MainAxisAlignment.start,
+       children: [
+      Container(
+        
+        width:120,
+        padding: EdgeInsets.all(0.0),
+        color: Colors.white,
+        child: Image.asset(
+          'assets/ethiojobs.webp',
+          
+        ),
+      ),
+    
+        Container(
+          padding: EdgeInsets.all(0),
+          color: Colors.white,
+          height: 140,
+              width: 190,
+              
+          child: Column(
+            children: [
+               TextButton(
+  onPressed: () {
+    widget.onJobSelected('Senior FullStack Developer');
+  },
+  style: TextButton.styleFrom(
+    padding: EdgeInsets.symmetric(horizontal: 5, vertical: 1), // Adjust padding
+  ),
+  child: SizedBox(
+    width: 200, // Set a fixed width for the button
+    child: Text(
+      'Senior FullStack Developer',
+      style: TextStyle(color: Colors.black, fontSize: 18),
+      overflow: TextOverflow.ellipsis, // Enable ellipsis
+      maxLines: 2, // Limit to one line
+    ),
+  ),
+),
+            SizedBox(height: 8.0),
+              SizedBox(
+                
+                
+  width: 160.0, // Set the desired width
+  height: 33.0, // Set the desired height
+  child: ElevatedButton(
+    onPressed: () {
+      // Action when button is pressed
+    },
+    style: ElevatedButton.styleFrom(
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20.0), // Rounded corners
+      ),
+      backgroundColor: const Color.fromARGB(200, 255, 255, 255), // Background color
+    ),
+    child: Text(
+      'Computer Science & IT',
+      style: TextStyle(color: Colors.black, fontSize: 12.5,fontWeight: FontWeight.w400, ), overflow: TextOverflow.ellipsis,maxLines: 1, // Text color
+    ),
+  ),
+),
+SizedBox(height: 8.0),
+ SizedBox(
+  width: 160.0, // Set the desired width
+  height: 33.0, // Set the desired height
+  child: ElevatedButton(
     onPressed: () {
       // Action when button is pressed
     },
@@ -67,52 +214,68 @@ class _AppspageState extends State<Appspage> {
       backgroundColor: const Color.fromARGB(200, 255, 255, 255), // Background color
     ),
     child: Text(
-      'Computer Science',
+      'Software Engineering',
       style: TextStyle(color: Colors.black, fontSize: 12.5,fontWeight: FontWeight.w400,),overflow: TextOverflow.ellipsis,maxLines: 2, // Text color
     ),
   ),
-              ],),
-              TextButton(
-  onPressed: () {
-    // Define the action when the button is pressed
-  },
-  child: Text(
-    'Senior full stack developer',
-    style: TextStyle(
-      fontSize: 24,
-      color: Colors.black,
-      fontWeight: FontWeight.bold,
-    ),
-  ),
-),
-Row(children: [
-  SizedBox(width: 20),
-  Text(
-    '4 months ago by',
-    style: TextStyle(
-      fontSize: 16,
-      color: Colors.black,
-      fontWeight: FontWeight.w300,
-    ),
-  ),
-  SizedBox(width: 5),
-  TextButton(
-  onPressed: () {
-    // Define the action when the button is pressed
-  },
-  child: Text(
-    'Ethiojobs & AFRINET',
-    style: TextStyle(
-      fontSize: 17,
-      color: const Color.fromARGB(255, 72, 193, 156),
-      fontWeight: FontWeight.w600,
-    ),
-  ),
-),
-],),
-Row(
+)
+              
+            ],
+          ),
+        )
+       ],
+      )
+
+       ),
+
+    Container(
+  height: 25,
+  width: 338,
+  margin: EdgeInsets.symmetric(horizontal: 22.0),
+  padding: EdgeInsets.all(3), // Ensure no padding around the container
+  color: Colors.white,
+  child: Row(
     children: [
-      SizedBox(width: 20),
+      // Label
+      Text(
+        '30 minutes ago by ',
+        style: TextStyle(fontSize: 14), // Customize the style as needed
+      ),
+      SizedBox(width: 6),
+      // Text Button
+      Expanded( // Use Expanded to take available space
+        child: TextButton(
+          onPressed: () {
+            // Action to perform when the button is pressed
+          },
+          style: TextButton.styleFrom(
+            padding: EdgeInsets.all(0),
+            minimumSize: Size(0, 0), // Remove padding from the button
+          ),
+          child: Text(
+            'ETHIOJOBS & AFRINET',
+            style: TextStyle(fontSize: 16, color: Colors.blueAccent),
+            overflow: TextOverflow.ellipsis, // Enable ellipsis
+            maxLines: 1, // Limit to one line
+          ),
+        ),
+      ),
+    ],
+  ),
+),
+
+
+      Container(
+        height: 25,
+  width: 338,
+  margin: EdgeInsets.symmetric(horizontal: 22.0),
+  padding: EdgeInsets.only(top:6), // Ensure no padding around the container
+  color: Colors.white,
+
+
+
+  child: Row(
+    children: [
          Padding(
   padding: const EdgeInsets.only(right: 0.0), 
   child: TextButton.icon(
@@ -162,8 +325,16 @@ Padding(
     ),
   ),
 ),
-  ],),
-  Row(
+  ],)
+      ),
+SizedBox(width:50),
+            Container(
+              height: 60,
+             width: 338,
+             margin: EdgeInsets.symmetric(horizontal: 22.0),
+             padding: EdgeInsets.only(top:10),
+             color: Colors.white,
+             child:Row(
               children: [
                   Padding(
   padding: const EdgeInsets.only(right: 0.0), 
@@ -185,7 +356,7 @@ Padding(
         backgroundColor: const Color.fromARGB(255, 72, 193, 156),
           ),
       child: Text(
-        'withdraw',
+        'Apply Now',
         style: TextStyle(
           color: Colors.white,
           fontSize: 14.8,
@@ -224,11 +395,13 @@ Padding(
   ),
 ),
 
-             ],),
-             SizedBox(height:40),
-              ]
-              )
+             ],)
             ),
+            SizedBox(height:40),
+    ],
+  ),
+            
+),
               ),
               SizedBox(height:30),
               Container(
@@ -257,7 +430,7 @@ Padding(
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(vertical: 20),
         child: Text(
-          'Application Status',
+          'Recommended Jobs',
           style: TextStyle(fontSize: 18),
         ),
       );
@@ -348,18 +521,18 @@ Padding(
               1: Container(
                 alignment: Alignment.center,
           padding: EdgeInsets.symmetric(vertical: 13), // Increase vertical padding
-          child:Text('My Applications'),
+          child:Text('Saved Jobs'),
               ),
               2: Container(
           alignment: Alignment.center,
           padding: EdgeInsets.symmetric(vertical: 13), // Increase vertical padding
-          child:Text("Application's status")),
+          child:Text("Recommended Jobs")),
             },
-            groupValue: _slide1,
+            groupValue: _slide2,
             onValueChanged: (int? newValue){
               
               setState(() {
-                _slide1 = newValue;
+                _slide2 = newValue;
               
               
             });
@@ -376,7 +549,7 @@ Padding(
   constraints: BoxConstraints(
     minHeight: 400, // Set a minimum height
   ),
-  child: _getSegment1(_slide1),
+  child: _getSegment1(_slide2),
 ),
         ]
       )

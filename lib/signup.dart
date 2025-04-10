@@ -215,7 +215,7 @@ class _SignuppageState extends State<Signuppage> {
                           SizedBox(height:25),
                     ElevatedButton(
                                   onPressed: () {
-                                    // Action for Button 2
+                                    Navigator.pushNamed(context, '/onboarding');
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: const Color.fromARGB(255, 26, 121, 198),

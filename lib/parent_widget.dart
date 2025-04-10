@@ -5,7 +5,9 @@ import 'login.dart';
 import 'signup.dart';
 import 'profile.dart';
 import 'apps.dart';
-
+import 'saved.dart';
+import 'onboarding.dart';
+import 'upload.dart';
 class ParentWidget extends StatefulWidget {
   const ParentWidget({super.key});
 
@@ -180,6 +182,15 @@ class _ParentWidgetState extends State<ParentWidget> {
                 break;
                 case '/apps': 
                 builder = (BuildContext context) => Appspage();
+                break;
+                case '/saved': 
+                builder = (BuildContext context) => Savedpage(onJobSelected: onJobSelected);
+                break;
+                case '/onboarding':
+                builder = (BuildContext context) => Onboardingpage();
+                break;
+                case '/upload': 
+                builder = (BuildContext context) => Uploadpage();
                 break;
                 
               default:

@@ -129,7 +129,7 @@ class _LoginpageState extends State<Loginpage> {
                     SizedBox(height:15),
                     ElevatedButton(
                                   onPressed: () {
-                                    // Action for Button 2
+                                    Navigator.pushNamed(context, '/upload');
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: const Color.fromARGB(255, 26, 121, 198),

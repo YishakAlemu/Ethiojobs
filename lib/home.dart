@@ -311,12 +311,10 @@ class _HomepageState extends State<Homepage> {
               color: const Color.fromARGB(255, 240, 238, 238), // Background color for the second container
               child: Column(
                 children: [
-
-                  Container(
-                    
-                     height: 340,
+                   SingleChildScrollView (
+                  child:Container(
                       width: 355,
-                    margin: EdgeInsets.only(top: 115),
+                    margin: EdgeInsets.only(top: 45),
                     decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(15),
@@ -687,13 +685,14 @@ Padding(
 ),
 
              ],)
-            )
+            ),
+            SizedBox(height:40),
     ],
   ),
+                  ),
 ),
 
                   Container(
-
                     height: 340,
                     width: 355,
                     margin: EdgeInsets.only(top: 25),
@@ -1205,7 +1204,7 @@ Padding(
           Icons.search_rounded,
           'Jobs',
           () {
-            // Action for Jobs
+            Navigator.pushNamed(context, '/home');
           },
           22,
           const Color.fromARGB(255, 72, 193, 156),
@@ -1220,7 +1219,7 @@ Padding(
           // Action for Alert
         }, 22, const Color.fromARGB(255, 72, 193, 156)),
         buildNavItem(Icons.bookmark_added, 'Saved Jobs', () {
-          // Action for Save Jobs
+          Navigator.pushNamed(context, '/saved');
         }, 22, const Color.fromARGB(255, 72, 193, 156)),
       ],
     ),
