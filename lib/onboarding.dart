@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_quill/flutter_quill.dart' as quill;
+
 class Onboardingpage extends StatefulWidget {
   const Onboardingpage({super.key});
 

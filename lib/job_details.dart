@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'dart:math' as math;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -873,11 +874,14 @@ class JobDetailPage extends StatelessWidget {
       child: SizedBox(
         width: double.infinity,
         height: double.infinity,
-        child: ElevatedButton(
+        child: Row(children:[
+          SizedBox(width:50),
+          ElevatedButton(
           onPressed: () {
             // Handle Apply action
           },
           style: ElevatedButton.styleFrom(
+
             backgroundColor: const Color.fromARGB(255, 72, 193, 156),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
@@ -886,9 +890,29 @@ class JobDetailPage extends StatelessWidget {
           ),
           child: const Text(
             'Apply',
-            style: TextStyle(fontSize: 25, color:Colors.white,fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 20, color:Colors.white,fontWeight: FontWeight.bold),
           ),
         ),
+        SizedBox(width:30),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/saved');
+          },
+          style: ElevatedButton.styleFrom(
+
+            backgroundColor: const Color.fromARGB(255, 72, 193, 156),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            elevation: 4,
+          ),
+          child: const Text(
+            'Save',
+            style: TextStyle(fontSize: 20, color:Colors.white,fontWeight: FontWeight.bold),
+          ),
+        ),
+        ]
+      )
       ),
     ),
   ),

@@ -17,6 +17,8 @@ dependencies:
   file_picker: ^10.0.0
   pdf: ^3.8.0
   path_provider: ^2.0.14
+  flutter_quill: 11.2.0
+  
 
 
 dev_dependencies:
@@ -67,6 +69,7 @@ flutter:
   - assets/linkedin.webp
   - assets/google_logo.webp
   - assets/user_blue.webp
+  - assets/jondon.webp
 
   uses-material-design: true
 
