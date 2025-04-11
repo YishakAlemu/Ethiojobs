@@ -470,44 +470,46 @@ Padding(
           SizedBox(height:40),
           Container(
            padding: EdgeInsets.only(left:16),
-            child:Container(
-               height:80,
-               width:355,
-              padding: EdgeInsets.only(left:16),
+            child:
+            Center(child:Container(
+               height:140,
+               width: double.infinity,
+              padding: EdgeInsets.only(left:5,right:5),
               decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.2),
-                  spreadRadius: 2,
-                  blurRadius: 10,
-                  offset: Offset(0, 2), // changes position of shadow
+                  spreadRadius: 0,
+                  blurRadius: 0,
+                  offset: Offset(0, 0), // changes position of shadow
                 ),
               ],
             ),
             child: Row(children:[
                Container(
                   decoration: BoxDecoration(
-    shape: BoxShape.circle,
-    border: Border.all(color: Color.fromARGB(255, 33, 232, 172), width: 4),  
+                 shape: BoxShape.circle,
+    border: Border.all(color: Color.fromARGB(255, 255, 255, 255), width: 1),  
   ),
                   child: CircleAvatar(
-                    radius: 20,
-                    backgroundImage: AssetImage('assets/user_blue.webp'), ),
+                    radius: 65,
+                    backgroundImage: AssetImage('assets/jondon.webp'), ),
                 ),
-                SizedBox(width:80),
-                Column(children: [
-                  Column(
-                    children: [
-                      SizedBox(height:20),
-                      Text('Jon Don ', style: TextStyle(fontSize:14, color:Colors.black),),
-                      Text('testabenezer@gmail.com ', style: TextStyle(fontSize:14, color:Colors.black),),
-                    ],
-                  ),
-                ],)
+                SizedBox(width:10),
+                Container(
+                  child: Column(
+                     crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [      
+                         SizedBox(height:20),
+                        Text('Jon Don ', style: TextStyle(fontSize:26, color:Colors.black,fontWeight:FontWeight.bold),),
+                        Text('testabenezer@gmail.com ', style: TextStyle(fontSize:15, color:Colors.grey),),
+                  ],),
+                )
             ]),
             )
+          ),
           ),
             
          SizedBox(height:40),

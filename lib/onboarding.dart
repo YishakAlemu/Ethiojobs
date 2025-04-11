@@ -18,9 +18,9 @@ class _OnboardingpageState extends State<Onboardingpage> {
   String? _selectedfield;
 
   final List<String> steps = [
-    "Accounts Info",
-    "Educational Information",
-    "Job Preferences",
+    "Add Education",
+    "Add Experience",
+    "skills",
     "Finish"
   ];
   List<String> allSkills = [
@@ -33,6 +33,15 @@ class _OnboardingpageState extends State<Onboardingpage> {
     'Spring',
     'Django',
   ];
+  List<String> allLanguages = [
+    'Amharic',
+    'English',
+    'French',
+    'Spanish',
+    'Deutsch',
+    'Arabic',
+    'Portugese',
+  ];
 
   List<String> selectedSkills = [];
 
@@ -43,7 +52,10 @@ class _OnboardingpageState extends State<Onboardingpage> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text("Select Skills"),
-        content: SingleChildScrollView(
+        content: Container(
+          width: MediaQuery.of(context).size.width, // 80% of screen width
+      height: MediaQuery.of(context).size.height * 0.8,
+        child:SingleChildScrollView(
           child: Column(
             children: allSkills.map((skill) {
               return CheckboxListTile(
@@ -62,6 +74,7 @@ class _OnboardingpageState extends State<Onboardingpage> {
             }).toList(),
           ),
         ),
+      ),
         actions: [
           TextButton(
             onPressed: () {
@@ -86,6 +99,59 @@ class _OnboardingpageState extends State<Onboardingpage> {
   void _removeSkill(String skill) {
     setState(() {
       selectedSkills.remove(skill);
+    });
+  }
+  List<String> selectedLanguages = [];
+  void _openLanguagePicker() async {
+    List<String> tempSelected = List.from(selectedSkills);
+
+    await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Select Languages"),
+        content: SingleChildScrollView(
+          child: Column(
+            children: allLanguages.map((language) {
+              return CheckboxListTile(
+                title: Text(language),
+                value: tempSelected.contains(language),
+                onChanged: (bool? value) {
+                  setState(() {
+                    if (value == true) {
+                      tempSelected.add(language);
+                    } else {
+                      tempSelected.remove(language);
+                    }
+                  });
+                },
+              );
+            }).toList(),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // cancel
+            },
+            child: const Text("Cancel"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              setState(() {
+                selectedLanguages = tempSelected;
+              });
+              Navigator.of(context).pop();
+            },
+            child: const Text("OK"),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _removeLanguage(String language) {
+    setState(() {
+      selectedLanguages.remove(language);
     });
   }
 
@@ -391,9 +457,8 @@ void _showFieldPicker(){
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 255, 255, 255),
       
-      body: 
-        Container(
-          height:800,
+      body: SingleChildScrollView(
+        child: Container(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
@@ -452,86 +517,8 @@ void _showFieldPicker(){
 
                   // Conditional input fields based on the current step
                   if (currentStep == 0) ...[
-                    Column(
-                        children: [
-                          Row(children: [
-                             Text('Full name ', style: TextStyle(color: Colors.black54,fontSize: 16),),
-                             Text('*', style: TextStyle(color: Colors.red,fontSize: 16),),
-                          ],),
-                          SizedBox(height:15),
-                          Container(
-              height: 50,
-              width: 340,
-              margin: EdgeInsets.only(top: 0),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(25),
-               
-              ),
-                 child: TextField(
-                  cursorColor: Colors.black54,
-                decoration: InputDecoration(
-                   enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(25),
-      borderSide: BorderSide(color: const Color.fromARGB(255, 220, 213, 213)), // 👈 Change this color
-    ),
-
-    // Border when the TextField is focused
-    focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(25),
-      borderSide: BorderSide(color: Colors.blue, width: 1), // 👈 And this one
-    ),
-                hintStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
-                 contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 12),
-                 border: OutlineInputBorder(
-                 borderRadius: BorderRadius.circular(25),
-                 borderSide: BorderSide(color: const Color.fromARGB(255, 230, 228, 228)), // Optional: customize color
-    ),
-                ),
-               ),
-              
-            ),
-            SizedBox(height:30),
-             Row(children: [
-                             Text('Email ', style: TextStyle(color: Colors.black54,fontSize: 16),),
-                             Text('*', style: TextStyle(color: Colors.red,fontSize: 16),),
-                          ],),
-                          SizedBox(height:15),
-             Container(
-              height: 50,
-              width: 340,
-              margin: EdgeInsets.only(top: 0),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(25),
-               
-              ),
-                 child: TextField(
-                  cursorColor: Colors.black54,
-                decoration: InputDecoration(
-                   enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(25),
-      borderSide: BorderSide(color: const Color.fromARGB(255, 220, 213, 213)), // 👈 Change this color
-    ),
-
-    // Border when the TextField is focused
-    focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(25),
-      borderSide: BorderSide(color: Colors.blue, width: 1), // 👈 And this one
-    ),
-                hintStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
-                 contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 12),
-                 border: OutlineInputBorder(
-                 borderRadius: BorderRadius.circular(25),
-                 borderSide: BorderSide(color: Colors.grey), // Optional: customize color
-    ),
-                ),
-               ),
-              
-            ),
-                  ],),
-                  ] else if (currentStep == 1) ...[
-                    Column(children: [
+                   
+                             Column(children: [
                      Row(children: [
                               Text('Institution ', style: TextStyle(color: Colors.black54,fontSize: 16),),
                               Text('*', style: TextStyle(color: Colors.red,fontSize: 16),),
@@ -684,7 +671,7 @@ Container(
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(25),
-        borderSide: BorderSide(color: Colors.brown, width: 2), 
+        borderSide: BorderSide(color: Colors.blue, width: 1), 
       ),
       suffixIcon: Icon(Icons.calendar_today), // optional calendar icon
     ),
@@ -702,9 +689,18 @@ Container(
       }
     },
   ),
-), 
+)
+                  ],),
+                  ] 
+                  
+                  else if (currentStep == 1) ...[
+                    
 SizedBox(height:5),
-Column(
+
+                  ]      
+                   
+                   else if (currentStep == 2) ...[
+                   Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(children: [
@@ -727,7 +723,7 @@ Column(
             width: double.infinity,
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey),
+              border: Border.all(color: Colors.white),
               borderRadius: BorderRadius.circular(6),
             ),
             child: Wrap(
@@ -745,23 +741,56 @@ Column(
 
           const SizedBox(height: 10),
           
+         Row(children: [
+            SizedBox(width:130),
+            TextButton(
+            onPressed: _openLanguagePicker,
+            child: const Text("Add More +", style: TextStyle(color:Colors.blue)),
+          ),
+          ],),
+          
+          const Text(
+            'Add your Language Skills',
+            style: TextStyle(fontSize: 16, color: Colors.black54),
+          ),
+          const SizedBox(height: 8),
+
+          // Chip display instead of TextField
+          Container(
+            
+            width: double.infinity,
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.white),
+              borderRadius: BorderRadius.circular(6),
+            ),
+            child: Wrap(
+              spacing: 8,
+              runSpacing: 4,
+              children: selectedLanguages.map((language) {
+                return Chip(
+                  label: Text(language),
+                  deleteIcon: const Icon(Icons.close),
+                  onDeleted: () => _removeLanguage(language),
+                );
+              }).toList(),
+            ),
+          ),
+
+          const SizedBox(height: 10),
+          
         ],
       ),
-                    ],)
-                   
-                  ] else if (currentStep == 2) ...[
-                    const TextField(
-                      decoration:
-                          InputDecoration(labelText: 'Job Preferences'),
-                    ),
+
+
                   ] else if (currentStep == 3) ...[
-                    const Text('Thank you for completing the onboarding!'),
+                    const Text(''),
                   ],
                 ],
               ),
             ),
         ),
-              SizedBox(height:220),
+              SizedBox(height:10),
             // Navigation Buttons
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -810,7 +839,7 @@ Column(
           ],
         ),
       ),
-      
+      )
     );
   }
 }

@@ -9,7 +9,8 @@ class Uploadpage extends StatefulWidget {
 }
 
 class _UploadpageState extends State<Uploadpage> {
-Widget build(BuildContext context) {
+@override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 255, 255, 255),
       body: SingleChildScrollView(
@@ -17,12 +18,12 @@ Widget build(BuildContext context) {
         padding: const EdgeInsets.all(16.0),
         child: Column(children: [
           SizedBox(height:40),
-              Container(
+              SizedBox(
                 height:40,
                 child: Row(children: [
                   
-                  Text('Upload Resume ', style: TextStyle(fontSize:17, ),),
-                  Text('*', style: TextStyle(color:Colors.red,fontSize:17))
+                  Text('', style: TextStyle(fontSize:17, ),),
+                  Text('', style: TextStyle(color:Colors.red,fontSize:17))
                 ],),
               ),
               SizedBox(height:1),
@@ -53,12 +54,12 @@ Widget build(BuildContext context) {
               )
               ),
         SizedBox(height:60),
-        Container(
+        SizedBox(
                 height:40,
                 child: Row(children: [
                   
-                  Text('Build Your Profile ', style: TextStyle(fontSize:17, ),),
-                  Text('*', style: TextStyle(color:Colors.red,fontSize:17))
+                  Text('', style: TextStyle(fontSize:17, ),),
+                  Text('', style: TextStyle(color:Colors.red,fontSize:17))
                 ],),
               ),
         Container(

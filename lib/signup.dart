@@ -4,13 +4,13 @@ import 'login.dart';
 
 class Signuppage extends StatefulWidget {
   const Signuppage({super.key});
-  
+
+
 
   @override
   _SignuppageState createState() => _SignuppageState(
     
   );
-  
 }
 
 class _SignuppageState extends State<Signuppage> {
@@ -215,7 +215,7 @@ class _SignuppageState extends State<Signuppage> {
                           SizedBox(height:25),
                     ElevatedButton(
                                   onPressed: () {
-                                    Navigator.pushNamed(context, '/onboarding');
+                                    
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: const Color.fromARGB(255, 26, 121, 198),

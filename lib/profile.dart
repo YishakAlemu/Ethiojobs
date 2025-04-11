@@ -15,6 +15,7 @@ class Profilepage extends StatefulWidget {
 }
 
 class _ProfilepageState extends State<Profilepage> {
+  
   Future<void> _generatePdf(String text) async {
     final pdf = pw.Document();
 
@@ -641,7 +642,7 @@ backgroundColor: const Color.fromARGB(255, 247, 251, 250),
   ),
                   child: CircleAvatar(
                     radius: 110,
-                    backgroundImage: AssetImage('assets/user_blue.webp'), ),
+                    backgroundImage: AssetImage('assets/jondon.webp'), ),
                 ),
               ),
               Positioned(
