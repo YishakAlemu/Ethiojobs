@@ -8,6 +8,7 @@ class Onboardingpage extends StatefulWidget {
 }
 
 class _OnboardingpageState extends State<Onboardingpage> {
+  bool isCurrentlyWorking = false;
   int currentStep = 0;
   final TextEditingController _dateController = TextEditingController();
   final TextEditingController _institutionController = TextEditingController();
@@ -695,8 +696,225 @@ Container(
                   
                   else if (currentStep == 1) ...[
                     
-SizedBox(height:5),
+                 SizedBox(height:5),
+                 Column(
+                        children: [
+                          Row(children: [
+                             Text('Company name ', style: TextStyle(color: Colors.black54,fontSize: 16),),
+                             Text('*', style: TextStyle(color: Colors.red,fontSize: 16),),
+                          ],),
+                          SizedBox(height:15),
+                          Container(
+              height: 50,
+              width: 340,
+              margin: EdgeInsets.only(top: 0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(25),
+               
+              ),
+                 child: TextField(
+                  cursorColor: Colors.black54,
+                decoration: InputDecoration(
+                   enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(25),
+      borderSide: BorderSide(color: const Color.fromARGB(255, 220, 213, 213)), // 👈 Change this color
+    ),
 
+    // Border when the TextField is focused
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(25),
+      borderSide: BorderSide(color: Colors.blue, width: 1), // 👈 And this one
+    ),
+                hintStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
+                 contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 12),
+                 border: OutlineInputBorder(
+                 borderRadius: BorderRadius.circular(25),
+                 borderSide: BorderSide(color: const Color.fromARGB(255, 230, 228, 228)), // Optional: customize color
+    ),
+                ),
+               ),
+              
+            ),
+            SizedBox(height:20),
+             Row(children: [
+                             Text('Title ', style: TextStyle(color: Colors.black54,fontSize: 16),),
+                             Text('*', style: TextStyle(color: Colors.red,fontSize: 16),),
+                          ],),
+                          SizedBox(height:15),
+             Container(
+              height: 50,
+              width: 340,
+              margin: EdgeInsets.only(top: 0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(25),
+               
+              ),
+                 child: TextField(
+                  cursorColor: Colors.black54,
+                decoration: InputDecoration(
+                   enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(25),
+      borderSide: BorderSide(color: const Color.fromARGB(255, 220, 213, 213)), // 👈 Change this color
+    ),
+
+    // Border when the TextField is focused
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(25),
+      borderSide: BorderSide(color: Colors.blue, width: 1), // 👈 And this one
+    ),
+                hintStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
+                 contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 12),
+                 border: OutlineInputBorder(
+                 borderRadius: BorderRadius.circular(25),
+                 borderSide: BorderSide(color: Colors.grey), // Optional: customize color
+    ),
+                ),
+               ),
+              
+            ),
+            SizedBox(height:20),
+            Row(children: [
+                              Text('From ', style: TextStyle(color: Colors.black54,fontSize: 16),),
+                              Text('*', style: TextStyle(color: Colors.red,fontSize: 16),),
+                            ],),
+                            SizedBox(height:15),
+              
+
+Container(
+ height: 50,
+              width: 340,
+              margin: EdgeInsets.only(top: 0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(25),
+               
+              ),
+
+  child: TextField(
+    controller: _dateController,
+    readOnly: true, // Prevent manual editing
+    cursorColor: Colors.black54,
+    decoration: InputDecoration(
+      hintText: 'Select date',
+      hintStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
+      contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 12),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(25),
+        borderSide: BorderSide(color: const Color.fromARGB(255, 220, 213, 213)), // Optional: customize color
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(25),
+        borderSide: BorderSide(color: const Color.fromARGB(255, 220, 213, 213)), 
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(25),
+        borderSide: BorderSide(color: Colors.blue, width: 1), 
+      ),
+      suffixIcon: Icon(Icons.calendar_today), // optional calendar icon
+    ),
+    onTap: () async {
+      DateTime? pickedDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2000),
+        lastDate: DateTime(2101),
+      );
+  
+      if (pickedDate != null) {
+        String formattedDate = "${pickedDate.year}-${pickedDate.month.toString().padLeft(2, '0')}-${pickedDate.day.toString().padLeft(2, '0')}";
+        _dateController.text = formattedDate;
+      }
+    },
+  ),
+),
+SizedBox(height:20),
+Row(children: [
+                              Text('To ', style: TextStyle(color: Colors.black54,fontSize: 16),),
+                              Text('*', style: TextStyle(color: Colors.red,fontSize: 16),),
+                            ],),
+                            SizedBox(height:15),
+              
+
+Container(
+ height: 50,
+              width: 340,
+              margin: EdgeInsets.only(top: 0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(25),
+               
+              ),
+
+  child: TextField(
+    controller: _dateController,
+    readOnly: true, // Prevent manual editing
+    cursorColor: Colors.black54,
+    decoration: InputDecoration(
+      hintText: 'Select date',
+      hintStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
+      contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 12),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(25),
+        borderSide: BorderSide(color: const Color.fromARGB(255, 220, 213, 213)), // Optional: customize color
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(25),
+        borderSide: BorderSide(color: const Color.fromARGB(255, 220, 213, 213)), 
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(25),
+        borderSide: BorderSide(color: Colors.blue, width: 1), 
+      ),
+      suffixIcon: Icon(Icons.calendar_today), // optional calendar icon
+    ),
+    onTap: () async {
+      DateTime? pickedDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2000),
+        lastDate: DateTime(2101),
+      );
+  
+      if (pickedDate != null) {
+        String formattedDate = "${pickedDate.year}-${pickedDate.month.toString().padLeft(2, '0')}-${pickedDate.day.toString().padLeft(2, '0')}";
+        _dateController.text = formattedDate;
+      }
+    },
+  ),
+),
+SizedBox(height:10),
+
+  
+  Row(
+    mainAxisAlignment: MainAxisAlignment.start,
+    children: [
+      Container(
+        decoration: BoxDecoration(
+          //border: Border.all(color: Colors.grey, width: 1), // Border around the switch
+          //borderRadius: BorderRadius.circular(40), // Rounded corners for the switch border
+        ),
+        child: Transform.scale(
+          scale: 0.9, // Ad
+        child: Switch(
+          value: isCurrentlyWorking,
+          onChanged: (bool value) {
+            setState(() {
+              isCurrentlyWorking = value; // Update the state
+            });
+          },
+          activeColor: Colors.green, // Color when the switch is on
+          inactiveThumbColor: Colors.grey, // Color when the switch is off
+        ),
+      ),
+      ),
+      const SizedBox(width: 8), // Space between switch and title
+      const Text("I currently work here", style: TextStyle(color:Colors.grey, fontSize: 16),),
+    ],
+  ),
+
+]),
                   ]      
                    
                    else if (currentStep == 2) ...[
