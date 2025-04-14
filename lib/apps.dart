@@ -10,7 +10,8 @@ class Appspage extends StatefulWidget {
 }
 
 class _AppspageState extends State<Appspage> {
-  // Define the _isExpanded variable
+  int _selectedNavIndex = 1;
+  
   double progress = 0.5; // Define the progress variable with a value between 0.0 and 1.0
   int? _slide1 = 1;
   Widget _getSegment1(int? segment1) {
@@ -265,22 +266,45 @@ Padding(
       return Container(); // Default case
   }
 }
+int _getIndex(String label) {
+    switch (label) {
+      case 'Jobs':
+        return 0;
+      case 'Applications':
+        return 1;
+      case 'Profile':
+        return 2;
+      case 'Alert':
+        return 3;
+      case 'Saved Jobs':
+        return 4;
+      default:
+        return 0;
+    }
+  }
 @override
   Widget build(BuildContext context) {
+    
   Widget buildNavItem(IconData icon, String label, VoidCallback onTap,double iconSize,Color iconColor) {
+    bool isSelected = _selectedNavIndex == _getIndex(label);
   return InkWell(
-    onTap: onTap,
+    onTap: () {
+        onTap();
+        setState(() {
+          _selectedNavIndex = _getIndex(label); // Update the selected index
+        });
+      },
     child: SizedBox(
       width: 60,
       height: double.infinity,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, size: iconSize, color: iconColor),
+          Icon(icon, size: iconSize, color: isSelected ? iconColor : const Color.fromARGB(255, 0, 0, 0),),
           SizedBox(height: 4),
           Text(
             label,
-            style: TextStyle(fontSize: 12, color: Colors.black),
+            style: TextStyle(fontSize: 12, color: isSelected ? iconColor : const Color.fromARGB(255, 0, 0, 0),),
             textAlign: TextAlign.center,
             overflow: TextOverflow.ellipsis,
           ),
@@ -289,6 +313,7 @@ Padding(
     ),
   );
 }
+
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 253, 253, 253),
       body: SingleChildScrollView(

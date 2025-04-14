@@ -188,7 +188,7 @@ class JobDetailPage extends StatelessWidget {
   ),
 )
                   ),
-                  SizedBox(height: 90),
+                  SizedBox(height: 20),
                   Container(
   alignment: Alignment.centerLeft,
   height: 500,
@@ -211,29 +211,29 @@ class JobDetailPage extends StatelessWidget {
   ),
   child: Column(
     children: [
-      SizedBox(
-        height: 65,
-        width: 370,
-        child: ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            alignment: Alignment.centerLeft,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(15.0),
-                topRight: Radius.circular(15.0),
-                bottomLeft: Radius.circular(0),
-                bottomRight: Radius.circular(0),
-              ), // Rounded corners
-            ),
-            backgroundColor: Color.fromARGB(255, 72, 193, 156), // Background color
-          ),
-          child: Text(
-            'Apply Now',
-            style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w400),
-          ),
-        ),
-      ),
+      // SizedBox(
+      //   height: 65,
+      //   width: 370,
+      //   child: ElevatedButton(
+      //     onPressed: () {},
+      //     style: ElevatedButton.styleFrom(
+      //       alignment: Alignment.centerLeft,
+      //       shape: RoundedRectangleBorder(
+      //         borderRadius: BorderRadius.only(
+      //           topLeft: Radius.circular(15.0),
+      //           topRight: Radius.circular(15.0),
+      //           bottomLeft: Radius.circular(0),
+      //           bottomRight: Radius.circular(0),
+      //         ), // Rounded corners
+      //       ),
+      //       backgroundColor: Color.fromARGB(255, 72, 193, 156), // Background color
+      //     ),
+      //     child: Text(
+      //       'Apply Now',
+      //       style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w400),
+      //     ),
+      //   ),
+      // ),
       SizedBox(height: 30),
       Expanded( // Allow the following rows to fill available space
         child: ListView(
@@ -875,40 +875,51 @@ class JobDetailPage extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
         child: Row(children:[
-          SizedBox(width:50),
-          ElevatedButton(
-          onPressed: () {
-            // Handle Apply action
-          },
-          style: ElevatedButton.styleFrom(
-
-            backgroundColor: const Color.fromARGB(255, 72, 193, 156),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
+          SizedBox(width:0),
+         Container(
+          height:45,
+          width:60,
+          decoration: BoxDecoration(
+    color: Colors.white,
+    borderRadius: BorderRadius.circular(8),
+    boxShadow: [
+      BoxShadow(
+        color: Colors.grey.withOpacity(0.2),
+        spreadRadius: 2,
+        blurRadius: 10,
+        offset: Offset(0, 4),
+      ),
+    ],
+    border: Border.all(
+      color: Colors.black,
+      width: 2,
+    ),
+  ),
+           child: IconButton(icon: Icon(Icons.bookmark_border_outlined, 
+                    color: Colors.black, 
+                    size: 26),
+                    onPressed: () { }),
+         ),
+        SizedBox(width:15),
+        Container(
+          width:270,
+          height:45,
+          child: ElevatedButton(
+            onPressed: () {
+             // Navigator.pushNamed(context, '/');
+            },
+            style: ElevatedButton.styleFrom(
+          
+              backgroundColor: const Color.fromARGB(255, 72, 193, 156),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              elevation: 1,
             ),
-            elevation: 4,
-          ),
-          child: const Text(
-            'Apply',
-            style: TextStyle(fontSize: 20, color:Colors.white,fontWeight: FontWeight.bold),
-          ),
-        ),
-        SizedBox(width:30),
-        ElevatedButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/saved');
-          },
-          style: ElevatedButton.styleFrom(
-
-            backgroundColor: const Color.fromARGB(255, 72, 193, 156),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
+            child: const Text(
+              'Apply Now',
+              style: TextStyle(fontSize: 16, color:Colors.black,fontWeight: FontWeight.bold),
             ),
-            elevation: 4,
-          ),
-          child: const Text(
-            'Save',
-            style: TextStyle(fontSize: 20, color:Colors.white,fontWeight: FontWeight.bold),
           ),
         ),
         ]

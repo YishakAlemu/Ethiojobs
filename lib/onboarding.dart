@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill/flutter_quill.dart' as quill;
 
 class Onboardingpage extends StatefulWidget {
@@ -10,6 +10,12 @@ class Onboardingpage extends StatefulWidget {
 }
 
 class _OnboardingpageState extends State<Onboardingpage> {
+  QuillController _controller = QuillController.basic();
+   @override
+  void dispose() {
+    _controller.dispose(); // Clean up the controller
+    super.dispose(); // Call the superclass dispose method
+  }
   bool isCurrentlyWorking = false;
   int currentStep = 0;
   final TextEditingController _dateController = TextEditingController();
@@ -915,6 +921,30 @@ SizedBox(height:10),
       const Text("I currently work here", style: TextStyle(color:Colors.grey, fontSize: 16),),
     ],
   ),
+  Text('Description', style:TextStyle(color:Colors.grey, fontSize:16,)),
+  SizedBox(height:10),
+  // Quill Editor and Toolbar
+QuillSimpleToolbar(
+  controller: _controller,
+  config: const QuillSimpleToolbarConfig(),
+),
+Container(
+  decoration: BoxDecoration(
+    color: Colors.white,
+    borderRadius: BorderRadius.circular(0),
+    
+    border: Border.all(
+      color: Colors.grey,
+      width: 0.5,
+    ),
+  ),
+  height: 250, // Fixed height for the QuillEditor
+  child: QuillEditor.basic(
+    controller: _controller,
+    config: const QuillEditorConfig(),
+    // Ensure it's not read-only if you want to edit
+  ),
+),
 
 ]),
                   ]      

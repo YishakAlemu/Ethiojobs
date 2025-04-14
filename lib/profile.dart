@@ -7,6 +7,9 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'dart:async';
+import 'package:flutter_quill/flutter_quill.dart';
+import 'package:flutter_quill/flutter_quill.dart' as quill;
+
 class Profilepage extends StatefulWidget {
   const Profilepage({super.key});
   
@@ -16,7 +19,7 @@ class Profilepage extends StatefulWidget {
 }
 
 class _ProfilepageState extends State<Profilepage> {
-  
+  int _selectedNavIndex = 2;
   Future<void> _generatePdf(String text) async {
     final pdf = pw.Document();
 
@@ -584,23 +587,113 @@ Container(
       _isExpanded = !_isExpanded;
     });
   }
+  int _getIndex(String label) {
+    switch (label) {
+      case 'Jobs':
+        return 0;
+      case 'Applications':
+        return 1;
+      case 'Profile':
+        return 2;
+      case 'Alert':
+        return 3;
+      case 'Saved Jobs':
+        return 4;
+      default:
+        return 0;
+    }
+  }
+  void _showQuillDialog(BuildContext context) {
+  quill.QuillController _controller = quill.QuillController.basic();
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15), // Rounded corners
+        ),
+        child: Container(
+          width: MediaQuery.of(context).size.width * 0.9, // Set width to 90% of screen
+          padding: EdgeInsets.all(16), // Add padding
+          child: Column(
+            mainAxisSize: MainAxisSize.min, // Adjust height based on content
+            children: [
+              Text(
+                'Edit Text',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 10),
+              QuillSimpleToolbar(
+  controller: _controller,
+  config: const QuillSimpleToolbarConfig(),
+),
+Container(
+  decoration: BoxDecoration(
+    color: Colors.white,
+    borderRadius: BorderRadius.circular(0),
+    
+    border: Border.all(
+      color: Colors.grey,
+      width: 0.5,
+    ),
+  ),
+  height: 250, // Fixed height for the QuillEditor
+  child: QuillEditor.basic(
+    controller: _controller,
+    config: const QuillEditorConfig(),
+    // Ensure it's not read-only if you want to edit
+  ),
+),
+ // Add toolbar for formatting
+              SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop(); // Close the dialog
+                    },
+                    child: Text('Save'),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop(); // Close the dialog
+                    },
+                    child: Text('Cancel'),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}
 
   @override
   Widget build(BuildContext context) {
-    Widget buildNavItem(IconData icon, String label, VoidCallback onTap,double iconSize,Color iconColor) {
+   Widget buildNavItem(IconData icon, String label, VoidCallback onTap,double iconSize,Color iconColor) {
+    bool isSelected = _selectedNavIndex == _getIndex(label);
   return InkWell(
-    onTap: onTap,
+    onTap: () {
+        onTap();
+        setState(() {
+          _selectedNavIndex = _getIndex(label); // Update the selected index
+        });
+      },
     child: SizedBox(
       width: 60,
       height: double.infinity,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, size: iconSize, color: iconColor),
+          Icon(icon, size: iconSize, color: isSelected ? iconColor : const Color.fromARGB(255, 0, 0, 0),),
           SizedBox(height: 4),
           Text(
             label,
-            style: TextStyle(fontSize: 12, color: Colors.black),
+            style: TextStyle(fontSize: 12, color: isSelected ? iconColor : const Color.fromARGB(255, 0, 0, 0),),
             textAlign: TextAlign.center,
             overflow: TextOverflow.ellipsis,
           ),
@@ -649,6 +742,7 @@ backgroundColor: const Color.fromARGB(255, 247, 251, 250),
               Positioned(
                right: 18,
                 top: 20,
+                
 child: Row(
   children: [
     Padding(
@@ -1092,7 +1186,7 @@ bottomNavigationBar:
           Icons.search_rounded,
           'Jobs',
           () {
-           Navigator.pushNamed(context, '/home');
+            Navigator.pushNamed(context, '/home');
           },
           22,
           const Color.fromARGB(255, 72, 193, 156),
@@ -1137,7 +1231,9 @@ bottomNavigationBar:
                         children: [
                           SizedBox(width:210),
                           TextButton.icon(
-                                              onPressed: () { },
+                                              onPressed: () { 
+                                                _showQuillDialog(context);
+                                              },
                                               icon: SizedBox(
                           width:12,
                           child: Icon(

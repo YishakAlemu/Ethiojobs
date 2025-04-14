@@ -57,11 +57,12 @@ class _ParentWidgetState extends State<ParentWidget> {
   value: 'Find Jobs',
   child: Row(
     children: [
-      Icon(Icons.home, color: const Color.fromARGB(255, 72, 193, 156), size: 20),
+      SizedBox(width:10),
+      Icon(Icons.home, color: const Color.fromARGB(255, 0, 0, 0), size: 20),
       SizedBox(width: 8),
       Text(
         'Find Jobs',
-        style: TextStyle(color: const Color.fromARGB(255, 72, 193, 156)),
+        style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0)),
       ),
     ],
   ),
@@ -77,36 +78,40 @@ class _ParentWidgetState extends State<ParentWidget> {
       PopupMenuItem<String>(
         value: 'Contact us',
         child:Row(children: [
-          Icon(Icons.phone, color: const Color.fromARGB(255, 72, 193, 156),size:20),
+          SizedBox(width:10),
+          Icon(Icons.phone, color: const Color.fromARGB(255, 0, 0, 0),size:20),
           SizedBox(width:8),
-          Text('Contact us', style: TextStyle(color:const Color.fromARGB(255, 72, 193, 156)),),
+          Text('Contact us', style: TextStyle(color:const Color.fromARGB(255, 0, 0, 0)),),
         ],)
       ),
       PopupMenuItem<String>(
         value: 'Log In',
         child:Row(children: [
-          Icon(Icons.login,color:Colors.blue, size:20),
+          SizedBox(width:10),
+          Icon(Icons.login,color:Colors.black, size:20),
           SizedBox(width:8),
-          Text('Log in', style: TextStyle(color:Colors.blue)),
+          Text('Log in', style: TextStyle(color:Colors.black)),
         ],)
       ),
       PopupMenuItem<String>(
         value: 'Sign Up',
         child:Row(children: [
-          Icon(Icons.person_add,color:Colors.blue, size:20),
+          SizedBox(width:10),
+          Icon(Icons.person_add,color:Colors.black, size:20),
           SizedBox(width:8),
-          Text('Sign up', style: TextStyle(color:Colors.blue)),
+          Text('Sign up', style: TextStyle(color:Colors.black)),
         ],)
       ),
       PopupMenuItem<String>(
   value: 'Log out',
   child: Row(
     children: [
-      Icon(Icons.logout, color: Colors.red, size: 20),
+      SizedBox(width:10),
+      Icon(Icons.logout, color: Colors.black, size: 20),
       SizedBox(width: 8),
       Text(
         'Log out',
-        style: TextStyle(color: Colors.red),
+        style: TextStyle(color: Colors.black),
       ),
     ],
   ),
