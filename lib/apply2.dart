@@ -68,11 +68,37 @@ class _Apply2pageState extends State<Apply2page>  {
          ),
          SizedBox(height:35),
          SingleChildScrollView(child:Container(
-          
+
           child: Column(children: [
             Center(child:Text('Selecting existing resume', style: TextStyle(color:Colors.black, fontSize:17,fontWeight:FontWeight.w600),)),
-            Center(child:Text('Please choose CV to apply', style: TextStyle(color:Colors.black, fontSize:16, fontWeight:FontWeight.w400)))
-                 
+            Center(child:Text('Please choose CV to apply', style: TextStyle(color:Colors.black, fontSize:16, fontWeight:FontWeight.w400))),
+                 SizedBox(height:10),
+                 Divider(color:Colors.grey),
+                 SizedBox(height:5),
+                 Row(children: [
+                  Icon(Icons.file_copy, color: Colors.grey,size: 17,),
+                  SizedBox(width:20),
+                  Text("resume_1.pdf", style: TextStyle(color: Colors.black, fontSize:15, )),
+                  SizedBox(width:50),
+                  Container(
+                     height:60,
+                     width:130,
+                     color: const Color.fromARGB(255, 214, 212, 212),
+                    child: ElevatedButton(onPressed: (){}, 
+                    child: Text("SELECT", style: TextStyle(fontSize:18, fontWeight:FontWeight.w600),)),
+                  ),
+                  SizedBox(width:20),
+                    IconButton(icon: Icon(Icons.download, 
+                  color: Colors.blue, 
+                  size: 22),
+                  onPressed: () { }),
+                   SizedBox(width:20),
+                    IconButton(icon: Icon(Icons.delete_outline_rounded, 
+                  color: Colors.blue, 
+                  size: 22),
+                  onPressed: () { }),
+
+                 ],)
           ],)
          )
           )
