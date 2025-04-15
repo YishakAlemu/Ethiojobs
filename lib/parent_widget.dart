@@ -8,6 +8,8 @@ import 'apps.dart';
 import 'saved.dart';
 import 'onboarding.dart';
 import 'upload.dart';
+import 'apply.dart';
+import 'apply2.dart';
 class ParentWidget extends StatefulWidget {
   const ParentWidget({super.key});
 
@@ -196,6 +198,12 @@ class _ParentWidgetState extends State<ParentWidget> {
                 break;
                 case '/upload': 
                 builder = (BuildContext context) => Uploadpage();
+                break;
+                case '/apply': 
+                builder = (BuildContext context) => Applypage();
+                break;
+                 case '/apply2': 
+                builder = (BuildContext context) => Apply2page();
                 break;
                 
               default:

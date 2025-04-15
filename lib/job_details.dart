@@ -189,7 +189,8 @@ class JobDetailPage extends StatelessWidget {
 )
                   ),
                   SizedBox(height: 20),
-                  Container(
+                SingleChildScrollView(
+                  child:Container(
   alignment: Alignment.centerLeft,
   height: 500,
   width: 370,
@@ -395,6 +396,7 @@ class JobDetailPage extends StatelessWidget {
     ],
   ),
 ),
+              ),
                   SizedBox(height: 100),
                   Container(
                     color: Colors.white,
@@ -906,7 +908,7 @@ class JobDetailPage extends StatelessWidget {
           height:45,
           child: ElevatedButton(
             onPressed: () {
-             // Navigator.pushNamed(context, '/');
+             Navigator.pushNamed(context, '/apply');
             },
             style: ElevatedButton.styleFrom(
           
