@@ -17,7 +17,7 @@ class JobDetailPage extends StatelessWidget {
       throw 'Could not launch $url';
     }
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

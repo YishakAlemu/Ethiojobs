@@ -12,7 +12,7 @@ import 'package:flutter_quill/flutter_quill.dart' as quill;
 
 class Profilepage extends StatefulWidget {
   const Profilepage({super.key});
-  
+
 
   @override
   _ProfilepageState createState() => _ProfilepageState();
@@ -131,6 +131,7 @@ class _ProfilepageState extends State<Profilepage> {
                     });
                     Navigator.pop(context);
                   },
+
                   activeColor: Colors.blue,
                 ),
                 RadioListTile<String?>(
@@ -167,6 +168,7 @@ class _ProfilepageState extends State<Profilepage> {
     },
   );
 }
+
 void _showProfessionPicker(){
                showDialog(
     context: context,
@@ -711,18 +713,21 @@ void _showdeleteDialog(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return Dialog(
+        backgroundColor:Colors.black,
         shape: RoundedRectangleBorder(
+          
           borderRadius: BorderRadius.circular(23),
           
         ),
         child: Container(
           decoration:BoxDecoration(
+
              color:Colors.white,
             borderRadius: BorderRadius.circular(20),
           ),
          
-          width: 300, // Set your desired width
-          height: 300, // Set your desired height
+          width: 360, // Set your desired width
+          height: 280, // Set your desired height
           padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -762,6 +767,7 @@ void _showdeleteDialog(BuildContext context) {
                     ),
                   ),
                   Container(
+                    height: 35,
                      decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
                       color:Colors.blue,
@@ -769,10 +775,13 @@ void _showdeleteDialog(BuildContext context) {
                     
                     child: ElevatedButton(
                       onPressed: () {
-                        // Add your confirmation logic here
-                        Navigator.of(context).pop(); // Close the dialog
-                        // Perform the removal action
+                        
+                        Navigator.of(context).pop(); 
+                        
                       },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                      ),
                       child: Text('Confirm', style:TextStyle(color:Colors.black)),
                     ),
                   ),
@@ -1324,6 +1333,7 @@ bottomNavigationBar:
 
   );
   }
+  
    Widget _buildExpandableTile(String title) {
     switch (title) {
       case 'About':
@@ -1437,7 +1447,9 @@ case 'Resume':
                   IconButton(icon: Icon(Icons.delete_outline_rounded, 
                   color: Colors.black, 
                   size: 25),
-                  onPressed: () { }),
+                  onPressed: () {
+                     _showdeleteDialog(context);
+                   }),
                  ]),
                  SizedBox(height:10),
                  Divider(color:const Color.fromARGB(255, 197, 231, 205),indent: 10,endIndent: 12),
@@ -1457,7 +1469,9 @@ case 'Resume':
                   IconButton(icon: Icon(Icons.delete_outline_rounded, 
                   color: Colors.black, 
                   size: 25),
-                  onPressed: () { }),
+                  onPressed: () { 
+                     _showdeleteDialog(context);
+                  }),
                  ]),
                  SizedBox(height:10),
                  Divider(color:const Color.fromARGB(255, 197, 231, 205),indent: 10,endIndent: 12),
@@ -1477,7 +1491,9 @@ case 'Resume':
                   IconButton(icon: Icon(Icons.delete_outline_rounded, 
                   color: Colors.black, 
                   size: 25),
-                  onPressed: () { }),
+                  onPressed: () { 
+                     _showdeleteDialog(context);
+                  }),
                  ]),
             ]),
                       ),
@@ -1506,7 +1522,7 @@ case 'Resume':
                     width:280,
                      child: ElevatedButton(
                                onPressed: () {
-                                 // Handle Apply action
+                                 
                                },
                                style: ElevatedButton.styleFrom(
                                  backgroundColor: const Color.fromARGB(255, 26, 121, 198),
@@ -1859,7 +1875,7 @@ case 'Resume':
                     style: TextStyle(color: Color.fromARGB(255, 72, 193, 156), fontSize:14),) // Text color
                   ),
                    
-                    
+                     
                     ]),
                      SizedBox(height:20),
                      Divider(color: Color.fromARGB(255, 72, 193, 156),indent:12, endIndent:12),
