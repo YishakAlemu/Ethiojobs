@@ -88,7 +88,7 @@ class _ApplypageState extends State<Applypage>  {
              Text('Build an EthioJobs Resume To Apply', style:TextStyle(fontSize:20, fontWeight:FontWeight.bold, color:Colors.black)),
              SizedBox(height:10),
              Container(
-              width:300,
+              width:100,
               child: Text("Recommended", style:TextStyle(fontSize:14, color:Colors.black54))),
              SizedBox(height:5),
              Container(

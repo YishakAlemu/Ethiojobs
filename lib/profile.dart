@@ -48,6 +48,40 @@ class _ProfilepageState extends State<Profilepage> {
   String? _selectedGender;
   final TextEditingController _professionController = TextEditingController();
   String? _selectedprofession;
+  bool _isEditing = false;
+
+  void _editText() {
+    setState(() {
+      _isEditing = true;
+    });
+  }
+
+  // void _closeEditor() {
+  //   setState(() {
+  //     _isEditing = false;
+  //     // Reset the controller to the original text
+  //     _controller.document = quill.Document.fromJson([
+  //       {'insert': "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Curabitur pretium tincidunt lacus. Nulla gravida orci a odio, et feugiat tellus tincidunt vitae. Suspendisse potenti. Fusce ac felis sit amet ligula pharetra condimentum. Morbi tincidunt, libero sed scelerisque dictum, nunc ante sagittis velit, ut aliquet felis augue sit amet nunc.Phasellus bibendum, sem ut eleifend tincidunt, augue dolor vulputate risus, eget suscipit nulla mauris eu odio. Proin ac tortor nec justo hendrerit dignissim. Integer facilisis, eros eget fermentum dapibus, leo nisi tincidunt velit, vitae varius magna justo sit amet dolor."}
+  //     ]);
+  //   });
+  // }
+
+  // void _applyChanges() {
+  //   setState(() {
+  //     _isEditing = false;
+  //     // You can add any additional logic to process the updated text if needed
+  //   });
+  // }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   // Initialize with default text
+  //   _controller.document = quill.Document.fromJson([
+  //     {'insert': 'This is a sample CV text that can be edited.'}
+  //   ]);
+  // }
+
 
   void _startLoading() {
     Timer.periodic(Duration(milliseconds: 100), (timer) {
@@ -603,64 +637,144 @@ Container(
         return 0;
     }
   }
-  void _showQuillDialog(BuildContext context) {
-  quill.QuillController _controller = quill.QuillController.basic();
+//   void _showQuillDialog(BuildContext context) {
+//   quill.QuillController _controller = quill.QuillController.basic();
 
+//   showDialog(
+//     context: context,
+//     builder: (BuildContext context) {
+//       return Dialog(
+//         shape: RoundedRectangleBorder(
+//           borderRadius: BorderRadius.circular(15), // Rounded corners
+//         ),
+//         child: Container(
+//           width: MediaQuery.of(context).size.width * 0.9, // Set width to 90% of screen
+//           padding: EdgeInsets.all(16), // Add padding
+//           child: Column(
+//             mainAxisSize: MainAxisSize.min, // Adjust height based on content
+//             children: [
+//               Text(
+//                 'Edit Text',
+//                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+//               ),
+//               SizedBox(height: 10),
+//               QuillSimpleToolbar(
+//   controller: _controller,
+//   config: const QuillSimpleToolbarConfig(),
+// ),
+// Container(
+//   decoration: BoxDecoration(
+//     color: Colors.white,
+//     borderRadius: BorderRadius.circular(0),
+    
+//     border: Border.all(
+//       color: Colors.grey,
+//       width: 0.5,
+//     ),
+//   ),
+//   height: 250, // Fixed height for the QuillEditor
+//   child: QuillEditor.basic(
+//     controller: _controller,
+//     config: const QuillEditorConfig(),
+//     // Ensure it's not read-only if you want to edit
+//   ),
+// ),
+//  // Add toolbar for formatting
+//               SizedBox(height: 10),
+//               Row(
+//                 mainAxisAlignment: MainAxisAlignment.end,
+//                 children: [
+//                   TextButton(
+//                     onPressed: () {
+//                       Navigator.of(context).pop(); // Close the dialog
+//                     },
+//                     child: Text('Save'),
+//                   ),
+//                   TextButton(
+//                     onPressed: () {
+//                       Navigator.of(context).pop(); // Close the dialog
+//                     },
+//                     child: Text('Cancel'),
+//                   ),
+//                 ],
+//               ),
+//             ],
+//           ),
+//         ),
+//       );
+//     },
+//   );
+// }
+
+void _showdeleteDialog(BuildContext context) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
       return Dialog(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15), // Rounded corners
+          borderRadius: BorderRadius.circular(23),
+          
         ),
         child: Container(
-          width: MediaQuery.of(context).size.width * 0.9, // Set width to 90% of screen
-          padding: EdgeInsets.all(16), // Add padding
+          decoration:BoxDecoration(
+             color:Colors.white,
+            borderRadius: BorderRadius.circular(20),
+          ),
+         
+          width: 300, // Set your desired width
+          height: 300, // Set your desired height
+          padding: const EdgeInsets.all(16.0),
           child: Column(
-            mainAxisSize: MainAxisSize.min, // Adjust height based on content
+            mainAxisSize: MainAxisSize.min,
             children: [
+              
+              Container(
+                height:60,
+                width: 60,
+                
+                decoration: BoxDecoration(
+                  color:const Color.fromARGB(255, 225, 223, 223),
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                child: Icon(Icons.remove_moderator, color:Colors.red, size:35)),
+                SizedBox(height:10),
+              Text('Remove resume', style:TextStyle(fontSize:17, fontWeight:FontWeight.w700)),
               Text(
-                'Edit Text',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                "Are you sure you want to remove?\nRecruiter's company",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 18),
               ),
-              SizedBox(height: 10),
-              QuillSimpleToolbar(
-  controller: _controller,
-  config: const QuillSimpleToolbarConfig(),
-),
-Container(
-  decoration: BoxDecoration(
-    color: Colors.white,
-    borderRadius: BorderRadius.circular(0),
-    
-    border: Border.all(
-      color: Colors.grey,
-      width: 0.5,
-    ),
-  ),
-  height: 250, // Fixed height for the QuillEditor
-  child: QuillEditor.basic(
-    controller: _controller,
-    config: const QuillEditorConfig(),
-    // Ensure it's not read-only if you want to edit
-  ),
-),
- // Add toolbar for formatting
-              SizedBox(height: 10),
+              SizedBox(height: 20), // Spacing
               Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop(); // Close the dialog
-                    },
-                    child: Text('Save'),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      color:Colors.white,
+                    ),
+                    child: TextButton(
+
+                      onPressed: () {
+                        Navigator.of(context).pop(); // Close the dialog
+                      },
+                      child: Text('Cancel', style:TextStyle(color:Colors.black)),
+                    ),
                   ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop(); // Close the dialog
-                    },
-                    child: Text('Cancel'),
+                  Container(
+                     decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      color:Colors.blue,
+                    ),
+                    
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // Add your confirmation logic here
+                        Navigator.of(context).pop(); // Close the dialog
+                        // Perform the removal action
+                      },
+                      child: Text('Confirm', style:TextStyle(color:Colors.black)),
+                    ),
                   ),
                 ],
               ),
@@ -1232,7 +1346,7 @@ bottomNavigationBar:
                           SizedBox(width:210),
                           TextButton.icon(
                                               onPressed: () { 
-                                                _showQuillDialog(context);
+                                                
                                               },
                                               icon: SizedBox(
                           width:12,
@@ -1242,7 +1356,7 @@ bottomNavigationBar:
                                     ),
                                               ),
                                               label: 
-                          Text(
+                                              Text(
                                               'Edit', // Button text
                                               style: TextStyle(color: Color.fromARGB(255, 72, 193, 156), fontSize:14),) // Text color
                                             ),
@@ -1301,7 +1415,9 @@ case 'Resume':
                   IconButton(icon: Icon(Icons.delete_outline_rounded, 
                   color: Colors.black, 
                   size: 25),
-                  onPressed: () { }),
+                  onPressed: () {
+                    _showdeleteDialog(context);
+                   }),
                  ]),
                  SizedBox(height:10),
                  Divider(color:const Color.fromARGB(255, 197, 231, 205),indent: 10,endIndent: 12),
@@ -2045,9 +2161,9 @@ case 'Resume':
           child: Column(
             children: [
               
-              
-              Container(
-                height:1000,
+              SingleChildScrollView(
+              child:Container(
+                
                 width:366,
             padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
@@ -2087,16 +2203,90 @@ case 'Resume':
                                ),
                   ),
                  ],),
-              Text('Jon Don', style:TextStyle(fontSize:24, fontWeight: FontWeight.bold) ),
-              Row(children: [
+                 Container(
+                  padding:EdgeInsets.only(left:20),
+                  color:Colors.red,
+                  child: Column(
+                    children:[
+                Container(
+                  width:300,
+                  child: Text('Jon Don', style:TextStyle(color:Colors.black,fontWeight: FontWeight.bold, fontSize:17))),
+                Row(children: [
                  Icon(Icons.phone, size: 12, color:Colors.green),
                  Text('2517890987', style:TextStyle(fontSize:14, ) ),
+              ],),
+              SizedBox(height:20),
+              Row(children:[
+                Text('@', style:TextStyle(color:Colors.green, fontSize:12)),
+                SizedBox(width: 5),
+                Text('testabenezer@gmail.com', style:TextStyle(color:Colors.black, fontSize:14,fontWeight:FontWeight.bold)),
+                SizedBox(width:20),
+                Icon(Icons.location_on, size: 12, color:Colors.green),
+                SizedBox(width:10),
+                Container(
+                  width:60,
+                  child: Text('Addis Ababa, Ethiopia', style:TextStyle(color:Colors.black, fontSize:14,fontWeight:FontWeight.bold))),
+              ]),
+              Row(children:[
+                Icon(Icons.badge, size:13, color:Colors.green,),
+                SizedBox(width: 5),
+                Text('Creative Arts',style:TextStyle(color:Colors.black, fontSize:14,fontWeight:FontWeight.bold) ),
+                
+              ])
+              ]
+                 )
+            ),
+              SizedBox(height:10),
+            Container(
+              padding: EdgeInsets.only(left:20),
+              child:Column(children: [
+                Container(
+                  width: 300,
+                  
+                  child: Text('SUMMARY',style:TextStyle(color:Colors.black, fontSize:20,fontWeight:FontWeight.bold) )),
+                  
+                Divider(color:Colors.black, thickness: 4, indent:10, endIndent:20, height:1),
+                SizedBox(height:5),
+                Container(
+                  padding:EdgeInsets.only(left:20, right:20),
+                  child: Column(children: [
+                    Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Curabitur pretium tincidunt lacus. Nulla gravida orci a odio, et feugiat tellus tincidunt vitae. Suspendisse potenti. Fusce ac felis sit amet ligula pharetra condimentum. Morbi tincidunt, libero sed scelerisque dictum, nunc ante sagittis velit, ut aliquet felis augue sit amet nunc.Phasellus bibendum, sem ut eleifend tincidunt, augue dolor vulputate risus, eget suscipit nulla mauris eu odio. Proin ac tortor nec justo hendrerit dignissim. Integer facilisis, eros eget fermentum dapibus, leo nisi tincidunt velit, vitae varius magna justo sit amet dolor"),
+                  ],),
+                )
               ],)
+              ),
+              SizedBox(height:20),
+              Container(
+                color: Colors.blue,
+                padding: EdgeInsets.only(left:20),
+                child:Column(children: [
+                 Container(
+                  
+                  width: 300,
+                  
+                  child: Text('EXPERIENCE',style:TextStyle(color:Colors.black, fontSize:20,fontWeight:FontWeight.bold) )),
+                  
+                Divider(color:Colors.black, thickness: 4, indent:10, endIndent:20, height:1),
+                SizedBox(height:5),
+                
+                Text('dereja', style:TextStyle(color:Colors.black, fontSize:15)),
+                
+                Text('composity', style:TextStyle(color:Colors.green, fontSize:15)),
+                
+                Row(children: [
+                  Icon(Icons.calendar_month, size:14, color:Colors.black),
+                  Text('2008-11-03 - Present', style:TextStyle(fontSize:12, color:Colors.black)),
+                  
+                ],),
+               
+                  Text(". lorem lope", style: TextStyle(color: Colors.black, fontSize: 13)),
               
-              
+                
+              ],))
               ]
             ),
               ),
+          ),
             ]
           )
         ),
