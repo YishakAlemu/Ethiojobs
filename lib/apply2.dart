@@ -263,7 +263,7 @@ class _Apply2pageState extends State<Apply2page>  {
         child: Container(
          child:Row(children:[
           SizedBox(width:10),
-          Container(
+          SizedBox(
             height:35,
             width:160,
             child: ElevatedButton(onPressed: (){},
@@ -277,7 +277,7 @@ class _Apply2pageState extends State<Apply2page>  {
             child: Text('SUBMIT', style:TextStyle(fontSize:15, color:Colors.white))),
           ),
           SizedBox(width:10),
-          Container(
+          SizedBox(
             height:35,
             width:160,
             child: ElevatedButton(onPressed: (){},

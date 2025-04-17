@@ -11,7 +11,7 @@ class Appspage extends StatefulWidget {
 class _AppspageState extends State<Appspage> with SingleTickerProviderStateMixin {
   int _selectedNavIndex = 1;
   double progress = 0.5; // Define the progress variable with a value between 0.0 and 1.0
-  int? _slide1 = 1;
+  final int? _slide1 = 1;
   late TabController _tabController;
 
   
@@ -384,7 +384,7 @@ class _AppspageState extends State<Appspage> with SingleTickerProviderStateMixin
               ),
             ),
             SizedBox(height: 5),
-            Container(
+            SizedBox(
               height:600,
               child: Column(
                 children: [

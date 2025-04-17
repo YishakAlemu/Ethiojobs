@@ -10,7 +10,7 @@ class Onboardingpage extends StatefulWidget {
 }
 
 class _OnboardingpageState extends State<Onboardingpage> {
-  QuillController _controller = QuillController.basic();
+  final QuillController _controller = QuillController.basic();
    @override
   void dispose() {
     _controller.dispose(); // Clean up the controller
@@ -61,7 +61,7 @@ class _OnboardingpageState extends State<Onboardingpage> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text("Select Skills"),
-        content: Container(
+        content: SizedBox(
           width: MediaQuery.of(context).size.width, // 80% of screen width
       height: MediaQuery.of(context).size.height * 0.8,
         child:SingleChildScrollView(

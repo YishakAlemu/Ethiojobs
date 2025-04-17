@@ -41,7 +41,7 @@ class _ApplypageState extends State<Applypage>  {
                 SizedBox(height:8),
                 Text('Accepted File Types are PDF, TXT,DOC,DOCX', style:TextStyle(fontSize:15, color:Colors.black54)),
                 SizedBox(height:10),
-                Container(
+                SizedBox(
                   height:38,
                   width:300,
                   child: ElevatedButton(
@@ -87,7 +87,7 @@ class _ApplypageState extends State<Applypage>  {
              SizedBox(height:50),
              Text('Build an EthioJobs Resume To Apply', style:TextStyle(fontSize:20, fontWeight:FontWeight.bold, color:Colors.black)),
              SizedBox(height:10),
-             Container(
+             SizedBox(
               width:100,
               child: Text("Recommended", style:TextStyle(fontSize:14, color:Colors.black54))),
              SizedBox(height:5),

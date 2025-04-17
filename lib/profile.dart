@@ -48,13 +48,13 @@ class _ProfilepageState extends State<Profilepage> {
   String? _selectedGender;
   final TextEditingController _professionController = TextEditingController();
   String? _selectedprofession;
-  bool _isEditing = false;
+  // bool _isEditing = false;
 
-  void _editText() {
-    setState(() {
-      _isEditing = true;
-    });
-  }
+  // void _editText() {
+  //   setState(() {
+  //     _isEditing = true;
+  //   });
+  // }
 
   // void _closeEditor() {
   //   setState(() {
@@ -639,74 +639,8 @@ Container(
         return 0;
     }
   }
-//   void _showQuillDialog(BuildContext context) {
-//   quill.QuillController _controller = quill.QuillController.basic();
 
-//   showDialog(
-//     context: context,
-//     builder: (BuildContext context) {
-//       return Dialog(
-//         shape: RoundedRectangleBorder(
-//           borderRadius: BorderRadius.circular(15), // Rounded corners
-//         ),
-//         child: Container(
-//           width: MediaQuery.of(context).size.width * 0.9, // Set width to 90% of screen
-//           padding: EdgeInsets.all(16), // Add padding
-//           child: Column(
-//             mainAxisSize: MainAxisSize.min, // Adjust height based on content
-//             children: [
-//               Text(
-//                 'Edit Text',
-//                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-//               ),
-//               SizedBox(height: 10),
-//               QuillSimpleToolbar(
-//   controller: _controller,
-//   config: const QuillSimpleToolbarConfig(),
-// ),
-// Container(
-//   decoration: BoxDecoration(
-//     color: Colors.white,
-//     borderRadius: BorderRadius.circular(0),
-    
-//     border: Border.all(
-//       color: Colors.grey,
-//       width: 0.5,
-//     ),
-//   ),
-//   height: 250, // Fixed height for the QuillEditor
-//   child: QuillEditor.basic(
-//     controller: _controller,
-//     config: const QuillEditorConfig(),
-//     // Ensure it's not read-only if you want to edit
-//   ),
-// ),
-//  // Add toolbar for formatting
-//               SizedBox(height: 10),
-//               Row(
-//                 mainAxisAlignment: MainAxisAlignment.end,
-//                 children: [
-//                   TextButton(
-//                     onPressed: () {
-//                       Navigator.of(context).pop(); // Close the dialog
-//                     },
-//                     child: Text('Save'),
-//                   ),
-//                   TextButton(
-//                     onPressed: () {
-//                       Navigator.of(context).pop(); // Close the dialog
-//                     },
-//                     child: Text('Cancel'),
-//                   ),
-//                 ],
-//               ),
-//             ],
-//           ),
-//         ),
-//       );
-//     },
-//   );
-// }
+
 
 void _showdeleteDialog(BuildContext context) {
   showDialog(
@@ -795,8 +729,31 @@ void _showdeleteDialog(BuildContext context) {
   );
 }
 
+final quill.QuillController _controller = quill.QuillController.basic();
+  bool _isEditing = false;
+
+  void _editText() {
+    setState(() {
+      _isEditing = true;
+    });
+  }
+
+  void _closeEditor() {
+    setState(() {
+      _isEditing = false;
+    });
+  }
+
+  void _saveChanges() {
+    // Implement your save logic here
+    setState(() {
+      _isEditing = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+
    Widget buildNavItem(IconData icon, String label, VoidCallback onTap,double iconSize,Color iconColor) {
     bool isSelected = _selectedNavIndex == _getIndex(label);
   return InkWell(
@@ -1337,49 +1294,129 @@ bottomNavigationBar:
    Widget _buildExpandableTile(String title) {
     switch (title) {
       case 'About':
-        return Column(
-          children: [
-            ExpansionTile(
-              title: Text(title,style: TextStyle(fontSize: 22, fontWeight:FontWeight.w500),),
-              trailing: Icon(Icons.keyboard_arrow_down_rounded,color: Color.fromARGB(255, 72, 193, 156)),
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
+  return Column(
+    children: [
+      ExpansionTile(
+        title: Text(
+          title,
+          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
+        ),
+        trailing: Icon(
+          Icons.keyboard_arrow_down_rounded,
+          color: Color.fromARGB(255, 72, 193, 156),
+        ),
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                if (!_isEditing) ...[
+                  Text(
+                    _controller.document.toPlainText() == ''
+                        ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." // Default text
+                        : _controller.document.toPlainText(),
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  SizedBox(height: 8),
+                  Row(
                     children: [
-                       Text(
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Curabitur pretium tincidunt lacus. Nulla gravida orci a odio, et feugiat tellus tincidunt vitae. Suspendisse potenti. Fusce ac felis sit amet ligula pharetra condimentum. Morbi tincidunt, libero sed scelerisque dictum, nunc ante sagittis velit, ut aliquet felis augue sit amet nunc.Phasellus bibendum, sem ut eleifend tincidunt, augue dolor vulputate risus, eget suscipit nulla mauris eu odio. Proin ac tortor nec justo hendrerit dignissim. Integer facilisis, eros eget fermentum dapibus, leo nisi tincidunt velit, vitae varius magna justo sit amet dolor.",
-                      ),
-                      SizedBox(height: 8),
-                      Row(
-                        children: [
-                          SizedBox(width:210),
-                          TextButton.icon(
-                                              onPressed: () { 
-                                                
-                                              },
-                                              icon: SizedBox(
-                          width:12,
+                      SizedBox(width: 210),
+                      TextButton.icon(
+                        onPressed: _editText,
+                        icon: SizedBox(
+                          width: 12,
                           child: Icon(
-                          Icons.edit, size:17,
-                          color: Color.fromARGB(255, 72, 193, 156), // Icon color
-                                    ),
-                                              ),
-                                              label: 
-                                              Text(
-                                              'Edit', // Button text
-                                              style: TextStyle(color: Color.fromARGB(255, 72, 193, 156), fontSize:14),) // Text color
-                                            ),
-                        ],
+                            Icons.edit,
+                            size: 17,
+                            color: Color.fromARGB(255, 72, 193, 156), // Icon color
+                          ),
+                        ),
+                        label: Text(
+                          'Edit', // Button text
+                          style: TextStyle(color: Color.fromARGB(255, 72, 193, 156), fontSize: 14),
+                        ),
                       ),
                     ],
                   ),
-                ),
+                ] else ...[
+                  Container(
+                    color:Colors.blue,
+                    width: 370,
+  
+                    child: Dialog(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: SafeArea(
+                        child: Container(
+                          color:Colors.green,
+                        
+                          
+                          //MediaQuery.of(context).size.width * 0.9,
+                                            
+                          padding: EdgeInsets.all(16),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                'Edit Text',
+                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(height: 10),
+                              quill.QuillSimpleToolbar(
+                                controller: _controller,
+                                config: const quill.QuillSimpleToolbarConfig(
+                                 
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              Container(
+                                
+                                decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius: BorderRadius.circular(0),
+                                  border: Border.all(
+                                    color: Colors.grey,
+                                    width: 0.5,
+                                  ),
+                                ),
+                                
+                                child: quill.QuillEditor.basic(
+                                  controller: _controller,
+                                  config: const quill.QuillEditorConfig(),
+                                  
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  TextButton(
+                                    onPressed: _saveChanges,
+                                    child: Text('Save'),
+                                  ),
+                                  SizedBox(width: 8),
+                                  TextButton(
+                                    onPressed: _closeEditor,
+                                    child: Text('Close'),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ],
             ),
-            Divider(color:const Color.fromARGB(255, 197, 231, 205),indent: 12,endIndent: 12,),
-          ],
-        );
+          ),
+        ],
+      ),
+      Divider(color: const Color.fromARGB(255, 197, 231, 205), indent: 12, endIndent: 12),
+    ],
+  );
     
 case 'Resume':
         return Column(
@@ -1629,7 +1666,7 @@ case 'Resume':
                                  elevation: 4,
                                ),
                                child: const Text(
-                                 '+Add Eduaction',
+                                 '+Add Education',
                                  style: TextStyle(fontSize: 17, color:Colors.white,fontWeight: FontWeight.bold),
                                ),
                              ),
@@ -2224,7 +2261,7 @@ case 'Resume':
                   color:Colors.red,
                   child: Column(
                     children:[
-                Container(
+                SizedBox(
                   width:300,
                   child: Text('Jon Don', style:TextStyle(color:Colors.black,fontWeight: FontWeight.bold, fontSize:17))),
                 Row(children: [
@@ -2239,7 +2276,7 @@ case 'Resume':
                 SizedBox(width:20),
                 Icon(Icons.location_on, size: 12, color:Colors.green),
                 SizedBox(width:10),
-                Container(
+                SizedBox(
                   width:60,
                   child: Text('Addis Ababa, Ethiopia', style:TextStyle(color:Colors.black, fontSize:14,fontWeight:FontWeight.bold))),
               ]),
@@ -2256,7 +2293,7 @@ case 'Resume':
             Container(
               padding: EdgeInsets.only(left:20),
               child:Column(children: [
-                Container(
+                SizedBox(
                   width: 300,
                   
                   child: Text('SUMMARY',style:TextStyle(color:Colors.black, fontSize:20,fontWeight:FontWeight.bold) )),
@@ -2276,7 +2313,7 @@ case 'Resume':
                 color: Colors.blue,
                 padding: EdgeInsets.only(left:20),
                 child:Column(children: [
-                 Container(
+                 SizedBox(
                   
                   width: 300,
                   

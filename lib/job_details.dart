@@ -903,7 +903,7 @@ class JobDetailPage extends StatelessWidget {
                     onPressed: () { }),
          ),
         SizedBox(width:15),
-        Container(
+        SizedBox(
           width:270,
           height:45,
           child: ElevatedButton(

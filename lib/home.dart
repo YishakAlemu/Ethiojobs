@@ -1214,7 +1214,7 @@ int _getIndex(String label) {
                       Row(
                         children: [
                           SizedBox(width:10),
-                          Container(
+                          SizedBox(
                             
                               width: 90, 
                               height: 55, 
@@ -1226,7 +1226,7 @@ int _getIndex(String label) {
                                  ),
                                   ),
                                 SizedBox(width:10),
-                                Container(
+                                SizedBox(
                                   width:120,
                                   height:25,
                                   child: ElevatedButton(
@@ -1247,7 +1247,7 @@ int _getIndex(String label) {
                                     ),
                                 ),
   SizedBox(width:10),
-  Container(
+  SizedBox(
     width:120,
     height:25,
     child: ElevatedButton(
@@ -1500,7 +1500,7 @@ Padding(
                       Row(
                         children: [
                           SizedBox(width:10),
-                          Container(
+                          SizedBox(
                             
                               width: 90, 
                               height: 55, 
@@ -1513,7 +1513,7 @@ Padding(
                                   ),
                                 
                                  SizedBox(width:10),
-                                Container(
+                                SizedBox(
                                   width:120,
                                   height:25,
                                   child: ElevatedButton(
@@ -1534,7 +1534,7 @@ Padding(
                                     ),
                                 ),
   SizedBox(width:10),
-  Container(
+  SizedBox(
     width:120,
     height:25,
     child: ElevatedButton(
@@ -1773,7 +1773,7 @@ Padding(
                       Row(
                         children: [
                           SizedBox(width:10),
-                          Container(
+                          SizedBox(
                             
                               width: 90, 
                               height: 55, 
@@ -1785,7 +1785,7 @@ Padding(
                                  ),
                                   ),
                                  SizedBox(width:10),
-                                Container(
+                                SizedBox(
                                   width:120,
                                   height:25,
                                   child: ElevatedButton(
@@ -1806,7 +1806,7 @@ Padding(
                                     ),
                                 ),
   SizedBox(width:10),
-  Container(
+  SizedBox(
     width:120,
     height:25,
     child: ElevatedButton(
