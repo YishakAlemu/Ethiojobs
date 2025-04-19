@@ -9,6 +9,7 @@ import 'dart:io';
 import 'dart:async';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill/flutter_quill.dart' as quill;
+import 'package:open_file/open_file.dart';
 
 class Profilepage extends StatefulWidget {
   const Profilepage({super.key});
@@ -20,25 +21,47 @@ class Profilepage extends StatefulWidget {
 
 class _ProfilepageState extends State<Profilepage> {
   int _selectedNavIndex = 2;
-  Future<void> _generatePdf(String text) async {
-    final pdf = pw.Document();
+  Future<String> _generatePdf(String content) async {
+  final pdf = pw.Document();
 
-    pdf.addPage(
-      pw.Page(
-        build: (pw.Context context) => pw.Center(
-          child: pw.Text(text),
-        ),
+  pdf.addPage(
+    pw.Page(
+      build: (pw.Context context) {
+        return pw.Center(
+          child: pw.Text(content),
+        );
+      },
+    ),
+  );
+
+  final directory = await getApplicationDocumentsDirectory();
+  final path = '${directory.path}/cv.pdf';
+
+  final file = File(path);
+  await file.writeAsBytes(await pdf.save());
+
+  return path; // Return the path of the generated PDF
+}
+
+void _downloadCv(BuildContext context) async {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(content: Text('Downloading CV...')),
+  );
+
+  String pdfPath = await _generatePdf('Name: Jon Don\nPhone: 2517890987');
+
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text('CV downloaded!'),
+      action: SnackBarAction(
+        label: 'Open File',
+        onPressed: () {
+          OpenFile.open(pdfPath); // Open the PDF file
+        },
       ),
-    );
-
-    final output = await getTemporaryDirectory();
-    final file = File("${output.path}/download.pdf");
-    await file.writeAsBytes(await pdf.save());
-    
-    // Optionally, open the file using a file viewer
-    // You can use a package like open_file to open it
-  }
-
+    ),
+  );
+}
   int? _slide = 1;
   bool _isExpanded = false;
   double progress = 0.5; // Initialize _progress variable
@@ -2240,7 +2263,7 @@ case 'Resume':
                     height:43,
                     child: ElevatedButton(
                                  onPressed: () {
-                                   _generatePdf('Name: Jon Don\nPhone: 2517890987');
+                                    onPressed: () => _downloadCv(context);
                                  },
                                  style: ElevatedButton.styleFrom(
                                    backgroundColor: const Color.fromARGB(255, 26, 121, 198),
