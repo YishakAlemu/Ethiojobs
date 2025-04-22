@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
 class Applypage extends StatefulWidget {
   const Applypage({super.key});
@@ -16,7 +15,6 @@ class _ApplypageState extends State<Applypage>  {
       backgroundColor: Color.fromARGB(255, 255, 255, 255),
       body: Center(
           child:Container(
-        
         //padding: const EdgeInsets.all(16.0),
       child:Column(children: [
           SizedBox(height:90),
@@ -95,7 +93,6 @@ class _ApplypageState extends State<Applypage>  {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
-                  
                   color: Colors.black,
                 )
               ),

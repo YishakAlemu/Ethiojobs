@@ -52,7 +52,7 @@ class _ParentWidgetState extends State<ParentWidget> {
         
 
         PopupMenuButton<String>(
-  icon: Icon(Icons.menu, size: 32),
+  icon: Icon(Icons.account_circle_rounded, size: 32),
   itemBuilder: (BuildContext context) {
     return [
       PopupMenuItem<String>(
@@ -60,7 +60,7 @@ class _ParentWidgetState extends State<ParentWidget> {
   child: Row(
     children: [
       SizedBox(width:10),
-      Icon(Icons.home, color: const Color.fromARGB(255, 0, 0, 0), size: 20),
+      Icon(Icons.person, color: const Color.fromARGB(255, 0, 0, 0), size: 20),
       SizedBox(width: 8),
       Text(
         'Find Jobs',

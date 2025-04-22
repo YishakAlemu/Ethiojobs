@@ -2,7 +2,8 @@
     <application
         android:label="ethiojobs"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:enableOnBackInvokedCallback="true"> <!-- Added this line -->
         
         <provider
             android:name="androidx.core.content.FileProvider"

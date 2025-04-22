@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:file_picker/file_picker.dart';
@@ -7,9 +6,12 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'dart:async';
-import 'package:flutter_quill/flutter_quill.dart';
+import 'dart:ui'; // Import for ImageByteFormat
 import 'package:flutter_quill/flutter_quill.dart' as quill;
 import 'package:open_file/open_file.dart';
+import 'dart:typed_data';
+import 'package:flutter/rendering.dart';
+import 'package:pdf/widgets.dart' as pw;
 
 class Profilepage extends StatefulWidget {
   const Profilepage({super.key});
@@ -21,14 +23,26 @@ class Profilepage extends StatefulWidget {
 
 class _ProfilepageState extends State<Profilepage> {
   int _selectedNavIndex = 2;
-  Future<String> _generatePdf(String content) async {
-  final pdf = pw.Document();
+  GlobalKey _globalKey = GlobalKey();
 
+Future<String> _generatePdf() async {
+  Future.delayed(Duration(milliseconds: 100));
+  RenderRepaintBoundary? boundary = _globalKey.currentContext?.findRenderObject() as RenderRepaintBoundary?;
+  if (boundary == null) {
+    throw Exception("Unable to find the boundary.");
+  }
+
+  final image = await boundary.toImage(pixelRatio: 3.0);
+  final byteData = await image.toByteData(format: ImageByteFormat.png);
+  final Uint8List pngBytes = byteData!.buffer.asUint8List();
+
+  // Create PDF Document
+  final pdf = pw.Document();
   pdf.addPage(
     pw.Page(
       build: (pw.Context context) {
         return pw.Center(
-          child: pw.Text(content),
+          child: pw.Image(pw.MemoryImage(pngBytes)),
         );
       },
     ),
@@ -36,31 +50,40 @@ class _ProfilepageState extends State<Profilepage> {
 
   final directory = await getApplicationDocumentsDirectory();
   final path = '${directory.path}/cv.pdf';
-
   final file = File(path);
   await file.writeAsBytes(await pdf.save());
 
-  return path; // Return the path of the generated PDF
+  return path;
 }
 
+// Method to download CV
 void _downloadCv(BuildContext context) async {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(content: Text('Downloading CV...')),
   );
 
-  String pdfPath = await _generatePdf('Name: Jon Don\nPhone: 2517890987');
+  // Ensure the widget is fully rendered before generating the PDF
+  WidgetsBinding.instance.addPostFrameCallback((_) async {
+    try {
+      String pdfPath = await _generatePdf(); // Generate PDF
 
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      content: Text('CV downloaded!'),
-      action: SnackBarAction(
-        label: 'Open File',
-        onPressed: () {
-          OpenFile.open(pdfPath); // Open the PDF file
-        },
-      ),
-    ),
-  );
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('CV downloaded!'),
+          action: SnackBarAction(
+            label: 'Open File',
+            onPressed: () {
+              OpenFile.open(pdfPath);
+            },
+          ),
+        ),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to generate CV: $e')),
+      );
+    }
+  });
 }
   int? _slide = 1;
   bool _isExpanded = false;
@@ -1363,7 +1386,7 @@ bottomNavigationBar:
                   ),
                 ] else ...[
                   Container(
-                    color:Colors.blue,
+                    
                     width: 370,
   
                     child: Dialog(
@@ -1372,7 +1395,7 @@ bottomNavigationBar:
                       ),
                       child: SafeArea(
                         child: Container(
-                          color:Colors.green,
+                          
                         
                           
                           //MediaQuery.of(context).size.width * 0.9,
@@ -1386,17 +1409,21 @@ bottomNavigationBar:
                                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                               SizedBox(height: 10),
-                              quill.QuillSimpleToolbar(
-                                controller: _controller,
-                                config: const quill.QuillSimpleToolbarConfig(
-                                 
+                              Container(
+                                height:50,
+                                width:360,
+                                child: quill.QuillSimpleToolbar(
+                                  controller: _controller,
+                                  config: const quill.QuillSimpleToolbarConfig(
+                                   
+                                  ),
                                 ),
                               ),
                               SizedBox(height: 10),
                               Container(
                                 
                                 decoration: BoxDecoration(
-                                  color: Colors.red,
+                                  
                                   borderRadius: BorderRadius.circular(0),
                                   border: Border.all(
                                     color: Colors.grey,
@@ -2232,141 +2259,158 @@ case 'Resume':
         ),
       );
     case 2:
-      return SingleChildScrollView( // Wrap with SingleChildScrollView for dynamic content
-        child: Center(
-          child: Column(
-            children: [
-              
-              SingleChildScrollView(
-              child:Container(
-                
-                width:366,
-            padding: const EdgeInsets.all(16.0),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.2),
-                  spreadRadius: 2,
-                  blurRadius: 15,
-                  offset: Offset(0, 5), // changes position of shadow
-                ),
-              ],
-            ),
-            child: Column(
-              children: [
-                 Row(children: [
-                  SizedBox(width:140),
-                  SizedBox(
-                    width:165,
-                    height:43,
-                    child: ElevatedButton(
-                                 onPressed: () {
-                                    onPressed: () => _downloadCv(context);
-                                 },
-                                 style: ElevatedButton.styleFrom(
-                                   backgroundColor: const Color.fromARGB(255, 26, 121, 198),
-                                   shape: RoundedRectangleBorder(
-                                     borderRadius: BorderRadius.circular(24),
-                                   ),
-                                   elevation: 2,
-                                 ),
-                                 child: const Text(
-                                   'Download CV',
-                                   style: TextStyle(fontSize: 16, color:Colors.white),
-                                 ),
-                               ),
-                  ),
-                 ],),
-                 Container(
-                  padding:EdgeInsets.only(left:20),
-                  color:Colors.red,
-                  child: Column(
-                    children:[
-                SizedBox(
-                  width:300,
-                  child: Text('Jon Don', style:TextStyle(color:Colors.black,fontWeight: FontWeight.bold, fontSize:17))),
-                Row(children: [
-                 Icon(Icons.phone, size: 12, color:Colors.green),
-                 Text('2517890987', style:TextStyle(fontSize:14, ) ),
-              ],),
-              SizedBox(height:20),
-              Row(children:[
-                Text('@', style:TextStyle(color:Colors.green, fontSize:12)),
-                SizedBox(width: 5),
-                Text('testabenezer@gmail.com', style:TextStyle(color:Colors.black, fontSize:14,fontWeight:FontWeight.bold)),
-                SizedBox(width:20),
-                Icon(Icons.location_on, size: 12, color:Colors.green),
-                SizedBox(width:10),
-                SizedBox(
-                  width:60,
-                  child: Text('Addis Ababa, Ethiopia', style:TextStyle(color:Colors.black, fontSize:14,fontWeight:FontWeight.bold))),
-              ]),
-              Row(children:[
-                Icon(Icons.badge, size:13, color:Colors.green,),
-                SizedBox(width: 5),
-                Text('Creative Arts',style:TextStyle(color:Colors.black, fontSize:14,fontWeight:FontWeight.bold) ),
-                
-              ])
-              ]
-                 )
-            ),
-              SizedBox(height:10),
+  return SingleChildScrollView( // Wrap with SingleChildScrollView for dynamic content
+    child: Center(
+      child: Column(
+        children: [
+          
             Container(
-              padding: EdgeInsets.only(left:20),
-              child:Column(children: [
-                SizedBox(
-                  width: 300,
-                  
-                  child: Text('SUMMARY',style:TextStyle(color:Colors.black, fontSize:20,fontWeight:FontWeight.bold) )),
-                  
-                Divider(color:Colors.black, thickness: 4, indent:10, endIndent:20, height:1),
-                SizedBox(height:5),
-                Container(
-                  padding:EdgeInsets.only(left:20, right:20),
-                  child: Column(children: [
-                    Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Curabitur pretium tincidunt lacus. Nulla gravida orci a odio, et feugiat tellus tincidunt vitae. Suspendisse potenti. Fusce ac felis sit amet ligula pharetra condimentum. Morbi tincidunt, libero sed scelerisque dictum, nunc ante sagittis velit, ut aliquet felis augue sit amet nunc.Phasellus bibendum, sem ut eleifend tincidunt, augue dolor vulputate risus, eget suscipit nulla mauris eu odio. Proin ac tortor nec justo hendrerit dignissim. Integer facilisis, eros eget fermentum dapibus, leo nisi tincidunt velit, vitae varius magna justo sit amet dolor"),
-                  ],),
-                )
-              ],)
+              width: 366,
+              padding: const EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 2,
+                    blurRadius: 15,
+                    offset: Offset(0, 5), // changes position of shadow
+                  ),
+                ],
               ),
-              SizedBox(height:20),
-              Container(
-                color: Colors.blue,
-                padding: EdgeInsets.only(left:20),
-                child:Column(children: [
-                 SizedBox(
-                  
-                  width: 300,
-                  
-                  child: Text('EXPERIENCE',style:TextStyle(color:Colors.black, fontSize:20,fontWeight:FontWeight.bold) )),
-                  
-                Divider(color:Colors.black, thickness: 4, indent:10, endIndent:20, height:1),
-                SizedBox(height:5),
-                
-                Text('dereja', style:TextStyle(color:Colors.black, fontSize:15)),
-                
-                Text('composity', style:TextStyle(color:Colors.green, fontSize:15)),
-                
-                Row(children: [
-                  Icon(Icons.calendar_month, size:14, color:Colors.black),
-                  Text('2008-11-03 - Present', style:TextStyle(fontSize:12, color:Colors.black)),
-                  
-                ],),
-               
-                  Text(". lorem lope", style: TextStyle(color: Colors.black, fontSize: 13)),
-              
-                
-              ],))
-              ]
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      SizedBox(width: 140),
+                      SizedBox(
+                        width: 165,
+                        height: 43,
+            child: ElevatedButton(
+  onPressed: () async {
+    // Call the _downloadCv function when the button is pressed
+    _downloadCv(context);
+  },
+  style: ElevatedButton.styleFrom(
+    backgroundColor: const Color.fromARGB(255, 26, 121, 198),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(24),
+    ),
+    elevation: 2,
+  ),
+  child: const Text(
+    'Download CV',
+    style: TextStyle(fontSize: 16, color: Colors.white),
+  ),
+),
+
+                      ),
+                    ],
+                  ),
+              RepaintBoundary(
+                   key: _globalKey,
+                  child:Container(
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(left: 20),
+                          color: Colors.red,
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                width: 300,
+                                child: Text('Jon Don', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 17)),
+                              ),
+                              Row(
+                                children: [
+                                  Icon(Icons.phone, size: 12, color: Colors.green),
+                                  Text(' 2517890987', style: TextStyle(fontSize: 14)),
+                                ],
+                              ),
+                              SizedBox(height: 20),
+                              Row(
+                                children: [
+                                  Text('@', style: TextStyle(color: Colors.green, fontSize: 12)),
+                                  SizedBox(width: 5),
+                                  Text('testabenezer@gmail.com', style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold)),
+                                  SizedBox(width: 20),
+                                  Icon(Icons.location_on, size: 12, color: Colors.green),
+                                  SizedBox(width: 10),
+                                  SizedBox(
+                                    width: 60,
+                                    child: Text('Addis Ababa, Ethiopia', style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold)),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Icon(Icons.badge, size: 13, color: Colors.green),
+                                  SizedBox(width: 5),
+                                  Text('Creative Arts', style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold)),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Container(
+                          padding: EdgeInsets.only(left: 20),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                width: 300,
+                                child: Text('SUMMARY', style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold)),
+                              ),
+                              Divider(color: Colors.black, thickness: 4, indent: 10, endIndent: 20, height: 1),
+                              SizedBox(height: 5),
+                              Container(
+                                padding: EdgeInsets.only(left: 20, right: 20),
+                                child: Column(
+                                  children: [
+                                    Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        Container(
+                          color: Colors.blue,
+                          padding: EdgeInsets.only(left: 20),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                width: 300,
+                                child: Text('EXPERIENCE', style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold)),
+                              ),
+                              Divider(color: Colors.black, thickness: 4, indent: 10, endIndent: 20, height: 1),
+                              SizedBox(height: 5),
+                              Text('dereja', style: TextStyle(color: Colors.black, fontSize: 15)),
+                              Text('composity', style: TextStyle(color: Colors.green, fontSize: 15)),
+                              Row(
+                                children: [
+                                  Icon(Icons.calendar_month, size: 14, color: Colors.black),
+                                  Text(' 2008-11-03 - Present', style: TextStyle(fontSize: 12, color: Colors.black)),
+                                ],
+                              ),
+                              Text(". lorem lope", style: TextStyle(color: Colors.black, fontSize: 13)),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+              ),
+                ],
+              ),
             ),
-              ),
-          ),
-            ]
-          )
-        ),
-      );
+          
+        ],
+      ),
+    ),
+  );
     default:
       return Center(child: Text('Select an option.'));
   }
