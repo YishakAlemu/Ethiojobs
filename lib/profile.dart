@@ -22,6 +22,12 @@ class Profilepage extends StatefulWidget {
 }
 
 class _ProfilepageState extends State<Profilepage> {
+  String fullName = '';
+  String email = '';
+  String phoneNumber = '';
+  String birthday = '';
+  String gender = '';
+  String profession = '';
   int _selectedNavIndex = 2;
   GlobalKey _globalKey = GlobalKey();
 
@@ -1396,8 +1402,6 @@ bottomNavigationBar:
                       child: SafeArea(
                         child: Container(
                           
-                        
-                          
                           //MediaQuery.of(context).size.width * 0.9,
                                             
                           padding: EdgeInsets.all(16),
@@ -1409,16 +1413,14 @@ bottomNavigationBar:
                                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                               SizedBox(height: 10),
-                              Container(
-                                height:50,
-                                width:360,
-                                child: quill.QuillSimpleToolbar(
+                              
+                                quill.QuillSimpleToolbar(
                                   controller: _controller,
                                   config: const quill.QuillSimpleToolbarConfig(
                                    
                                   ),
                                 ),
-                              ),
+                              
                               SizedBox(height: 10),
                               Container(
                                 
@@ -1432,10 +1434,10 @@ bottomNavigationBar:
                                 ),
                                 
                                 child: quill.QuillEditor.basic(
-                                  controller: _controller,
-                                  config: const quill.QuillEditorConfig(),
-                                  
-                                ),
+                                    controller: _controller,
+                                    config: const quill.QuillEditorConfig(),                          
+                                  ),
+                                
                               ),
                               SizedBox(height: 10),
                               Row(

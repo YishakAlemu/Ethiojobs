@@ -10,6 +10,7 @@ import 'onboarding.dart';
 import 'upload.dart';
 import 'apply.dart';
 import 'apply2.dart';
+import 'cv_editor.dart';
 class ParentWidget extends StatefulWidget {
   const ParentWidget({super.key});
 
@@ -52,18 +53,27 @@ class _ParentWidgetState extends State<ParentWidget> {
         
 
         PopupMenuButton<String>(
-  icon: Icon(Icons.account_circle_rounded, size: 32),
+  icon: Icon(Icons.account_circle_rounded, size: 40),
   itemBuilder: (BuildContext context) {
     return [
       PopupMenuItem<String>(
-  value: 'Find Jobs',
+        value: 'Login or register',
+        child:Row(children: [
+          SizedBox(width:10),
+          Icon(Icons.account_box_sharp,color:Colors.black, size:20),
+          SizedBox(width:8),
+          Text('Login or register', style: TextStyle(color:Colors.black)),
+        ],)
+      ),
+      PopupMenuItem<String>(
+  value: 'Profile',
   child: Row(
     children: [
       SizedBox(width:10),
       Icon(Icons.person, color: const Color.fromARGB(255, 0, 0, 0), size: 20),
       SizedBox(width: 8),
       Text(
-        'Find Jobs',
+        'Profile',
         style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0)),
       ),
     ],
@@ -78,32 +88,24 @@ class _ParentWidgetState extends State<ParentWidget> {
       //   child: Text('Blog'),
       // ),
       PopupMenuItem<String>(
-        value: 'Contact us',
+        value: 'Companies',
         child:Row(children: [
           SizedBox(width:10),
-          Icon(Icons.phone, color: const Color.fromARGB(255, 0, 0, 0),size:20),
+          Icon(Icons.location_city_outlined, color: const Color.fromARGB(255, 0, 0, 0),size:20),
           SizedBox(width:8),
-          Text('Contact us', style: TextStyle(color:const Color.fromARGB(255, 0, 0, 0)),),
+          Text('Companies', style: TextStyle(color:const Color.fromARGB(255, 0, 0, 0)),),
         ],)
       ),
-      PopupMenuItem<String>(
-        value: 'Log In',
-        child:Row(children: [
-          SizedBox(width:10),
-          Icon(Icons.login,color:Colors.black, size:20),
-          SizedBox(width:8),
-          Text('Log in', style: TextStyle(color:Colors.black)),
-        ],)
-      ),
-      PopupMenuItem<String>(
-        value: 'Sign Up',
-        child:Row(children: [
-          SizedBox(width:10),
-          Icon(Icons.person_add,color:Colors.black, size:20),
-          SizedBox(width:8),
-          Text('Sign up', style: TextStyle(color:Colors.black)),
-        ],)
-      ),
+      
+      // PopupMenuItem<String>(
+      //   value: 'Sign Up',
+      //   child:Row(children: [
+      //     SizedBox(width:10),
+      //     Icon(Icons.person_add,color:Colors.black, size:20),
+      //     SizedBox(width:8),
+      //     Text('Sign up', style: TextStyle(color:Colors.black)),
+      //   ],)
+      // ),
       PopupMenuItem<String>(
   value: 'Log out',
   child: Row(
@@ -126,14 +128,14 @@ class _ParentWidgetState extends State<ParentWidget> {
     ];
   },
   onSelected: (String value) {
-                  if (value == 'Log In') {
+                  if (value == 'Login or register') {
                     _navigatorKey.currentState!.pushNamed('/login');
                   }
                    else if (value == 'Sign Up') {
                     _navigatorKey.currentState!.pushNamed('/signup');
                 }
-                else if (value == 'Find Jobs') {
-                    _navigatorKey.currentState!.pushNamed('/home');}
+                else if (value == 'Profile') {
+                    _navigatorKey.currentState!.pushNamed('/profile');}
                     else if (value == 'Log out') {
                     _navigatorKey.currentState!.pushNamed('/logout');} 
 
@@ -204,6 +206,9 @@ class _ParentWidgetState extends State<ParentWidget> {
                 break;
                  case '/apply2': 
                 builder = (BuildContext context) => Apply2page();
+                break;
+                case '/cv_editor':
+                builder = (BuildContext context) => Cv_editorpage();
                 break;
                 
               default:

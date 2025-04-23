@@ -83,7 +83,7 @@ class _ApplypageState extends State<Applypage>  {
   ],
 ),
              SizedBox(height:50),
-             Text('Build an EthioJobs Resume To Apply', style:TextStyle(fontSize:20, fontWeight:FontWeight.bold, color:Colors.black)),
+             Text('Apply with EthioJobs Resume', style:TextStyle(fontSize:20, fontWeight:FontWeight.bold, color:Colors.black)),
              SizedBox(height:10),
              SizedBox(
               width:100,
@@ -98,7 +98,9 @@ class _ApplypageState extends State<Applypage>  {
               ),
               height: 38,
               width:320,
-               child: ElevatedButton(onPressed: (){}, 
+               child: ElevatedButton(onPressed: (){
+                  Navigator.pushNamed(context, '/cv_editor');
+               }, 
                style: ElevatedButton.styleFrom(
                                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                                 shape: RoundedRectangleBorder(

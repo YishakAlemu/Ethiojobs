@@ -1364,7 +1364,7 @@ Padding(
             ),
                     child: ElevatedButton(
                           onPressed: () {
-                            // Button action
+                            Navigator.pushNamed(context, '/apply');
                           },
                           style: ElevatedButton.styleFrom(
                                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 3),
@@ -1635,7 +1635,7 @@ Padding(
             ),
                     child: ElevatedButton(
                           onPressed: () {
-                            // Button action
+                            Navigator.pushNamed(context, '/apply');
                           },
                           style: ElevatedButton.styleFrom(
                                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 3),
@@ -1908,7 +1908,7 @@ Padding(
             ),
                     child: ElevatedButton(
                           onPressed: () {
-                            // Button action
+                            Navigator.pushNamed(context, '/apply');
                           },
                           style: ElevatedButton.styleFrom(
                                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 3),
