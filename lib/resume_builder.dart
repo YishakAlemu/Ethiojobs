@@ -36,14 +36,7 @@ class Resume_builderpageState extends State<Resume_builderpage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Center(
-        child: Column(
-          children: [
-            
-
-          ],
-        )
-      )
+      
     );
   }
 
