@@ -12,6 +12,7 @@ import 'upload.dart';
 import 'apply.dart';
 import 'apply2.dart';
 import 'cv_editor.dart';
+import 'resume_builder.dart';
 class ParentWidget extends StatefulWidget {
   const ParentWidget({super.key});
 
@@ -247,6 +248,21 @@ class _ParentWidgetState extends State<ParentWidget> {
                  case '/account':
                 builder = (BuildContext context) => Accountpage();
                 break;
+                // case '/resume_builder':
+                // builder = (BuildContext context) => Resume_builderpage(
+                //   fullName: 'John Doe',
+                //   email: 'johndoe@example.com',
+                //   phoneNumber: '1234567890',
+                //   birthday: '1990-01-01',
+                //   country: 'USA',
+                //   city: 'New York',
+                //   gender: 'Male',
+                //   profession: 'Software Engineer',
+                //   richTextContent: 'Experienced in Flutter development',
+                // );
+               // break;
+
+                
                 
               default:
                 throw Exception('Invalid route: ${settings.name}');
