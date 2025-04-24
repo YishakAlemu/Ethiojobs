@@ -513,22 +513,25 @@ Widget _buildProfession2PickerField() {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      
+      
+      
+     appBar: AppBar(
+      backgroundColor:Colors.white,
         title: Text(''),
         actions: [
           IconButton(
             icon: Icon(Icons.edit),
             onPressed: () => showPopup(context),
-            
           ),
         ],
       ),
       
-     body: SingleChildScrollView( // Wrap with SingleChildScrollView for dynamic content
+     body: SingleChildScrollView(
     child: Center(
       child: Column(
         children: [
-          
+          SizedBox(height:20),
             Container(
               width: 366,
               padding: const EdgeInsets.all(16.0),
@@ -756,11 +759,12 @@ Widget _buildProfession2PickerField() {
                 ],
               ),
             ),
-          
+          SizedBox(height:30),
         ],
       ),
     ),
   )
+  
     );
   }
 }
