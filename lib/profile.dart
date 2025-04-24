@@ -11,7 +11,6 @@ import 'package:flutter_quill/flutter_quill.dart' as quill;
 import 'package:open_file/open_file.dart';
 import 'dart:typed_data';
 import 'package:flutter/rendering.dart';
-import 'package:pdf/widgets.dart' as pw;
 
 class Profilepage extends StatefulWidget {
   const Profilepage({super.key});
@@ -29,7 +28,7 @@ class _ProfilepageState extends State<Profilepage> {
   String gender = '';
   String profession = '';
   int _selectedNavIndex = 2;
-  GlobalKey _globalKey = GlobalKey();
+  final GlobalKey _globalKey = GlobalKey();
 
 Future<String> _generatePdf() async {
   Future.delayed(Duration(milliseconds: 100));
@@ -806,7 +805,7 @@ final quill.QuillController _controller = quill.QuillController.basic();
   @override
   Widget build(BuildContext context) {
 
-   Widget buildNavItem(IconData icon, String label, VoidCallback onTap,double iconSize,Color iconColor) {
+    Widget buildNavItem(IconData icon, String label, VoidCallback onTap,double iconSize,Color iconColor,double scaleFactor,) {
     bool isSelected = _selectedNavIndex == _getIndex(label);
   return InkWell(
     onTap: () {
@@ -821,7 +820,14 @@ final quill.QuillController _controller = quill.QuillController.basic();
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, size: iconSize, color: isSelected ? iconColor : const Color.fromARGB(255, 0, 0, 0),),
+          Transform.scale(
+  scale: scaleFactor, // Pass your scale factor here
+  child: Icon(
+    icon, // Your icon
+    size: iconSize, // Base size of the icon
+    color: isSelected ? iconColor : const Color.fromARGB(255, 0, 0, 0), // Color based on selection
+  ),
+),
           SizedBox(height: 4),
           Text(
             label,
@@ -1135,172 +1141,7 @@ SizedBox(
 
 
 
-    Container(
-              height: 605,
-              width:400,
-              color: Color.fromARGB(255, 72, 193, 156), // Background color for the footer
-              margin: EdgeInsets.only(top: 25), 
-              
-              child: Container(
-                margin: EdgeInsets.only(top: 15), 
-                child: Column(
-                  children: [
-                    SizedBox(height : 37),
-                      SizedBox(
   
-  height: 57,
-  width: 290,
-  child: ClipRRect(
-    borderRadius: BorderRadius.circular(0), // Optional: for rounded corners
-    child: Image.asset(
-      'assets/africa_jobs.webp',
-      fit: BoxFit.fill, // Use BoxFit.fill or BoxFit.cover
-      height: 57, // Match container height
-      width: 300,  // Match container width
-    ),
-  ),
-),
-                    SizedBox(height: 60),
-                    Center(
-                      child:Text(
-                'Subscribe to get updates from', 
-                  style: TextStyle(
-                color: Colors.white,
-                  fontSize: 18,
-      ),
-    ),
-                    ),
-                    Text(
-                'Ethiojobs', 
-                  style: TextStyle(
-                color: Colors.white,
-                  fontSize: 19
-                  
-      ),
-    ),
-    SizedBox(height:5),
-    Center(
-      child:Container(
-              height: 50,
-              width: 330,
-              margin: EdgeInsets.only(top: 0),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(25),
-               
-              ),
-             child: Center(
-  child: TextField(
-    cursorColor: Colors.black54,
-    decoration: InputDecoration(
-      hintText: "Your email",
-      hintStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
-      contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 12),
-      border: InputBorder.none,
-    ),
-  ),
-),
-            ),
-    ),
-    Row(
-      children: [
-        SizedBox(width: 210),
-        Padding(
-          padding: const EdgeInsets.only(left: 0.0, right: 0),
-          child: ElevatedButton(
-            onPressed: () {
-              // Action for Button 2
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color.fromARGB(255, 26, 121, 198),
-              padding: EdgeInsets.zero, // Remove any padding from the button
-              minimumSize: Size(150, 37),  // Ensure minimum size is zero to avoid extra space
-            ),
-            child: Text('Subscribe', style: TextStyle(color: Colors.white, fontSize: 16,),),
-          ),
-        ),
-        
-
-            
-      ]
-    ),
-               SizedBox(height:20),
-               Text('Contact Us', style: TextStyle(
-                color: Colors.white, fontSize: 21, fontWeight:FontWeight.w600
-               ),),
-                   SizedBox(height:10),
-                   Text('Meskel Flower Road', style: TextStyle(
-                color: Colors.white, fontSize: 17, fontWeight:FontWeight.w400
-               ),), 
-                   Text('Behind Nazra Hotel, Addis Ababa, Ethiopia', style: TextStyle(
-                color: Colors.white, fontSize: 17, fontWeight:FontWeight.w400
-               ),),
-               Text('+251-993-87-22-46 | +251-969-23-90-94', style: TextStyle(
-                color: Colors.white, fontSize: 17, fontWeight:FontWeight.w400
-               ),),
-               Text('candidates@ethiojobs.net', style: TextStyle(
-                color: Colors.white, fontSize: 16, fontWeight:FontWeight.w400
-               ),),
-               SizedBox(height:30),
-               Text('About Us | Contact  Us | FAQs', style: TextStyle(
-                color: Colors.white, fontSize: 15, fontWeight:FontWeight.w400
-               ),),
-                  SizedBox(height:10),
-               Container(
-                            margin: EdgeInsets.symmetric(horizontal: 10),
-                            
-                            width: 255,
-                            child: Row(
-                              children: [
-                                SizedBox(width: 15),
-                                FaIcon(FontAwesomeIcons.linkedin, color: Colors.white, size: 30),
-                                SizedBox(width: 11),
-                                FaIcon(FontAwesomeIcons.instagram, color: Colors.white, size: 29),
-                                SizedBox(width: 11),
-                                FaIcon(FontAwesomeIcons.youtube, color: Colors.white, size: 29),
-                                SizedBox(width: 11),
-                                FaIcon(FontAwesomeIcons.xTwitter, color: Colors.white, size: 29),
-                                SizedBox(width: 11),
-                                FaIcon(FontAwesomeIcons.facebook, color: Colors.white, size: 29),
-                                SizedBox(width: 11),
-                                FaIcon(FontAwesomeIcons.telegram, color: Colors.white, size: 32),
-                              ],
-                            ),
-                          ),
-               SizedBox(height:10),
-               Row(
-                children: [
-                  SizedBox(width:110),
-                FaIcon(FontAwesomeIcons.copyright, color: Colors.white,size: 10),
-                SizedBox(width:5),
-                Text('2004-2024 Ethio Jobs', style: TextStyle(color: Colors.white),),
-                ]
-               )
-                  ],
-                  
-                  
-                  
-                  
-                  
-                  
-                  )
-              
-              ),
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            ),
     ],
   ),
 ),
@@ -1313,28 +1154,32 @@ bottomNavigationBar:
     padding: EdgeInsets.symmetric(horizontal: 4),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
+      children:  [
         buildNavItem(
+          
           Icons.search_rounded,
           'Jobs',
           () {
             Navigator.pushNamed(context, '/home');
           },
           22,
-          const Color.fromARGB(255, 72, 193, 156),
+          const Color.fromARGB(255, 0, 0, 0), 0.7
+          
         ),
-        buildNavItem(Icons.menu_book_outlined, 'Applications', () {
+        buildNavItem(Icons.location_city_outlined, 'Companies', () {
+         // Navigator.pushNamed(context, '/saved');
+        }, 22, const Color.fromARGB(255, 0, 0, 0),0.7),
+        buildNavItem(Icons.menu_book_outlined, 'My Applications', () {
           Navigator.pushNamed(context, '/apps');
-        }, 22, const Color.fromARGB(255, 72, 193, 156)),
+        }, 22, const Color.fromARGB(255, 0, 0, 0),0.7),
+        
+        // buildNavItem(Icons.add_alert_sharp, 'Alert', () {
+        //   // Action for Alert
+        // }, 22, const Color.fromARGB(255, 72, 193, 156)),
+        
         buildNavItem(Icons.person_outline_outlined, 'Profile', () {
           Navigator.pushNamed(context, '/profile');
-        }, 35, const Color.fromARGB(255, 72, 193, 156)),
-        buildNavItem(Icons.add_alert_sharp, 'Alert', () {
-          // Action for Alert
-        }, 22, const Color.fromARGB(255, 72, 193, 156)),
-        buildNavItem(Icons.bookmark_added, 'Saved Jobs', () {
-          Navigator.pushNamed(context, '/saved');
-        }, 22, const Color.fromARGB(255, 72, 193, 156)),
+        }, 22, const Color.fromARGB(255, 72, 193, 156),0.7),
       ],
     ),
   ),
@@ -1391,7 +1236,7 @@ bottomNavigationBar:
                     ],
                   ),
                 ] else ...[
-                  Container(
+                  SizedBox(
                     
                     width: 370,
   

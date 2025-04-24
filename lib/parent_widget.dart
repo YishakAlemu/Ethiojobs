@@ -1,3 +1,4 @@
+import 'package:ethiojobs/account.dart';
 import 'package:flutter/material.dart';
 import 'home.dart';
 import 'job_details.dart';
@@ -40,109 +41,142 @@ class _ParentWidgetState extends State<ParentWidget> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         
-        Image.asset(
-          'assets/ethiojobs.webp',
-          height: 125,
-          width: 145,
-        ),
-        SizedBox(width:90),
- 
+        
+         
+          Image.asset(
+            'assets/ethiojobs.webp',
+            height: 125,
+            width: 145,
+          ),
+      
+        SizedBox(width:70),
+         Container(
+         
+           child: Column(children: [
+            SizedBox(height: 13),
+            GestureDetector(
+             onTap: () {
+               // Your onTap logic here
+               _navigatorKey.currentState!.pushNamed('/account');
+             },
+             child: Container(
+               decoration: BoxDecoration(
+                 shape: BoxShape.circle,
+                 border: Border.all(color: Color.fromARGB(255, 255, 255, 255), width: 1),
+               ),
+               child: CircleAvatar(
+                 radius: 22,
+                 backgroundImage: AssetImage('assets/jondon.webp'), // Ensure this image exists
+               ),
+             ),
+           ),
+           ],),
+         )
+
+
+
+
+
+
+
+           
+         
       
     
   
         
 
-        PopupMenuButton<String>(
-  icon: Icon(Icons.account_circle_rounded, size: 40),
-  itemBuilder: (BuildContext context) {
-    return [
-      PopupMenuItem<String>(
-        value: 'Login or register',
-        child:Row(children: [
-          SizedBox(width:10),
-          Icon(Icons.account_box_sharp,color:Colors.black, size:20),
-          SizedBox(width:8),
-          Text('Login or register', style: TextStyle(color:Colors.black)),
-        ],)
-      ),
-      PopupMenuItem<String>(
-  value: 'Profile',
-  child: Row(
-    children: [
-      SizedBox(width:10),
-      Icon(Icons.person, color: const Color.fromARGB(255, 0, 0, 0), size: 20),
-      SizedBox(width: 8),
-      Text(
-        'Profile',
-        style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0)),
-      ),
-    ],
-  ),
-),
-      // PopupMenuItem<String>(
-      //   value: 'Find Companies',
-      //   child: Text('Find Companies'),
-      // ),
-      // PopupMenuItem<String>(
-      //   value: 'Blog',
-      //   child: Text('Blog'),
-      // ),
-      PopupMenuItem<String>(
-        value: 'Companies',
-        child:Row(children: [
-          SizedBox(width:10),
-          Icon(Icons.location_city_outlined, color: const Color.fromARGB(255, 0, 0, 0),size:20),
-          SizedBox(width:8),
-          Text('Companies', style: TextStyle(color:const Color.fromARGB(255, 0, 0, 0)),),
-        ],)
-      ),
+//         PopupMenuButton<String>(
+//   icon: Icon(Icons.account_circle_rounded, size: 40),
+//   itemBuilder: (BuildContext context) {
+//     return [
+//       PopupMenuItem<String>(
+//         value: 'Login or register',
+//         child:Row(children: [
+//           SizedBox(width:10),
+//           Icon(Icons.account_box_sharp,color:Colors.black, size:20),
+//           SizedBox(width:8),
+//           Text('Login or register', style: TextStyle(color:Colors.black)),
+//         ],)
+//       ),
+//       PopupMenuItem<String>(
+//   value: 'Profile',
+//   child: Row(
+//     children: [
+//       SizedBox(width:10),
+//       Icon(Icons.person, color: const Color.fromARGB(255, 0, 0, 0), size: 20),
+//       SizedBox(width: 8),
+//       Text(
+//         'Profile',
+//         style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0)),
+//       ),
+//     ],
+//   ),
+// ),
+//       // PopupMenuItem<String>(
+//       //   value: 'Find Companies',
+//       //   child: Text('Find Companies'),
+//       // ),
+//       // PopupMenuItem<String>(
+//       //   value: 'Blog',
+//       //   child: Text('Blog'),
+//       // ),
+//       PopupMenuItem<String>(
+//         value: 'Companies',
+//         child:Row(children: [
+//           SizedBox(width:10),
+//           Icon(Icons.location_city_outlined, color: const Color.fromARGB(255, 0, 0, 0),size:20),
+//           SizedBox(width:8),
+//           Text('Companies', style: TextStyle(color:const Color.fromARGB(255, 0, 0, 0)),),
+//         ],)
+//       ),
       
-      // PopupMenuItem<String>(
-      //   value: 'Sign Up',
-      //   child:Row(children: [
-      //     SizedBox(width:10),
-      //     Icon(Icons.person_add,color:Colors.black, size:20),
-      //     SizedBox(width:8),
-      //     Text('Sign up', style: TextStyle(color:Colors.black)),
-      //   ],)
-      // ),
-      PopupMenuItem<String>(
-  value: 'Log out',
-  child: Row(
-    children: [
-      SizedBox(width:10),
-      Icon(Icons.logout, color: Colors.black, size: 20),
-      SizedBox(width: 8),
-      Text(
-        'Log out',
-        style: TextStyle(color: Colors.black),
-      ),
-    ],
-  ),
-),
+//       // PopupMenuItem<String>(
+//       //   value: 'Sign Up',
+//       //   child:Row(children: [
+//       //     SizedBox(width:10),
+//       //     Icon(Icons.person_add,color:Colors.black, size:20),
+//       //     SizedBox(width:8),
+//       //     Text('Sign up', style: TextStyle(color:Colors.black)),
+//       //   ],)
+//       // ),
+//       PopupMenuItem<String>(
+//   value: 'Log out',
+//   child: Row(
+//     children: [
+//       SizedBox(width:10),
+//       Icon(Icons.logout, color: Colors.black, size: 20),
+//       SizedBox(width: 8),
+//       Text(
+//         'Log out',
+//         style: TextStyle(color: Colors.black),
+//       ),
+//     ],
+//   ),
+// ),
 
-      // PopupMenuItem<String>(
-      //   value: 'Employers, are you recruiting?',
-      //   child: Text('Employers, are you recruiting?'),
-      // ),
-    ];
-  },
-  onSelected: (String value) {
-                  if (value == 'Login or register') {
-                    _navigatorKey.currentState!.pushNamed('/login');
-                  }
-                   else if (value == 'Sign Up') {
-                    _navigatorKey.currentState!.pushNamed('/signup');
-                }
-                else if (value == 'Profile') {
-                    _navigatorKey.currentState!.pushNamed('/profile');}
-                    else if (value == 'Log out') {
-                    _navigatorKey.currentState!.pushNamed('/logout');} 
+//       // PopupMenuItem<String>(
+//       //   value: 'Employers, are you recruiting?',
+//       //   child: Text('Employers, are you recruiting?'),
+//       // ),
+//     ];
+//   },
+//   onSelected: (String value) {
+//                   if (value == 'Login or register') {
+//                     _navigatorKey.currentState!.pushNamed('/login');
+//                   }
+//                    else if (value == 'Sign Up') {
+//                     _navigatorKey.currentState!.pushNamed('/signup');
+//                 }
+//                 else if (value == 'Profile') {
+//                     _navigatorKey.currentState!.pushNamed('/profile');}
+//                     else if (value == 'Log out') {
+//                     _navigatorKey.currentState!.pushNamed('/logout');} 
 
 
-  },
-  offset: Offset(0, 35), 
-)
+//   },
+//   offset: Offset(0, 35), 
+// )
       ],
     ),
               backgroundColor: const Color.fromARGB(255, 255, 255, 255),
@@ -193,7 +227,7 @@ class _ParentWidgetState extends State<ParentWidget> {
                 builder = (BuildContext context) => Appspage();
                 break;
                 case '/saved': 
-                builder = (BuildContext context) => Savedpage(onJobSelected: onJobSelected);
+                builder = (BuildContext context) => Savedpage();
                 break;
                 case '/onboarding':
                 builder = (BuildContext context) => Onboardingpage();
@@ -209,6 +243,9 @@ class _ParentWidgetState extends State<ParentWidget> {
                 break;
                 case '/cv_editor':
                 builder = (BuildContext context) => Cv_editorpage();
+                break;
+                 case '/account':
+                builder = (BuildContext context) => Accountpage();
                 break;
                 
               default:

@@ -30,7 +30,7 @@ int _getIndex(String label) {
   }
   @override
   Widget build(BuildContext context) {
-   Widget buildNavItem(IconData icon, String label, VoidCallback onTap,double iconSize,Color iconColor) {
+    Widget buildNavItem(IconData icon, String label, VoidCallback onTap,double iconSize,Color iconColor,double scaleFactor,) {
     bool isSelected = _selectedNavIndex == _getIndex(label);
   return InkWell(
     onTap: () {
@@ -45,7 +45,14 @@ int _getIndex(String label) {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, size: iconSize, color: isSelected ? iconColor : const Color.fromARGB(255, 0, 0, 0),),
+          Transform.scale(
+  scale: scaleFactor, // Pass your scale factor here
+  child: Icon(
+    icon, // Your icon
+    size: iconSize, // Base size of the icon
+    color: isSelected ? iconColor : const Color.fromARGB(255, 0, 0, 0), // Color based on selection
+  ),
+),
           SizedBox(height: 4),
           Text(
             label,
@@ -1276,7 +1283,7 @@ int _getIndex(String label) {
                            
                             alignment: Alignment.centerLeft,
                             
-                            width:355,
+                            width:360,
                             height:40,
                             
                             child: TextButton(
@@ -1294,10 +1301,51 @@ int _getIndex(String label) {
                                                ),
                          ],
                        ),
-                       SizedBox(height:1),
+                       SizedBox(height:10),
+                       Container(
+  height: 25,
+  width: 338,
+  margin: EdgeInsets.symmetric(horizontal: 22.0),
+  padding: EdgeInsets.all(0), // Ensure no padding around the container
+  color: Colors.white,
+  child: Row(
+    children: [
+      SizedBox(width:0),
+      
+      Container(
+        
+        
+        child: Text(
+          '15 days ago by ',
+          style: TextStyle(fontSize: 14), // Customize the style as needed
+        ),
+      ),
+      SizedBox(width: 10),
+      // Text Button
+      Container( // Use Expanded to take available space
+        child: TextButton(
+          onPressed: () {
+            // Action to perform when the button is pressed
+          },
+          style: TextButton.styleFrom(
+            padding: EdgeInsets.all(0),
+            minimumSize: Size(0, 0), // Remove padding from the button
+          ),
+          child: Text(
+            'ETHIOJOBS & AFRINET',
+            style: TextStyle(fontSize: 14, color: Colors.blueAccent),
+            overflow: TextOverflow.ellipsis, // Enable ellipsis
+            maxLines: 1, // Limit to one line
+          ),
+        ),
+      ),
+      
+    ],
+  ),
+),
                        Row(
     children: [
-      SizedBox(width:10),
+      SizedBox(width:20),
          Padding(
   padding: const EdgeInsets.only(right: 0.0), 
   child: TextButton.icon(
@@ -1556,20 +1604,70 @@ Padding(
   ),
                         ],
                       ),
-                       Container(
-                        width:355,
-                        
-                        margin:EdgeInsets.only(left:10),
-                     padding: EdgeInsets.only(left:0), // Aligns the text to the start of the container
-                  child: Text(
-                 'Accountant',
-                 style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.black),
-                textAlign: TextAlign.left, // Optional: ensures text is aligned to the left
-                ),
-                    ),
+                       Row(
+                         children: [
+                          SizedBox(width:10),
+                           Container(
+                           
+                            alignment: Alignment.centerLeft,
+                            
+                            width:360,
+                            height:40,
+                            
+                            child: TextButton(
+                             onPressed: () {
+                               
+                             },
+                               child: Text(
+                                 'Accountant',
+                                 style: TextStyle(color: Colors.black, fontSize: 18,fontWeight: FontWeight.bold),
+                                 overflow: TextOverflow.ellipsis,
+                                 maxLines: 1,
+                               ),
+                             
+                           ),
+                                               ),
+                         ],
+                       ),
+                    SizedBox(height:10),
+                     Container(
+  height: 25,
+  width: 338,
+  margin: EdgeInsets.symmetric(horizontal: 22.0),
+  padding: EdgeInsets.all(0), // Ensure no padding around the container
+  color: Colors.white,
+  child: Row(
+    children: [
+      // Label
+      Text(
+        '15 days ago by ',
+        style: TextStyle(fontSize: 14), // Customize the style as needed
+      ),
+      SizedBox(width: 10),
+      // Text Button
+      Container( // Use Expanded to take available space
+        child: TextButton(
+          onPressed: () {
+            // Action to perform when the button is pressed
+          },
+          style: TextButton.styleFrom(
+            padding: EdgeInsets.all(0),
+            minimumSize: Size(0, 0), // Remove padding from the button
+          ),
+          child: Text(
+            'ETHIOJOBS & AFRINET',
+            style: TextStyle(fontSize: 14, color: Colors.blueAccent),
+            overflow: TextOverflow.ellipsis, // Enable ellipsis
+            maxLines: 1, // Limit to one line
+          ),
+        ),
+      ),
+    ],
+  ),
+),
                        Row(
     children: [
-      SizedBox(width:10),
+      SizedBox(width:20),
          Padding(
   padding: const EdgeInsets.only(right: 0.0), 
   child: TextButton.icon(
@@ -1829,20 +1927,70 @@ Padding(
                                 
                         ],
                       ),
-                       Container(
-                        width:355,
-                        
-                        margin:EdgeInsets.only(left:10),
-                     padding: EdgeInsets.only(left:0), // Aligns the text to the start of the container
-                  child: Text(
-                 'HR manager [All Levels]',
-                 style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.black),
-                textAlign: TextAlign.left, // Optional: ensures text is aligned to the left
-                ),
-                    ),
+                       Row(
+                         children: [
+                          SizedBox(width:10),
+                           Container(
+                           
+                            alignment: Alignment.centerLeft,
+                            
+                            width:360,
+                            height:40,
+                            
+                            child: TextButton(
+                             onPressed: () {
+                               
+                             },
+                               child: Text(
+                                 'HR manager [All Levels]',
+                                 style: TextStyle(color: Colors.black, fontSize: 18,fontWeight: FontWeight.bold),
+                                 overflow: TextOverflow.ellipsis,
+                                 maxLines: 1,
+                               ),
+                             
+                           ),
+                                               ),
+                         ],
+                       ),
+                    SizedBox(height:10),
+                    Container(
+  height: 25,
+  width: 338,
+  margin: EdgeInsets.symmetric(horizontal: 22.0),
+  padding: EdgeInsets.all(0), // Ensure no padding around the container
+  color: Colors.white,
+  child: Row(
+    children: [
+      // Label
+      Text(
+        '15 days ago by ',
+        style: TextStyle(fontSize: 14), // Customize the style as needed
+      ),
+      SizedBox(width: 10),
+      // Text Button
+      Container( // Use Expanded to take available space
+        child: TextButton(
+          onPressed: () {
+            // Action to perform when the button is pressed
+          },
+          style: TextButton.styleFrom(
+            padding: EdgeInsets.all(0),
+            minimumSize: Size(0, 0), // Remove padding from the button
+          ),
+          child: Text(
+            'ETHIOJOBS & AFRINET',
+            style: TextStyle(fontSize: 14, color: Colors.blueAccent),
+            overflow: TextOverflow.ellipsis, // Enable ellipsis
+            maxLines: 1, // Limit to one line
+          ),
+        ),
+      ),
+    ],
+  ),
+),
                        Row(
     children: [
-      SizedBox(width:10),
+      SizedBox(width:20),
          Padding(
   padding: const EdgeInsets.only(right: 0.0), 
   child: TextButton.icon(
@@ -2395,28 +2543,32 @@ Padding(
     padding: EdgeInsets.symmetric(horizontal: 4),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
+      children:  [
         buildNavItem(
+          
           Icons.search_rounded,
           'Jobs',
           () {
             Navigator.pushNamed(context, '/home');
           },
           22,
-          const Color.fromARGB(255, 72, 193, 156),
+          const Color.fromARGB(255, 72, 193, 156), 0.7
+          
         ),
-        buildNavItem(Icons.menu_book_outlined, 'Applications', () {
+        buildNavItem(Icons.location_city_outlined, 'Companies', () {
+         // Navigator.pushNamed(context, '/saved');
+        }, 22, const Color.fromARGB(255, 0, 0, 0),0.7),
+        buildNavItem(Icons.menu_book_outlined, 'My Applications', () {
           Navigator.pushNamed(context, '/apps');
-        }, 22, const Color.fromARGB(255, 72, 193, 156)),
+        }, 22, const Color.fromARGB(255, 0, 0, 0),0.7),
+        
+        // buildNavItem(Icons.add_alert_sharp, 'Alert', () {
+        //   // Action for Alert
+        // }, 22, const Color.fromARGB(255, 72, 193, 156)),
+        
         buildNavItem(Icons.person_outline_outlined, 'Profile', () {
           Navigator.pushNamed(context, '/profile');
-        }, 35, const Color.fromARGB(255, 72, 193, 156)),
-        buildNavItem(Icons.add_alert_sharp, 'Alert', () {
-          // Action for Alert
-        }, 22, const Color.fromARGB(255, 72, 193, 156)),
-        buildNavItem(Icons.bookmark_added, 'Saved Jobs', () {
-          Navigator.pushNamed(context, '/saved');
-        }, 22, const Color.fromARGB(255, 72, 193, 156)),
+        }, 22, const Color.fromARGB(255, 72, 193, 156),0.7),
       ],
     ),
   ),
