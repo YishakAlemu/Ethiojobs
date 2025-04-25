@@ -27,18 +27,20 @@ class _Cv_editorpageState extends State<Cv_editorpage> {
   final TextEditingController _phoneNumberController = TextEditingController(text: "+1234567890");
   final TextEditingController _countryController = TextEditingController(text: "USA");
   final TextEditingController _cityController = TextEditingController(text: "New York");
-  final TextEditingController _dateController = TextEditingController(text: "111");
+  final TextEditingController _dateController = TextEditingController();
   final TextEditingController _genderController = TextEditingController();
   final TextEditingController _professionController = TextEditingController();
   final QuillController _Controller = QuillController.basic();
   final QuillController _Controller2 = QuillController.basic();
+  String? _selectedGender;
   String fullName = 'Jon Don';
   String email = 'testabenezer@gmail.com';  
   String phoneNumber = '25197';
   String birthday = '12/4/2002';
   String country = 'Ethiopia';
   String city = 'Addis Ababa';
-  String gender = 'Male';
+  String gender = '';
+  
   String profession = 'Creative arts';
   String richTextContent = "Lorem ipsum dolor sit amet,consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum";
   String university = 'AAstu';
@@ -194,7 +196,8 @@ void _downloadCv(BuildContext context) async {
                               hintText: '',
                               onChanged: (value) => phoneNumber = value,
                             ),
-                            _buildDatePickerField(),
+                            _buildDatePickerField(
+                            ),
                             _buildTextField(
                               label: 'Country',
                               hintText: '',
@@ -208,23 +211,38 @@ void _downloadCv(BuildContext context) async {
                             _buildGenderPickerField(),
                             _buildProfessionPickerField(),
                             _buildRichTextEditor(),
-                            SizedBox(height:40),
-                              Text('Education',style: TextStyle(
-                                
-                          color: Colors.black,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ), ),
-                        Divider(color:Colors.grey, indent: 20, endIndent:20),
-                        SizedBox(height:15),
-                            _buildUniPickerField(),
-                             _buildTextField(
-                              label: 'University Major',
-                              hintText: '',
-                              onChanged: (value) => city = value,
-                            ),
-                            _buildDegreePickerField(),
-                            _buildGraduationPickerField(),
+                            
+                            
+                               SizedBox(height:30),
+                        ...educationEntries.asMap().entries.map((entry) {
+          int index = entry.key;
+          var value = entry.value;
+          return _buildEducationContainer(
+            university: value['university'] ?? '',
+            degree: value['degree'] ?? '',
+            grad_year: value['grad_year'] ?? '',
+            onDelete: () => _removeEducation(index), // Pass the delete function
+          );
+        }),
+      
+      
+                              SizedBox(height:5),
+                              ElevatedButton(
+        onPressed: () {
+    _addEducation(context); // Open the education dialog
+  },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color.fromARGB(255, 26, 121, 198),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          elevation: 4,
+        ),
+        child: const Text(
+          '+ Add Education',
+          style: TextStyle(fontSize: 17, color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+      ),
                              SizedBox(height:40),
                               Text('Work Experience',style: TextStyle(
                                 
@@ -315,48 +333,180 @@ void _downloadCv(BuildContext context) async {
 
   
 
-  Widget _buildTextField({required String label, required String hintText, TextEditingController? controller, required Function(String) onChanged}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label, style: TextStyle(color: Colors.black54, fontSize: 16)),
-        SizedBox(height: 8),
+  Widget _buildTextField({
+  required String label,
+  required String hintText,
+  TextEditingController? controller,
+  required Function(String) onChanged,
+  bool isDatePicker = false,
+  List<String>? dropdownItems,
+  String? selectedValue,
+  Function(String?)? onDropdownChanged,
+}) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(label, style: TextStyle(color: Colors.black54, fontSize: 16)),
+      SizedBox(height: 8),
+      if (isDatePicker)
+        GestureDetector(
+          onTap: () async {
+            DateTime? pickedDate = await showDatePicker(
+              context: context,
+              initialDate: DateTime.now(),
+              firstDate: DateTime(1900),
+              lastDate: DateTime(2101),
+            );
+
+            if (pickedDate != null) {
+              String formattedDate = "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
+              controller?.text = formattedDate; // Update text field
+              onChanged(formattedDate); // Call onChanged
+            }
+          },
+          child: AbsorbPointer(
+            child: TextField(
+              controller: controller,
+              decoration: InputDecoration(
+                hintText: hintText,
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ),
+        )
+      else if (dropdownItems != null && onDropdownChanged != null)
+        DropdownButton<String>(
+          value: selectedValue,
+          hint: Text(hintText),
+          isExpanded: true,
+          items: dropdownItems.map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            );
+          }).toList(),
+          onChanged: (value) {
+            onDropdownChanged(value);
+            if (controller != null) {
+              controller.text = value ?? ''; // Update text field if controller is provided
+            }
+          },
+        )
+      else
         TextField(
           controller: controller,
-          
           onChanged: onChanged,
           decoration: InputDecoration(
             hintText: hintText,
             border: OutlineInputBorder(),
           ),
         ),
-        SizedBox(height: 16),
-      ],
-    );
-  }
+      SizedBox(height: 16),
+    ],
+  );
+}
 
-  Widget _buildDatePickerField() {
-    return _buildTextField(
-      controller: _dateController,
-      label: 'Birthday',
-      hintText: 'Select date',
-      onChanged: (value) {
-        birthday = value;
-      },
-    );
-  }
+ Widget _buildDatePickerField() {
+  return GestureDetector(
+    onTap: () async {
+      DateTime? pickedDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1900),
+        lastDate: DateTime(2101),
+      );
 
-  Widget _buildGenderPickerField() {
-    return _buildTextField(
-      controller: _genderController,
+      if (pickedDate != null) {
+        String formattedDate = "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
+        _dateController.text = formattedDate; // Update the controller's text
+        birthday = formattedDate; // Update the variable
+      }
+    },
+    child: AbsorbPointer(
+      child: _buildTextField(
+        controller: _dateController,
+        label: 'Birthday',
+        hintText: 'Select date',
+        onChanged: (value) {
+          birthday = value; // Still keep this to manage changes
+        },
+      ),
+    ),
+  );
+}
+
+Widget _buildGenderPickerField() {
+  return GestureDetector(
+    onTap: () {
+      _showGenderSelectionDialog(); // Show dialog with radio buttons
+    },
+    child: AbsorbPointer(
+      child: _buildTextField(
+        controller: _genderController,
+        label: 'Gender',
+        hintText: 'Select Gender',
+        onChanged: (value) {
+          birthday = value; // Still keep this to manage changes
+        },
+       
+          // Optional icon
+        ),
       
-      label: 'Gender',
-      hintText: 'Select Gender',
-      onChanged: (value) {
-        gender = value;
-      },
-    );
-  }
+    ),
+  );
+}
+
+void _showGenderSelectionDialog() {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Select Gender'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            RadioListTile<String?>(
+              title: Text("Male"),
+              value: "male",
+              groupValue: gender,
+              onChanged: (value) {
+                setState(() {
+                  gender = value ?? '';
+                  _genderController.text = 'Male'; // Update the text controller
+                });
+                Navigator.pop(context); // Close the dialog
+              },
+            ),
+            RadioListTile<String?>(
+              title: Text("Female"),
+              value: "female",
+              groupValue: gender,
+              onChanged: (value) {
+                setState(() {
+                  gender = value ?? '';
+                  _genderController.text = 'Female'; // Update the text controller
+                });
+                Navigator.pop(context); // Close the dialog
+              },
+            ),
+            RadioListTile<String?>(
+              title: Text("Other"),
+              value: "other",
+              groupValue: gender,
+              onChanged: (value) {
+                setState(() {
+                  gender = value ?? '';
+                  _genderController.text = 'Other'; // Update the text controller
+                });
+                Navigator.pop(context); // Close the dialog
+              },
+            ),
+          ],
+        ),
+      );
+    },
+  );
+}
 
   Widget _buildProfessionPickerField() {
     return _buildTextField(
@@ -429,6 +579,57 @@ Widget _buildUniPickerField() {
       },
     );
   }
+  List<Map<String, String>> educationEntries = [];
+
+  void _addEducation(BuildContext context) {
+    // Dummy data for demonstration; replace with actual data entry logic
+    setState(() {
+      educationEntries.add({
+        'university': university,
+        'degree': degree,
+        'grad_year': grad_year,
+      });
+    });
+  }
+  void _removeEducation(int index) {
+    setState(() {
+      if (index >= 0 && index < educationEntries.length) {
+        educationEntries.removeAt(index); // Remove the entry at the specified index
+      }
+    });
+  }
+  Widget _buildEducationContainer({
+  required String university,
+  required String degree,
+  required String grad_year,
+  required VoidCallback onDelete, // Added onDelete parameter
+}) {
+  return Container(
+                              child: Column(
+                                children: [
+                                  Row(children: [
+                                    SizedBox(width:30),
+                                    Text('Education',style: TextStyle(
+                                  
+                          color: Colors.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ), ),
+                        SizedBox(width:150),
+                        IconButton(onPressed: onDelete, 
+                        icon: Icon(Icons.delete, color:Colors.red, size:18))],),
+                        Divider(color:Colors.grey, indent: 20, endIndent:20, height: 0),
+                        SizedBox(height:15),
+                            _buildUniPickerField(),
+                             _buildTextField(
+                              label: 'University Major',
+                              hintText: '',
+                              onChanged: (value) => city = value,
+                            ),
+                            _buildDegreePickerField(),
+                            _buildGraduationPickerField(),],
+                              ));
+}
   Widget _buildGraduationPickerField() {
     return _buildTextField(
      
@@ -439,6 +640,7 @@ Widget _buildUniPickerField() {
       },
     );
   }
+  
   Widget _buildFromPickerField() {
     return _buildTextField(
       controller: _professionController,
@@ -675,28 +877,42 @@ Widget _buildProfession2PickerField() {
                         ),
                         SizedBox(height:20),
                         Container(
-                          
-                          padding: EdgeInsets.only(left: 20),
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                width: 300,
-                                child: Text('EDUCATION', style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold)),
-                              ),
-                              Divider(color: Colors.black, thickness: 4, indent: 10, endIndent: 20, height: 1),
-                              SizedBox(height: 5),
-                              Text(university, style: TextStyle(color: Colors.black, fontSize: 15)),
-                              Text(degree, style: TextStyle(color: Colors.green, fontSize: 15)),
-                              Row(
-                                children: [
-                                  Icon(Icons.calendar_month, size: 14, color: Colors.black),
-                                  Text(' $grad_year', style: TextStyle(fontSize: 12, color: Colors.black)),
-                                ],
-                              ),
-                              Text(". lorem lope", style: TextStyle(color: Colors.black, fontSize: 13)),
-                            ],
-                          ),
-                        ),
+  padding: EdgeInsets.only(left: 20),
+  child: Column(
+    children: [
+      SizedBox(
+        width: 300,
+        child: Text(
+          'EDUCATION',
+          style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+      ),
+      Divider(color: Colors.black, thickness: 4, indent: 10, endIndent: 20, height: 1),
+      SizedBox(height: 5),
+      
+      ...educationEntries.map((entry) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(entry['university'] ?? '', style: TextStyle(color: Colors.black, fontSize: 15)),
+            Text(entry['degree'] ?? '', style: TextStyle(color: Colors.green, fontSize: 15)),
+            Row(
+              children: [
+                Icon(Icons.calendar_month, size: 14, color: Colors.black),
+                Text(' ${entry['grad_year'] ?? ''}', style: TextStyle(fontSize: 12, color: Colors.black)),
+              ],
+            ),
+            SizedBox(height: 10), // Add space between entries
+          ],
+        );
+      }).toList(),
+    ],
+  ),
+),
+
+      
+
+                        
                         SizedBox(height:20),
                         Container(
                           
@@ -751,7 +967,7 @@ Widget _buildProfession2PickerField() {
                             ],
                           ),
                         ),
-
+    
                       ],
                     ),
                   ),
