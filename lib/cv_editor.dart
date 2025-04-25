@@ -271,7 +271,7 @@ void _downloadCv(BuildContext context) async {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Container(
+                          SizedBox(
                             width:150,
                             child: ElevatedButton(
                               onPressed: () {
@@ -283,7 +283,7 @@ void _downloadCv(BuildContext context) async {
                               child: Text('Close', style: TextStyle(color: Colors.white)),
                             ),
                           ),
-                          Container(
+                          SizedBox(
                             width:150,
                             child: ElevatedButton(
                               onPressed: () {
@@ -392,7 +392,7 @@ void _downloadCv(BuildContext context) async {
         children: [
           QuillSimpleToolbar(controller: _Controller), 
           Divider(color:Colors.grey),// Toolbar for rich text editing
-          Container(
+          SizedBox(
             
             height: 300,
             child: QuillEditor(
@@ -482,7 +482,7 @@ Widget _buildUniPickerField() {
         children: [
           QuillSimpleToolbar(controller: _Controller), 
           Divider(color:Colors.grey),// Toolbar for rich text editing
-          Container(
+          SizedBox(
             
             height: 200,
             child: QuillEditor(
@@ -588,7 +588,7 @@ Widget _buildProfession2PickerField() {
                             children: [
                               SizedBox(
                                 width: 300,
-                                child: Text('$fullName', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 17)),
+                                child: Text(fullName, style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 17)),
                               ),
                               Row(
                                 children: [
@@ -601,15 +601,15 @@ Widget _buildProfession2PickerField() {
                                 children: [
                                   Text('@', style: TextStyle(color: Colors.green, fontSize: 12)),
                                   SizedBox(width: 5),
-                                  Text('$email', style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold)),
+                                  Text(email, style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold)),
                                   SizedBox(width: 10),
                                   Icon(Icons.location_on, size: 12, color: Colors.green),
                                   SizedBox(width: 10),
                                 
                                     Column(children: [
-                                      Text('$city',overflow: TextOverflow.ellipsis,
+                                      Text(city,overflow: TextOverflow.ellipsis,
   maxLines: 1, style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold)),
-                                      Text('$country',overflow: TextOverflow.ellipsis,
+                                      Text(country,overflow: TextOverflow.ellipsis,
   maxLines: 1, style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold)),
                                     ],)
                                     
@@ -620,7 +620,7 @@ Widget _buildProfession2PickerField() {
                                 children: [
                                   Icon(Icons.badge, size: 13, color: Colors.green),
                                   SizedBox(width: 5),
-                                  Text('$profession', style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold)),
+                                  Text(profession, style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold)),
                                 ],
                               ),
                             ],
@@ -641,7 +641,7 @@ Widget _buildProfession2PickerField() {
                                 padding: EdgeInsets.only(left: 20, right: 20),
                                 child: Column(
                                   children: [
-                                    Text("$richTextContent"),
+                                    Text(richTextContent),
                                   ],
                                 ),
                               ),
@@ -660,8 +660,8 @@ Widget _buildProfession2PickerField() {
                               ),
                               Divider(color: Colors.black, thickness: 4, indent: 10, endIndent: 20, height: 1),
                               SizedBox(height: 5),
-                              Text('$company', style: TextStyle(color: Colors.black, fontSize: 15)),
-                              Text('$title', style: TextStyle(color: Colors.green, fontSize: 15)),
+                              Text(company, style: TextStyle(color: Colors.black, fontSize: 15)),
+                              Text(title, style: TextStyle(color: Colors.green, fontSize: 15)),
                               Row(
                                 children: [
                                   Icon(Icons.calendar_month, size: 14, color: Colors.black),
@@ -685,8 +685,8 @@ Widget _buildProfession2PickerField() {
                               ),
                               Divider(color: Colors.black, thickness: 4, indent: 10, endIndent: 20, height: 1),
                               SizedBox(height: 5),
-                              Text('$university', style: TextStyle(color: Colors.black, fontSize: 15)),
-                              Text('$degree', style: TextStyle(color: Colors.green, fontSize: 15)),
+                              Text(university, style: TextStyle(color: Colors.black, fontSize: 15)),
+                              Text(degree, style: TextStyle(color: Colors.green, fontSize: 15)),
                               Row(
                                 children: [
                                   Icon(Icons.calendar_month, size: 14, color: Colors.black),

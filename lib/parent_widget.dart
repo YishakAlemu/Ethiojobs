@@ -12,7 +12,6 @@ import 'upload.dart';
 import 'apply.dart';
 import 'apply2.dart';
 import 'cv_editor.dart';
-import 'resume_builder.dart';
 class ParentWidget extends StatefulWidget {
   const ParentWidget({super.key});
 

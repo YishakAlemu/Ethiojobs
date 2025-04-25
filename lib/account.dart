@@ -223,7 +223,9 @@ Container(
     color: Colors.white,
     borderRadius: BorderRadius.circular(0),
   ),
-  child: ElevatedButton(onPressed: (){}, 
+  child: ElevatedButton(onPressed: (){
+    Navigator.pushNamed(context, '/login');
+  }, 
   child: Text('Log out', style: TextStyle(color:Colors.red, fontSize:16),)),
 )
 

@@ -1301,48 +1301,48 @@ int _getIndex(String label) {
                                                ),
                          ],
                        ),
-                       SizedBox(height:10),
-                       Container(
-  height: 25,
-  width: 338,
-  margin: EdgeInsets.symmetric(horizontal: 22.0),
-  padding: EdgeInsets.all(0), // Ensure no padding around the container
-  color: Colors.white,
-  child: Row(
-    children: [
-      SizedBox(width:0),
+//                        SizedBox(height:10),
+//                        Container(
+//   height: 25,
+//   width: 338,
+//   margin: EdgeInsets.symmetric(horizontal: 22.0),
+//   padding: EdgeInsets.all(0), // Ensure no padding around the container
+//   color: Colors.white,
+//   child: Row(
+//     children: [
+//       SizedBox(width:0),
       
-      Container(
+//       Container(
         
         
-        child: Text(
-          '15 days ago by ',
-          style: TextStyle(fontSize: 14), // Customize the style as needed
-        ),
-      ),
-      SizedBox(width: 10),
-      // Text Button
-      Container( // Use Expanded to take available space
-        child: TextButton(
-          onPressed: () {
-            // Action to perform when the button is pressed
-          },
-          style: TextButton.styleFrom(
-            padding: EdgeInsets.all(0),
-            minimumSize: Size(0, 0), // Remove padding from the button
-          ),
-          child: Text(
-            'ETHIOJOBS & AFRINET',
-            style: TextStyle(fontSize: 14, color: Colors.blueAccent),
-            overflow: TextOverflow.ellipsis, // Enable ellipsis
-            maxLines: 1, // Limit to one line
-          ),
-        ),
-      ),
+//         child: Text(
+//           '15 days ago by ',
+//           style: TextStyle(fontSize: 14), // Customize the style as needed
+//         ),
+//       ),
+//       SizedBox(width: 10),
+//       // Text Button
+//       Container( // Use Expanded to take available space
+//         child: TextButton(
+//           onPressed: () {
+//             // Action to perform when the button is pressed
+//           },
+//           style: TextButton.styleFrom(
+//             padding: EdgeInsets.all(0),
+//             minimumSize: Size(0, 0), // Remove padding from the button
+//           ),
+//           child: Text(
+//             'ETHIOJOBS & AFRINET',
+//             style: TextStyle(fontSize: 14, color: Colors.blueAccent),
+//             overflow: TextOverflow.ellipsis, // Enable ellipsis
+//             maxLines: 1, // Limit to one line
+//           ),
+//         ),
+//       ),
       
-    ],
-  ),
-),
+//     ],
+//   ),
+// ),
                        Row(
     children: [
       SizedBox(width:20),
