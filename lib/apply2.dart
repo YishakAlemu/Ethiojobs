@@ -279,7 +279,9 @@ class _Apply2pageState extends State<Apply2page>  {
           SizedBox(
             height:35,
             width:160,
-            child: ElevatedButton(onPressed: (){},
+            child: ElevatedButton(onPressed: (){
+              Navigator.pop(context);
+            },
             style: ElevatedButton.styleFrom(
                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                                   shape: RoundedRectangleBorder(
@@ -289,7 +291,7 @@ class _Apply2pageState extends State<Apply2page>  {
             ),
              child: Text('CANCEL', style: TextStyle(fontSize: 15, color:Colors.white),)),
           )
-
+    
          ]
          )
         ),

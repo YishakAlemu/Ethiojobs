@@ -53,7 +53,7 @@ int _getIndex(String label) {
     color: isSelected ? iconColor : const Color.fromARGB(255, 0, 0, 0), // Color based on selection
   ),
 ),
-          SizedBox(height: 4),
+          SizedBox(height: 2),
           Text(
             label,
             style: TextStyle(fontSize: 12, color: isSelected ? iconColor : const Color.fromARGB(255, 0, 0, 0),),
@@ -2536,10 +2536,11 @@ Padding(
       ),
       bottomNavigationBar: 
       BottomAppBar(
+        height:67,
         elevation: 8,
   color: Colors.white,
   child: Container(
-    height: 70,
+    
     padding: EdgeInsets.symmetric(horizontal: 4),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,

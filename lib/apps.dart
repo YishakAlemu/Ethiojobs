@@ -158,7 +158,7 @@ class _AppspageState extends State<Appspage> with SingleTickerProviderStateMixin
           ),
           child: Text(
             'ETHIOJOBS & AFRINET',
-            style: TextStyle(fontSize: 16, color: Colors.blueAccent),
+            style: TextStyle(fontSize: 14, color: Colors.blueAccent),
             overflow: TextOverflow.ellipsis, // Enable ellipsis
             maxLines: 1, // Limit to one line
           ),
@@ -335,7 +335,7 @@ Padding(
     color: isSelected ? iconColor : const Color.fromARGB(255, 0, 0, 0), // Color based on selection
   ),
 ),
-          SizedBox(height: 4),
+          SizedBox(height: 2),
           Text(
             label,
             style: TextStyle(fontSize: 12, color: isSelected ? iconColor : const Color.fromARGB(255, 0, 0, 0),),
@@ -439,9 +439,10 @@ Padding(
       ),
       bottomNavigationBar: BottomAppBar(
         elevation: 8,
+        height:67,
   color: Colors.white,
   child: Container(
-    height: 70,
+    
     padding: EdgeInsets.symmetric(horizontal: 4),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,

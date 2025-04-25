@@ -22,6 +22,8 @@ class Cv_editorpage extends StatefulWidget {
 }
 
 class _Cv_editorpageState extends State<Cv_editorpage> {
+   bool isChecked = false;
+   
   final TextEditingController _fullNameController = TextEditingController(text: "John Doe");
   final TextEditingController _emailController = TextEditingController(text: "john.doe@example.com");
   final TextEditingController _phoneNumberController = TextEditingController(text: "+1234567890");
@@ -54,6 +56,16 @@ class _Cv_editorpageState extends State<Cv_editorpage> {
   String richTextContent2 = "";
   String profession2 = 'Adaptablity';
   String years_of_exp= '3';
+  final List<String> skills = [
+    'Flutter',
+    'Dart',
+    'Firebase',
+    'Python',
+    'JavaScript',
+    'UI/UX',
+    'Spring',
+    'Django',
+  ];
   
 @override
   void dispose() {
@@ -243,7 +255,7 @@ void _downloadCv(BuildContext context) async {
           style: TextStyle(fontSize: 17, color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),
-                             SizedBox(height:40),
+                             SizedBox(height:60),
                               Text('Work Experience',style: TextStyle(
                                 
                           color: Colors.black,
@@ -264,8 +276,41 @@ void _downloadCv(BuildContext context) async {
                             ),
                              _buildFromPickerField(),
                             _buildToPickerField(),
+                            
+                            Row(
+                 children: [
+                  SizedBox(width:10),
+                   Checkbox(
+                                 value: isChecked,
+                                 activeColor: const Color.fromARGB(255, 26, 121, 198),
+                                 onChanged: (bool? value) {
+                    setState(() {
+                      isChecked = value ?? false; // Update state
+                    });
+                                 },
+                               ),
+                    Text('I currently work here', style: TextStyle(color:Colors.grey,fontSize: 18),),
+                 ],
+               ),
                             _buildRichTextEditor2(),
-                              SizedBox(height:40),
+                            ElevatedButton(
+        onPressed: () {
+     // Open the education dialog
+  },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color.fromARGB(255, 26, 121, 198),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          elevation: 4,
+        ),
+        child: const Text(
+          '+ Add Work Experience',
+          style: TextStyle(fontSize: 17, color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+      ),
+                             
+                              SizedBox(height:60),
                               Text('Skills',style: TextStyle(
                                 
                           color: Colors.black,
@@ -280,6 +325,45 @@ void _downloadCv(BuildContext context) async {
                               hintText: 'Enter your years of experience',
                               onChanged: (value) => years_of_exp = value,
                             ),
+                            ElevatedButton(
+        onPressed: () {
+     // Open the education dialog
+  },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color.fromARGB(255, 26, 121, 198),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          elevation: 4,
+        ),
+        child: const Text(
+          '+ Add Skill',
+          style: TextStyle(fontSize: 17, color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+      ),
+      SizedBox(height:5),
+       Container(
+        padding: EdgeInsets.all(16.0),
+        child: Wrap(
+          spacing: 8.0, // Horizontal space between chips
+          runSpacing: 4.0, // Vertical space between rows of chips
+          children: skills.map((skill) {
+            return Chip(
+              label: Text(skill),
+              deleteIcon: Icon(Icons.remove_circle_outline),
+              onDeleted: () {
+                // Handle chip removal logic here
+                print('$skill removed');
+              },
+              backgroundColor: Colors.blue[100], // Optional: Background color
+            );
+          }).toList(),
+        ),
+      ),
+                             SizedBox(height:40),
+
+
+
                           ],
                         ),
                       ),
@@ -710,6 +794,15 @@ Widget _buildProfession2PickerField() {
       onChanged: (value) {
         profession2 = value;
       },
+    );
+  }
+  
+  Widget _buildChip(String label, Function onDeleted) {
+    return Chip(
+      label: Text(label),
+      deleteIcon: Icon(Icons.remove_circle_outline),
+      onDeleted: () => onDeleted(),
+      backgroundColor: Colors.blue[100], // Optional: Background color
     );
   }
   @override

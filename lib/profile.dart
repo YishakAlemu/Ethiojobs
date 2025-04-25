@@ -827,7 +827,7 @@ final quill.QuillController _controller = quill.QuillController.basic();
     color: isSelected ? iconColor : const Color.fromARGB(255, 0, 0, 0), // Color based on selection
   ),
 ),
-          SizedBox(height: 4),
+          SizedBox(height: 2),
           Text(
             label,
             style: TextStyle(fontSize: 12, color: isSelected ? iconColor : const Color.fromARGB(255, 0, 0, 0),),
@@ -1147,9 +1147,10 @@ SizedBox(
 bottomNavigationBar: 
       BottomAppBar(
         elevation: 8,
+        height:67,
   color: Colors.white,
   child: Container(
-    height: 70,
+    height: 60,
     padding: EdgeInsets.symmetric(horizontal: 4),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -2161,7 +2162,7 @@ case 'Resume':
                       children: [
                         Container(
                           padding: EdgeInsets.only(left: 20),
-                          color: Colors.red,
+                          
                           child: Column(
                             children: [
                               SizedBox(
@@ -2223,7 +2224,7 @@ case 'Resume':
                         ),
                         SizedBox(height: 20),
                         Container(
-                          color: Colors.blue,
+                         
                           padding: EdgeInsets.only(left: 20),
                           child: Column(
                             children: [

@@ -1152,7 +1152,7 @@ Padding(
     color: isSelected ? iconColor : const Color.fromARGB(255, 0, 0, 0), // Color based on selection
   ),
 ),
-          SizedBox(height: 4),
+          SizedBox(height: 2),
           Text(
             label,
             style: TextStyle(fontSize: 12, color: isSelected ? iconColor : const Color.fromARGB(255, 0, 0, 0),),
@@ -1166,99 +1166,99 @@ Padding(
 }
 
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255,255, 255, 255),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(height: 20),
-            Container(
-              padding: EdgeInsets.only(left: 16),
-              child: Center(
-                child: Container(
-                  height: 55,
-                  width: double.infinity,
-                  padding: EdgeInsets.only(left: 5, right: 5),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.2),
-                        spreadRadius: 0,
-                        blurRadius: 0,
-                        offset: Offset(0, 0), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  child: Row(children: [
-                    
-                    Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Color.fromARGB(255, 255, 255, 255), width: 1),
-                      ),
-                      child: CircleAvatar(
-                        radius: 25,
-                        backgroundImage: AssetImage('assets/jondon.webp'),
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: 0),
-                          Text(
-                            'Jon Don',
-                            style: TextStyle(fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            'testabenezer@gmail.com',
-                            style: TextStyle(fontSize: 12, color: Colors.grey),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ]),
-                ),
-              ),
-            ),
-            SizedBox(height: 5),
-            SizedBox(
-              height:900,
-              child: Column(
-                children: [
-                  TabBar(
-                    controller: _tabController,
-                    tabs: [
-                      Tab(text: 'Saved Jobs'),
-                      Tab(text: "Recommended Jobs"),
-                    ],
-                  indicatorColor: const Color.fromARGB(255, 72, 193, 156), // Color of the indicator below the active tab
-                  labelColor: Colors.black, // Color of the text for the active tab
-                  unselectedLabelColor: Colors.black38, // Color for the inactive tabs
-                  indicatorWeight: 2.0
-                  ),
-                  Expanded(
-                    child: TabBarView(
-                      controller: _tabController,
-                      children: [
-                        _getSegment1(1), // Call your existing method for My Applications
-                        _getSegment1(2), // Call your existing method for Application Status
-                      ],
-                    ),
+  backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+  body: SingleChildScrollView(
+    child: Column(
+      children: [
+        SizedBox(height: 20),
+        Container(
+          padding: EdgeInsets.only(left: 16),
+          child: Center(
+            child: Container(
+              height: 55,
+              width: double.infinity,
+              padding: EdgeInsets.only(left: 5, right: 5),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 0,
+                    blurRadius: 0,
+                    offset: Offset(0, 0), // changes position of shadow
                   ),
                 ],
               ),
+              child: Row(children: [
+                Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Color.fromARGB(255, 255, 255, 255), width: 1),
+                  ),
+                  child: CircleAvatar(
+                    radius: 25,
+                    backgroundImage: AssetImage('assets/jondon.webp'),
+                  ),
+                ),
+                SizedBox(width: 10),
+                Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Jon Don',
+                        style: TextStyle(fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        'testabenezer@gmail.com',
+                        style: TextStyle(fontSize: 12, color: Colors.grey),
+                      ),
+                    ],
+                  ),
+                ),
+              ]),
             ),
-          ],
+          ),
         ),
-      ),
+        SizedBox(height: 5),
+        Container(
+          height: 1200, // Set a fixed height for the container
+          child: Column(
+            children: [
+              TabBar(
+                controller: _tabController,
+                tabs: [
+                  Tab(text: 'Saved Jobs'),
+                  Tab(text: "Recommended Jobs"),
+                ],
+                indicatorColor: const Color.fromARGB(255, 72, 193, 156), // Color of the indicator below the active tab
+                labelColor: Colors.black, // Color of the text for the active tab
+                unselectedLabelColor: Colors.black38, // Color for the inactive tabs
+                indicatorWeight: 2.0,
+              ),
+              Expanded(
+                child: TabBarView(
+                  controller: _tabController,
+                  children: [
+                    _getSegment1(1), // Call your existing method for My Applications
+                    _getSegment1(2), // Call your existing method for Application Status
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  ),
+
       bottomNavigationBar: BottomAppBar(
         elevation: 8,
+        height:67,
         color: Colors.white,
         child: Container(
-          height: 70,
+          
           padding: EdgeInsets.symmetric(horizontal: 4),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
