@@ -26,7 +26,22 @@ class _ProfilepageState extends State<Profilepage> {
   String birthday = '';
   String gender = '';
   String profession = '';
-  int _selectedNavIndex = 2;
+  int _selectedNavIndex = 3;
+  int _getIndex(String label) {
+    switch (label) {
+      case 'Jobs':
+        return 0;
+      case 'Companies':
+        return 1;
+      case 'My Applications':
+        return 2;
+      case 'Profile':
+        return 3;
+     
+      default:
+        return 0;
+    }
+  }
   final GlobalKey _globalKey = GlobalKey();
 
 Future<String> _generatePdf() async {
@@ -673,23 +688,7 @@ Container(
       _isExpanded = !_isExpanded;
     });
   }
-  int _getIndex(String label) {
-    switch (label) {
-      case 'Jobs':
-        return 0;
-      case 'Applications':
-        return 1;
-      case 'Profile':
-        return 2;
-      case 'Alert':
-        return 3;
-      case 'Saved Jobs':
-        return 4;
-      default:
-        return 0;
-    }
-  }
-
+  
 
 
 void _showdeleteDialog(BuildContext context) {

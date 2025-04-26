@@ -8,7 +8,22 @@ class Appspage extends StatefulWidget {
 }
 
 class _AppspageState extends State<Appspage> with SingleTickerProviderStateMixin {
-  int _selectedNavIndex = 1;
+  int _selectedNavIndex = 2;
+  int _getIndex(String label) {
+    switch (label) {
+      case 'Jobs':
+        return 0;
+      case 'Companies':
+        return 1;
+      case 'My Applications':
+        return 2;
+      case 'Profile':
+        return 3;
+     
+      default:
+        return 0;
+    }
+  }
   double progress = 0.5; // Define the progress variable with a value between 0.0 and 1.0
   final int _slide1 = 1;
   late TabController _tabController;
@@ -293,22 +308,7 @@ Padding(
     super.dispose();
   }
 
-  int _getIndex(String label) {
-    switch (label) {
-      case 'Jobs':
-        return 0;
-      case 'My Applications':
-        return 1;
-      case 'Profile':
-        return 2;
-      case 'Alert':
-        return 3;
-      case 'Saved Jobs':
-        return 4;
-      default:
-        return 0;
-    }
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -374,7 +374,11 @@ Padding(
                     ],
                   ),
                   child: Row(children: [
-                    
+                     GestureDetector(
+                  onTap: () {
+                 Navigator.pushNamed(context, '/profile'); // Navigate to Accountpage
+                                 },
+                    child:
                     Container(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
@@ -385,6 +389,7 @@ Padding(
                         backgroundImage: AssetImage('assets/jondon.webp'),
                       ),
                     ),
+                     ),
                     SizedBox(width: 10),
                     Container(
                       child: Column(

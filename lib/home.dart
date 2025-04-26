@@ -16,14 +16,13 @@ int _getIndex(String label) {
     switch (label) {
       case 'Jobs':
         return 0;
-      case 'Applications':
+      case 'Companies':
         return 1;
-      case 'Profile':
+      case 'My Applications':
         return 2;
-      case 'Alert':
+      case 'Profile':
         return 3;
-      case 'Saved Jobs':
-        return 4;
+     
       default:
         return 0;
     }
@@ -2595,7 +2594,7 @@ Padding(
         
         buildNavItem(Icons.person_outline_outlined, 'Profile', () {
           Navigator.pushNamed(context, '/profile');
-        }, 22, const Color.fromARGB(255, 72, 193, 156),0.7),
+        }, 22, const Color.fromARGB(255, 0, 0, 0),0.7),
       ],
     ),
   ),
