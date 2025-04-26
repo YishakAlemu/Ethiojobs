@@ -352,15 +352,26 @@ void _downloadCv(BuildContext context) async {
               label: Text(skill),
               deleteIcon: Icon(Icons.remove_circle_outline),
               onDeleted: () {
-                // Handle chip removal logic here
-                print('$skill removed');
+                setState(() {
+                  skills.remove(skill); // Remove the skill from the list
+                });
+                
               },
               backgroundColor: Colors.blue[100], // Optional: Background color
             );
           }).toList(),
         ),
       ),
-                             SizedBox(height:40),
+                             SizedBox(height:60),
+
+                              Text('Add language skills',style: TextStyle(
+                                
+                          color: Colors.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ), ),
+                        Divider(color:Colors.grey, indent: 20, endIndent:20),
+                        SizedBox(height:15),
 
 
 

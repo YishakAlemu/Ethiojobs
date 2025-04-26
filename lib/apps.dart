@@ -297,7 +297,7 @@ Padding(
     switch (label) {
       case 'Jobs':
         return 0;
-      case 'Applications':
+      case 'My Applications':
         return 1;
       case 'Profile':
         return 2;
