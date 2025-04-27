@@ -15,11 +15,15 @@ class _Resume_builderpageState extends State<Resume_builderpage> {
   final TextEditingController countryController = TextEditingController(text: "USA");
   final TextEditingController cityController = TextEditingController(text: "New York");
   final TextEditingController dateController = TextEditingController();
+  final TextEditingController dateController2 = TextEditingController();
+  final TextEditingController dateController3 = TextEditingController();
   final TextEditingController genderController = TextEditingController();
-  final TextEditingController _professionController = TextEditingController();
+  final TextEditingController professionController = TextEditingController();
+  final TextEditingController professionController2 = TextEditingController();
   final QuillController _Controller = QuillController.basic();
    final QuillController _controller = QuillController.basic();
   final QuillController _Controller2 = QuillController.basic();
+  final QuillController _Controller3 = QuillController.basic();
   String? _selectedGender;
   String fullName = 'Jon Don';
   String email = 'testabenezer@gmail.com';  
@@ -42,7 +46,7 @@ class _Resume_builderpageState extends State<Resume_builderpage> {
   String richTextContent2 = "";
   String profession2 = 'Adaptablity';
   String years_of_exp= '3';
-  final List<String> skills = [
+  List<String> skills = [
     'Flutter',
     'Dart',
     'Firebase',
@@ -52,8 +56,16 @@ class _Resume_builderpageState extends State<Resume_builderpage> {
     'Spring',
     'Django',
   ];
+  String languges = '';
  
+  String? selectedLanguage;
+  List<String> languages = ['Arabic', 'English', 'French', 'Portuguese'];
   
+  String? selectedLevel;
+  List<String> levels = ['Basic','Intermidiate',  'Proficient',  'Fluent', 'Native'];
+  String richTextContent3 = "";
+  String insert_title = '';
+  String insert_link = '';
 
   @override
   Widget build(BuildContext context) {
@@ -101,6 +113,7 @@ class _Resume_builderpageState extends State<Resume_builderpage> {
                                     hintText: '',
                                     onChanged: (value) => fullName = value,
                                   ),
+                                  
                                   buildTextField(
                                     label: 'Email',
                                     hintText: '',
@@ -199,22 +212,32 @@ class _Resume_builderpageState extends State<Resume_builderpage> {
                  ],
                ),
                             _buildRichTextEditor2(),
-                            ElevatedButton(
-        onPressed: () {
-     // Open the education dialog
-  },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: const Color.fromARGB(255, 26, 121, 198),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          elevation: 4,
-        ),
-        child: const Text(
-          '+ Add Work Experience',
-          style: TextStyle(fontSize: 17, color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-      ),
+                            SizedBox(height:10),
+                            Row(
+                              children: [
+                                SizedBox(width:120),
+                                Container(
+                                   height:30,
+                                  width:230,
+                                  child: ElevatedButton(
+                                          onPressed: () {
+                                       // Open the education dialog
+                                    },
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: const Color.fromARGB(255, 26, 121, 198),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(20),
+                                            ),
+                                            elevation: 4,
+                                          ),
+                                          child: const Text(
+                                            '+ Add Work Experience',
+                                            style: TextStyle(fontSize: 17, color: Colors.white, fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                ),
+                              ],
+                            ),
                              
                               SizedBox(height:60),
                               Text('Skills',style: TextStyle(
@@ -231,22 +254,26 @@ class _Resume_builderpageState extends State<Resume_builderpage> {
                               hintText: 'Enter your years of experience',
                               onChanged: (value) => years_of_exp = value,
                             ),
-                            ElevatedButton(
-        onPressed: () {
-     // Open the education dialog
-  },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: const Color.fromARGB(255, 26, 121, 198),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          elevation: 4,
-        ),
-        child: const Text(
-          '+ Add Skill',
-          style: TextStyle(fontSize: 17, color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-      ),
+                            Container(
+                               height:30,
+                               width:220,
+                              child: ElevatedButton(
+                                      onPressed: () {
+                                   // Open the education dialog
+                                },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: const Color.fromARGB(255, 26, 121, 198),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(20),
+                                        ),
+                                        elevation: 4,
+                                      ),
+                                      child: const Text(
+                                        '+ Add Skill',
+                                        style: TextStyle(fontSize: 17, color: Colors.white, fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                            ),
       SizedBox(height:5),
        Container(
         padding: EdgeInsets.all(16.0),
@@ -269,7 +296,7 @@ class _Resume_builderpageState extends State<Resume_builderpage> {
         ),
       ),
                              SizedBox(height:60),
-
+                            
                               Text('Add language skills',style: TextStyle(
                                 
                           color: Colors.black,
@@ -278,7 +305,79 @@ class _Resume_builderpageState extends State<Resume_builderpage> {
                         ), ),
                         Divider(color:Colors.grey, indent: 20, endIndent:20),
                         SizedBox(height:15),
+                        Container(
+                    alignment: Alignment.centerLeft, // Aligns the child to the left
+                        child: Text(
+                              'Select Language',
+                  style: TextStyle(color: Colors.grey, fontSize: 18),
+                                  ),
+                        ),
+                        SizedBox(height:5),
+                        _buildlanguagePickerField(),
+                        SizedBox(height:10),
+                        Container(
+                alignment: Alignment.centerLeft, // Aligns the child to the left
+                            child: Text(
+                             'Level',
+                         style: TextStyle(color: Colors.grey, fontSize: 18),
+                               ),
+                        ),
+                        SizedBox(height:5),
+                        _buildlevelPickerField(),
+                        SizedBox(height:60),
+                        Container(
+                          height:30,
+                          width:220,
+                          child: ElevatedButton(
+                                  onPressed: () {
+                               // Open the education dialog
+                            },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color.fromARGB(255, 26, 121, 198),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    elevation: 4,
+                                  ),
+                                  child: const Text(
+                                    '+ Add Language',
+                                    style: TextStyle(fontSize: 17, color: Colors.white, fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                        ),
+                       SizedBox(height: 60,),
 
+
+                                  ...projectEntries.asMap().entries.map((entry) {
+          int index = entry.key;
+          var value = entry.value;
+          return _buildProjectContainer(
+            richTextContent3: value['richTextContent3'] ?? '',
+            insert_title: value['university'] ?? '',
+            insert_link: value['degree'] ?? '',
+           
+            onDelete: () => _removeProject(index), // Pass the delete function
+          );
+        }),
+      
+      
+                              SizedBox(height:5),
+                              ElevatedButton(
+        onPressed: () {
+    _addProject(context); // Open the education dialog
+  },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color.fromARGB(255, 26, 121, 198),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          elevation: 4,
+        ),
+        child: const Text(
+          '+ Add Project',
+          style: TextStyle(fontSize: 17, color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+      ),
 
 
                           ],
@@ -293,21 +392,32 @@ class _Resume_builderpageState extends State<Resume_builderpage> {
       bottomNavigationBar: BottomAppBar(
         color:Colors.white,
          child:Container(
+          
                      
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          SizedBox(
-                            width:150,
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.red,
+                              borderRadius: BorderRadius.circular(3),
+                            ),
+                            width:160,
                             height:40,
                             child: ElevatedButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
+                              
+                              
+                             
+                              child: Text('Close', style: TextStyle(color: Colors.white)),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.green,
-                              ),
-                              child: Text('Close', style: TextStyle(color: Colors.white)),
+                               shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(3), 
+                              
+    ),),
                             ),
                           ),
                           SizedBox(
@@ -324,8 +434,19 @@ class _Resume_builderpageState extends State<Resume_builderpage> {
     'phoneNumber': phoneNumber,
     'country': country,
     'city': city,
+    'gender': gender,
     'profession': profession,
     'richTextContent': richTextContent,
+     'university' : university,
+      'major': major,
+      'degree' : degree,
+   'grad_year' : grad_year,
+   'company' : company,
+  'title': title,
+   'from' : from,
+      'to' : to,
+   'richTextContent2' : richTextContent2,
+
   });
 },
                               style: ElevatedButton.styleFrom(
@@ -518,7 +639,7 @@ void _showGenderSelectionDialog() {
 
   Widget _buildProfessionPickerField() {
     return buildTextField(
-      controller: _professionController,
+      controller: professionController,
       label: 'Profession',
       hintText: 'Enter your profession',
       onChanged: (value) {
@@ -650,25 +771,61 @@ Widget _buildUniPickerField() {
   }
   
   Widget _buildFromPickerField() {
-    return buildTextField(
-      controller: _professionController,
-      label: 'From',
-      hintText: '',
-      onChanged: (value) {
-        from = value;
-      },
-    );
-  }
+  return GestureDetector(
+    onTap: () async {
+      DateTime? pickedDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1900),
+        lastDate: DateTime(2101),
+      );
+
+      if (pickedDate != null) {
+        String formattedDate = "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
+        dateController2.text = formattedDate; // Update the controller's text
+        from = formattedDate; // Update the variable
+      }
+    },
+    child: AbsorbPointer(
+      child: buildTextField(
+        controller: dateController2,
+        label: 'From',
+        hintText: '',
+        onChanged: (value) {
+          from = value; // Still keep this to manage changes
+        },
+      ),
+    ),
+  );
+}
   Widget _buildToPickerField() {
-    return buildTextField(
-      controller: _professionController,
-      label: 'To',
-      hintText: '',
-      onChanged: (value) {
-        to = value;
-      },
-    );
-  }
+  return GestureDetector(
+    onTap: () async {
+      DateTime? pickedDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1900),
+        lastDate: DateTime(2101),
+      );
+
+      if (pickedDate != null) {
+        String formattedDate = "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
+        dateController3.text = formattedDate; // Update the controller's text
+        to = formattedDate; // Update the variable
+      }
+    },
+    child: AbsorbPointer(
+      child: buildTextField(
+        controller: dateController3,
+        label: 'To',
+        hintText: '',
+        onChanged: (value) {
+          to = value; // Still keep this to manage changes
+        },
+      ),
+    ),
+  );
+}
   Widget _buildRichTextEditor2() {
     
     return SingleChildScrollView(
@@ -712,7 +869,7 @@ Widget _buildUniPickerField() {
 
 Widget _buildProfession2PickerField() {
     return buildTextField(
-      controller: _professionController,
+      controller: professionController2,
       label: 'Profession',
       hintText: '',
       onChanged: (value) {
@@ -729,4 +886,168 @@ Widget _buildProfession2PickerField() {
       backgroundColor: Colors.blue[100], // Optional: Background color
     );
   }
+  Widget _buildlanguagePickerField() {
+    return DropdownButtonFormField<String>(
+      value: selectedLanguage,
+      hint: Text('Select a language'),
+      items: languages.map((String language) {
+        return DropdownMenuItem<String>(
+          value: language,
+          child: Text(language),
+        );
+      }).toList(),
+      onChanged: (String? newValue) {
+        setState(() {
+          selectedLanguage = newValue;
+        });
+        _languageSelected(newValue);
+      },
+      decoration: InputDecoration(
+        border: OutlineInputBorder(),
+        
+      ),
+    );
+  }
+
+  void _languageSelected(String? language) {
+    // Handle language selection
+    if (language != null) {
+      print('Selected Language: $language');
+    }
+  }
+Widget _buildlevelPickerField() {
+    return Container(
+      child: DropdownButtonFormField<String>(
+        value: selectedLevel,
+        hint: Text('Select a level'),
+        items: levels.map((String level) {
+          return DropdownMenuItem<String>(
+            value: level,
+            child: Text(level),
+          );
+        }).toList(),
+        
+        onChanged: (String? newValue) {
+          setState(() {
+            selectedLevel = newValue;
+          });
+          _levelSelected(newValue);
+        },
+        decoration: InputDecoration(
+          border: OutlineInputBorder(),
+          
+        ),
+      
+      ),
+    );
+  }
+
+  void _levelSelected(String? level) {
+    // Handle language selection
+    if (level != null) {
+      print('Selected Language: $levels');
+    }
+  }
+Widget _buildRichTextEditor3() {
+    
+    return SingleChildScrollView(
+      
+      child:Column(
+        children: [
+        SizedBox(height:10),
+          Container(
+            alignment: Alignment.centerLeft,
+            child: Text('Quick Bio', style: TextStyle(color:Colors.grey, fontSize:16),)),
+            SizedBox(height:6),
+          Container(
+             decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              border: Border.all(
+                color: Colors.grey,
+              )
+            ),
+            
+         child: Column(
+        children: [
+          QuillSimpleToolbar(controller: _Controller), 
+          Divider(color:Colors.grey),// Toolbar for rich text editing
+          SizedBox(
+            
+            height: 200,
+            child: QuillEditor(
+              controller: _Controller3,
+              
+              focusNode: FocusNode(), // Added focusNode
+              scrollController: ScrollController(), // Added scrollController
+            ),
+          ),
+        ],
+      )
+      ),
+        ]
+      )
+    );
+  }
+  
+  List<Map<String, String>> projectEntries = [];
+
+  void _addProject(BuildContext context) {
+    // Dummy data for demonstration; replace with actual data entry logic
+    setState(() {
+      projectEntries.add({
+        'richTextContent3': richTextContent3,
+        'insert_title' : insert_title,
+        'insert_link' : insert_link,
+      });
+    });
+  }
+  void _removeProject(int index) {
+    setState(() {
+      if (index >= 0 && index < projectEntries.length) {
+        projectEntries.removeAt(index); // Remove the entry at the specified index
+      }
+    });
+  }
+ Widget _buildProjectContainer({
+  required String richTextContent3,
+  required String insert_title,
+  required String insert_link,
+  required VoidCallback onDelete, // Added onDelete parameter
+}) {
+  return Container(
+    
+                              child: Column(
+                                children: [
+                                  Row(children: [
+                                    SizedBox(width:30),
+                                    Text('Project & Portfolio',style: TextStyle(
+                                  
+                          color: Colors.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ), ),
+                        SizedBox(width:100),
+                        IconButton(onPressed: onDelete, 
+                        icon: Icon(Icons.delete, color:Colors.red, size:18))],),
+                        Divider(color:Colors.grey, indent: 20, endIndent:20, height: 0),
+                        SizedBox(height:15),
+                            _buildRichTextEditor3(),
+                            SizedBox(height:10),
+                             buildTextField(
+                              label: 'Title',
+                              hintText: '',
+                              onChanged: (value) => insert_title = value,
+                            ),
+                            
+                           buildTextField(
+                              label: 'Link',
+                              hintText: '',
+                              onChanged: (value) => insert_link = value,
+                            ),],
+                              ));
 }
+ 
+}
+  
+
+

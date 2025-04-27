@@ -25,16 +25,17 @@ class Cv_editorpage extends StatefulWidget {
 class _Cv_editorpageState extends State<Cv_editorpage> {
    bool isChecked = false;
    
-  final TextEditingController _fullNameController = TextEditingController(text: "John Doe");
-  final TextEditingController _emailController = TextEditingController(text: "john.doe@example.com");
-  final TextEditingController _phoneNumberController = TextEditingController(text: "+1234567890");
-  final TextEditingController _countryController = TextEditingController(text: "USA");
-  final TextEditingController _cityController = TextEditingController(text: "New York");
+  final TextEditingController _fullNameController = TextEditingController(text: "Jon Don");
+  final TextEditingController _emailController = TextEditingController(text: "testabenezer@gmail.com");
+  final TextEditingController _phoneNumberController = TextEditingController(text: "25197");
+  final TextEditingController _countryController = TextEditingController(text: "Ethiopia");
+  //final TextEditingController _cityController = TextEditingController(text: "Addis Ababa");
   final TextEditingController _dateController = TextEditingController();
   final TextEditingController _genderController = TextEditingController();
   final TextEditingController _professionController = TextEditingController();
   final QuillController _Controller = QuillController.basic();
   final QuillController _Controller2 = QuillController.basic();
+  final QuillController _Controller3 = QuillController.basic();
   String? _selectedGender;
   String fullName = '';
   String email = '';  
@@ -51,8 +52,8 @@ class _Cv_editorpageState extends State<Cv_editorpage> {
   String degree = 'Bachelor';
   String grad_year = '2026';
   String company = 'test company';
-
-  final List<Map<String, String>> educationEntries = [
+  
+   List<Map<String, String>> educationEntries = [
     {
       'university': 'Addis Ababa University',
       'degree': 'Bachelor of Science in Computer Science',
@@ -68,9 +69,9 @@ class _Cv_editorpageState extends State<Cv_editorpage> {
   String from = '2022';
   String to = '2025';
   String richTextContent2 = "";
-  String profession2 = 'Adaptablity';
-  String years_of_exp= '3';
-  final List<String> skills = [
+  String profession2 = '';
+  String years_of_exp = '';
+  List<String> skills = [
     'Flutter',
     'Dart',
     'Firebase',
@@ -80,14 +81,16 @@ class _Cv_editorpageState extends State<Cv_editorpage> {
     'Spring',
     'Django',
   ];
-  
+  String language = '';
+  String level = '';
+   
 @override
   void dispose() {
     _fullNameController.dispose();
     _emailController.dispose();
     _phoneNumberController.dispose();
     _countryController.dispose();
-    _cityController.dispose();
+    //_cityController.dispose();
     _Controller.dispose();
     super.dispose();
   }
@@ -185,8 +188,21 @@ void _downloadCv(BuildContext context) async {
       phoneNumber = updatedData['phoneNumber'] ?? phoneNumber;
       country = updatedData['country'] ?? country;
       city = updatedData['city'] ?? city;
+      gender = updatedData['gender'] ?? gender;
       profession = updatedData['profession'] ?? profession;
       richTextContent = updatedData['richTextContent'] ?? richTextContent;
+      educationEntries = List<Map<String, String>>.from(updatedData['educationEntries'] ?? educationEntries);
+         company = updatedData['company'] ?? company;
+          major = updatedData['major'] ?? major;
+           title = updatedData['title'] ?? title;
+           from = updatedData['from'] ?? from;
+            to = updatedData['to'] ?? to;
+             richTextContent2 = updatedData['richTextContent2'] ?? richTextContent2;
+               profession2 = updatedData ['profession2'] ?? profession2;
+                years_of_exp = updatedData ['years_of_exp'] ?? years_of_exp;
+                 skills = updatedData ['skills'] ?? skills;
+                
+                
     });
   }
 },
@@ -255,7 +271,7 @@ void _downloadCv(BuildContext context) async {
                             children: [
                               SizedBox(
                                 width: 300,
-                                child: Text('$fullName', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 17)),
+                                child: Text(' $fullName', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 17)),
                               ),
                               Row(
                                 children: [
@@ -268,15 +284,15 @@ void _downloadCv(BuildContext context) async {
                                 children: [
                                   Text('@', style: TextStyle(color: Colors.green, fontSize: 12)),
                                   SizedBox(width: 5),
-                                  Text('$email', style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold)),
+                                  Text(' $email', style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold)),
                                   SizedBox(width: 10),
                                   Icon(Icons.location_on, size: 12, color: Colors.green),
                                   SizedBox(width: 10),
                                 
                                     Column(children: [
-                                      Text(city,overflow: TextOverflow.ellipsis,
+                                      Text(' $city',overflow: TextOverflow.ellipsis,
   maxLines: 1, style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold)),
-                                      Text(country,overflow: TextOverflow.ellipsis,
+                                      Text(' $country',overflow: TextOverflow.ellipsis,
   maxLines: 1, style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold)),
                                     ],)
                                     
@@ -287,7 +303,7 @@ void _downloadCv(BuildContext context) async {
                                 children: [
                                   Icon(Icons.badge, size: 13, color: Colors.green),
                                   SizedBox(width: 5),
-                                  Text(profession, style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold)),
+                                  Text(' $profession', style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold)),
                                 ],
                               ),
                             ],
@@ -308,7 +324,7 @@ void _downloadCv(BuildContext context) async {
                                 padding: EdgeInsets.only(left: 20, right: 20),
                                 child: Column(
                                   children: [
-                                    Text(richTextContent),
+                                    Text(' $richTextContent'),
                                   ],
                                 ),
                               ),
@@ -317,60 +333,72 @@ void _downloadCv(BuildContext context) async {
                         ),
                         SizedBox(height: 20),
                         Container(
-                          
-                          padding: EdgeInsets.only(left: 20),
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                width: 300,
-                                child: Text('EXPERIENCE', style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold)),
-                              ),
-                              Divider(color: Colors.black, thickness: 4, indent: 10, endIndent: 20, height: 1),
-                              SizedBox(height: 5),
-                              Text(company, style: TextStyle(color: Colors.black, fontSize: 15)),
-                              Text(title, style: TextStyle(color: Colors.green, fontSize: 15)),
-                              Row(
-                                children: [
-                                  Icon(Icons.calendar_month, size: 14, color: Colors.black),
-                                  Text(' $from', style: TextStyle(fontSize: 12, color: Colors.black)),
-                                  Text(' $to', style: TextStyle(fontSize: 12, color: Colors.black)),
-                                ],
-                              ),
-                              Text(". lorem lope", style: TextStyle(color: Colors.black, fontSize: 13)),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height:20),
-                        Container(
   padding: EdgeInsets.only(left: 20),
   child: Column(
     children: [
+      // Experience Section
       SizedBox(
         width: 300,
         child: Text(
-          'EDUCATION',
+          'EXPERIENCE',
           style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
         ),
       ),
       Divider(color: Colors.black, thickness: 4, indent: 10, endIndent: 20, height: 1),
       SizedBox(height: 5),
-      
-      ...educationEntries.map((entry) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      Container(
+        child: Column(
           children: [
-            Text(entry['university'] ?? '', style: TextStyle(color: Colors.black, fontSize: 15)),
-            Text(entry['degree'] ?? '', style: TextStyle(color: Colors.green, fontSize: 15)),
+            Text(company, style: TextStyle(color: Colors.black, fontSize: 15)),
+            Text(title, style: TextStyle(color: Colors.green, fontSize: 15)),
             Row(
               children: [
                 Icon(Icons.calendar_month, size: 14, color: Colors.black),
-                Text(' ${entry['grad_year'] ?? ''}', style: TextStyle(fontSize: 12, color: Colors.black)),
+                Text(' $from ', style: TextStyle(fontSize: 12, color: Colors.black)),
+                Text('-', style: TextStyle(color: Colors.grey, fontSize: 20)),
+                Text(' $to', style: TextStyle(fontSize: 12, color: Colors.black)),
               ],
             ),
-            SizedBox(height: 10), // Add space between entries
           ],
-        );
-      }).toList(),
+        ),
+      ),
+      SizedBox(height: 20),
+
+      // Education Section
+      Container(
+        padding: EdgeInsets.only(left: 20),
+        child: Column(
+          children: [
+            SizedBox(
+              width: 300,
+              child: Text(
+                'EDUCATION',
+                style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Divider(color: Colors.black, thickness: 4, indent: 10, endIndent: 20, height: 1),
+            SizedBox(height: 5),
+
+            // Mapping through educationEntries
+            ...educationEntries.map((entry) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(entry['university'] ?? '', style: TextStyle(color: Colors.black, fontSize: 15)),
+                  Text(entry['degree'] ?? '', style: TextStyle(color: Colors.green, fontSize: 15)),
+                  Row(
+                    children: [
+                      Icon(Icons.calendar_month, size: 14, color: Colors.black),
+                      Text(' ${entry['grad_year'] ?? ''}', style: TextStyle(fontSize: 12, color: Colors.black)),
+                    ],
+                  ),
+                  SizedBox(height: 10), // Add space between entries
+                ],
+              );
+            }).toList(),
+          ],
+        ),
+      ),
     ],
   ),
 ),
@@ -390,8 +418,8 @@ void _downloadCv(BuildContext context) async {
                               ),
                               Divider(color: Colors.black, thickness: 4, indent: 10, endIndent: 20, height: 1),
                               SizedBox(height: 5),
-                              Text('', style: TextStyle(color: Colors.black, fontSize: 15)),
-                              Text('', style: TextStyle(color: Colors.green, fontSize: 15)),
+                              Text(' $language', style: TextStyle(color: Colors.black, fontSize: 15)),
+                              Text(' $level', style: TextStyle(color: Colors.green, fontSize: 15)),
                               
                             ],
                           ),
@@ -408,8 +436,9 @@ void _downloadCv(BuildContext context) async {
                               ),
                               Divider(color: Colors.black, thickness: 4, indent: 10, endIndent: 20, height: 1),
                               SizedBox(height: 5),
-                              Text('', style: TextStyle(color: Colors.black, fontSize: 15)),
-                              Text('', style: TextStyle(color: Colors.green, fontSize: 15)),
+                              Text(' $profession2', style: TextStyle(color: Colors.black, fontSize: 15)),
+                              Text(' $years_of_exp', style: TextStyle(color: Colors.black, fontSize: 15)),
+                              Text(' $skills', style: TextStyle(decoration: TextDecoration.underline,color: Colors.black, fontSize: 15)),
                               
                             ],
                           ),
