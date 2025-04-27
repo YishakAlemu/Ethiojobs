@@ -1280,16 +1280,12 @@ Padding(
           const Color.fromARGB(255, 72, 193, 156), 0.7
           
         ),
-         buildNavItem(Icons.location_city, 'Companies', () {
-          //Navigator.pushNamed(context, '/companies');
+         buildNavItem(Icons.business, 'Companies', () {
+          Navigator.pushNamed(context, '/companies');
         }, 22, const Color.fromARGB(255, 72, 193, 156),0.7),
-        buildNavItem(Icons.menu_book_outlined, 'My Applications', () {
+        buildNavItem(Icons.assignment, 'My Applications', () {
           Navigator.pushNamed(context, '/apps');
         }, 22, const Color.fromARGB(255, 72, 193, 156),0.7),
-        
-        // buildNavItem(Icons.add_alert_sharp, 'Alert', () {
-        //   // Action for Alert
-        // }, 22, const Color.fromARGB(255, 72, 193, 156)),
        
         buildNavItem(Icons.person_outline_outlined, 'Profile', () {
           Navigator.pushNamed(context, '/profile');

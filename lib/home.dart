@@ -11,6 +11,7 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  String? _selectedValue = '';
   int _selectedNavIndex = 0;
 int _getIndex(String label) {
     switch (label) {
@@ -75,14 +76,14 @@ int _getIndex(String label) {
 
             // First main container
                     Container(
-                     height: 215,
+                     height: 200,
                      width:700,
                  color: Color.fromARGB(255, 72, 193, 156), // Background color for the first container
                child: Column(
           children: [
             Container(
               height: 60,
-              width: 355,
+              width: 370,
               margin: EdgeInsets.only(top: 10),
               
               child: Center(
@@ -124,206 +125,108 @@ int _getIndex(String label) {
 ),
             ),
 
-
+SizedBox(height:10),
     Container(
-      margin: EdgeInsets.only(top: 20),
-  height: 50,
-  width: 700,
-  child: SingleChildScrollView(
-    scrollDirection: Axis.horizontal,
-    child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20), // Adjust the horizontal padding
-      child: Wrap(
-        spacing: 20, // Space between buttons
-        children: [
-          
+      
+      height:45,
+      width:370,
+      
+      child: Row(children: [
+        SizedBox(width:40),
             Container(
-              margin: EdgeInsets.only(top: 3),
-              height: 42,
-              width:42,
-  decoration: BoxDecoration(
-    color: const Color.fromARGB(255, 225, 225, 220), // Background color
-    shape: BoxShape.circle, // Makes the button circular
-    boxShadow: [
-      BoxShadow(
-        color: Colors.black.withOpacity(0.2), // Shadow color
-        spreadRadius: 0.5, // Spread radius
-        blurRadius: 2, // Blur radius
-        offset: Offset(0, 0), // Position of the shadow
+              height:35,
+              width:120,
+              
+              child: ElevatedButton(onPressed: (){},
+              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white,
+                               shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6), 
+                              
+    ),),
+               child: Row(children: [
+                Icon(Icons.tune, color:Colors.black),
+                SizedBox(width:5),
+                Text('Filter', style:TextStyle(color:Colors.black,fontWeight: FontWeight.w400)),
+                
+               ],)),
+            ),
+             SizedBox(width:30),
+             Container(
+              decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(6),
+        color:Colors.white,
       ),
-    ],
-    border: Border.all(
-      color: Colors.grey, // Border color
-      width: 0.8, // Border width
+              height: 35,
+              width: 150,
+              
+               child: PopupMenuButton<String>(
+                 onSelected: (String value) {
+                   setState(() {
+                     _selectedValue = value; // Update the selected value
+                   });
+                 },
+                 icon: Row(
+                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                   children: [
+                     Padding(
+                       padding: const EdgeInsets.symmetric(horizontal: 10),
+                       child: Row(
+                         children: [
+                           Text('Sort: '),
+                           Text(
+                _selectedValue ?? 'Select an option', 
+                style: TextStyle(
+                  overflow: TextOverflow.ellipsis,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  
+                ),
+                           ),
+                         ],
+                       ),
+                     ),
+                     Icon(Icons.arrow_drop_down, color: Colors.grey),
+                   ],
+                 ),
+                 itemBuilder: (BuildContext context) => [
+                   PopupMenuItem(
+                     value: 'Popularity',
+                     child: Text(
+                       'Popularity',
+                       style: TextStyle(overflow: TextOverflow.ellipsis,fontSize: 13, fontWeight: FontWeight.w400, color: Colors.black),
+                     ),
+                   ),
+                   PopupMenuItem(
+                     value: 'Date',
+                     child: Text(
+                       'Date',
+                       style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: Colors.black),
+                     ),
+                   ),
+                   PopupMenuItem(
+                     value: 'Location',
+                     child: Text(
+                       'Location',
+                       style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: Colors.black),
+                     ),
+                   ),
+                   PopupMenuItem(
+                     value: 'Type',
+                     child: Text(
+                       'Type',
+                       style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: Colors.black),
+                     ),
+                   ),
+                 ],
+                 offset: Offset(0, 40),
+                 color: Colors.white,
+               ),
+             )
+
+
+      ],),
     ),
-  ),
-  child: IconButton(
-    icon: Icon(Icons.tune, color: Colors.black, size: 22), // Icon color and size
-    onPressed: () {
-      
-    },
-    constraints: BoxConstraints(
-      minWidth: 32, 
-      minHeight: 32, 
-    ),
-  ),
-),
-          ElevatedButton(
-  onPressed: () {},
-  style: ElevatedButton.styleFrom(
-    backgroundColor : const Color.fromARGB(255, 225, 225, 220),
-    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 7), 
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(8),
-      side: BorderSide(
-        color: Colors.grey, 
-        width: 0.8, 
-      ), 
-    ),
-  ),
-  child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween, 
-    children: [
-      Text(
-        'Category', 
-        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
-      ),
-      Padding(
-        padding: EdgeInsets.only(left: 30.0), // Add padding if needed
-        child: Icon(Icons.fiber_manual_record, size: 12), // Dot icon on the right
-      ),
-    ],
-  ),
-),
-          ElevatedButton(
-  onPressed: () {},
-  style: ElevatedButton.styleFrom(
-    backgroundColor : const Color.fromARGB(255, 225, 225, 220),
-    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 7), // Adjust padding as needed
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(8),
-      side: BorderSide(
-        color: Colors.grey, // Border color
-        width: 0.8, // Border width
-      ), // // Optional: rounded corners
-    ),
-  ),
-  child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween, // Space between text and icon
-    children: [
-      Text(
-        'Location', 
-        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
-      ),
-      Padding(
-        padding: EdgeInsets.only(left: 30.0), // Add padding if needed
-        child: Icon(Icons.fiber_manual_record, size: 12), // Dot icon on the right
-      ),
-    ],
-  ),
-),
-         ElevatedButton(
-  onPressed: () {},
-  style: ElevatedButton.styleFrom(
-    backgroundColor : const Color.fromARGB(255, 225, 225, 220),
-    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 7), // Adjust padding as needed
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(8),
-      side: BorderSide(
-        color: Colors.grey, 
-        width: 0.8, 
-      ), 
-    ),
-  ),
-  child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween, 
-    children: [
-      Text(
-        'Carrer', 
-        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
-      ),
-      Padding(
-        padding: EdgeInsets.only(left: 30.0), 
-        child: Icon(Icons.fiber_manual_record, size: 12), 
-      ),
-    ],
-  ),
-),
-          ElevatedButton(
-  onPressed: () {},
-  style: ElevatedButton.styleFrom(
-    backgroundColor : const Color.fromARGB(255, 225, 225, 220),
-    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 7), // Adjust padding as needed
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(8),
-      side: BorderSide(
-        color: Colors.grey, // Border color
-        width: 0.8, // Border width
-      ), // // Optional: rounded corners
-    ),
-  ),
-  child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween, // Space between text and icon
-    children: [
-      Text(
-        'Employment Type', 
-        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
-      ),
-      Padding(
-        padding: EdgeInsets.only(left: 30.0), 
-        child: Icon(Icons.fiber_manual_record, size: 12), 
-      ),
-    ],
-  ),
-),
-           Container(
-  margin: EdgeInsets.only(top: 4),
-  height: 40,
-  width: 160, 
-  decoration: BoxDecoration(
-    color: const Color.fromARGB(255, 225, 225, 220), 
-    borderRadius: BorderRadius.circular(8), 
-    boxShadow: [
-      BoxShadow(
-        color: Colors.grey.withOpacity(0.2), 
-        spreadRadius: 1,
-        blurRadius: 3,
-        offset: Offset(0, 2), 
-      ),
-    ],
-  ),
-  child: PopupMenuButton<String>(
-    onSelected: (String value) {
-      
-    },
-    icon: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween, 
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Text(
-            'Posted Wit...',
-            style: TextStyle(overflow: TextOverflow.ellipsis,fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
-          ),
-        ),
-        Icon(Icons.arrow_drop_down, color: Colors.grey), 
-      ],
-    ),
-    itemBuilder: (BuildContext context) => [
-      PopupMenuItem(value: 'Any date', child: Text('Any date',style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: Colors.black),)),
-      PopupMenuItem(value: 'Since yesterday', child: Text('Since yesterday',style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: Colors.black),)),
-      PopupMenuItem(value: 'Last 7 days', child: Text('Last 7 days',style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: Colors.black),)),
-      PopupMenuItem(value: 'Last 30 days', child: Text('Last 30 days',style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: Colors.black),)),
-    ],
-    offset: Offset(0, 40), 
-    color: Colors.white, 
-  ),
-)
-        ],
-      ),
-    ),
-  ),
-),
           ]
         ),
     ),
@@ -2140,16 +2043,14 @@ Padding(
           const Color.fromARGB(255, 72, 193, 156), 0.7
           
         ),
-        buildNavItem(Icons.location_city_outlined, 'Companies', () {
-         // Navigator.pushNamed(context, '/saved');
+        buildNavItem(Icons.business, 'Companies', () {
+         Navigator.pushNamed(context, '/companies');
         }, 22, const Color.fromARGB(255, 0, 0, 0),0.7),
-        buildNavItem(Icons.menu_book_outlined, 'My Applications', () {
+        buildNavItem(Icons.assignment, 'My Applications', () {
           Navigator.pushNamed(context, '/apps');
         }, 22, const Color.fromARGB(255, 0, 0, 0),0.7),
         
-        // buildNavItem(Icons.add_alert_sharp, 'Alert', () {
-        //   // Action for Alert
-        // }, 22, const Color.fromARGB(255, 72, 193, 156)),
+      
         
         buildNavItem(Icons.person_outline_outlined, 'Profile', () {
           Navigator.pushNamed(context, '/profile');
