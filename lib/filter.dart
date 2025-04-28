@@ -769,44 +769,73 @@ Container(
       ],),
      )
       ),
-      bottomNavigationBar: BottomAppBar(
-         color: Colors.white,
-         
-         height:60,
-        child:Container(
-          height:55,
-          width:290,
-          child: Row(
-            children: [
-              ElevatedButton(onPressed: (){
-                Navigator.pop(context);
-              },
-               style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color.fromARGB(255, 72, 193, 156),
-                                   shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(6), 
-                                  
-                  ),),
-                  child:Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.cancel_outlined, color:Colors.white),
-                      SizedBox(width:5),
-                      Text('CANCEL', style: TextStyle(color:Colors.white, fontSize: 17),)
-                    ],
-                  )),
-              ElevatedButton(onPressed: (){},
-               style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color.fromARGB(255, 72, 193, 156),
-                                   shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(6), 
-                                  
-                  ),),
-              child:Text('UPDATE', style: TextStyle(color:Colors.white, fontSize: 17),)),
-            ],
-          )
-        )
+         bottomNavigationBar: BottomAppBar(
+  elevation: 8,
+  color: Colors.white,
+  child: SizedBox(
+    height: 65,
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+      child: SizedBox(
+        width: double.infinity,
+        height: double.infinity,
+        child: Row(children:[
+          SizedBox(width:0),
+         SizedBox(
+          width:120,
+          height:45,
+          child: ElevatedButton(
+            onPressed: () {
+             Navigator.pop(context);
+            },
+            style: ElevatedButton.styleFrom(
+          
+              backgroundColor: const Color.fromARGB(255, 72, 193, 156),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              elevation: 1,
+            ),
+            child: const Row(
+              children: [
+                Icon(Icons.cancel_outlined, color: Colors.white, size: 20),
+                SizedBox(width: 5),
+                Text(
+                  'CANCEL',
+                  style: TextStyle(fontSize: 16, color:Colors.white,fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
+        SizedBox(width:15),
+        SizedBox(
+          width:270,
+          height:45,
+          child: ElevatedButton(
+            onPressed: () {
+             Navigator.pushNamed(context, '/apply');
+            },
+            style: ElevatedButton.styleFrom(
+          
+              backgroundColor: const Color.fromARGB(255, 72, 193, 156),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              elevation: 1,
+            ),
+            child: const Text(
+              'UPDATE',
+              style: TextStyle(fontSize: 16, color:Colors.white,fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
+        ]
+      )
       ),
+    ),
+  ),
+),
     );
     
   }
