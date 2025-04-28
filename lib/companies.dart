@@ -68,7 +68,13 @@ int _getIndex(String label) {
       
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-      child:Center(child: Text('Companies Page'))
+        
+      child:Center(child: Column(
+        children: [
+          SizedBox(height:60),
+          Text('Companies Page'),
+        ],
+      ))
       ),
        bottomNavigationBar: 
       BottomAppBar(

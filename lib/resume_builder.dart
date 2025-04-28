@@ -359,8 +359,6 @@ class _Resume_builderpageState extends State<Resume_builderpage> {
             onDelete: () => _removeProject(index), // Pass the delete function
           );
         }),
-      
-      
                               SizedBox(height:5),
                               ElevatedButton(
         onPressed: () {
@@ -411,7 +409,7 @@ class _Resume_builderpageState extends State<Resume_builderpage> {
                               
                               
                              
-                              child: Text('Close', style: TextStyle(color: Colors.white)),
+                              child: Text('Apply', style: TextStyle(color: Colors.white)),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.green,
                                shape: RoundedRectangleBorder(

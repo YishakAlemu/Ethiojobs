@@ -14,6 +14,7 @@ import 'apply2.dart';
 import 'cv_editor.dart';
 import 'resume_builder.dart';
 import 'companies.dart';
+import 'filter.dart';
 class ParentWidget extends StatefulWidget {
   const ParentWidget({super.key});
 
@@ -33,8 +34,11 @@ class _ParentWidgetState extends State<ParentWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final currentRoute = ModalRoute.of(context)?.settings.name;
     return Scaffold(
-      appBar: PreferredSize(
+      
+       appBar: currentRoute != '/filter' // Show AppBar only if not on FilterPage
+          ? PreferredSize(
   preferredSize: Size.fromHeight(65.0),
   child: AppBar(
     
@@ -74,118 +78,13 @@ class _ParentWidgetState extends State<ParentWidget> {
            ),
            ],),
          )
-
-
-
-
-
-
-
-           
-         
-      
-    
-  
-        
-
-//         PopupMenuButton<String>(
-//   icon: Icon(Icons.account_circle_rounded, size: 40),
-//   itemBuilder: (BuildContext context) {
-//     return [
-//       PopupMenuItem<String>(
-//         value: 'Login or register',
-//         child:Row(children: [
-//           SizedBox(width:10),
-//           Icon(Icons.account_box_sharp,color:Colors.black, size:20),
-//           SizedBox(width:8),
-//           Text('Login or register', style: TextStyle(color:Colors.black)),
-//         ],)
-//       ),
-//       PopupMenuItem<String>(
-//   value: 'Profile',
-//   child: Row(
-//     children: [
-//       SizedBox(width:10),
-//       Icon(Icons.person, color: const Color.fromARGB(255, 0, 0, 0), size: 20),
-//       SizedBox(width: 8),
-//       Text(
-//         'Profile',
-//         style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0)),
-//       ),
-//     ],
-//   ),
-// ),
-//       // PopupMenuItem<String>(
-//       //   value: 'Find Companies',
-//       //   child: Text('Find Companies'),
-//       // ),
-//       // PopupMenuItem<String>(
-//       //   value: 'Blog',
-//       //   child: Text('Blog'),
-//       // ),
-//       PopupMenuItem<String>(
-//         value: 'Companies',
-//         child:Row(children: [
-//           SizedBox(width:10),
-//           Icon(Icons.location_city_outlined, color: const Color.fromARGB(255, 0, 0, 0),size:20),
-//           SizedBox(width:8),
-//           Text('Companies', style: TextStyle(color:const Color.fromARGB(255, 0, 0, 0)),),
-//         ],)
-//       ),
-      
-//       // PopupMenuItem<String>(
-//       //   value: 'Sign Up',
-//       //   child:Row(children: [
-//       //     SizedBox(width:10),
-//       //     Icon(Icons.person_add,color:Colors.black, size:20),
-//       //     SizedBox(width:8),
-//       //     Text('Sign up', style: TextStyle(color:Colors.black)),
-//       //   ],)
-//       // ),
-//       PopupMenuItem<String>(
-//   value: 'Log out',
-//   child: Row(
-//     children: [
-//       SizedBox(width:10),
-//       Icon(Icons.logout, color: Colors.black, size: 20),
-//       SizedBox(width: 8),
-//       Text(
-//         'Log out',
-//         style: TextStyle(color: Colors.black),
-//       ),
-//     ],
-//   ),
-// ),
-
-//       // PopupMenuItem<String>(
-//       //   value: 'Employers, are you recruiting?',
-//       //   child: Text('Employers, are you recruiting?'),
-//       // ),
-//     ];
-//   },
-//   onSelected: (String value) {
-//                   if (value == 'Login or register') {
-//                     _navigatorKey.currentState!.pushNamed('/login');
-//                   }
-//                    else if (value == 'Sign Up') {
-//                     _navigatorKey.currentState!.pushNamed('/signup');
-//                 }
-//                 else if (value == 'Profile') {
-//                     _navigatorKey.currentState!.pushNamed('/profile');}
-//                     else if (value == 'Log out') {
-//                     _navigatorKey.currentState!.pushNamed('/logout');} 
-
-
-//   },
-//   offset: Offset(0, 35), 
-// )
       ],
     ),
               backgroundColor: const Color.fromARGB(255, 255, 255, 255),
               elevation: 5,
             shadowColor: Colors.black,
       ),
-          ),
+          ): null,
       body: WillPopScope(
         onWillPop: () async {
           if (_navigatorKey.currentState!.canPop()) {
@@ -255,7 +154,10 @@ class _ParentWidgetState extends State<ParentWidget> {
                case '/companies':
                 builder = (BuildContext context) => Companiespage();
                break;
-
+               case '/filter':
+                builder = (BuildContext context) => Filterpage();
+               break;
+               
                 
                 
               default:
