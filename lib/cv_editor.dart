@@ -37,13 +37,13 @@ class _Cv_editorpageState extends State<Cv_editorpage> {
   final QuillController _Controller2 = QuillController.basic();
   final QuillController _Controller3 = QuillController.basic();
   String? _selectedGender;
-  String fullName = '';
-  String email = '';  
+  String fullName = 'Jn don';
+  String email = 'testabenezer@gmail.com';  
   String phoneNumber = '25197';
   String birthday = '12/4/2002';
   String country = 'Ethiopia';
   String city = 'Addis Ababa';
-  String gender = '';
+  String gender = 'Male';
   
   String profession = 'Creative arts';
   String richTextContent = "Lorem ipsum dolor sit amet,consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum";
@@ -395,7 +395,7 @@ void _downloadCv(BuildContext context) async {
                   SizedBox(height: 10), // Add space between entries
                 ],
               );
-            }).toList(),
+            }),
           ],
         ),
       ),

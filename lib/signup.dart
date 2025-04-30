@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'login.dart';
 
 class Signuppage extends StatefulWidget {
@@ -215,7 +214,10 @@ class _SignuppageState extends State<Signuppage> {
                           SizedBox(height:25),
                     ElevatedButton(
                                   onPressed: () {
-                                    
+                                  Navigator.pushNamed(
+                                      context,
+                                      '/onboarding', // Navigate to SignupPage
+                                    );
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: const Color.fromARGB(255, 26, 121, 198),

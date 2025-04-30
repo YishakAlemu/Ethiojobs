@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'filter.dart';
+import 'search.dart';
 
-class Companiespage extends StatefulWidget {
-  final Function(String) onJobSelected;
-  const Companiespage({super.key, required this.onJobSelected});
+class Homepage extends StatefulWidget {
+  final Function(String job) onJobSelected;
+  const Homepage({super.key, required this.onJobSelected});
 
 
   @override
-  _CompaniespageState createState() => _CompaniespageState();
+  _HomepageState createState() => _HomepageState();
 }
 
-class _CompaniespageState extends State<Companiespage> {
-  final String? _selectedValue = '';
-  int _selectedNavIndex = 1;
+class _HomepageState extends State<Homepage> {
+  final TextEditingController _searchController = TextEditingController();
+
+
+  @override
+  void dispose() {
+    _searchController.dispose(); // Dispose the controller
+    super.dispose();
+  }
+  String? _selectedValue = '';
+  int _selectedNavIndex = 0;
 int _getIndex(String label) {
     switch (label) {
       case 'Jobs':
@@ -77,83 +86,169 @@ resizeToAvoidBottomInset: false,
 
             // First main container
                     Container(
-                     height: 150,
+                     height: 200,
                      width:700,
-                 color: Colors.white,// Background color for the first container
+                 color: Color.fromARGB(255, 72, 193, 156), // Background color for the first container
                child: Column(
           children: [
-            SizedBox(height: 20),
-            Row(
-              children: [
-                SizedBox(width: 10),
-                SizedBox(
-                  height: 60,
-                  width: 320,
-                  
-                  
-                  child: Center(
-                    child: Text(
-                     'Find Your Dream Job in Ethiopia',
-                      style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0), fontSize: 18), // Changed color for visibility
-                   ),
-                 ),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-             SizedBox(width: 15),
-                Container(
-                
-                  height: 45,
-                  width: 300,
-                  margin: EdgeInsets.only(top: 0),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(25),
-                    border: Border.all(
-                      color: Colors.grey, // Border color
-                      width: 1, // Border width
-                    ),
-                   
-                  ),
-                 child: Center(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: "Job title, Keywords, or industry",
-                      hintStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w300),
-                      contentPadding: EdgeInsets.symmetric(horizontal: 7, vertical: 12),
-                      border: InputBorder.none,
-                      prefixIcon: Padding(
-                        padding: EdgeInsets.only(left: 10.0, right: 4.0, top: 6), // Add some padding
-                        child: Icon(Icons.search, color: const Color.fromARGB(255, 72, 193, 156)), // Search icon
-                      ),
-                    ),
-                  ),
-                ),
-                ),
-                
-                SizedBox(width: 7),
-                Container(
-                  height: 42,
-                  decoration:BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                    border: Border.all(color:Colors.grey, width: 1),
-                  ),
-                 
-                  child: IconButton(onPressed: (){
-                            Navigator.pushNamed(context, '/filter');
-                          }, 
-                          icon: Icon(Icons.tune, color:const Color.fromARGB(255, 72, 193, 156),size: 20,)),
-                )
-
-              ],
+            SizedBox(
+              height: 60,
+              width: 370,
               
+              
+              child: Center(
+                child: Text(
+                 'Find Your Dream Job in Ethiopia',
+                  style: TextStyle(color: Colors.white, fontSize: 18), // Changed color for visibility
+               ),
+             ),
+            ),
+            Container(
+              height: 50,
+              width: 355,
+              margin: EdgeInsets.only(top: 0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(25),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2), // Shadow color
+                    spreadRadius: 5, // Spread radius
+                    blurRadius: 10, // Blur radius
+                    offset: Offset(0, 2), // Offset for the shadow
+                  ),
+                  ],
+              ),
+             child: Center(
+  child: TextField(
+    controller: _searchController,
+    decoration: InputDecoration(
+      hintText: "Job title, Keywords, or industry",
+      hintStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w300),
+      contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 12),
+      border: InputBorder.none,
+      prefixIcon: Padding(
+        padding: EdgeInsets.only(left: 10.0, right: 10.0), // Add some padding
+        child: Icon(Icons.search, color: Colors.grey), // Search icon
+      ),
+    ),
+    onTap: () {
+                        // // Navigate to the search results page
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => Searchpage(searchQuery: _searchController.text),
+                        //   ),
+                        // );
+                      },
+  ),
+),
             ),
 
 SizedBox(height:20),
-    
+    SizedBox(
+      
+      height:45,
+      width:370,
+      
+      child: Row(children: [
+        SizedBox(width:40),
+            SizedBox(
+              height:35,
+              width:120,
+              
+              child: ElevatedButton(onPressed: () {
+                   Navigator.pushNamed(context, '/filter');
+                                        },
+              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white,
+                               shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6), 
+                              
+    ),),
+               child: Row(children: [
+                Icon(Icons.tune, color:Colors.black),
+                SizedBox(width:5),
+                Text('Filter', style:TextStyle(color:Colors.black,fontWeight: FontWeight.w400)),
+                
+               ],)),
+            ),
+             SizedBox(width:30),
+             Container(
+              decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(6),
+        color:Colors.white,
+      ),
+              height: 35,
+              width: 150,
+              
+               child: PopupMenuButton<String>(
+                 onSelected: (String value) {
+                   setState(() {
+                     _selectedValue = value; // Update the selected value
+                   });
+                 },
+                 icon: Row(
+                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                   children: [
+                     Row(
+                         children: [
+                          SizedBox(width: 10),
+                           Text('Sort: '),
+                           Text(
+                _selectedValue ?? 'Select an option', 
+                style: TextStyle(
+                  overflow: TextOverflow.ellipsis,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  
+                ),
+                           ),
+                           Icon(Icons.arrow_drop_down, color: Colors.grey),
+                         ],
+                       ),
+                     
+                     
+                   ],
+                 ),
+                 itemBuilder: (BuildContext context) => [
+                   PopupMenuItem(
+                     value: 'Popularity',
+                     child: Text(
+                       'Popularity',
+                       style: TextStyle(overflow: TextOverflow.ellipsis,fontSize: 13, fontWeight: FontWeight.w400, color: Colors.black),
+                     ),
+                   ),
+                   PopupMenuItem(
+                     value: 'Date',
+                     child: Text(
+                       'Date',
+                       style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: Colors.black),
+                     ),
+                   ),
+                   PopupMenuItem(
+                     value: 'Location',
+                     child: Text(
+                       'Location',
+                       style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: Colors.black),
+                     ),
+                   ),
+                   PopupMenuItem(
+                     value: 'Type',
+                     child: Text(
+                       'Type',
+                       style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: Colors.black),
+                     ),
+                   ),
+                 ],
+                 offset: Offset(0, 40),
+                 color: Colors.white,
+               ),
+             )
+
+
+      ],),
+    ),
           ]
         ),
     ),
@@ -227,7 +322,7 @@ SizedBox(height:20),
           padding: EdgeInsets.zero, // Remove any padding from the button
           minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
         ),
-                child: Text('Premium', style: TextStyle(color: const Color.fromARGB(255, 72, 193, 156), fontSize: 13,),),
+                child: Text('Premium', style: TextStyle(color: Colors.green, fontSize: 13,),),
               ),
             ),
             SizedBox(width:11),
@@ -251,7 +346,7 @@ SizedBox(height:20),
                       SizedBox(height:5),
                       Row(
                         children: [
-                          SizedBox(width:10),
+                          SizedBox(width:20),
                           SizedBox(
                             
                               width: 90, 
@@ -532,7 +627,7 @@ Padding(
           padding: EdgeInsets.zero, // Remove any padding from the button
           minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
         ),
-                child: Text('Premium', style: TextStyle(color: const Color.fromARGB(255, 72, 193, 156), fontSize: 13,),),
+                child: Text('Premium', style: TextStyle(color: Colors.green, fontSize: 13,),),
               ),
             ),
             SizedBox(width:11),
@@ -556,7 +651,617 @@ Padding(
                       SizedBox(height:5),
                       Row(
                         children: [
+                          SizedBox(width:20),
+                          SizedBox(
+                            
+                              width: 90, 
+                              height: 55, 
+                              child: ClipRect( 
+                              child: Image.asset(
+                              'assets/actionhunger_logo.jpg', 
+                               fit: BoxFit.cover, // Use BoxFit.cover to maintain aspect ratio while filling the container
+                                  ),
+                                 ),
+                                  ),
+                                SizedBox(width:10),
+                                 Column(
+                                   children: [
+                                     Container(
+                                                                
+                          alignment: Alignment.centerLeft,
+
+
+                          height:40,
+
+                          child: TextButton(
+                          onPressed: () {
+                          widget.onJobSelected('Senior FullStack Developer');
+                          },
+                          child: Text(
+                      'IT Assistant',
+                      style: TextStyle(color: Colors.black, fontSize: 16,fontWeight: FontWeight.bold),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                                                    ),
+                                                  
+                                                ),
+                                    ),
+            Row(
+              children: [
+                SizedBox(
+                width:120,
+                height:25,
+                child: ElevatedButton(
+                    onPressed: () {
+                      // Action when button is pressed
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0), // Rounded corners
+                      ),
+                      backgroundColor: const Color.fromARGB(200, 255, 255, 255), // Background color
+                    ),
+                    child: Text(
+                      'Informatin science',
+                      style: TextStyle(color: Colors.black, fontSize: 12.5,fontWeight: FontWeight.w400, ), overflow: TextOverflow.ellipsis,maxLines: 1, // Text color
+                    ),
+                  ),
+              ),
+              SizedBox(width:5),
+              SizedBox(
+    width:120,
+    height:25,
+    child: ElevatedButton(
+      onPressed: () {
+        // Action when button is pressed
+      },
+      style: ElevatedButton.styleFrom(
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0), // Rounded corners
+        ),
+        backgroundColor: const Color.fromARGB(200, 255, 255, 255), // Background color
+      ),
+      child: Text(
+        'Information systems',
+        style: TextStyle(color: Colors.black, fontSize: 12.5,fontWeight: FontWeight.w400, ), overflow: TextOverflow.ellipsis,maxLines: 1, // Text color
+      ),
+    ),
+  ),
+                                                     ],
+                                                   ),
+                                
+                               
+                                   ],
+                                   
+                                 ),
+                        ],
+                      ),
+                       Row(
+                         children: [
                           SizedBox(width:10),
+                          
+                         ],
+                       ),
+                        SizedBox(height:5),
+                       Row(
+    children: [
+      SizedBox(width:20),
+         Padding(
+  padding: const EdgeInsets.only(right: 0.0), 
+  child: TextButton.icon(
+    onPressed: () {
+      // Button action
+    },
+    style: TextButton.styleFrom(
+          padding: EdgeInsets.zero, // Remove any padding from the button
+          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
+        ),
+    icon: Icon(
+      Icons.location_on_outlined,
+      size: 14,
+      color: Colors.black, // Lightning icon color
+    ),
+    label: Text(
+      'Addis Ababa',
+      style: TextStyle(
+        color: Colors.black,
+        fontSize: 13,
+      ),
+    ),
+  ),
+),
+SizedBox(width:20),
+Padding(
+  padding: const EdgeInsets.only(right: 0.0), 
+  child: TextButton.icon(
+    onPressed: () {
+      // Button action
+    },
+    style: TextButton.styleFrom(
+          padding: EdgeInsets.zero, // Remove any padding from the button
+          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
+        ),
+    icon: Icon(
+      Icons.calendar_month_outlined,
+      size: 14,
+      color: Colors.black, // Lightning icon color
+    ),
+    label: Text(
+      'April 10th, 2025',
+      style: TextStyle(
+        color: Colors.black,
+        fontSize: 13,
+      ),
+    ),
+  ),
+),
+  ],),
+
+   Container(
+  height: 25,
+  width: 338,
+  margin: EdgeInsets.symmetric(horizontal: 22.0),
+  padding: EdgeInsets.all(3), // Ensure no padding around the container
+  color: Colors.white,
+  child: Row(
+    children: [
+      // Label
+      Text(
+        '15 days ago by ',
+        style: TextStyle(fontSize: 13), // Customize the style as needed
+      ),
+      SizedBox(width: 10),
+      // Text Button
+      Container( // Use Expanded to take available space
+        child: TextButton(
+          onPressed: () {
+            // Action to perform when the button is pressed
+          },
+          style: TextButton.styleFrom(
+            padding: EdgeInsets.all(0),
+            minimumSize: Size(0, 0), // Remove padding from the button
+          ),
+          child: Text(
+            'ETHIOJOBS & AFRINET',
+            style: TextStyle(fontSize: 13, color: Colors.blueAccent),
+            overflow: TextOverflow.ellipsis, // Enable ellipsis
+            maxLines: 1, // Limit to one line
+          ),
+        ),
+      ),
+    ],
+  ),
+),
+ SizedBox(height:5),
+              Row(
+                children: [
+                  SizedBox(width:260),
+                  Container(
+                    height:30,
+                    width: 100,
+                    decoration: BoxDecoration(
+              border: Border.all(
+                color: const Color.fromARGB(255, 72, 193, 156), // Border color
+                width: 2, // Border width
+              ),
+              borderRadius: BorderRadius.circular(6), // Optional: Rounded corners
+            ),
+                    child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/apply');
+                          },
+                          style: ElevatedButton.styleFrom(
+                                 padding: EdgeInsets.symmetric(horizontal: 12, vertical: 3),
+                            shape: RoundedRectangleBorder(
+                              
+                              borderRadius: BorderRadius.circular(6.0), // Rounded corners
+                            ),
+                            backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                              ),
+                          child: Text(
+                            'Apply Now',
+                            style: TextStyle(
+                              color: const Color.fromARGB(255, 72, 193, 156),
+                              fontSize: 13.8,
+                            ),
+                          ),
+                        ),
+                  ),
+                ],
+              ),          
+                   SizedBox(height:15), ],),
+                      
+                    ),
+              ),
+               SingleChildScrollView(
+                    child:Container(
+
+                    
+                    width: 380,
+                    margin: EdgeInsets.only(top: 0),
+                    decoration: BoxDecoration(
+                   color: Colors.white,
+                  borderRadius: BorderRadius.circular(0),
+                  boxShadow: [
+                 
+                  ],
+                   border: Border(
+     bottom: BorderSide(
+        color: Colors.grey.withOpacity(0.5), 
+        width: 1, 
+      ),
+      
+      left: BorderSide(color: Colors.transparent),
+      right: BorderSide(color: Colors.transparent),
+      top: BorderSide(color: Colors.transparent),
+    ), // Set the circular radius here
+                           ),
+                    child: Column(children: [
+                      SizedBox(height:5),
+                      Row(
+          mainAxisAlignment: MainAxisAlignment.start, // Start alignment for manual control
+          children: [
+            SizedBox(width:6),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0, right:0),
+               
+              child: TextButton(
+                onPressed: () {
+                  
+                },
+                style: TextButton.styleFrom(
+          padding: EdgeInsets.zero, // Remove any padding from the button
+          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
+        ),
+                child: Text(
+                  'New',
+                  style: TextStyle(color: Colors.indigo,fontSize: 13),
+                ),
+              ),
+            ),
+            SizedBox(width:11),
+            Padding(
+              padding: const EdgeInsets.only(right: 0.0), // Adjust space for Button 2
+              child: TextButton(
+                onPressed: () {
+                  // Action for Button 2
+                },
+                style: TextButton.styleFrom(
+          padding: EdgeInsets.zero, // Remove any padding from the button
+          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
+        ),
+                child: Text('Premium', style: TextStyle(color: Colors.green, fontSize: 13,),),
+              ),
+            ),
+            SizedBox(width:11),
+        SizedBox(width: 185),
+            TextButton(
+  onPressed: () {
+    
+  },
+  style: TextButton.styleFrom(
+          padding: EdgeInsets.zero, // Remove any padding from the button
+          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
+        ),
+  child: Icon(
+    Icons.bookmark_border, // Use Icons.favorite for filled heart
+    color: Colors.black54, // Customize the icon color
+    size: 24.5, // Customize the icon size
+  ),
+)
+          ],
+        ),
+                      SizedBox(height:5),
+                      Row(
+                        children: [
+                          SizedBox(width:20),
+                          SizedBox(
+                            
+                              width: 90, 
+                              height: 55, 
+                              child: ClipRect( 
+                              child: Image.asset(
+                              'assets/amref_logo.png', 
+                               fit: BoxFit.cover, // Use BoxFit.cover to maintain aspect ratio while filling the container
+                                  ),
+                                 ),
+                                  ),
+                                SizedBox(width:10),
+                                 Column(
+                                   children: [
+                                     Container(
+                                                                
+                          alignment: Alignment.centerLeft,
+
+
+                          height:40,
+
+                          child: TextButton(
+                          onPressed: () {
+                          widget.onJobSelected('Senior FullStack Developer');
+                          },
+                          child: Text(
+                      'Sales Manager',
+                      style: TextStyle(color: Colors.black, fontSize: 16,fontWeight: FontWeight.bold),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                                                    ),
+                                                  
+                                                ),
+                                    ),
+            Row(
+              children: [
+                SizedBox(
+                width:120,
+                height:25,
+                child: ElevatedButton(
+                    onPressed: () {
+                      // Action when button is pressed
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0), // Rounded corners
+                      ),
+                      backgroundColor: const Color.fromARGB(200, 255, 255, 255), // Background color
+                    ),
+                    child: Text(
+                      'Sales',
+                      style: TextStyle(color: Colors.black, fontSize: 12.5,fontWeight: FontWeight.w400, ), overflow: TextOverflow.ellipsis,maxLines: 1, // Text color
+                    ),
+                  ),
+              ),
+              SizedBox(width:5),
+              SizedBox(
+    width:120,
+    height:25,
+    child: ElevatedButton(
+      onPressed: () {
+        // Action when button is pressed
+      },
+      style: ElevatedButton.styleFrom(
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0), // Rounded corners
+        ),
+        backgroundColor: const Color.fromARGB(200, 255, 255, 255), // Background color
+      ),
+      child: Text(
+        'Computer Science & IT',
+        style: TextStyle(color: Colors.black, fontSize: 12.5,fontWeight: FontWeight.w400, ), overflow: TextOverflow.ellipsis,maxLines: 1, // Text color
+      ),
+    ),
+  ),
+                                                     ],
+                                                   ),
+                                
+                               
+                                   ],
+                                   
+                                 ),
+                        ],
+                      ),
+                       Row(
+                         children: [
+                          SizedBox(width:10),
+                          
+                         ],
+                       ),
+                        SizedBox(height:5),
+                       Row(
+    children: [
+      SizedBox(width:20),
+         Padding(
+  padding: const EdgeInsets.only(right: 0.0), 
+  child: TextButton.icon(
+    onPressed: () {
+      // Button action
+    },
+    style: TextButton.styleFrom(
+          padding: EdgeInsets.zero, // Remove any padding from the button
+          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
+        ),
+    icon: Icon(
+      Icons.location_on_outlined,
+      size: 14,
+      color: Colors.black, // Lightning icon color
+    ),
+    label: Text(
+      'Addis Ababa',
+      style: TextStyle(
+        color: Colors.black,
+        fontSize: 13,
+      ),
+    ),
+  ),
+),
+SizedBox(width:20),
+Padding(
+  padding: const EdgeInsets.only(right: 0.0), 
+  child: TextButton.icon(
+    onPressed: () {
+      // Button action
+    },
+    style: TextButton.styleFrom(
+          padding: EdgeInsets.zero, // Remove any padding from the button
+          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
+        ),
+    icon: Icon(
+      Icons.calendar_month_outlined,
+      size: 14,
+      color: Colors.black, // Lightning icon color
+    ),
+    label: Text(
+      'April 10th, 2025',
+      style: TextStyle(
+        color: Colors.black,
+        fontSize: 13,
+      ),
+    ),
+  ),
+),
+  ],),
+
+   Container(
+  height: 25,
+  width: 338,
+  margin: EdgeInsets.symmetric(horizontal: 22.0),
+  padding: EdgeInsets.all(3), // Ensure no padding around the container
+  color: Colors.white,
+  child: Row(
+    children: [
+      // Label
+      Text(
+        '15 days ago by ',
+        style: TextStyle(fontSize: 13), // Customize the style as needed
+      ),
+      SizedBox(width: 10),
+      // Text Button
+      Container( // Use Expanded to take available space
+        child: TextButton(
+          onPressed: () {
+            // Action to perform when the button is pressed
+          },
+          style: TextButton.styleFrom(
+            padding: EdgeInsets.all(0),
+            minimumSize: Size(0, 0), // Remove padding from the button
+          ),
+          child: Text(
+            'ETHIOJOBS & AFRINET',
+            style: TextStyle(fontSize: 13, color: Colors.blueAccent),
+            overflow: TextOverflow.ellipsis, // Enable ellipsis
+            maxLines: 1, // Limit to one line
+          ),
+        ),
+      ),
+    ],
+  ),
+),
+ SizedBox(height:5),
+              Row(
+                children: [
+                  SizedBox(width:260),
+                  Container(
+                    height:30,
+                    width: 100,
+                    decoration: BoxDecoration(
+              border: Border.all(
+                color: const Color.fromARGB(255, 72, 193, 156), // Border color
+                width: 2, // Border width
+              ),
+              borderRadius: BorderRadius.circular(6), // Optional: Rounded corners
+            ),
+                    child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/apply');
+                          },
+                          style: ElevatedButton.styleFrom(
+                                 padding: EdgeInsets.symmetric(horizontal: 12, vertical: 3),
+                            shape: RoundedRectangleBorder(
+                              
+                              borderRadius: BorderRadius.circular(6.0), // Rounded corners
+                            ),
+                            backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                              ),
+                          child: Text(
+                            'Apply Now',
+                            style: TextStyle(
+                              color: const Color.fromARGB(255, 72, 193, 156),
+                              fontSize: 13.8,
+                            ),
+                          ),
+                        ),
+                  ),
+                ],
+              ),          
+                   SizedBox(height:15), ],),
+                      
+                    ),
+              ),
+               SingleChildScrollView(
+                    child:Container(
+
+                    
+                    width: 380,
+                    margin: EdgeInsets.only(top: 0),
+                    decoration: BoxDecoration(
+                   color: Colors.white,
+                  borderRadius: BorderRadius.circular(0),
+                  boxShadow: [
+                 
+                  ],
+                   border: Border(
+     bottom: BorderSide(
+        color: Colors.grey.withOpacity(0.5), 
+        width: 1, 
+      ),
+      
+      left: BorderSide(color: Colors.transparent),
+      right: BorderSide(color: Colors.transparent),
+      top: BorderSide(color: Colors.transparent),
+    ), // Set the circular radius here
+                           ),
+                    child: Column(children: [
+                      SizedBox(height:5),
+                      Row(
+          mainAxisAlignment: MainAxisAlignment.start, // Start alignment for manual control
+          children: [
+            SizedBox(width:6),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0, right:0),
+               
+              child: TextButton(
+                onPressed: () {
+                  
+                },
+                style: TextButton.styleFrom(
+          padding: EdgeInsets.zero, // Remove any padding from the button
+          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
+        ),
+                child: Text(
+                  'New',
+                  style: TextStyle(color: Colors.indigo,fontSize: 13),
+                ),
+              ),
+            ),
+            SizedBox(width:11),
+            Padding(
+              padding: const EdgeInsets.only(right: 0.0), // Adjust space for Button 2
+              child: TextButton(
+                onPressed: () {
+                  // Action for Button 2
+                },
+                style: TextButton.styleFrom(
+          padding: EdgeInsets.zero, // Remove any padding from the button
+          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
+        ),
+                child: Text('Premium', style: TextStyle(color: Colors.green, fontSize: 13,),),
+              ),
+            ),
+            SizedBox(width:11),
+        SizedBox(width: 185),
+            TextButton(
+  onPressed: () {
+    
+  },
+  style: TextButton.styleFrom(
+          padding: EdgeInsets.zero, // Remove any padding from the button
+          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
+        ),
+  child: Icon(
+    Icons.bookmark_border, // Use Icons.favorite for filled heart
+    color: Colors.black54, // Customize the icon color
+    size: 24.5, // Customize the icon size
+  ),
+)
+          ],
+        ),
+                      SizedBox(height:5),
+                      Row(
+                        children: [
+                          SizedBox(width:20),
                           SizedBox(
                             
                               width: 90, 
@@ -859,7 +1564,7 @@ Padding(
                       SizedBox(height:5),
                       Row(
                         children: [
-                          SizedBox(width:10),
+                          SizedBox(width:20),
                           SizedBox(
                             
                               width: 90, 
@@ -1083,653 +1788,7 @@ Padding(
                       
                     ),
               ),
-                     SingleChildScrollView(
-                    child:Container(
-
                     
-                    width: 380,
-                    margin: EdgeInsets.only(top: 0),
-                    decoration: BoxDecoration(
-                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(0),
-                  boxShadow: [
-                 
-                  ],
-                   border: Border(
-     bottom: BorderSide(
-        color: Colors.grey.withOpacity(0.5), 
-        width: 1, 
-      ),
-      
-      left: BorderSide(color: Colors.transparent),
-      right: BorderSide(color: Colors.transparent),
-      top: BorderSide(color: Colors.transparent),
-    ), // Set the circular radius here
-                           ),
-                    child: Column(children: [
-                      SizedBox(height:5),
-                      Row(
-          mainAxisAlignment: MainAxisAlignment.start, // Start alignment for manual control
-          children: [
-            SizedBox(width:6),
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0, right:0),
-               
-              child: TextButton(
-                onPressed: () {
-                  
-                },
-                style: TextButton.styleFrom(
-          padding: EdgeInsets.zero, // Remove any padding from the button
-          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
-        ),
-                child: Text(
-                  'New',
-                  style: TextStyle(color: Colors.indigo,fontSize: 14.8),
-                ),
-              ),
-            ),
-            SizedBox(width:11),
-            Padding(
-              padding: const EdgeInsets.only(right: 0.0), // Adjust space for Button 2
-              child: TextButton(
-                onPressed: () {
-                  // Action for Button 2
-                },
-                style: TextButton.styleFrom(
-          padding: EdgeInsets.zero, // Remove any padding from the button
-          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
-        ),
-                child: Text('Premium', style: TextStyle(color: Colors.green, fontSize: 14.8,),),
-              ),
-            ),
-            SizedBox(width:11),
-            Padding(
-  padding: const EdgeInsets.only(right: 0.0), 
-  child: TextButton.icon(
-    onPressed: () {
-      // Button action
-    },
-    style: TextButton.styleFrom(
-          padding: EdgeInsets.zero, // Remove any padding from the button
-          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
-        ),
-    icon: SizedBox(
-      
-      width:10,
-      height:15,
-      child: Icon(
-        Icons.flash_on_outlined,
-        size: 16,
-        color: const Color.fromARGB(255, 15, 92, 154), // Lightning icon color
-      ),
-    ),
-    label: Text(
-      'Easy Apply',
-      style: TextStyle(
-        color: Colors.blueAccent,
-        fontSize: 14.8,
-      ),
-    ),
-  ),
-),
-            SizedBox(width: 90),
-            TextButton(
-  onPressed: () {
-    
-  },
-  style: TextButton.styleFrom(
-          padding: EdgeInsets.zero, // Remove any padding from the button
-          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
-        ),
-  child: Icon(
-    Icons.bookmark_border, // Use Icons.favorite for filled heart
-    color: Colors.black54, // Customize the icon color
-    size: 24.5, // Customize the icon size
-  ),
-)
-          ],
-        ),
-                      SizedBox(height:5),
-                      Row(
-                        children: [
-                          SizedBox(width:10),
-                          SizedBox(
-                            
-                              width: 90, 
-                              height: 55, 
-                              child: ClipRect( 
-                              child: Image.asset(
-                              'assets/dashin_logo.png', 
-                               fit: BoxFit.cover, // Use BoxFit.cover to maintain aspect ratio while filling the container
-                                  ),
-                                 ),
-                                  ),
-                                
-                                 SizedBox(width:10),
-                                SizedBox(
-                                  width:120,
-                                  height:25,
-                                  child: ElevatedButton(
-                                      onPressed: () {
-                                        // Action when button is pressed
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(20.0), // Rounded corners
-                                        ),
-                                        backgroundColor: const Color.fromARGB(200, 255, 255, 255), // Background color
-                                      ),
-                                      child: Text(
-                                        'Accounting',
-                                        style: TextStyle(color: Colors.black, fontSize: 12.5,fontWeight: FontWeight.w400, ), overflow: TextOverflow.ellipsis,maxLines: 1, // Text color
-                                      ),
-                                    ),
-                                ),
-  SizedBox(width:10),
-  SizedBox(
-    width:120,
-    height:25,
-    child: ElevatedButton(
-      onPressed: () {
-        // Action when button is pressed
-      },
-      style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0), // Rounded corners
-        ),
-        backgroundColor: const Color.fromARGB(200, 255, 255, 255), // Background color
-      ),
-      child: Text(
-        'Management',
-        style: TextStyle(color: Colors.black, fontSize: 12.5,fontWeight: FontWeight.w400, ), overflow: TextOverflow.ellipsis,maxLines: 1, // Text color
-      ),
-    ),
-  ),
-                        ],
-                      ),
-                       Row(
-                         children: [
-                          SizedBox(width:10),
-                           Container(
-                           
-                            alignment: Alignment.centerLeft,
-                            
-                            width:360,
-                            height:40,
-                            
-                            child: TextButton(
-                             onPressed: () {
-                               
-                             },
-                               child: Text(
-                                 'Accountant',
-                                 style: TextStyle(color: Colors.black, fontSize: 18,fontWeight: FontWeight.bold),
-                                 overflow: TextOverflow.ellipsis,
-                                 maxLines: 1,
-                               ),
-                             
-                           ),
-                                               ),
-                         ],
-                       ),
-                    SizedBox(height:10),
-                     Container(
-  height: 25,
-  width: 338,
-  margin: EdgeInsets.symmetric(horizontal: 22.0),
-  padding: EdgeInsets.all(0), // Ensure no padding around the container
-  color: Colors.white,
-  child: Row(
-    children: [
-      // Label
-      Text(
-        '15 days ago by ',
-        style: TextStyle(fontSize: 14), // Customize the style as needed
-      ),
-      SizedBox(width: 10),
-      // Text Button
-      Container( // Use Expanded to take available space
-        child: TextButton(
-          onPressed: () {
-            // Action to perform when the button is pressed
-          },
-          style: TextButton.styleFrom(
-            padding: EdgeInsets.all(0),
-            minimumSize: Size(0, 0), // Remove padding from the button
-          ),
-          child: Text(
-            'ETHIOJOBS & AFRINET',
-            style: TextStyle(fontSize: 14, color: Colors.blueAccent),
-            overflow: TextOverflow.ellipsis, // Enable ellipsis
-            maxLines: 1, // Limit to one line
-          ),
-        ),
-      ),
-    ],
-  ),
-),
-                       Row(
-    children: [
-      SizedBox(width:20),
-         Padding(
-  padding: const EdgeInsets.only(right: 0.0), 
-  child: TextButton.icon(
-    onPressed: () {
-      // Button action
-    },
-    style: TextButton.styleFrom(
-          padding: EdgeInsets.zero, // Remove any padding from the button
-          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
-        ),
-    icon: Icon(
-      Icons.location_on_outlined,
-      size: 17,
-      color: Colors.black, // Lightning icon color
-    ),
-    label: Text(
-      'Addis Ababa',
-      style: TextStyle(
-        color: Colors.black,
-        fontSize: 14.8,
-      ),
-    ),
-  ),
-),
-SizedBox(width:20),
-Padding(
-  padding: const EdgeInsets.only(right: 0.0), 
-  child: TextButton.icon(
-    onPressed: () {
-      // Button action
-    },
-    style: TextButton.styleFrom(
-          padding: EdgeInsets.zero, // Remove any padding from the button
-          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
-        ),
-    icon: Icon(
-      Icons.calendar_month_outlined,
-      size: 16,
-      color: Colors.black, // Lightning icon color
-    ),
-    label: Text(
-      'April 10th, 2025',
-      style: TextStyle(
-        color: Colors.black,
-        fontSize: 14.8,
-      ),
-    ),
-  ),
-),
-  ],),
-  Row(
-                children: [
-                  SizedBox(width:260),
-                  Container(
-                    height:30,
-                    width: 100,
-                    decoration: BoxDecoration(
-              border: Border.all(
-                color: const Color.fromARGB(255, 72, 193, 156), // Border color
-                width: 2, // Border width
-              ),
-              borderRadius: BorderRadius.circular(6), // Optional: Rounded corners
-            ),
-                    child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/apply');
-                          },
-                          style: ElevatedButton.styleFrom(
-                                 padding: EdgeInsets.symmetric(horizontal: 12, vertical: 3),
-                            shape: RoundedRectangleBorder(
-                              
-                              borderRadius: BorderRadius.circular(6.0), // Rounded corners
-                            ),
-                            backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                              ),
-                          child: Text(
-                            'Apply Now',
-                            style: TextStyle(
-                              color: const Color.fromARGB(255, 72, 193, 156),
-                              fontSize: 13.8,
-                            ),
-                          ),
-                        ),
-                  ),
-                ],
-              ),    
-              SizedBox(height:15),
-                       
-                    ],),
-                      
-                    ),
-              ),
-                     SingleChildScrollView(
-                    child:Container(
-
-                    
-                    width: 380,
-                    margin: EdgeInsets.only(top: 0),
-                    decoration: BoxDecoration(
-                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(0),
-                  boxShadow: [
-                 
-                  ],
-                   border: Border(
-     bottom: BorderSide(
-        color: Colors.grey.withOpacity(0.5), 
-        width: 1, 
-      ),
-      
-      left: BorderSide(color: Colors.transparent),
-      right: BorderSide(color: Colors.transparent),
-      top: BorderSide(color: Colors.transparent),
-    ), // Set the circular radius here
-                           ),
-                    child: Column(children: [
-                      SizedBox(height:5),
-                      Row(
-          mainAxisAlignment: MainAxisAlignment.start, // Start alignment for manual control
-          children: [
-            SizedBox(width:6),
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0, right:0),
-               
-              child: TextButton(
-                onPressed: () {
-                  
-                },
-                style: TextButton.styleFrom(
-          padding: EdgeInsets.zero, // Remove any padding from the button
-          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
-        ),
-                child: Text(
-                  'New',
-                  style: TextStyle(color: Colors.indigo,fontSize: 14.8),
-                ),
-              ),
-            ),
-            SizedBox(width:11),
-            Padding(
-              padding: const EdgeInsets.only(right: 0.0), // Adjust space for Button 2
-              child: TextButton(
-                onPressed: () {
-                  // Action for Button 2
-                },
-                style: TextButton.styleFrom(
-          padding: EdgeInsets.zero, // Remove any padding from the button
-          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
-        ),
-                child: Text('Premium', style: TextStyle(color: Colors.green, fontSize: 14.8,),),
-              ),
-            ),
-            SizedBox(width:11),
-            Padding(
-  padding: const EdgeInsets.only(right: 0.0), 
-  child: TextButton.icon(
-    onPressed: () {
-      // Button action
-    },
-    style: TextButton.styleFrom(
-          padding: EdgeInsets.zero, // Remove any padding from the button
-          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
-        ),
-    icon: SizedBox(
-      
-      width:10,
-      height:15,
-      child: Icon(
-        Icons.flash_on_outlined,
-        size: 16,
-        color: const Color.fromARGB(255, 15, 92, 154), // Lightning icon color
-      ),
-    ),
-    label: Text(
-      'Easy Apply',
-      style: TextStyle(
-        color: Colors.blueAccent,
-        fontSize: 14.8,
-      ),
-    ),
-  ),
-),
-            SizedBox(width: 90),
-            TextButton(
-  onPressed: () {
-    
-  },
-  style: TextButton.styleFrom(
-          padding: EdgeInsets.zero, // Remove any padding from the button
-          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
-        ),
-  child: Icon(
-    Icons.bookmark_border, // Use Icons.favorite for filled heart
-    color: Colors.black54, // Customize the icon color
-    size: 24.5, // Customize the icon size
-  ),
-)
-          ],
-        ),
-                      SizedBox(height:5),
-                      Row(
-                        children: [
-                          SizedBox(width:10),
-                          SizedBox(
-                            
-                              width: 90, 
-                              height: 55, 
-                              child: ClipRect( 
-                              child: Image.asset(
-                              'assets/ahadu_logo.png', 
-                               fit: BoxFit.cover, // Use BoxFit.cover to maintain aspect ratio while filling the container
-                                  ),
-                                 ),
-                                  ),
-                                 SizedBox(width:10),
-                                SizedBox(
-                                  width:120,
-                                  height:25,
-                                  child: ElevatedButton(
-                                      onPressed: () {
-                                        // Action when button is pressed
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(20.0), // Rounded corners
-                                        ),
-                                        backgroundColor: const Color.fromARGB(200, 255, 255, 255), // Background color
-                                      ),
-                                      child: Text(
-                                        'Marketing',
-                                        style: TextStyle(color: Colors.black, fontSize: 12.5,fontWeight: FontWeight.w400, ), overflow: TextOverflow.ellipsis,maxLines: 1, // Text color
-                                      ),
-                                    ),
-                                ),
-  SizedBox(width:10),
-  SizedBox(
-    width:120,
-    height:25,
-    child: ElevatedButton(
-      onPressed: () {
-        // Action when button is pressed
-      },
-      style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0), // Rounded corners
-        ),
-        backgroundColor: const Color.fromARGB(200, 255, 255, 255), // Background color
-      ),
-      child: Text(
-        'Marketing',
-        style: TextStyle(color: Colors.black, fontSize: 12.5,fontWeight: FontWeight.w400, ), overflow: TextOverflow.ellipsis,maxLines: 1, // Text color
-      ),
-    ),
-  ),
-                                
-                        ],
-                      ),
-                       Row(
-                         children: [
-                          SizedBox(width:10),
-                           Container(
-                           
-                            alignment: Alignment.centerLeft,
-                            
-                            width:360,
-                            height:40,
-                            
-                            child: TextButton(
-                             onPressed: () {
-                               
-                             },
-                               child: Text(
-                                 'HR manager [All Levels]',
-                                 style: TextStyle(color: Colors.black, fontSize: 18,fontWeight: FontWeight.bold),
-                                 overflow: TextOverflow.ellipsis,
-                                 maxLines: 1,
-                               ),
-                             
-                           ),
-                                               ),
-                         ],
-                       ),
-                    SizedBox(height:10),
-                    Container(
-  height: 25,
-  width: 338,
-  margin: EdgeInsets.symmetric(horizontal: 22.0),
-  padding: EdgeInsets.all(0), // Ensure no padding around the container
-  color: Colors.white,
-  child: Row(
-    children: [
-      // Label
-      Text(
-        '15 days ago by ',
-        style: TextStyle(fontSize: 14), // Customize the style as needed
-      ),
-      SizedBox(width: 10),
-      // Text Button
-      Container( // Use Expanded to take available space
-        child: TextButton(
-          onPressed: () {
-            // Action to perform when the button is pressed
-          },
-          style: TextButton.styleFrom(
-            padding: EdgeInsets.all(0),
-            minimumSize: Size(0, 0), // Remove padding from the button
-          ),
-          child: Text(
-            'ETHIOJOBS & AFRINET',
-            style: TextStyle(fontSize: 14, color: Colors.blueAccent),
-            overflow: TextOverflow.ellipsis, // Enable ellipsis
-            maxLines: 1, // Limit to one line
-          ),
-        ),
-      ),
-    ],
-  ),
-),
-                       Row(
-    children: [
-      SizedBox(width:20),
-         Padding(
-  padding: const EdgeInsets.only(right: 0.0), 
-  child: TextButton.icon(
-    onPressed: () {
-      // Button action
-    },
-    style: TextButton.styleFrom(
-          padding: EdgeInsets.zero, 
-          minimumSize: Size(0, 0), 
-        ),
-    icon: Icon(
-      Icons.location_on_outlined,
-      size: 17,
-      color: Colors.black, 
-    ),
-    label: Text(
-      'Addis Ababa',
-      style: TextStyle(
-        color: Colors.black,
-        fontSize: 14.8,
-      ),
-    ),
-  ),
-),
-SizedBox(width:20),
-Padding(
-  padding: const EdgeInsets.only(right: 0.0), 
-  child: TextButton.icon(
-    onPressed: () {
-      // Button action
-    },
-    style: TextButton.styleFrom(
-          padding: EdgeInsets.zero, 
-          minimumSize: Size(0, 0), 
-        ),
-    icon: Icon(
-      Icons.calendar_month_outlined,
-      size: 16,
-      color: Colors.black,
-    ),
-    label: Text(
-      'April 10th, 2025',
-      style: TextStyle(
-        color: Colors.black,
-        fontSize: 14.8,
-      ),
-    ),
-  ),
-),
-  ],),
-  Row(
-                children: [
-                  SizedBox(width:260),
-                  Container(
-                    height:30,
-                    width: 100,
-                    decoration: BoxDecoration(
-              border: Border.all(
-                color: const Color.fromARGB(255, 72, 193, 156), // Border color
-                width: 2, // Border width
-              ),
-              borderRadius: BorderRadius.circular(6), // Optional: Rounded corners
-            ),
-                    child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/apply');
-                          },
-                          style: ElevatedButton.styleFrom(
-                                 padding: EdgeInsets.symmetric(horizontal: 12, vertical: 3),
-                            shape: RoundedRectangleBorder(
-                              
-                              borderRadius: BorderRadius.circular(6.0), // Rounded corners
-                            ),
-                            backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                              ),
-                          child: Text(
-                            'Apply Now',
-                            style: TextStyle(
-                              color: const Color.fromARGB(255, 72, 193, 156),
-                              fontSize: 13.8,
-                            ),
-                          ),
-                        ),
-                  ),
-                ],
-              ),    
-              SizedBox(height:15),
-                       
-                    ],),
-                      
-                    ),
-              ),
-                  
 
                          
                    ],
@@ -1759,12 +1818,12 @@ Padding(
             Navigator.pushNamed(context, '/home');
           },
           22,
-          const Color.fromARGB(255, 0, 0, 0), 0.7
+          const Color.fromARGB(255, 72, 193, 156), 0.7
           
         ),
         buildNavItem(Icons.business, 'Companies', () {
          Navigator.pushNamed(context, '/companies');
-        }, 22, const Color.fromARGB(255, 72, 193, 156),0.7),
+        }, 22, const Color.fromARGB(255, 0, 0, 0),0.7),
         buildNavItem(Icons.assignment, 'My Applications', () {
           Navigator.pushNamed(context, '/apps');
         }, 22, const Color.fromARGB(255, 0, 0, 0),0.7),

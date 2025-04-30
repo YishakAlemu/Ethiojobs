@@ -151,9 +151,16 @@ class _ParentWidgetState extends State<ParentWidget> {
                 case '/resume_builder':
                 builder = (BuildContext context) => Resume_builderpage();
                break;
-               case '/companies':
-                builder = (BuildContext context) => Companiespage();
-               break;
+                case '/companies':
+                builder = (BuildContext context) => Companiespage(
+                      onJobSelected: (job) {
+                        _navigatorKey.currentState!.pushNamed(
+                          '/jobDetail',
+                          arguments: job,
+                        );
+                      },
+                    );
+                break;
                case '/filter':
                 builder = (BuildContext context) => Filterpage();
                break;

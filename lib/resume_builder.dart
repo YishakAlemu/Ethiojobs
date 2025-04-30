@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill/flutter_quill.dart' as quill;
 class Resume_builderpage extends StatefulWidget {
+  const Resume_builderpage({super.key});
+
   @override
   _Resume_builderpageState createState() => _Resume_builderpageState();
 }
@@ -66,7 +68,106 @@ class _Resume_builderpageState extends State<Resume_builderpage> {
   String richTextContent3 = "";
   String insert_title = '';
   String insert_link = '';
-
+void _showGenerateCVDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return Dialog(
+        child: Container(
+         width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.5,
+        
+          child: Container(
+            decoration:BoxDecoration(
+        
+               color:Colors.white,
+              borderRadius: BorderRadius.circular(20),
+            ),
+           
+            width: 360, // Set your desired width
+            height: 280, // Set your desired height
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                
+                Container(
+                  height:40,
+                  width: 40,
+                  
+                  decoration: BoxDecoration(
+                    color:const Color.fromARGB(255, 225, 223, 223),
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  child: Icon(Icons.file_open_sharp, color:Colors.grey, size:22)),
+                  SizedBox(height:10),
+                 Row(
+                   children: [
+                    SizedBox(width:0),
+                     Text('Your CV is generated successfully!', style:TextStyle(fontSize:17, fontWeight:FontWeight.w700)),
+                   ],
+                 ),
+                SizedBox(height:10),
+                Text(
+                  "Your CV is generated and saved \nin your profle, you can apply form here",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 18),
+                ),
+                SizedBox(height: 20),
+                Container(
+                  height:80,
+                  width:220,
+                  decoration:BoxDecoration(
+                  border: Border.all(color:Colors.grey, width: 1),
+                  )
+                ), 
+                SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        color:Colors.white,
+                      ),
+                      child: TextButton(
+        
+                        onPressed: () {
+                          Navigator.of(context).pop(); // Close the dialog
+                        },
+                        child: Text('Cancel', style:TextStyle(color:Colors.black)),
+                      ),
+                    ),
+                    Container(
+                      height: 35,
+                       decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        color:Colors.blue,
+                      ),
+                      
+                      child: ElevatedButton(
+                        onPressed: () {
+                // setState(() {
+                //   resumes.removeAt(index);
+                // });
+                // Navigator.of(context).pop();
+              },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue,
+                        ),
+                        child: Text('Apply', style:TextStyle(color:Colors.black)),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    },
+  );
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -216,7 +317,7 @@ class _Resume_builderpageState extends State<Resume_builderpage> {
                             Row(
                               children: [
                                 SizedBox(width:120),
-                                Container(
+                                SizedBox(
                                    height:30,
                                   width:230,
                                   child: ElevatedButton(
@@ -254,7 +355,7 @@ class _Resume_builderpageState extends State<Resume_builderpage> {
                               hintText: 'Enter your years of experience',
                               onChanged: (value) => years_of_exp = value,
                             ),
-                            Container(
+                            SizedBox(
                                height:30,
                                width:220,
                               child: ElevatedButton(
@@ -325,7 +426,7 @@ class _Resume_builderpageState extends State<Resume_builderpage> {
                         SizedBox(height:5),
                         _buildlevelPickerField(),
                         SizedBox(height:60),
-                        Container(
+                        SizedBox(
                           height:30,
                           width:220,
                           child: ElevatedButton(
@@ -404,18 +505,18 @@ class _Resume_builderpageState extends State<Resume_builderpage> {
                             height:40,
                             child: ElevatedButton(
                               onPressed: () {
-                                Navigator.of(context).pop();
+                                _showGenerateCVDialog(context);
                               },
-                              
-                              
-                             
-                              child: Text('Apply', style: TextStyle(color: Colors.white)),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.green,
                                shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(3), 
                               
     ),),
+                              
+                              
+                             
+                              child: Text('Generate CV', style: TextStyle(color: Colors.white)),
                             ),
                           ),
                           SizedBox(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'parent_widget.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_quill/flutter_quill.dart'; 
-// Added for debugPaintSizeEnabled
+
 
 void main() {
   runApp(const Ethiojobs());
@@ -10,7 +10,7 @@ void main() {
 
 class Ethiojobs extends StatelessWidget {
   const Ethiojobs({super.key});
-
+ 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,4 +26,3 @@ class Ethiojobs extends StatelessWidget {
     );
   }
 }
- 

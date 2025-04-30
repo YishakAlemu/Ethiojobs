@@ -1228,7 +1228,7 @@ Padding(
           ),
         ),
         SizedBox(height: 5),
-        Container(
+        SizedBox(
           height: 1200, // Set a fixed height for the container
           child: Column(
             children: [

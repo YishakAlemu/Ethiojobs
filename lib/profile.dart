@@ -7,9 +7,12 @@ import 'dart:io';
 import 'dart:async';
 import 'dart:ui'; // Import for ImageByteFormat
 import 'package:flutter_quill/flutter_quill.dart' as quill;
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:open_file/open_file.dart';
 import 'dart:typed_data';
 import 'package:flutter/rendering.dart';
+import 'cv_editor.dart';
+import 'resume_builder.dart';
 
 class Profilepage extends StatefulWidget {
   const Profilepage({super.key});
@@ -21,12 +24,19 @@ class Profilepage extends StatefulWidget {
 
 class _ProfilepageState extends State<Profilepage> {
   String fullName = '';
+  String richTextContent = "Lorem ipsum dolor sit amet,consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum";
   String email = '';
   String phoneNumber = '';
   String birthday = '';
   String gender = '';
   String profession = '';
   int _selectedNavIndex = 3;
+  List<Map<String, String>> resumes = [
+  {'fileName': 'Recruiter_company'},
+  {'fileName': 'Resume.pdf'},
+  {'fileName': 'Who_are_we.pdf'},
+  {'fileName': 'Jon_Don_.pdf'},
+];
   int _getIndex(String label) {
     switch (label) {
       case 'Jobs':
@@ -74,6 +84,131 @@ Future<String> _generatePdf() async {
 
   return path;
 }
+void showPopup(BuildContext context) {
+  showGeneralDialog(
+    context: context,
+    barrierDismissible: true,
+    barrierLabel: "Popup",
+    transitionDuration: Duration(milliseconds: 200),
+    pageBuilder: (context, animation1, animation2) {
+      return SafeArea(
+        child: Scaffold(
+          backgroundColor: Colors.black.withOpacity(0.5),
+          body: Center(
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.8,
+              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                    ),
+                    child: Text(
+                      "",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: _buildRichTextEditor(),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          style: TextButton.styleFrom(
+                            backgroundColor: Colors.white,
+                          ),
+                          child: Text('Close', style: TextStyle(color: Colors.grey)),
+                        ),
+                        Container(
+                          width:130,
+                          height:35,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                richTextContent = _Controller.document.toPlainText();
+                              });
+                              Navigator.of(context).pop();
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blue,
+                            ),
+                            child: Text('Save', style: TextStyle(color: Colors.white)),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    },
+  );
+}
+ Widget _buildRichTextEditor() {
+    
+    return SingleChildScrollView(
+      
+      child:Column(
+        children: [
+        SizedBox(height:10),
+          Container(
+            alignment: Alignment.centerLeft,
+            child: Text('About you', style: TextStyle(color:Colors.grey, fontSize:16),)),
+            SizedBox(height:6),
+          Container(
+             decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              border: Border.all(
+                color: Colors.grey,
+              )
+            ),
+            
+         child: Column(
+        children: [
+          QuillSimpleToolbar(controller: _Controller), 
+          Divider(color:Colors.grey),// Toolbar for rich text editing
+          SizedBox(
+            
+            height: 300,
+            child: QuillEditor(
+              controller: _Controller,
+              
+              focusNode: FocusNode(), // Added focusNode
+              scrollController: ScrollController(), // Added scrollController
+            ),
+          ),
+        ],
+      )
+      ),
+        ]
+      )
+    );
+  }
 
 // Method to download CV
 void _downloadCv(BuildContext context) async {
@@ -112,6 +247,7 @@ void _downloadCv(BuildContext context) async {
   final TextEditingController _genderController = TextEditingController();
   String? _selectedGender;
   final TextEditingController _professionController = TextEditingController();
+  final QuillController _Controller = QuillController.basic();
   String? _selectedprofession;
   // bool _isEditing = false;
 
@@ -334,7 +470,7 @@ void _showProfessionPicker(){
 );
 }
 
-void showPopup(BuildContext context) {
+void showPopupdialog(BuildContext context) {
   showGeneralDialog(
     context: context,
     barrierDismissible: true,
@@ -691,7 +827,7 @@ Container(
   
 
 
-void _showdeleteDialog(BuildContext context) {
+void _showDeleteDialog(BuildContext context, index, fileName) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -728,7 +864,7 @@ void _showdeleteDialog(BuildContext context) {
                 SizedBox(height:10),
               Text('Remove resume', style:TextStyle(fontSize:17, fontWeight:FontWeight.w700)),
               Text(
-                "Are you sure you want to remove?\nRecruiter's company",
+                "Are you sure you want to remove $fileName ?",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 18),
               ),
@@ -758,10 +894,11 @@ void _showdeleteDialog(BuildContext context) {
                     
                     child: ElevatedButton(
                       onPressed: () {
-                        
-                        Navigator.of(context).pop(); 
-                        
-                      },
+              setState(() {
+                resumes.removeAt(index);
+              });
+              Navigator.of(context).pop();
+            },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blue,
                       ),
@@ -778,7 +915,9 @@ void _showdeleteDialog(BuildContext context) {
   );
 }
 
-final quill.QuillController _controller = quill.QuillController.basic();
+
+
+quill.QuillController _controller = quill.QuillController.basic();
   bool _isEditing = false;
 
   void _editText() {
@@ -1202,105 +1341,35 @@ bottomNavigationBar:
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                if (!_isEditing) ...[
-                  Text(
-                    _controller.document.toPlainText() == ''
-                        ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." // Default text
-                        : _controller.document.toPlainText(),
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  SizedBox(height: 8),
-                  Row(
-                    children: [
-                      SizedBox(width: 210),
-                      TextButton.icon(
-                        onPressed: _editText,
-                        icon: SizedBox(
-                          width: 12,
-                          child: Icon(
-                            Icons.edit,
-                            size: 17,
-                            color: Color.fromARGB(255, 72, 193, 156), // Icon color
-                          ),
-                        ),
-                        label: Text(
-                          'Edit', // Button text
-                          style: TextStyle(color: Color.fromARGB(255, 72, 193, 156), fontSize: 14),
-                        ),
+                Text(richTextContent),
+                SizedBox(height: 20),
+                Row(
+                  children: [
+                    SizedBox(width:220),
+                    TextButton(
+                      onPressed: () {
+  _controller = QuillController(
+    document: Document()..insert(0, richTextContent),
+    selection: const TextSelection.collapsed(offset: 0),
+  );
+  showPopup(context);
+},
+                      style: TextButton.styleFrom(
+                        padding: EdgeInsets.zero, 
+                        minimumSize: Size(0, 0), 
                       ),
-                    ],
-                  ),
-                ] else ...[
-                  SizedBox(
-                    
-                    width: 370,
-  
-                    child: Dialog(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: SafeArea(
-                        child: Container(
-                          
-                          //MediaQuery.of(context).size.width * 0.9,
-                                            
-                          padding: EdgeInsets.all(16),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                'Edit Text',
-                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(height: 10),
-                              
-                                quill.QuillSimpleToolbar(
-                                  controller: _controller,
-                                  config: const quill.QuillSimpleToolbarConfig(
-                                   
-                                  ),
-                                ),
-                              
-                              SizedBox(height: 10),
-                              Container(
-                                
-                                decoration: BoxDecoration(
-                                  
-                                  borderRadius: BorderRadius.circular(0),
-                                  border: Border.all(
-                                    color: Colors.grey,
-                                    width: 0.5,
-                                  ),
-                                ),
-                                
-                                child: quill.QuillEditor.basic(
-                                    controller: _controller,
-                                    config: const quill.QuillEditorConfig(),                          
-                                  ),
-                                
-                              ),
-                              SizedBox(height: 10),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  TextButton(
-                                    onPressed: _saveChanges,
-                                    child: Text('Save'),
-                                  ),
-                                  SizedBox(width: 8),
-                                  TextButton(
-                                    onPressed: _closeEditor,
-                                    child: Text('Close'),
-                                  ),
-                                ],
-                              ),
-                            ],
+                      child: Row(
+                        children: [
+                          Icon(Icons.edit, color: const Color.fromARGB(255, 72, 193, 156),size:13),
+                           Text(
+                            'Edit',
+                            style: TextStyle(fontSize: 13, color: const Color.fromARGB(255, 72, 193, 156), fontWeight: FontWeight.bold),
                           ),
-                        ),
+                        ],
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ],
             ),
           ),
@@ -1322,130 +1391,64 @@ case 'Resume':
                   child: Column(
                     children: [
                       Container(
-                        height:340,
-                        width :320,
-                        decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(30),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.2),
-                  spreadRadius: 2,
-                  blurRadius: 10,
-                  offset: Offset(0, 0), // changes position of shadow
-                ),
-              ],
+  height: 340,
+  width: 320,
+  decoration: BoxDecoration(
+    color: Colors.white,
+    borderRadius: BorderRadius.circular(30),
+    boxShadow: [
+      BoxShadow(
+        color: Colors.grey.withOpacity(0.2),
+        spreadRadius: 2,
+        blurRadius: 10,
+        offset: Offset(0, 0),
+      ),
+    ],
+  ),
+  child: ListView.builder(
+    itemCount: resumes.length,
+    itemBuilder: (context, index) {
+      final resume = resumes[index];
+      return Column(
+        children: [
+          SizedBox(height:20),
+          if (index != 0)
+            Divider(
+              color: const Color.fromARGB(255, 197, 231, 205),
+              indent: 10,
+              endIndent: 12,
             ),
-            
-            child: Column(children:[
-              SizedBox(height:30),
-                 Row(children:[
-                  SizedBox(width:15),
-                  Icon(Icons.file_copy, color: Colors.green[100], size: 25),
-                  SizedBox(width:5),
-                  SizedBox(
-                    width: 155,
-                    child: Text('Recruiter_company', style:TextStyle(fontSize: 17,fontWeight: FontWeight.w500 ))),
-                  SizedBox(width:0),
-                  IconButton(icon: Icon(Icons.cloud_download_rounded, 
-                  color:const Color.fromARGB(255, 26, 121, 198),
-                   size: 25),
-                   onPressed: () { }),
-                  IconButton(icon: Icon(Icons.delete_outline_rounded, 
-                  color: Colors.black, 
-                  size: 25),
-                  onPressed: () {
-                    _showdeleteDialog(context);
-                   }),
-                 ]),
-                 SizedBox(height:10),
-                 Divider(color:const Color.fromARGB(255, 197, 231, 205),indent: 10,endIndent: 12),
-                 Row(children:[
-                  SizedBox(width:15),
-                  Icon(Icons.file_copy, color: Colors.green[100], size: 25),
-                  SizedBox(width:5),
-                  SizedBox(
-                     width: 155,
-                    child: Text('Resume.pdf', style:TextStyle(fontSize: 17,fontWeight: FontWeight.w500 ))),
-                  SizedBox(width:0),
-                  IconButton(icon: Icon(Icons.cloud_download_rounded, 
-                  color:const Color.fromARGB(255, 26, 121, 198),
-                   size: 25),
-                   onPressed: () { }),
-                  SizedBox(width:0),
-                  IconButton(icon: Icon(Icons.delete_outline_rounded, 
-                  color: Colors.black, 
-                  size: 25),
-                  onPressed: () {
-                     _showdeleteDialog(context);
-                   }),
-                 ]),
-                 SizedBox(height:10),
-                 Divider(color:const Color.fromARGB(255, 197, 231, 205),indent: 10,endIndent: 12),
-                 Row(children:[
-                  SizedBox(width:15),
-                  Icon(Icons.file_copy, color: Colors.green[100], size: 25),
-                  SizedBox(width:5),
-                  SizedBox(
-                     width: 155,
-                    child: Text('Who_are_we.pdf', style:TextStyle(fontSize: 17,fontWeight: FontWeight.w500 ))),
-                  SizedBox(width:0),
-                  IconButton(icon: Icon(Icons.cloud_download_rounded, 
-                  color:const Color.fromARGB(255, 26, 121, 198),
-                   size: 25),
-                   onPressed: () { }),
-                  SizedBox(width:0),
-                  IconButton(icon: Icon(Icons.delete_outline_rounded, 
-                  color: Colors.black, 
-                  size: 25),
-                  onPressed: () { 
-                     _showdeleteDialog(context);
-                  }),
-                 ]),
-                 SizedBox(height:10),
-                 Divider(color:const Color.fromARGB(255, 197, 231, 205),indent: 10,endIndent: 12),
-                 Row(children:[
-                  SizedBox(width:15),
-                  Icon(Icons.file_copy, color: Colors.green[100], size: 25),
-                  SizedBox(width:5),
-                  SizedBox(
-                     width: 155,
-                    child: Text('Jon_Don_.pdf', style:TextStyle(fontSize: 17,fontWeight: FontWeight.w500 ))),
-                  SizedBox(width:0),
-                  IconButton(icon: Icon(Icons.cloud_download_rounded, 
-                  color:const Color.fromARGB(255, 26, 121, 198),
-                   size: 25),
-                   onPressed: () { }),
-                  SizedBox(width:0),
-                  IconButton(icon: Icon(Icons.delete_outline_rounded, 
-                  color: Colors.black, 
-                  size: 25),
-                  onPressed: () { 
-                     _showdeleteDialog(context);
-                  }),
-                 ]),
-            ]),
-                      ),
+          Row(
+            children: [
+              SizedBox(width: 15),
+              Icon(Icons.file_copy, color: Colors.green[100], size: 25),
+              SizedBox(width: 5),
+              SizedBox(
+                width: 155,
+                child: Text(resume['fileName']!, style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500)),
+              ),
+              IconButton(
+                icon: Icon(Icons.cloud_download_rounded, color: Color.fromARGB(255, 26, 121, 198), size: 25),
+                onPressed: () {
+                  // Handle download
+                },
+              ),
+              IconButton(
+                icon: Icon(Icons.delete_outline_rounded, color: Colors.black, size: 25),
+                onPressed: () {
+                  _showDeleteDialog(context, index, resumes[index]['fileName']);
+                },
+              ),
+            ],
+          ),
+        ],
+      );
+    },
+  ),
+),
+
                       SizedBox(height: 20),
-                   SizedBox(
-                    width:280,
-                     child: ElevatedButton(
-                               onPressed: () {
-                                 // Handle Apply action
-                               },
-                               style: ElevatedButton.styleFrom(
-                                 backgroundColor: const Color.fromARGB(255, 26, 121, 198),
-                                 shape: RoundedRectangleBorder(
-                                   borderRadius: BorderRadius.circular(20),
-                                 ),
-                                 elevation: 4,
-                               ),
-                               child: const Text(
-                                 'Resume Auto Fill',
-                                 style: TextStyle(fontSize: 17, color:Colors.white,fontWeight: FontWeight.bold),
-                               ),
-                             ),
-                   ),
+                   
                    SizedBox(height: 10),
                    SizedBox(
                     width:280,
@@ -2101,11 +2104,11 @@ case 'Resume':
         ),
       );
     case 2:
-  return SingleChildScrollView( // Wrap with SingleChildScrollView for dynamic content
+  return SingleChildScrollView(
     child: Center(
       child: Column(
         children: [
-          
+          SizedBox(height:20),
             Container(
               width: 366,
               padding: const EdgeInsets.all(16.0),
@@ -2162,12 +2165,12 @@ case 'Resume':
                             children: [
                               SizedBox(
                                 width: 300,
-                                child: Text('Jon Don', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 17)),
+                                child: Text(' Jon Don', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 17)),
                               ),
                               Row(
                                 children: [
                                   Icon(Icons.phone, size: 12, color: Colors.green),
-                                  Text(' 2517890987', style: TextStyle(fontSize: 14)),
+                                  Text(' 251978', style: TextStyle(fontSize: 14)),
                                 ],
                               ),
                               SizedBox(height: 20),
@@ -2175,21 +2178,26 @@ case 'Resume':
                                 children: [
                                   Text('@', style: TextStyle(color: Colors.green, fontSize: 12)),
                                   SizedBox(width: 5),
-                                  Text('testabenezer@gmail.com', style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold)),
-                                  SizedBox(width: 20),
+                                  Text(' testabenezer@gmail.com', style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold)),
+                                  SizedBox(width: 10),
                                   Icon(Icons.location_on, size: 12, color: Colors.green),
                                   SizedBox(width: 10),
-                                  SizedBox(
-                                    width: 60,
-                                    child: Text('Addis Ababa, Ethiopia', style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold)),
-                                  ),
+                                
+                                    Column(children: [
+                                      Text(' Addis Ababa',overflow: TextOverflow.ellipsis,
+  maxLines: 1, style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold)),
+                                      Text(' Ethiopia',overflow: TextOverflow.ellipsis,
+  maxLines: 1, style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold)),
+                                    ],)
+                                    
+                                  
                                 ],
                               ),
                               Row(
                                 children: [
                                   Icon(Icons.badge, size: 13, color: Colors.green),
                                   SizedBox(width: 5),
-                                  Text('Creative Arts', style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold)),
+                                  Text(' $profession', style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold)),
                                 ],
                               ),
                             ],
@@ -2210,7 +2218,7 @@ case 'Resume':
                                 padding: EdgeInsets.only(left: 20, right: 20),
                                 child: Column(
                                   children: [
-                                    Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."),
+                                    Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"),
                                   ],
                                 ),
                               ),
@@ -2219,28 +2227,135 @@ case 'Resume':
                         ),
                         SizedBox(height: 20),
                         Container(
-                         
+  padding: EdgeInsets.only(left: 20),
+  child: Column(
+    children: [
+      // Experience Section
+      SizedBox(
+        width: 300,
+        child: Text(
+          'EXPERIENCE',
+          style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+      ),
+      Divider(color: Colors.black, thickness: 4, indent: 10, endIndent: 20, height: 1),
+      SizedBox(height: 5),
+      Container(
+        child: Column(
+          children: [
+            Text('test Company', style: TextStyle(color: Colors.black, fontSize: 15)),
+            Text('software analysis', style: TextStyle(color: Colors.green, fontSize: 15)),
+            Row(
+              children: [
+                Icon(Icons.calendar_month, size: 14, color: Colors.black),
+                Text('2018-12-2' ,style: TextStyle(fontSize: 12, color: Colors.black)),
+                Text('-', style: TextStyle(color: Colors.grey, fontSize: 20)),
+                Text(' undefined', style: TextStyle(fontSize: 12, color: Colors.black)),
+              ],
+            ),
+          ],
+        ),
+      ),
+      SizedBox(height: 20),
+
+      // Education Section
+      Container(
+        padding: EdgeInsets.only(left: 20),
+        child: Column(
+          children: [
+            SizedBox(
+              width: 300,
+              child: Text(
+                'EDUCATION',
+                style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Divider(color: Colors.black, thickness: 4,  endIndent: 20, height: 1),
+            SizedBox(height: 5),
+
+            // Mapping through educationEntries
+           // ...educationEntries.map((entry) {
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Bonga University', style: TextStyle(color: Colors.black, fontSize: 15)),
+                  Text("bachelor's", style: TextStyle(color: Colors.green, fontSize: 15)),
+                  Row(
+                    children: [
+                      Icon(Icons.calendar_month, size: 14, color: Colors.black),
+                      Text(' 2026-04-17', style: TextStyle(fontSize: 12, color: Colors.black)),
+                    ],
+                  ),
+                  SizedBox(height: 10), // Add space between entries
+                ],
+              
+            ),
+          ],
+        ),
+      ),
+    ],
+  ),
+),
+
+      
+
+                        
+                        SizedBox(height:20),
+                        Container(
+                          
                           padding: EdgeInsets.only(left: 20),
                           child: Column(
                             children: [
                               SizedBox(
                                 width: 300,
-                                child: Text('EXPERIENCE', style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold)),
+                                child: Text('Languages', style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold)),
                               ),
                               Divider(color: Colors.black, thickness: 4, indent: 10, endIndent: 20, height: 1),
                               SizedBox(height: 5),
-                              Text('dereja', style: TextStyle(color: Colors.black, fontSize: 15)),
-                              Text('composity', style: TextStyle(color: Colors.green, fontSize: 15)),
-                              Row(
-                                children: [
-                                  Icon(Icons.calendar_month, size: 14, color: Colors.black),
-                                  Text(' 2008-11-03 - Present', style: TextStyle(fontSize: 12, color: Colors.black)),
-                                ],
-                              ),
-                              Text(". lorem lope", style: TextStyle(color: Colors.black, fontSize: 13)),
+                              Text(' ', style: TextStyle(color: Colors.black, fontSize: 15)),
+                              Text(' ', style: TextStyle(color: Colors.green, fontSize: 15)),
+                              
                             ],
                           ),
                         ),
+                        SizedBox(height:20),
+                        Container(
+                          
+                          padding: EdgeInsets.only(left: 20),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                width: 300,
+                                child: Text('Skill', style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold)),
+                              ),
+                              Divider(color: Colors.black, thickness: 4, indent: 10, endIndent: 20, height: 1),
+                              SizedBox(height: 5),
+                              Text(' ', style: TextStyle(color: Colors.black, fontSize: 15)),
+                              Text(' ', style: TextStyle(color: Colors.black, fontSize: 15)),
+                              Text(' ', style: TextStyle(decoration: TextDecoration.underline,color: Colors.black, fontSize: 15)),
+                              
+                            ],
+                          ),
+                        ),
+                        SizedBox(height:20),
+                        Container(
+                          
+                          padding: EdgeInsets.only(left: 20),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                width: 300,
+                                child: Text('Project and Portfolio', style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold)),
+                              ),
+                              Divider(color: Colors.black, thickness: 4, indent: 10, endIndent: 20, height: 1),
+                              SizedBox(height: 5),
+                              Text('', style: TextStyle(color: Colors.black, fontSize: 15)),
+                              Text('', style: TextStyle(color: Colors.green, fontSize: 15)),
+                              
+                            ],
+                          ),
+                        ),
+    
                       ],
                     ),
                   ),
@@ -2248,7 +2363,7 @@ case 'Resume':
                 ],
               ),
             ),
-          
+          SizedBox(height:30),
         ],
       ),
     ),
