@@ -14,15 +14,21 @@ class Ethiojobs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-    
     localizationsDelegates: const [
     GlobalMaterialLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
     GlobalWidgetsLocalizations.delegate,
     FlutterQuillLocalizations.delegate,
   ],
+      // supportedLocales: const [
+      //   Locale('en', ''), // English
+      //   Locale('am', ''), // Amharic
+      //   Locale('ti', ''), // Tigrinya
+      //   Locale('om', ''), // Oromo
+      //   Locale('so', ''), // Somali
+      // ],
       debugShowCheckedModeBanner: false,
-      home: ParentWidget(), // Use ParentWidget to manage navigation and persistent AppBar
+      home: ParentWidget(),
     );
   }
 }

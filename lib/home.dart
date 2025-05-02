@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'search.dart';
 
+
 class Job {
   final String title;
   final String date;
+  final String time;
    final String company;
   final String type;
   final String location;
@@ -12,6 +14,7 @@ class Job {
   Job({
     required this.title,
     required this.date,
+    required this.time,
      required this.company,
     required this.type,
     required this.location,
@@ -36,13 +39,12 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   // Hardcoded list of jobs
   final List<Job> allJobs = [
-    Job(title: 'Senior FullStack Developer', date: '2023-04-29',company: 'ETHIOJOBS AND AFRINET', type: 'Full-time', location: 'Addis Ababa',imageUrl: 'assets/ethiojobs.webp'),
-    Job(title: 'HR Manager', date: '2023-04-20',company: 'AHADU BANK', type: 'Part-time', location: 'Dire Dawa',imageUrl: 'assets/ahadu_logo.png'),
-    Job(title: 'Sales Manager', date: '2023-04-10',company: 'DASHIN BANK', type: 'Full-time', location: 'Gondar',imageUrl: 'assets/dashin_logo.png'),
-    Job(title: 'IT Assistant', date: '2023-04-05',company: 'AMREF HEALTH AFRICA', type: 'Internship', location: 'Bahir Dar',imageUrl: 'assets/amref_logo.png'),
+   Job(title: 'Senior FullStack Developer', date: 'april 1st, 2025',time: '15d', company: 'ETHIOJOBS AND AFRINET', type: 'Full-time', location: 'Addis Ababa',imageUrl: 'assets/ethiojobs.webp'),
+    Job(title: 'HR Manager', date: 'April 11th, 2025',time: '2d',company: 'AHADU BANK', type: 'Part-time', location: 'Dire Dawa',imageUrl: 'assets/ahadu_logo.png'),
+    Job(title: 'Sales Manager', date: 'April 20th, 2025',time: '1s',company: 'DASHIN BANK', type: 'Full-time', location: 'Gondar',imageUrl: 'assets/dashin_logo.png'),
+    Job(title: 'IT Assistant', date: ' April 10th, 2025',time: '1mo',company: 'AMREF HEALTH AFRICA', type: 'Internship', location: 'Bahir Dar',imageUrl: 'assets/amref_logo.png'),
   ];
 final TextEditingController _searchController = TextEditingController();
-
 
   @override
   void dispose() {
@@ -68,8 +70,15 @@ int _getIndex(String label) {
   }
   @override
   Widget build(BuildContext context) {
+    final Map<IconData, IconData> iconMapping = {
+  Icons.business_outlined: Icons.business,
+  Icons.assignment_outlined: Icons.assignment,
+  Icons.person_outline_outlined: Icons.person,
+  // Add other mappings as needed
+};
      Widget buildNavItem(IconData icon, String label, VoidCallback onTap,double iconSize,Color iconColor,double scaleFactor,) {
     bool isSelected = _selectedNavIndex == _getIndex(label);
+    IconData displayIcon = isSelected ? iconMapping[icon] ?? icon : icon;
   return InkWell(
     onTap: () {
         onTap();
@@ -86,7 +95,7 @@ int _getIndex(String label) {
           Transform.scale(
   scale: scaleFactor, // Pass your scale factor here
   child: Icon(
-    icon, // Your icon
+     displayIcon, // Your icon
     size: iconSize, // Base size of the icon
     color: isSelected ? iconColor : const Color.fromARGB(255, 0, 0, 0), // Color based on selection
   ),
@@ -104,57 +113,113 @@ int _getIndex(String label) {
   );
 }
     return Scaffold(
+      appBar:  PreferredSize(
+  preferredSize: Size.fromHeight(65.0),
+  child: AppBar(
+    automaticallyImplyLeading: false,
+    title: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        
+        
+         
+          Image.asset(
+            'assets/ethiojobs.webp',
+            height: 125,
+            width: 145,
+          ),
+      
+        SizedBox(width:70),
+         Container(
+         
+           child: Column(children: [
+            SizedBox(height: 13),
+            GestureDetector(
+             onTap: () {
+               // Your onTap logic here
+               Navigator.pushNamed(context, '/account');
+             },
+             child: Container(
+               decoration: BoxDecoration(
+                 shape: BoxShape.circle,
+                 border: Border.all(color: Color.fromARGB(255, 255, 255, 255), width: 1),
+               ),
+               child: CircleAvatar(
+                 radius: 22,
+                 backgroundImage: AssetImage('assets/jondon.webp'), // Ensure this image exists
+               ),
+             ),
+           ),
+           ],),
+         )
+      ],
+    ),
+              backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+              elevation: 5,
+            shadowColor: Colors.black,
+      ),
+          ),
       backgroundColor: Colors.white,
       body: Column(
                  children: [
-                  Container(
-                     height: 200,
-                     
-                 color: Color.fromARGB(255, 72, 193, 156), // Background color for the first container
+               Container(
+                
+                     height: 150,
+                     width:700,
+                 color: const Color.fromARGB(255, 72, 193, 156),// Background color for the first container
                child: Column(
           children: [
-            SizedBox(
-              height: 60,
-              width: 370,
-              
-              
-              child: Center(
-                child: Text(
-                 'Find Your Dream Job in Ethiopia',
-                  style: TextStyle(color: Colors.white, fontSize: 18), // Changed color for visibility
-               ),
-             ),
+            SizedBox(height: 15),
+            Row(
+              children: [
+                SizedBox(width: 10),
+                SizedBox(
+                  height: 50,
+                  width: 320,
+                  
+                  
+                  child: Center(
+                    child: Text(
+                     'Find Your Dream Job in Ethiopia',
+                      style: TextStyle(color: const Color.fromARGB(255, 255, 255,255), fontSize: 17), // Changed color for visibility
+                   ),
+                 ),
+                ),
+              ],
             ),
-            Container(
-              height: 50,
-              width: 355,
-              margin: EdgeInsets.only(top: 0),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(25),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.2), // Shadow color
-                    spreadRadius: 5, // Spread radius
-                    blurRadius: 10, // Blur radius
-                    offset: Offset(0, 2), // Offset for the shadow
+            Row(
+              children: [
+             SizedBox(width: 15),
+                Container(
+                
+                  height: 45,
+                  width: 300,
+                  margin: EdgeInsets.only(top: 0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(25),
+                    border: Border.all(
+                      color: Colors.grey, // Border color
+                      width: 1, // Border width
+                    ),
+                   
                   ),
-                  ],
-              ),
-             child: Center(
-  child: TextField(
-    controller: _searchController,
-    decoration: InputDecoration(
-      hintText: "Job title, Keywords, or industry",
-      hintStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w300),
-      contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 12),
-      border: InputBorder.none,
-      prefixIcon: Padding(
-        padding: EdgeInsets.only(left: 10.0, right: 10.0), // Add some padding
-        child: Icon(Icons.search, color: Colors.grey), // Search icon
-      ),
-    ),
-    onTap: () {
+                 child: Center(
+                  child: TextField(
+                    controller: _searchController,
+                    readOnly: true,
+                    decoration: InputDecoration(
+                      hintText: "Job title, Keywords, or industry",
+                      hintStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w300),
+                      contentPadding: EdgeInsets.symmetric(horizontal: 7, vertical: 12),
+                      border: InputBorder.none,
+                      prefixIcon: Padding(
+                        padding: EdgeInsets.only(left: 10.0, right: 4.0, top: 6), // Add some padding
+                        child: Icon(Icons.search, color: const Color.fromARGB(255, 72, 193, 156)), // Search icon
+                      ),
+                    ),
+                    onTap: () {
                         Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -162,114 +227,63 @@ int _getIndex(String label) {
                 ),
               );
                       },
-  ),
-),
+                  ),
+                ),
+                ),
+                
+                SizedBox(width: 7),
+                Container(
+                  height: 42,
+                  decoration:BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                    border: Border.all(color:Colors.grey, width: 1),
+                  ),
+                 
+                  child: IconButton(onPressed: (){
+                            Navigator.pushNamed(context, '/filter');
+                          }, 
+                          icon: Icon(Icons.tune, color:const Color.fromARGB(255, 72, 193, 156),size: 20,)),
+                )
+
+              ],
+              
             ),
 
 SizedBox(height:20),
-    SizedBox(
+    //   SizedBox(
       
-      height:45,
+    //   height:45,
       
       
-      child: Row(children: [
-        SizedBox(width:40),
-            SizedBox(
-              height:35,
-              width:120,
+    //   child: Row(children: [
+    //     SizedBox(width:130),
+    //         SizedBox(
+    //           height:35,
+    //           width:120,
               
-              child: ElevatedButton(onPressed: () {
-                   Navigator.pushNamed(context, '/filter');
-                                        },
-              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.white,
-                               shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(6), 
+    //           child: ElevatedButton(onPressed: () {
+    //                Navigator.pushNamed(context, '/filter');
+    //                                     },
+    //           style: ElevatedButton.styleFrom(
+    //                             backgroundColor: Colors.white,
+    //                            shape: RoundedRectangleBorder(
+    //                           borderRadius: BorderRadius.circular(6), 
                               
-    ),),
-               child: Row(children: [
-                Icon(Icons.tune, color:Colors.black),
-                SizedBox(width:5),
-                Text('Filter', style:TextStyle(color:Colors.black,fontWeight: FontWeight.w400)),
+    // ),),
+    //            child: Row(children: [
+    //             Icon(Icons.tune, color:Colors.black),
+    //             SizedBox(width:5),
+    //             Text('Filter', style:TextStyle(color:Colors.black,fontWeight: FontWeight.w400)),
                 
-               ],)),
-            ),
-             SizedBox(width:30),
-             Container(
-              decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(6),
-        color:Colors.white,
-      ),
-              height: 35,
-              width: 150,
-              
-               child: PopupMenuButton<String>(
-                 onSelected: (String value) {
-                   setState(() {
-                     _selectedValue = value; // Update the selected value
-                   });
-                 },
-                 icon: Row(
-                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                   children: [
-                     Row(
-                         children: [
-                          SizedBox(width: 10),
-                           Text('Sort: '),
-                           Text(
-                _selectedValue ?? 'Select an option', 
-                style: TextStyle(
-                  overflow: TextOverflow.ellipsis,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  
-                ),
-                           ),
-                           Icon(Icons.arrow_drop_down, color: Colors.grey),
-                         ],
-                       ),
-                     
-                     
-                   ],
-                 ),
-                 itemBuilder: (BuildContext context) => [
-                   PopupMenuItem(
-                     value: 'Popularity',
-                     child: Text(
-                       'Popularity',
-                       style: TextStyle(overflow: TextOverflow.ellipsis,fontSize: 13, fontWeight: FontWeight.w400, color: Colors.black),
-                     ),
-                   ),
-                   PopupMenuItem(
-                     value: 'Date',
-                     child: Text(
-                       'Date',
-                       style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: Colors.black),
-                     ),
-                   ),
-                   PopupMenuItem(
-                     value: 'Location',
-                     child: Text(
-                       'Location',
-                       style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: Colors.black),
-                     ),
-                   ),
-                   PopupMenuItem(
-                     value: 'Type',
-                     child: Text(
-                       'Type',
-                       style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400, color: Colors.black),
-                     ),
-                   ),
-                 ],
-                 offset: Offset(0, 40),
-                 color: Colors.white,
-               ),
-             )
+    //            ],)),
+    //         ),
+    //          SizedBox(width:30),
+             
 
 
-      ],),
-    ),
+    //   ],),
+    // ),
           ]
         ),
     ),
@@ -309,19 +323,20 @@ SizedBox(height:20),
       children:  [
         buildNavItem(
           
-          Icons.search_rounded,
+          Icons.search,
           'Jobs',
           () {
+            
             Navigator.pushNamed(context, '/home');
           },
           22,
           const Color.fromARGB(255, 72, 193, 156), 0.7
           
         ),
-        buildNavItem(Icons.business, 'Companies', () {
+        buildNavItem(Icons.business_outlined, 'Companies', () {
          Navigator.pushNamed(context, '/companies');
         }, 22, const Color.fromARGB(255, 0, 0, 0),0.7),
-        buildNavItem(Icons.assignment, 'My Applications', () {
+        buildNavItem(Icons.assignment_outlined, 'My Applications', () {
           Navigator.pushNamed(context, '/apps');
         }, 22, const Color.fromARGB(255, 0, 0, 0),0.7),
         
@@ -559,7 +574,7 @@ Padding(
       color: Colors.black, // Lightning icon color
     ),
     label: Text(
-      'April 10th, 2025',
+      job.date,
       style: TextStyle(
         color: Colors.black,
         fontSize: 13,

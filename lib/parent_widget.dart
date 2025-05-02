@@ -32,59 +32,67 @@ class _ParentWidgetState extends State<ParentWidget> {
     );
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
     final currentRoute = ModalRoute.of(context)?.settings.name;
     return Scaffold(
       
-       appBar: currentRoute != '/filter' // Show AppBar only if not on FilterPage
-          ? PreferredSize(
-  preferredSize: Size.fromHeight(65.0),
-  child: AppBar(
-    
-    title: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        
-        
-         
-          Image.asset(
-            'assets/ethiojobs.webp',
-            height: 125,
-            width: 145,
-          ),
-      
-        SizedBox(width:70),
-         Container(
-         
-           child: Column(children: [
-            SizedBox(height: 13),
-            GestureDetector(
-             onTap: () {
-               // Your onTap logic here
-               _navigatorKey.currentState!.pushNamed('/account');
-             },
-             child: Container(
-               decoration: BoxDecoration(
-                 shape: BoxShape.circle,
-                 border: Border.all(color: Color.fromARGB(255, 255, 255, 255), width: 1),
-               ),
-               child: CircleAvatar(
-                 radius: 22,
-                 backgroundImage: AssetImage('assets/jondon.webp'), // Ensure this image exists
-               ),
-             ),
-           ),
-           ],),
-         )
-      ],
-    ),
-              backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-              elevation: 5,
-            shadowColor: Colors.black,
-      ),
-          ): null,
+       
       body: WillPopScope(
         onWillPop: () async {
           if (_navigatorKey.currentState!.canPop()) {
@@ -151,15 +159,12 @@ class _ParentWidgetState extends State<ParentWidget> {
                 case '/resume_builder':
                 builder = (BuildContext context) => Resume_builderpage();
                break;
+                case '/account':
+                builder = (BuildContext context) => Accountpage();
+               break;
+
                 case '/companies':
-                builder = (BuildContext context) => Companiespage(
-                      onJobSelected: (job) {
-                        _navigatorKey.currentState!.pushNamed(
-                          '/jobDetail',
-                          arguments: job,
-                        );
-                      },
-                    );
+                builder = (BuildContext context) => Companiespage(onJobSelected:onJobSelected);
                 break;
                case '/filter':
                 builder = (BuildContext context) => Filterpage();

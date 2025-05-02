@@ -1,0 +1,348 @@
+void showPopupdialog(BuildContext context) {
+  showGeneralDialog(
+    context: context,
+    barrierDismissible: true,
+    barrierLabel: "Popup",
+    transitionDuration: Duration(milliseconds: 200),
+    pageBuilder: (context, animation1, animation2) {
+      return SafeArea(
+        child: Scaffold(
+          backgroundColor: Colors.black.withOpacity(0.5), // Optional dim background
+          body: Center(
+            child: Container(
+              width: MediaQuery.of(context).size.width, // Full screen width
+              height: MediaQuery.of(context).size.height * 0.9,
+              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Column(
+                children: [
+                  
+                  Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.all(16),
+                    margin:EdgeInsets.only(top:15),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                    ),
+                    child: Text(
+                      "Basic Info",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  // Scrollable Middle Content
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: EdgeInsets.all(16),
+                      child: Column(
+                        children: [
+                          Row(children: [
+                             Text('Full name ', style: TextStyle(color: Colors.black54,fontSize: 16),),
+                             Text('*', style: TextStyle(color: Colors.red,fontSize: 16),),
+                          ],),
+                          SizedBox(height:15),
+                          Container(
+              height: 50,
+              width: 340,
+              margin: EdgeInsets.only(top: 0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(25),
+               
+              ),
+                 child: TextField(
+                  cursorColor: Colors.black54,
+                decoration: InputDecoration(
+                   enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(25),
+      borderSide: BorderSide(color: const Color.fromARGB(255, 220, 213, 213)), // 👈 Change this color
+    ),
+
+    // Border when the TextField is focused
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(25),
+      borderSide: BorderSide(color: Colors.brown, width: 2), // 👈 And this one
+    ),
+                hintStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
+                 contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 12),
+                 border: OutlineInputBorder(
+                 borderRadius: BorderRadius.circular(25),
+                 borderSide: BorderSide(color: const Color.fromARGB(255, 230, 228, 228)), // Optional: customize color
+    ),
+                ),
+               ),
+              
+            ),
+            SizedBox(height:30),
+             Row(children: [
+                             Text('Email ', style: TextStyle(color: Colors.black54,fontSize: 16),),
+                             Text('*', style: TextStyle(color: Colors.red,fontSize: 16),),
+                          ],),
+                          SizedBox(height:15),
+             Container(
+              height: 50,
+              width: 340,
+              margin: EdgeInsets.only(top: 0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(25),
+               
+              ),
+                 child: TextField(
+                  cursorColor: Colors.black54,
+                decoration: InputDecoration(
+                   enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(25),
+      borderSide: BorderSide(color: const Color.fromARGB(255, 220, 213, 213)), 
+    ),
+
+    // Border when the TextField is focused
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(25),
+      borderSide: BorderSide(color: Colors.brown, width: 2), 
+    ),
+                hintStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
+                 contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 12),
+                 border: OutlineInputBorder(
+                 borderRadius: BorderRadius.circular(25),
+                 borderSide: BorderSide(color: Colors.grey), // Optional: customize color
+    ),
+                ),
+               ),
+              
+            ),
+            SizedBox(height:30),
+              Row(children: [
+                              Text('Phone number ', style: TextStyle(color: Colors.black54,fontSize: 16),),
+                              Text('*', style: TextStyle(color: Colors.red,fontSize: 16),),
+                            ],),
+                            SizedBox(height:15),
+             Container(
+              height: 50,
+              width: 340,
+              margin: EdgeInsets.only(top: 0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(25),
+               
+              ),
+                 child: TextField(
+                  cursorColor: Colors.black54,
+                decoration: InputDecoration( enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(25),
+      borderSide: BorderSide(color: const Color.fromARGB(255, 220, 213, 213)), 
+    ),
+
+    // Border when the TextField is focused
+                    focusedBorder: OutlineInputBorder(
+                   borderRadius: BorderRadius.circular(25),
+                   borderSide: BorderSide(color: Colors.brown, width: 2), 
+                  ),
+
+                hintStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
+                 contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 12),
+                 border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(25),
+                borderSide: BorderSide(color: Colors.grey), // Optional: customize color
+                  ),
+                ),
+               ),
+              
+            ),
+            SizedBox(height:30),
+              Row(children: [
+                              Text('Birthday ', style: TextStyle(color: Colors.black54,fontSize: 16),),
+                              Text('*', style: TextStyle(color: Colors.red,fontSize: 16),),
+                            ],),
+                            SizedBox(height:15),
+              
+
+Container(
+ height: 50,
+              width: 340,
+              margin: EdgeInsets.only(top: 0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(25),
+               
+              ),
+
+  child: TextField(
+    controller: _dateController,
+    readOnly: true, // Prevent manual editing
+    cursorColor: Colors.black54,
+    decoration: InputDecoration(
+      hintText: 'Select date',
+      hintStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
+      contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 12),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(25),
+        borderSide: BorderSide(color: const Color.fromARGB(255, 220, 213, 213)), // Optional: customize color
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(25),
+        borderSide: BorderSide(color: const Color.fromARGB(255, 220, 213, 213)), 
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(25),
+        borderSide: BorderSide(color: Colors.brown, width: 2), 
+      ),
+      suffixIcon: Icon(Icons.calendar_today), // optional calendar icon
+    ),
+    onTap: () async {
+      DateTime? pickedDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2000),
+        lastDate: DateTime(2101),
+      );
+  
+      if (pickedDate != null) {
+        String formattedDate = "${pickedDate.year}-${pickedDate.month.toString().padLeft(2, '0')}-${pickedDate.day.toString().padLeft(2, '0')}";
+        _dateController.text = formattedDate;
+      }
+    },
+  ),
+),
+             SizedBox(height:30),
+              Row(children: [
+                              Text('Gender ', style: TextStyle(color: Colors.black54,fontSize: 16),),
+                              Text('*', style: TextStyle(color: Colors.red,fontSize: 16),),
+                            ],),
+                            SizedBox(height:15),
+         Container(
+            height: 50,
+              width: 340,
+              margin: EdgeInsets.only(top: 0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(25),
+               
+              ),
+  child: TextField(
+                controller: _genderController,
+                readOnly: true,
+                 decoration: InputDecoration(
+      hintText: 'Select Gender',
+      hintStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
+      contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 12),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(25),
+        borderSide: BorderSide(color: const Color.fromARGB(255, 220, 213, 213)), // Optional: customize color
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(25),
+        borderSide: BorderSide(color: const Color.fromARGB(255, 220, 213, 213)), 
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(25),
+        borderSide: BorderSide(color: Colors.brown, width: 2), 
+      ),
+      suffixIcon: Icon(Icons.arrow_drop_down, size:15), // optional calendar icon
+    ),
+                onTap: _showGenderPicker,
+              ),
+),
+
+
+ SizedBox(height:30),
+              Row(children: [
+                              Text('Profession ', style: TextStyle(color: Colors.black54,fontSize: 16),),
+                              Text('*', style: TextStyle(color: Colors.red,fontSize: 16),),
+                            ],),
+                            SizedBox(height:15),
+         Container(
+            height: 50,
+              width: 340,
+              margin: EdgeInsets.only(top: 0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(25),
+               
+              ),
+  child: TextField(
+                controller: _genderController,
+                readOnly: true,
+                 decoration: InputDecoration(
+      hintText: '',
+      hintStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
+      contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 12),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(25),
+        borderSide: BorderSide(color: const Color.fromARGB(255, 220, 213, 213)), // Optional: customize color
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(25),
+        borderSide: BorderSide(color: const Color.fromARGB(255, 220, 213, 213)), 
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(25),
+        borderSide: BorderSide(color: Colors.brown, width: 2), 
+      ),
+      suffixIcon: Icon(Icons.arrow_drop_down), // optional calendar icon
+    ),
+                onTap: _showProfessionPicker,
+              ),
+),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  // Fixed Footer
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        SizedBox(width:30),
+                       
+                         
+                         ElevatedButton(
+                          
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                                    padding: EdgeInsets.zero, 
+                                    minimumSize: Size(100, 30), 
+                                    shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20), 
+                                    side: BorderSide.none, 
+                                    ),
+                                    elevation: 0, 
+                                  ),
+                                  child: Text('Close', style: TextStyle(color: Colors.grey, fontSize: 16,)),
+                                ),
+                        
+                        ElevatedButton(
+                                  onPressed: () {
+                                    // Action for Button 2
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color.fromARGB(255, 26, 121, 198),
+                                    padding: EdgeInsets.zero, // Remove any padding from the button
+                                    minimumSize: Size(150, 37),  // Ensure minimum size is zero to avoid extra space
+                                  ),
+                                  child: Text('Save', style: TextStyle(color: Colors.white, fontSize: 16,)),
+                                ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    },
+  );
+}

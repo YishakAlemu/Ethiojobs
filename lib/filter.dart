@@ -166,138 +166,138 @@ void _resetSelections() {
            ),
          ],
        ),
-       ..._filteredCategories.map((category) {
-        return Padding(
-          padding: const EdgeInsets.only(left: 10.0),
-  child: Row(
-    mainAxisAlignment: MainAxisAlignment.start,
-    children: [
-      Checkbox(
-        value: category == 'Accounting and Finance' ? _cat1isChecked : _cat2isChecked,
-        activeColor: const Color.fromARGB(255, 72, 193, 156),
-        checkColor: Colors.white,
-        onChanged: (bool? value) {
-          setState(() {
-            if (category == 'Accounting and Finance') {
-              _cat1isChecked = value ?? false;
-            } else if (category == 'Admin secretarial and clerical') {
-              _cat2isChecked = value ?? false;
-            }
+//        ..._filteredCategories.map((category) {
+//         return Padding(
+//           padding: const EdgeInsets.only(left: 10.0),
+//   child: Row(
+//     mainAxisAlignment: MainAxisAlignment.start,
+//     children: [
+//       Checkbox(
+//         value: category == 'Accounting and Finance' ? _cat1isChecked : _cat2isChecked,
+//         activeColor: const Color.fromARGB(255, 72, 193, 156),
+//         checkColor: Colors.white,
+//         onChanged: (bool? value) {
+//           setState(() {
+//             if (category == 'Accounting and Finance') {
+//               _cat1isChecked = value ?? false;
+//             } else if (category == 'Admin secretarial and clerical') {
+//               _cat2isChecked = value ?? false;
+//             }
            
           
-          });
-        },
-      ),
-      Text(category, style: TextStyle(color: Colors.black54, fontSize: 15)),
-    ],
-  ),
-       );
-}),
-      //  Container(
-      //   padding: EdgeInsets.only(left:10),
-      //   child:Column(
-      //   children: [
-      //      Row(
-      //       mainAxisAlignment: MainAxisAlignment.start,
-      //       children: [
-      //         Checkbox(
-      //           value: _cat1isChecked,
-      //            activeColor: const Color.fromARGB(255, 72, 193, 156), // Color of the checkbox when checked
-      //           checkColor: Colors.white,
-      //           onChanged: (bool? value) {
-      //             setState(() {
-      //               _cat1isChecked = value ?? false; // Update the state
-      //             });
-      //           },
-      //         ),
-      //         Text('Accounting and Finance', style:TextStyle(color:Colors.black54, fontSize: 15)),
-      //       ],
-      //     ),
-      //   ],)),
-      //   Container(
-      //   padding: EdgeInsets.only(left:10),
-      //   child:Column(
-      //   children: [
-      //      Row(
-      //       mainAxisAlignment: MainAxisAlignment.start,
-      //       children: [
-      //         Checkbox(
-      //           value: _cat2isChecked,
-      //            activeColor: const Color.fromARGB(255, 72, 193, 156), // Color of the checkbox when checked
-      //           checkColor: Colors.white,
-      //           onChanged: (bool? value) {
-      //             setState(() {
-      //               _cat2isChecked = value ?? false; // Update the state
-      //             });
-      //           },
-      //         ),
-      //         Text('Admin secretarial and clerical', style:TextStyle(color:Colors.black54, fontSize: 15)),
-      //       ],
-      //     ),
-      //   ],)),
-      //    Container(
-      //   padding: EdgeInsets.only(left:10),
-      //   child:Column(
-      //   children: [
-      //      Row(
-      //       mainAxisAlignment: MainAxisAlignment.start,
-      //       children: [
-      //         Checkbox(
-      //           value: _cat3isChecked,
-      //            activeColor: const Color.fromARGB(255, 72, 193, 156), // Color of the checkbox when checked
-      //           checkColor: Colors.white,
-      //           onChanged: (bool? value) {
-      //             setState(() {
-      //               _cat3isChecked = value ?? false; // Update the state
-      //             });
-      //           },
-      //         ),
-      //         Text('Agriculture', style:TextStyle(color:Colors.black54, fontSize: 15)),
-      //       ],
-      //     ),
-      //   ],)),
-      //    Container(
-      //   padding: EdgeInsets.only(left:10),
-      //   child:Column(
-      //   children: [
-      //      Row(
-      //       mainAxisAlignment: MainAxisAlignment.start,
-      //       children: [
-      //         Checkbox(
-      //           value: _cat4isChecked,
-      //            activeColor: const Color.fromARGB(255, 72, 193, 156), // Color of the checkbox when checked
-      //           checkColor: Colors.white,
-      //           onChanged: (bool? value) {
-      //             setState(() {
-      //               _cat4isChecked = value ?? false; // Update the state
-      //             });
-      //           },
-      //         ),
-      //         Text('Architecture and Construction', style:TextStyle(color:Colors.black54, fontSize: 15)),
-      //       ],
-      //     ),
-      //   ],)),
-      //    Container(
-      //   padding: EdgeInsets.only(left:10),
-      //   child:Column(
-      //   children: [
-      //      Row(
-      //       mainAxisAlignment: MainAxisAlignment.start,
-      //       children: [
-      //         Checkbox(
-      //           value: _cat5isChecked,
-      //            activeColor: const Color.fromARGB(255, 72, 193, 156), // Color of the checkbox when checked
-      //           checkColor: Colors.white,
-      //           onChanged: (bool? value) {
-      //             setState(() {
-      //               _cat5isChecked = value ?? false; // Update the state
-      //             });
-      //           },
-      //         ),
-      //         Text('Automotive', style:TextStyle(color:Colors.black54, fontSize: 15)),
-      //       ],
-      //     ),
-      //   ],)),
+//           });
+//         },
+//       ),
+//       Text(category, style: TextStyle(color: Colors.black54, fontSize: 15)),
+//     ],
+//   ),
+//        );
+// }),
+       Container(
+        padding: EdgeInsets.only(left:10),
+        child:Column(
+        children: [
+           Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Checkbox(
+                value: _cat1isChecked,
+                 activeColor: const Color.fromARGB(255, 72, 193, 156), // Color of the checkbox when checked
+                checkColor: Colors.white,
+                onChanged: (bool? value) {
+                  setState(() {
+                    _cat1isChecked = value ?? false; // Update the state
+                  });
+                },
+              ),
+              Text('Accounting and Finance', style:TextStyle(color:Colors.black54, fontSize: 15)),
+            ],
+          ),
+        ],)),
+        Container(
+        padding: EdgeInsets.only(left:10),
+        child:Column(
+        children: [
+           Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Checkbox(
+                value: _cat2isChecked,
+                 activeColor: const Color.fromARGB(255, 72, 193, 156), // Color of the checkbox when checked
+                checkColor: Colors.white,
+                onChanged: (bool? value) {
+                  setState(() {
+                    _cat2isChecked = value ?? false; // Update the state
+                  });
+                },
+              ),
+              Text('Admin secretarial and clerical', style:TextStyle(color:Colors.black54, fontSize: 15)),
+            ],
+          ),
+        ],)),
+         Container(
+        padding: EdgeInsets.only(left:10),
+        child:Column(
+        children: [
+           Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Checkbox(
+                value: _cat3isChecked,
+                 activeColor: const Color.fromARGB(255, 72, 193, 156), // Color of the checkbox when checked
+                checkColor: Colors.white,
+                onChanged: (bool? value) {
+                  setState(() {
+                    _cat3isChecked = value ?? false; // Update the state
+                  });
+                },
+              ),
+              Text('Agriculture', style:TextStyle(color:Colors.black54, fontSize: 15)),
+            ],
+          ),
+        ],)),
+         Container(
+        padding: EdgeInsets.only(left:10),
+        child:Column(
+        children: [
+           Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Checkbox(
+                value: _cat4isChecked,
+                 activeColor: const Color.fromARGB(255, 72, 193, 156), // Color of the checkbox when checked
+                checkColor: Colors.white,
+                onChanged: (bool? value) {
+                  setState(() {
+                    _cat4isChecked = value ?? false; // Update the state
+                  });
+                },
+              ),
+              Text('Architecture and Construction', style:TextStyle(color:Colors.black54, fontSize: 15)),
+            ],
+          ),
+        ],)),
+         Container(
+        padding: EdgeInsets.only(left:10),
+        child:Column(
+        children: [
+           Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Checkbox(
+                value: _cat5isChecked,
+                 activeColor: const Color.fromARGB(255, 72, 193, 156), // Color of the checkbox when checked
+                checkColor: Colors.white,
+                onChanged: (bool? value) {
+                  setState(() {
+                    _cat5isChecked = value ?? false; // Update the state
+                  });
+                },
+              ),
+              Text('Automotive', style:TextStyle(color:Colors.black54, fontSize: 15)),
+            ],
+          ),
+        ],)),
         SizedBox(height:10),
        Divider(color: const Color.fromARGB(255, 219, 219, 219),indent: 30,endIndent: 30,),
        SizedBox(height:10),

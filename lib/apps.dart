@@ -312,8 +312,15 @@ Padding(
 
   @override
   Widget build(BuildContext context) {
+     final Map<IconData, IconData> iconMapping = {
+  Icons.business_outlined: Icons.business,
+  Icons.assignment_outlined: Icons.assignment,
+  Icons.person_outline_outlined: Icons.person,
+  // Add other mappings as needed
+};
      Widget buildNavItem(IconData icon, String label, VoidCallback onTap,double iconSize,Color iconColor,double scaleFactor,) {
     bool isSelected = _selectedNavIndex == _getIndex(label);
+    IconData displayIcon = isSelected ? iconMapping[icon] ?? icon : icon;
   return InkWell(
     onTap: () {
         onTap();
@@ -330,7 +337,7 @@ Padding(
           Transform.scale(
   scale: scaleFactor, // Pass your scale factor here
   child: Icon(
-    icon, // Your icon
+    displayIcon, // Your icon
     size: iconSize, // Base size of the icon
     color: isSelected ? iconColor : const Color.fromARGB(255, 0, 0, 0), // Color based on selection
   ),
@@ -349,6 +356,53 @@ Padding(
 }
 
     return Scaffold(
+       appBar:  PreferredSize(
+  preferredSize: Size.fromHeight(65.0),
+  child: AppBar(
+    automaticallyImplyLeading: false,
+    title: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        
+        
+         
+          Image.asset(
+            'assets/ethiojobs.webp',
+            height: 125,
+            width: 145,
+          ),
+      
+        SizedBox(width:70),
+         Container(
+         
+           child: Column(children: [
+            SizedBox(height: 13),
+            GestureDetector(
+             onTap: () {
+               // Your onTap logic here
+               Navigator.pushNamed(context, '/account');
+             },
+             child: Container(
+               decoration: BoxDecoration(
+                 shape: BoxShape.circle,
+                 border: Border.all(color: Color.fromARGB(255, 255, 255, 255), width: 1),
+               ),
+               child: CircleAvatar(
+                 radius: 22,
+                 backgroundImage: AssetImage('assets/jondon.webp'), // Ensure this image exists
+               ),
+             ),
+           ),
+           ],),
+         )
+      ],
+    ),
+              backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+              elevation: 5,
+            shadowColor: Colors.black,
+      ),
+          ),
       backgroundColor: const Color.fromARGB(255,255, 255, 255),
       body: SingleChildScrollView(
         child: Column(
@@ -463,10 +517,10 @@ Padding(
           const Color.fromARGB(255, 0, 0, 0), 0.7
           
         ),
-        buildNavItem(Icons.business, 'Companies', () {
+        buildNavItem(Icons.business_outlined, 'Companies', () {
          Navigator.pushNamed(context, '/companies');
         }, 22, const Color.fromARGB(255, 0, 0, 0),0.7),
-        buildNavItem(Icons.assignment, 'My Applications', () {
+        buildNavItem(Icons.assignment_outlined, 'My Applications', () {
           Navigator.pushNamed(context, '/apps');
         }, 22, const Color.fromARGB(255, 72, 193, 156),0.7),
         

@@ -23,13 +23,15 @@ class Profilepage extends StatefulWidget {
 }
 
 class _ProfilepageState extends State<Profilepage> {
-  String fullName = '';
+  TextEditingController _genderController = TextEditingController();
+  String? _selectedGender;
+  String fullName = 'Jon Don';
   String richTextContent = "Lorem ipsum dolor sit amet,consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum";
-  String email = '';
-  String phoneNumber = '';
+  String email = 'testAbenezer@gmail.com';
+  String phoneNumber = '+25197';
   String birthday = '';
-  String gender = '';
-  String profession = '';
+  String gender = 'Male';
+  String profession = 'Creative Arts';
   int _selectedNavIndex = 3;
   List<Map<String, String>> resumes = [
   {'fileName': 'Recruiter_company'},
@@ -244,45 +246,27 @@ void _downloadCv(BuildContext context) async {
   double progress = 0.5; // Initialize _progress variable
   String _percentage = "50%"; // Initialize _percentage variable
   final TextEditingController _dateController = TextEditingController();
-  final TextEditingController _genderController = TextEditingController();
-  String? _selectedGender;
-  final TextEditingController _professionController = TextEditingController();
+  
+  TextEditingController _professionController = TextEditingController();
   final QuillController _Controller = QuillController.basic();
   String? _selectedprofession;
-  // bool _isEditing = false;
+ 
 
-  // void _editText() {
-  //   setState(() {
-  //     _isEditing = true;
-  //   });
-  // }
+void _updateContainer(Map<String, String> values) {
+  setState(() {
+    fullName = values['fullName']!;
+    email = values['email']!;
+    phoneNumber = values['phoneNumber']!;
+    birthday = values['birthday']!;
+    gender = values['gender']!;
+    profession = values['profession']!;
+  });
+}
+void _showDialog() {
+    showPopupDialog1(context, _updateContainer);
+  }
 
-  // void _closeEditor() {
-  //   setState(() {
-  //     _isEditing = false;
-  //     // Reset the controller to the original text
-  //     _controller.document = quill.Document.fromJson([
-  //       {'insert': "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Curabitur pretium tincidunt lacus. Nulla gravida orci a odio, et feugiat tellus tincidunt vitae. Suspendisse potenti. Fusce ac felis sit amet ligula pharetra condimentum. Morbi tincidunt, libero sed scelerisque dictum, nunc ante sagittis velit, ut aliquet felis augue sit amet nunc.Phasellus bibendum, sem ut eleifend tincidunt, augue dolor vulputate risus, eget suscipit nulla mauris eu odio. Proin ac tortor nec justo hendrerit dignissim. Integer facilisis, eros eget fermentum dapibus, leo nisi tincidunt velit, vitae varius magna justo sit amet dolor."}
-  //     ]);
-  //   });
-  // }
-
-  // void _applyChanges() {
-  //   setState(() {
-  //     _isEditing = false;
-  //     // You can add any additional logic to process the updated text if needed
-  //   });
-  // }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   // Initialize with default text
-  //   _controller.document = quill.Document.fromJson([
-  //     {'insert': 'This is a sample CV text that can be edited.'}
-  //   ]);
-  // }
-
+// Call the dialog
 
   void _startLoading() {
     Timer.periodic(Duration(milliseconds: 100), (timer) {
@@ -305,8 +289,8 @@ void _downloadCv(BuildContext context) async {
         insetPadding: EdgeInsets.only(
           left: 16,
           right: 16,
-          bottom: 16, 
-          top: MediaQuery.of(context).size.height * 0.6, 
+          bottom: 16,
+          top: MediaQuery.of(context).size.height * 0.6,
         ),
         backgroundColor: Colors.transparent,
         child: Align(
@@ -322,17 +306,16 @@ void _downloadCv(BuildContext context) async {
               mainAxisSize: MainAxisSize.min,
               children: [
                 RadioListTile<String?>(
-                  title: Text("", style: TextStyle(color: Colors.white)),
+                  title: Text("Select Gender", style: TextStyle(color: Colors.black)),
                   value: null,
                   groupValue: _selectedGender,
                   onChanged: (value) {
                     setState(() {
                       _selectedGender = value;
-                      _genderController.text = '';
+                      _genderController.text = ''; // Clear if null is selected
                     });
                     Navigator.pop(context);
                   },
-
                   activeColor: Colors.blue,
                 ),
                 RadioListTile<String?>(
@@ -370,107 +353,103 @@ void _downloadCv(BuildContext context) async {
   );
 }
 
-void _showProfessionPicker(){
-               showDialog(
+void _showProfessionPicker() {
+  showDialog(
     context: context,
     builder: (context) {
       return SafeArea(
-              child: Scaffold(
+        child: Scaffold(
           backgroundColor: Colors.black.withOpacity(0.5), // Optional dim background
           body: Center(
-                child: Container(
-              width: MediaQuery.of(context).size.width * 0.9, 
-              height: MediaQuery.of(context).size.height * 0.9,
+            child: Container(
+              width: MediaQuery.of(context).size.width * 0.9,
+              height: MediaQuery.of(context).size.height * 0.6, // Adjusted height
               margin: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(16),
               ),
-                  
-              
-                       child:Expanded(
-                    child: SingleChildScrollView(
-                      child:Column(
-                        mainAxisSize: MainAxisSize.min,
-              children: [
-                RadioListTile<String?>(
-                  title: Text("", style: TextStyle(color: Colors.white)),
-                  value: null,
-                  groupValue: _selectedprofession,
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedprofession = value;
-                      _professionController.text = '';
-                    });
-                    Navigator.pop(context);
-                  },
-                  activeColor: Colors.blue,
-                ),
-                RadioListTile<String?>(
-                  title: Text("Accounting and Finance", style: TextStyle(color: Colors.black)),
-                  value: "Accounting and Finance",
-                  groupValue: _selectedprofession,
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedprofession = value;
-                      _professionController.text = 'Accounting and Finance';
-                    });
-                    Navigator.pop(context);
-                  },
-                  activeColor: Colors.blue,
-                ),
-                RadioListTile<String?>(
-                  title: Text("Admin,Secreterial,Clerical", style: TextStyle(color: Colors.black)),
-                  value: "Admin,Secreterial,Clerical",
-                  groupValue: _selectedprofession,
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedprofession = value;
-                      _professionController.text = 'Admin,Secreterial,Clerical';
-                    });
-                    Navigator.pop(context);
-                  },
-                  activeColor: Colors.blue,
-                ),
-                
-                RadioListTile<String?>(
-                  title: Text("Accounting and Finance", style: TextStyle(color: Colors.black)),
-                  value: "Accounting and Finance",
-                  groupValue: _selectedprofession,
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedprofession = value;
-                      _professionController.text = 'Accounting and Finance';
-                    });
-                    Navigator.pop(context);
-                  },
-                  activeColor: Colors.blue,
-                ),RadioListTile<String?>(
-                  title: Text("Accounting and Finance", style: TextStyle(color: Colors.black)),
-                  value: "Accounting and Finance",
-                  groupValue: _selectedprofession,
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedprofession = value;
-                      _professionController.text = 'Accounting and Finance';
-                    });
-                    Navigator.pop(context);
-                  },
-                  activeColor: Colors.blue,
-                ),
-              ],
+              child: Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      // Option to clear selection
+                      RadioListTile<String?>(
+                        title: Text("Select Profession", style: TextStyle(color: Colors.black)),
+                        value: null,
+                        groupValue: _selectedprofession,
+                        onChanged: (value) {
+                          setState(() {
+                            _selectedprofession = value;
+                            _professionController.text = ''; // Clear selection
+                          });
+                          Navigator.pop(context);
+                        },
+                        activeColor: Colors.blue,
+                      ),
+                      // Profession options
+                      RadioListTile<String?>(
+                        title: Text("Accounting and Finance", style: TextStyle(color: Colors.black)),
+                        value: "Accounting and Finance",
+                        groupValue: _selectedprofession,
+                        onChanged: (value) {
+                          setState(() {
+                            _selectedprofession = value;
+                            _professionController.text = 'Accounting and Finance';
+                          });
+                          Navigator.pop(context);
+                        },
+                        activeColor: Colors.blue,
+                      ),
+                      RadioListTile<String?>(
+                        title: Text("Admin, Secretarial, Clerical", style: TextStyle(color: Colors.black)),
+                        value: "Admin, Secretarial, Clerical",
+                        groupValue: _selectedprofession,
+                        onChanged: (value) {
+                          setState(() {
+                            _selectedprofession = value;
+                            _professionController.text = 'Admin, Secretarial, Clerical';
+                          });
+                          Navigator.pop(context);
+                        },
+                        activeColor: Colors.blue,
+                      ),
+                      // Add more options as needed
+                      RadioListTile<String?>(
+                        title: Text("Information Technology", style: TextStyle(color: Colors.black)),
+                        value: "Information Technology",
+                        groupValue: _selectedprofession,
+                        onChanged: (value) {
+                          setState(() {
+                            _selectedprofession = value;
+                            _professionController.text = 'Information Technology';
+                          });
+                          Navigator.pop(context);
+                        },
+                        activeColor: Colors.blue,
+                      ),
+                    ],
                   ),
-                  ),
-),
+                ),
+              ),
             ),
-      ),
-               ),
-            );
-}
-);
+          ),
+        ),
+      );
+    },
+  );
 }
 
-void showPopupdialog(BuildContext context) {
+void showPopupDialog1(BuildContext context, Function(Map<String, String>) onSave) {
+  TextEditingController _fullNameController = TextEditingController(text:'Jon don');
+  TextEditingController _emailController = TextEditingController(text:'testabenezer@gmail.com');
+  TextEditingController _phoneNumberController = TextEditingController(text:'251978');
+  TextEditingController _dateController = TextEditingController(text:'12-02-2023');
+  String? _selectedGender;
+  TextEditingController _genderController = TextEditingController(text:'');
+  TextEditingController _professionController = TextEditingController(text: 'Creative Arts');
+
   showGeneralDialog(
     context: context,
     barrierDismissible: true,
@@ -479,10 +458,10 @@ void showPopupdialog(BuildContext context) {
     pageBuilder: (context, animation1, animation2) {
       return SafeArea(
         child: Scaffold(
-          backgroundColor: Colors.black.withOpacity(0.5), // Optional dim background
+          backgroundColor: Colors.black.withOpacity(0.5),
           body: Center(
             child: Container(
-              width: MediaQuery.of(context).size.width, // Full screen width
+              width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 0.9,
               margin: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
               decoration: BoxDecoration(
@@ -491,7 +470,6 @@ void showPopupdialog(BuildContext context) {
               ),
               child: Column(
                 children: [
-                  
                   Container(
                     width: double.infinity,
                     padding: EdgeInsets.all(16),
@@ -509,12 +487,12 @@ void showPopupdialog(BuildContext context) {
                       ),
                     ),
                   ),
-                  // Scrollable Middle Content
                   Expanded(
                     child: SingleChildScrollView(
                       padding: EdgeInsets.all(16),
                       child: Column(
                         children: [
+                          // Full Name Field
                           Row(children: [
                              Text('Full name ', style: TextStyle(color: Colors.black54,fontSize: 16),),
                              Text('*', style: TextStyle(color: Colors.red,fontSize: 16),),
@@ -530,6 +508,7 @@ void showPopupdialog(BuildContext context) {
                
               ),
                  child: TextField(
+                  controller: _fullNameController,
                   cursorColor: Colors.black54,
                 decoration: InputDecoration(
                    enabledBorder: OutlineInputBorder(
@@ -553,7 +532,8 @@ void showPopupdialog(BuildContext context) {
               
             ),
             SizedBox(height:30),
-             Row(children: [
+                          // Email Field
+                          Row(children: [
                              Text('Email ', style: TextStyle(color: Colors.black54,fontSize: 16),),
                              Text('*', style: TextStyle(color: Colors.red,fontSize: 16),),
                           ],),
@@ -568,17 +548,18 @@ void showPopupdialog(BuildContext context) {
                
               ),
                  child: TextField(
+                  controller: _emailController,
                   cursorColor: Colors.black54,
                 decoration: InputDecoration(
                    enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(25),
-      borderSide: BorderSide(color: const Color.fromARGB(255, 220, 213, 213)), // 👈 Change this color
+      borderSide: BorderSide(color: const Color.fromARGB(255, 220, 213, 213)), 
     ),
 
     // Border when the TextField is focused
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(25),
-      borderSide: BorderSide(color: Colors.brown, width: 2), // 👈 And this one
+      borderSide: BorderSide(color: Colors.brown, width: 2), 
     ),
                 hintStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
                  contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 12),
@@ -590,7 +571,8 @@ void showPopupdialog(BuildContext context) {
                ),
               
             ),
-            SizedBox(height:30),
+                          // Phone Number Field
+                          SizedBox(height:30),
               Row(children: [
                               Text('Phone number ', style: TextStyle(color: Colors.black54,fontSize: 16),),
                               Text('*', style: TextStyle(color: Colors.red,fontSize: 16),),
@@ -606,6 +588,7 @@ void showPopupdialog(BuildContext context) {
                
               ),
                  child: TextField(
+                  controller: _phoneNumberController,
                   cursorColor: Colors.black54,
                 decoration: InputDecoration( enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(25),
@@ -629,7 +612,8 @@ void showPopupdialog(BuildContext context) {
               
             ),
             SizedBox(height:30),
-              Row(children: [
+                          // Birthday Field
+                          Row(children: [
                               Text('Birthday ', style: TextStyle(color: Colors.black54,fontSize: 16),),
                               Text('*', style: TextStyle(color: Colors.red,fontSize: 16),),
                             ],),
@@ -683,8 +667,8 @@ Container(
     },
   ),
 ),
-             SizedBox(height:30),
-              Row(children: [
+                       SizedBox(height:30),
+                           Row(children: [
                               Text('Gender ', style: TextStyle(color: Colors.black54,fontSize: 16),),
                               Text('*', style: TextStyle(color: Colors.red,fontSize: 16),),
                             ],),
@@ -724,88 +708,49 @@ Container(
 ),
 
 
- SizedBox(height:30),
-              Row(children: [
-                              Text('Profession ', style: TextStyle(color: Colors.black54,fontSize: 16),),
-                              Text('*', style: TextStyle(color: Colors.red,fontSize: 16),),
-                            ],),
-                            SizedBox(height:15),
-         Container(
-            height: 50,
-              width: 340,
-              margin: EdgeInsets.only(top: 0),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(25),
-               
-              ),
-  child: TextField(
-                controller: _genderController,
-                readOnly: true,
-                 decoration: InputDecoration(
-      hintText: '',
-      hintStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
-      contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 12),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(25),
-        borderSide: BorderSide(color: const Color.fromARGB(255, 220, 213, 213)), // Optional: customize color
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(25),
-        borderSide: BorderSide(color: const Color.fromARGB(255, 220, 213, 213)), 
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(25),
-        borderSide: BorderSide(color: Colors.brown, width: 2), 
-      ),
-      suffixIcon: Icon(Icons.arrow_drop_down), // optional calendar icon
-    ),
-                onTap: _showProfessionPicker,
-              ),
-),
+                       SizedBox(height:30),
+                          // Profession Field
+                         TextField(
+                            controller: _professionController,
+                            readOnly: true,
+                            decoration: InputDecoration(hintText: 'Select Profession'),
+                             onTap: _showProfessionPicker,
+                          ),
                         ],
                       ),
                     ),
                   ),
-
-                  // Fixed Footer
+                  // Button Row
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        SizedBox(width:30),
-                       
-                         
-                         ElevatedButton(
-                          
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                                    padding: EdgeInsets.zero, 
-                                    minimumSize: Size(100, 30), 
-                                    shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20), 
-                                    side: BorderSide.none, 
-                                    ),
-                                    elevation: 0, 
-                                  ),
-                                  child: Text('Close', style: TextStyle(color: Colors.grey, fontSize: 16,)),
-                                ),
-                        
                         ElevatedButton(
-                                  onPressed: () {
-                                    // Action for Button 2
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color.fromARGB(255, 26, 121, 198),
-                                    padding: EdgeInsets.zero, // Remove any padding from the button
-                                    minimumSize: Size(150, 37),  // Ensure minimum size is zero to avoid extra space
-                                  ),
-                                  child: Text('Save', style: TextStyle(color: Colors.white, fontSize: 16,)),
-                                ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text('Close'),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            // Save the values to the state variables
+                            Map<String, String> values = {
+                              'fullName': _fullNameController.text,
+                              'email': _emailController.text,
+                              'phoneNumber': _phoneNumberController.text,
+                              'birthday': _dateController.text,
+                              'gender': _genderController.text,
+                              'profession': _professionController.text,
+                            };
+
+                            // Call the onSave callback to pass the values
+                            onSave(values);
+
+                            Navigator.of(context).pop();
+                          },
+                          child: Text('Save'),
+                        ),
                       ],
                     ),
                   ),
@@ -942,8 +887,15 @@ quill.QuillController _controller = quill.QuillController.basic();
   @override
   Widget build(BuildContext context) {
 
-    Widget buildNavItem(IconData icon, String label, VoidCallback onTap,double iconSize,Color iconColor,double scaleFactor,) {
+    final Map<IconData, IconData> iconMapping = {
+  Icons.business_outlined: Icons.business,
+  Icons.assignment_outlined: Icons.assignment,
+  Icons.person_outline_outlined: Icons.person,
+  // Add other mappings as needed
+};
+     Widget buildNavItem(IconData icon, String label, VoidCallback onTap,double iconSize,Color iconColor,double scaleFactor,) {
     bool isSelected = _selectedNavIndex == _getIndex(label);
+    IconData displayIcon = isSelected ? iconMapping[icon] ?? icon : icon;
   return InkWell(
     onTap: () {
         onTap();
@@ -960,7 +912,7 @@ quill.QuillController _controller = quill.QuillController.basic();
           Transform.scale(
   scale: scaleFactor, // Pass your scale factor here
   child: Icon(
-    icon, // Your icon
+    displayIcon, // Your icon
     size: iconSize, // Base size of the icon
     color: isSelected ? iconColor : const Color.fromARGB(255, 0, 0, 0), // Color based on selection
   ),
@@ -979,6 +931,53 @@ quill.QuillController _controller = quill.QuillController.basic();
 }
     return Scaffold(
 backgroundColor: const Color.fromARGB(255, 247, 251, 250),
+ appBar:  PreferredSize(
+  preferredSize: Size.fromHeight(65.0),
+  child: AppBar(
+    automaticallyImplyLeading: false,
+    title: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        
+        
+         
+          Image.asset(
+            'assets/ethiojobs.webp',
+            height: 125,
+            width: 145,
+          ),
+      
+        SizedBox(width:70),
+         Container(
+         
+           child: Column(children: [
+            SizedBox(height: 13),
+            GestureDetector(
+             onTap: () {
+               // Your onTap logic here
+               Navigator.pushNamed(context, '/account');
+             },
+             child: Container(
+               decoration: BoxDecoration(
+                 shape: BoxShape.circle,
+                 border: Border.all(color: Color.fromARGB(255, 255, 255, 255), width: 1),
+               ),
+               child: CircleAvatar(
+                 radius: 22,
+                 backgroundImage: AssetImage('assets/jondon.webp'), // Ensure this image exists
+               ),
+             ),
+           ),
+           ],),
+         )
+      ],
+    ),
+              backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+              elevation: 5,
+            shadowColor: Colors.black,
+      ),
+          ),
       body: SingleChildScrollView(
   child: 
   Column(
@@ -1023,9 +1022,7 @@ child: Row(
     Padding(
       padding: const EdgeInsets.only(right: 0.0), 
       child: TextButton.icon(
-        onPressed: ( ) {
-          showPopup(context);
-        },
+       onPressed: _showDialog,
         style: TextButton.styleFrom(
           padding: EdgeInsets.zero, // Remove any padding from the button
           minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
@@ -1093,9 +1090,9 @@ child: Row(
         ),
      
                   SizedBox(height: 25),
-                  Text('Jon Don', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+                  Text('$fullName', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
                   SizedBox(height: 2),
-                  Text('Age 22, other', style: TextStyle(color: Colors.white, fontSize: 17)),
+                  Text('Age 22, $gender', style: TextStyle(color: Colors.white, fontSize: 17)),
                   SizedBox(height: 20),
                   
                   Row(
@@ -1116,7 +1113,7 @@ child: Row(
           Icon(Icons.mail, color: Colors.white, size: 17),
           SizedBox(width: 5),
           Text(
-            'testabenezer@gmail.com',
+            '$email',
             style: TextStyle(color: Colors.white, fontSize: 16),
           ),
         ]
@@ -1128,7 +1125,7 @@ child: Row(
           Icon(Icons.phone, color: Colors.white, size: 17),
           SizedBox(width: 5),
           Text(
-            '+2517890987',
+            ' $phoneNumber',
             style: TextStyle(color: Colors.white, fontSize: 16),
           ),
         ]
@@ -1162,11 +1159,11 @@ child: Row(
               
                           
               Text(
-                'Profession: Creative Arts',
+                'Profession: $birthday',
                 style: TextStyle(color: Colors.white, fontSize: 16),
               ),
               Text(
-                'Carrer Level: Mid Level(3-5years)',
+                'Carrer Level: $gender',
                 style: TextStyle(color: Colors.white, fontSize: 16),
               ),
               Text(
@@ -1304,10 +1301,10 @@ bottomNavigationBar:
           const Color.fromARGB(255, 0, 0, 0), 0.7
           
         ),
-        buildNavItem(Icons.business, 'Companies', () {
+        buildNavItem(Icons.business_outlined, 'Companies', () {
          Navigator.pushNamed(context, '/companies');
         }, 22, const Color.fromARGB(255, 0, 0, 0),0.7),
-        buildNavItem(Icons.assignment, 'My Applications', () {
+        buildNavItem(Icons.assignment_outlined, 'My Applications', () {
           Navigator.pushNamed(context, '/apps');
         }, 22, const Color.fromARGB(255, 0, 0, 0),0.7),
         

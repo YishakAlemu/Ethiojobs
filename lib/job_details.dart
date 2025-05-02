@@ -20,6 +20,53 @@ class JobDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       appBar:  PreferredSize(
+  preferredSize: Size.fromHeight(65.0),
+  child: AppBar(
+    automaticallyImplyLeading: false,
+    title: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        
+        
+         
+          Image.asset(
+            'assets/ethiojobs.webp',
+            height: 125,
+            width: 145,
+          ),
+      
+        SizedBox(width:70),
+         Container(
+         
+           child: Column(children: [
+            SizedBox(height: 13),
+            GestureDetector(
+             onTap: () {
+               // Your onTap logic here
+               Navigator.pushNamed(context, '/account');
+             },
+             child: Container(
+               decoration: BoxDecoration(
+                 shape: BoxShape.circle,
+                 border: Border.all(color: Color.fromARGB(255, 255, 255, 255), width: 1),
+               ),
+               child: CircleAvatar(
+                 radius: 22,
+                 backgroundImage: AssetImage('assets/jondon.webp'), // Ensure this image exists
+               ),
+             ),
+           ),
+           ],),
+         )
+      ],
+    ),
+              backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+              elevation: 5,
+            shadowColor: Colors.black,
+      ),
+          ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
@@ -29,7 +76,7 @@ class JobDetailPage extends StatelessWidget {
               children: [
                 // First main container
                 Container(
-                  height: 380,
+                  height: 250,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
@@ -135,7 +182,36 @@ class JobDetailPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Container(
+                  Row(
+                    children: [
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        padding: const EdgeInsets.only(left: 35.0),
+                        child: ElevatedButton(
+                        onPressed: () {
+                          // Action when button is pressed
+                        },
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0), // Rounded corners
+                          ),
+                          backgroundColor: const Color.fromARGB(200, 255, 255, 255), // Background color
+                        ),
+                        child: SizedBox(
+                          width: 120, // Set a fixed width for the button
+                          child: Text(
+                            'Computer Science & IT', // Example of longer text
+                            style: TextStyle(color: Colors.black, fontSize: 12.5, fontWeight: FontWeight.w400),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            textAlign: TextAlign.center, // Center the text
+                          ),
+                        ),
+                      )
+                      ),
+                      SizedBox(width: 5),
+ Container(
                     alignment: Alignment.centerLeft,
                     padding: const EdgeInsets.only(left: 35.0),
                     child: ElevatedButton(
@@ -150,33 +226,7 @@ class JobDetailPage extends StatelessWidget {
     backgroundColor: const Color.fromARGB(200, 255, 255, 255), // Background color
   ),
   child: SizedBox(
-    width: 150, // Set a fixed width for the button
-    child: Text(
-      'Computer Science & IT', // Example of longer text
-      style: TextStyle(color: Colors.black, fontSize: 12.5, fontWeight: FontWeight.w400),
-      overflow: TextOverflow.ellipsis,
-      maxLines: 1,
-      textAlign: TextAlign.center, // Center the text
-    ),
-  ),
-)
-                  ),
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    padding: const EdgeInsets.only(left: 35.0),
-                    child: ElevatedButton(
-  onPressed: () {
-    // Action when button is pressed
-  },
-  style: ElevatedButton.styleFrom(
-    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(20.0), // Rounded corners
-    ),
-    backgroundColor: const Color.fromARGB(200, 255, 255, 255), // Background color
-  ),
-  child: SizedBox(
-    width: 150, // Set a fixed width for the button
+    width: 120, // Set a fixed width for the button
     child: Text(
       'Software Engineering', // Example of longer text
       style: TextStyle(color: Colors.black, fontSize: 12.5, fontWeight: FontWeight.w400),
@@ -187,6 +237,9 @@ class JobDetailPage extends StatelessWidget {
   ),
 )
                   ),
+                    ],
+                  ),
+                 
                   SizedBox(height: 20),
                 SingleChildScrollView(
                   child:Container(

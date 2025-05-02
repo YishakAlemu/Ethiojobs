@@ -1129,8 +1129,10 @@ Padding(
   
   @override
   Widget build(BuildContext context) {
+   
      Widget buildNavItem(IconData icon, String label, VoidCallback onTap,double iconSize,Color iconColor,double scaleFactor,) {
     bool isSelected = _selectedNavIndex == _getIndex(label);
+ 
   return InkWell(
     onTap: () {
         onTap();
@@ -1166,6 +1168,53 @@ Padding(
 }
 
     return Scaffold(
+       appBar:  PreferredSize(
+  preferredSize: Size.fromHeight(65.0),
+  child: AppBar(
+    automaticallyImplyLeading: false,
+    title: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        
+        
+         
+          Image.asset(
+            'assets/ethiojobs.webp',
+            height: 125,
+            width: 145,
+          ),
+      
+        SizedBox(width:70),
+         Container(
+         
+           child: Column(children: [
+            SizedBox(height: 13),
+            GestureDetector(
+             onTap: () {
+               // Your onTap logic here
+               Navigator.pushNamed(context, '/account');
+             },
+             child: Container(
+               decoration: BoxDecoration(
+                 shape: BoxShape.circle,
+                 border: Border.all(color: Color.fromARGB(255, 255, 255, 255), width: 1),
+               ),
+               child: CircleAvatar(
+                 radius: 22,
+                 backgroundImage: AssetImage('assets/jondon.webp'), // Ensure this image exists
+               ),
+             ),
+           ),
+           ],),
+         )
+      ],
+    ),
+              backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+              elevation: 5,
+            shadowColor: Colors.black,
+      ),
+          ),
   backgroundColor: const Color.fromARGB(255, 255, 255, 255),
   body: SingleChildScrollView(
     child: Column(
@@ -1277,19 +1326,19 @@ Padding(
             Navigator.pushNamed(context, '/home');
           },
           22,
-          const Color.fromARGB(255, 72, 193, 156), 0.7
+          const Color.fromARGB(255, 0, 0, 0), 0.7
           
         ),
-         buildNavItem(Icons.business, 'Companies', () {
+         buildNavItem(Icons.business_outlined, 'Companies', () {
           Navigator.pushNamed(context, '/companies');
-        }, 22, const Color.fromARGB(255, 72, 193, 156),0.7),
-        buildNavItem(Icons.assignment, 'My Applications', () {
+        }, 22, const Color.fromARGB(255, 0, 0, 0),0.7),
+        buildNavItem(Icons.assignment_outlined, 'My Applications', () {
           Navigator.pushNamed(context, '/apps');
-        }, 22, const Color.fromARGB(255, 72, 193, 156),0.7),
+        }, 22, const Color.fromARGB(255, 0, 0, 0),0.7),
        
         buildNavItem(Icons.person_outline_outlined, 'Profile', () {
           Navigator.pushNamed(context, '/profile');
-        }, 22, const Color.fromARGB(255, 72, 193, 156),0.7),
+        }, 22, const Color.fromARGB(255, 0, 0, 0),0.7),
       ],
           ),
         ),
