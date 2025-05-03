@@ -29,7 +29,7 @@ final TextEditingController _searchController = TextEditingController();
     _searchController.dispose(); // Dispose the controller
     super.dispose();
   }
-  String? _selectedValue = '';
+  final String? _selectedValue = '';
   int _selectedNavIndex = 1;
 int _getIndex(String label) {
     switch (label) {
@@ -378,7 +378,7 @@ SizedBox(height:20),
                           Row(
                             children: [
                               SizedBox(width:20),
-                              Container(
+                              SizedBox(
                                   
                                   width: 40, 
                                   height: 40, 

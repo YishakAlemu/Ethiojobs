@@ -23,7 +23,7 @@ class Profilepage extends StatefulWidget {
 }
 
 class _ProfilepageState extends State<Profilepage> {
-  TextEditingController _genderController = TextEditingController();
+  final TextEditingController _genderController = TextEditingController();
   String? _selectedGender;
   String fullName = 'Jon Don';
   String richTextContent = "Lorem ipsum dolor sit amet,consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum";
@@ -143,7 +143,7 @@ void showPopup(BuildContext context) {
                           ),
                           child: Text('Close', style: TextStyle(color: Colors.grey)),
                         ),
-                        Container(
+                        SizedBox(
                           width:130,
                           height:35,
                           child: ElevatedButton(
@@ -247,7 +247,7 @@ void _downloadCv(BuildContext context) async {
   String _percentage = "50%"; // Initialize _percentage variable
   final TextEditingController _dateController = TextEditingController();
   
-  TextEditingController _professionController = TextEditingController();
+  final TextEditingController _professionController = TextEditingController();
   final QuillController _Controller = QuillController.basic();
   String? _selectedprofession;
  
@@ -442,13 +442,13 @@ void _showProfessionPicker() {
 }
 
 void showPopupDialog1(BuildContext context, Function(Map<String, String>) onSave) {
-  TextEditingController _fullNameController = TextEditingController(text:'Jon don');
-  TextEditingController _emailController = TextEditingController(text:'testabenezer@gmail.com');
-  TextEditingController _phoneNumberController = TextEditingController(text:'251978');
-  TextEditingController _dateController = TextEditingController(text:'12-02-2023');
-  String? _selectedGender;
-  TextEditingController _genderController = TextEditingController(text:'');
-  TextEditingController _professionController = TextEditingController(text: 'Creative Arts');
+  TextEditingController fullNameController = TextEditingController(text:'Jon don');
+  TextEditingController emailController = TextEditingController(text:'testabenezer@gmail.com');
+  TextEditingController phoneNumberController = TextEditingController(text:'251978');
+  TextEditingController dateController = TextEditingController(text:'12-02-2023');
+  String? selectedGender;
+  TextEditingController genderController = TextEditingController(text:'');
+  TextEditingController professionController = TextEditingController(text: 'Creative Arts');
 
   showGeneralDialog(
     context: context,
@@ -508,7 +508,7 @@ void showPopupDialog1(BuildContext context, Function(Map<String, String>) onSave
                
               ),
                  child: TextField(
-                  controller: _fullNameController,
+                  controller: fullNameController,
                   cursorColor: Colors.black54,
                 decoration: InputDecoration(
                    enabledBorder: OutlineInputBorder(
@@ -548,7 +548,7 @@ void showPopupDialog1(BuildContext context, Function(Map<String, String>) onSave
                
               ),
                  child: TextField(
-                  controller: _emailController,
+                  controller: emailController,
                   cursorColor: Colors.black54,
                 decoration: InputDecoration(
                    enabledBorder: OutlineInputBorder(
@@ -588,7 +588,7 @@ void showPopupDialog1(BuildContext context, Function(Map<String, String>) onSave
                
               ),
                  child: TextField(
-                  controller: _phoneNumberController,
+                  controller: phoneNumberController,
                   cursorColor: Colors.black54,
                 decoration: InputDecoration( enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(25),
@@ -631,7 +631,7 @@ Container(
               ),
 
   child: TextField(
-    controller: _dateController,
+    controller: dateController,
     readOnly: true, // Prevent manual editing
     cursorColor: Colors.black54,
     decoration: InputDecoration(
@@ -662,7 +662,7 @@ Container(
   
       if (pickedDate != null) {
         String formattedDate = "${pickedDate.year}-${pickedDate.month.toString().padLeft(2, '0')}-${pickedDate.day.toString().padLeft(2, '0')}";
-        _dateController.text = formattedDate;
+        dateController.text = formattedDate;
       }
     },
   ),
@@ -683,7 +683,7 @@ Container(
                
               ),
   child: TextField(
-                controller: _genderController,
+                controller: genderController,
                 readOnly: true,
                  decoration: InputDecoration(
       hintText: 'Select Gender',
@@ -711,7 +711,7 @@ Container(
                        SizedBox(height:30),
                           // Profession Field
                          TextField(
-                            controller: _professionController,
+                            controller: professionController,
                             readOnly: true,
                             decoration: InputDecoration(hintText: 'Select Profession'),
                              onTap: _showProfessionPicker,
@@ -736,12 +736,12 @@ Container(
                           onPressed: () {
                             // Save the values to the state variables
                             Map<String, String> values = {
-                              'fullName': _fullNameController.text,
-                              'email': _emailController.text,
-                              'phoneNumber': _phoneNumberController.text,
-                              'birthday': _dateController.text,
-                              'gender': _genderController.text,
-                              'profession': _professionController.text,
+                              'fullName': fullNameController.text,
+                              'email': emailController.text,
+                              'phoneNumber': phoneNumberController.text,
+                              'birthday': dateController.text,
+                              'gender': genderController.text,
+                              'profession': professionController.text,
                             };
 
                             // Call the onSave callback to pass the values
@@ -1090,7 +1090,7 @@ child: Row(
         ),
      
                   SizedBox(height: 25),
-                  Text('$fullName', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+                  Text(fullName, style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
                   SizedBox(height: 2),
                   Text('Age 22, $gender', style: TextStyle(color: Colors.white, fontSize: 17)),
                   SizedBox(height: 20),
@@ -1113,7 +1113,7 @@ child: Row(
           Icon(Icons.mail, color: Colors.white, size: 17),
           SizedBox(width: 5),
           Text(
-            '$email',
+            email,
             style: TextStyle(color: Colors.white, fontSize: 16),
           ),
         ]

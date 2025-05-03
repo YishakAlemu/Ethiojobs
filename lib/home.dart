@@ -51,7 +51,7 @@ final TextEditingController _searchController = TextEditingController();
     _searchController.dispose(); // Dispose the controller
     super.dispose();
   }
-  String? _selectedValue = '';
+  final String? _selectedValue = '';
   int _selectedNavIndex = 0;
 int _getIndex(String label) {
     switch (label) {
@@ -565,13 +565,13 @@ Padding(
       // Button action
     },
     style: TextButton.styleFrom(
-          padding: EdgeInsets.zero, // Remove any padding from the button
-          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
+          padding: EdgeInsets.zero, 
+          minimumSize: Size(0, 0), 
         ),
     icon: Icon(
       Icons.calendar_month_outlined,
       size: 14,
-      color: Colors.black, // Lightning icon color
+      color: Colors.black, 
     ),
     label: Text(
       job.date,
@@ -588,31 +588,31 @@ Padding(
   height: 25,
   width: 338,
   margin: EdgeInsets.symmetric(horizontal: 22.0),
-  padding: EdgeInsets.all(3), // Ensure no padding around the container
+  padding: EdgeInsets.all(3), 
   color: Colors.white,
   child: Row(
     children: [
       // Label
       Text(
         '15 days ago by ',
-        style: TextStyle(fontSize: 13), // Customize the style as needed
+        style: TextStyle(fontSize: 13), 
       ),
       SizedBox(width: 10),
-      // Text Button
-      Container( // Use Expanded to take available space
+     
+      Container( 
         child: TextButton(
           onPressed: () {
-            // Action to perform when the button is pressed
+            
           },
           style: TextButton.styleFrom(
             padding: EdgeInsets.all(0),
-            minimumSize: Size(0, 0), // Remove padding from the button
+            minimumSize: Size(0, 0), 
           ),
           child: Text(
             job.company,
             style: TextStyle(fontSize: 13, color: Colors.blueAccent),
-            overflow: TextOverflow.ellipsis, // Enable ellipsis
-            maxLines: 1, // Limit to one line
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
           ),
         ),
       ),

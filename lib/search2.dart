@@ -13,7 +13,7 @@ class Search2page extends StatefulWidget {
 class _Search2pageState extends State<Search2page> {
   bool _isHovered = false;
 
-  TextEditingController _search2Controller = TextEditingController();
+  final TextEditingController _search2Controller = TextEditingController();
   List<Job> _filteredJobs = [];
 
   @override
@@ -170,7 +170,7 @@ class _Search2pageState extends State<Search2page> {
                           Row(
                             children: [
                               SizedBox(width:20),
-                              Container(
+                              SizedBox(
                                   
                                   width: 40, 
                                   height: 40, 

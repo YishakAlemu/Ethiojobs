@@ -13,7 +13,7 @@ class Searchpage extends StatefulWidget {
 class _SearchpageState extends State<Searchpage> {
   bool _isHovered = false;
 
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
   List<Job> _filteredJobs = [];
 
   @override

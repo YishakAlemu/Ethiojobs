@@ -73,7 +73,7 @@ void _showGenerateCVDialog(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return Dialog(
-        child: Container(
+        child: SizedBox(
          width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 0.5,
         

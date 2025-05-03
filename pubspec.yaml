@@ -81,6 +81,11 @@ flutter:
   - assets/user_blue.webp
   - assets/jondon.webp
   - assets/ethiojobslogo.webp
+  - assets/peoplefun_1.jpg
+  - assets/peoplefun_2.webp
+  - assets/peoplefun_3.jpg
+  - assets/peoplefun_4.jpg
+
 
   uses-material-design: true
 

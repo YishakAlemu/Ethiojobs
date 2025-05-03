@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart' ;
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'dart:async';
 import 'dart:ui'; // Import for ImageByteFormat
-import 'package:flutter_quill/flutter_quill.dart' as quill;
 import 'package:open_file/open_file.dart';
 import 'dart:typed_data';
 import 'package:flutter/rendering.dart';

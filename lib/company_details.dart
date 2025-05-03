@@ -4,6 +4,8 @@ import 'companies.dart';
 import 'search.dart';
 
 class companyDetailspage extends StatefulWidget {
+  const companyDetailspage({super.key});
+
   @override
   _companyDetailspageState createState() => _companyDetailspageState();
 }
@@ -76,7 +78,7 @@ class _companyDetailspageState extends State<companyDetailspage> {
 class OverviewTab extends StatefulWidget {
   final Job job;
 
-  OverviewTab({required this.job});
+  const OverviewTab({super.key, required this.job});
   @override
   _OverviewTabState createState() => _OverviewTabState();
 }
@@ -102,7 +104,7 @@ class _OverviewTabState extends State<OverviewTab> {
 class CompaniesTab extends StatefulWidget {
   final Job job;
 
-  CompaniesTab({required this.job});
+  const CompaniesTab({super.key, required this.job});
   @override
   _CompaniesTabState createState() => _CompaniesTabState();
 }
