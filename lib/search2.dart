@@ -136,7 +136,7 @@ class _Search2pageState extends State<Search2page> {
           },
       child: InkWell(
         onTap: () {
-            Navigator.pushNamed(context, '/apply');
+            Navigator.pushNamed(context, '/company_details', arguments: job,);
         },
         child: Container(
           color:Colors.white,

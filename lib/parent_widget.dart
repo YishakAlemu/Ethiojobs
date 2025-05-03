@@ -15,6 +15,7 @@ import 'cv_editor.dart';
 import 'resume_builder.dart';
 import 'companies.dart';
 import 'filter.dart';
+import 'company_details.dart';
 class ParentWidget extends StatefulWidget {
   const ParentWidget({super.key});
 
@@ -168,6 +169,9 @@ class _ParentWidgetState extends State<ParentWidget> {
                 break;
                case '/filter':
                 builder = (BuildContext context) => Filterpage();
+               break;
+               case '/company_details':
+                builder = (BuildContext context) => companyDetailspage();
                break;
                
                 

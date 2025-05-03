@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'search2.dart';
 import 'home.dart';
-
+import 'company_details.dart';
 
 
 class Companiespage extends StatefulWidget {
@@ -344,7 +344,7 @@ SizedBox(height:20),
           },
       child: InkWell(
         onTap: () {
-            Navigator.pushNamed(context, '/apply');
+            Navigator.pushNamed(context, '/company_details', arguments: job);
         },
         child: Container(
           color:Colors.white,

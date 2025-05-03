@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'search.dart';
-
+import 'company_details.dart';
 
 class Job {
   final String title;
@@ -23,7 +23,7 @@ class Job {
 
   @override
   String toString() {
-    return '$title ($type) - $location on $date $imageUrl $company';
+    return '$title ($type) - $location on $date $imageUrl $company $time';
   }
 }
 
