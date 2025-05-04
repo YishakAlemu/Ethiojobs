@@ -403,14 +403,14 @@ SizedBox(height:20),
             ),
             SizedBox(width:11),
             Padding(
-              padding: const EdgeInsets.only(right: 0.0), // Adjust space for Button 2
+              padding: const EdgeInsets.only(right: 0.0), 
               child: TextButton(
                 onPressed: () {
                   // Action for Button 2
                 },
                 style: TextButton.styleFrom(
-          padding: EdgeInsets.zero, // Remove any padding from the button
-          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
+          padding: EdgeInsets.zero, 
+          minimumSize: Size(0, 0), 
         ),
                 child: Text('Premium', style: TextStyle(color: Colors.green, fontSize: 13,),),
               ),
@@ -422,13 +422,13 @@ SizedBox(height:20),
     
   },
   style: TextButton.styleFrom(
-          padding: EdgeInsets.zero, // Remove any padding from the button
-          minimumSize: Size(0, 0), // Ensure minimum size is zero to avoid extra space
+          padding: EdgeInsets.zero, 
+          minimumSize: Size(0, 0), 
         ),
   child: Icon(
-    Icons.bookmark_border, // Use Icons.favorite for filled heart
-    color: Colors.black54, // Customize the icon color
-    size: 24.5, // Customize the icon size
+    Icons.bookmark_border, 
+    color: Colors.black54, 
+    size: 24.5, 
   ),
 )
           ],
